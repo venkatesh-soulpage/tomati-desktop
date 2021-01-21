@@ -1,2 +1,2 @@
 # tomatiapp
-Master Branch for tomati.app
+Master Repo for tomati.app
