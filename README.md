@@ -1,2 +1,2 @@
-# tomati app
+# tomatiapp
 Master Repo for tomati.app
