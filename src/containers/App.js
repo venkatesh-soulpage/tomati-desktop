@@ -1,41 +1,41 @@
-import React, { useEffect } from "react";
+import React from "react";
 // Router Imports
 import { Router, Route, Switch } from "react-router-dom";
 import history from "utils/history";
 // Redux component connect
 import { connect } from "react-redux";
 // Importing redux actions
-import { handleIsUserAuthenticated, validateAuthToken } from "_actions/auth";
+// import { handleIsUserAuthenticated, validateAuthToken } from "_actions/auth";
 // Local Components
 import Home from "pages/Home";
-import Dashboard from "pages/Dashboard";
+// import Dashboard from "pages/Dashboard";
 import Page404 from "pages/static/Page404";
 // Auth Components
-import Register from "pages/auth/Register";
-import LogIn from "pages/auth/LogIn";
-import ForgotPassword from "pages/auth/ForgotPassword";
+// import Register from "pages/auth/Register";
+// import LogIn from "pages/auth/LogIn";
+// import ForgotPassword from "pages/auth/ForgotPassword";
 
 // Layouts
 import Navbar from "components/Navbar";
 // Private Route For Auth redirection.
-import PrivateRoute from "containers/PrivateRoute";
-import AuthRoute from "containers/AuthRoute";
-import ResetPasswordSuccess from "pages/static/ResetPasswordSuccess";
+// import PrivateRoute from "containers/PrivateRoute";
+// import AuthRoute from "containers/AuthRoute";
+// import ResetPasswordSuccess from "pages/static/ResetPasswordSuccess";
 
 function App(props) {
   /**
    * Similar to componentDidMount and componentDidUpdate:
    * Checking for the user token availability and changing the isAuthenticated flag value.
    */
-  useEffect(() => {
-    if (sessionStorage.getItem("token")) {
-      props.dispatch(validateAuthToken());
-      props.dispatch(handleIsUserAuthenticated(true));
-      // props.dispatch(resetApplicationStep());
-    } else {
-      props.dispatch(handleIsUserAuthenticated(false));
-    }
-  }, [sessionStorage.getItem("token")]);
+  // useEffect(() => {
+  //   if (sessionStorage.getItem("token")) {
+  //     props.dispatch(validateAuthToken());
+  //     props.dispatch(handleIsUserAuthenticated(true));
+  //     // props.dispatch(resetApplicationStep());
+  //   } else {
+  //     props.dispatch(handleIsUserAuthenticated(false));
+  //   }
+  // }, [sessionStorage.getItem("token")]);
 
   // Rending Routes
   return (
@@ -64,7 +64,7 @@ function App(props) {
               exact
               component={ResetPasswordSuccess}
             /> */}
-            <PrivateRoute path="/dashboard/" exact component={Dashboard} />
+            {/* <PrivateRoute path="/dashboard/" exact component={Dashboard} /> */}
             <Route component={Page404} />
           </Switch>
         </div>
