@@ -1,0 +1,171 @@
+// /* ====================================== */
+// /* Button */
+// /* ====================================== */
+// .btn:focus {
+//   box-shadow: none;
+// }
+// /* ====================================== */
+// /* Button Toggle */
+// /* ====================================== */
+// .btn-group-toggle {
+//   .btn-primary.active {
+//     background-color: $primary-active-color !important;
+//     color: $light-color !important;
+//     border-color: $primary-color !important;
+//     outline: none;
+//     box-shadow: none;
+//   }
+//   .btn-primary {
+//     background-color: $light-color !important;
+//     color: $primary-active-color !important;
+//     border-color: $border-color;
+//   }
+// }
+// .btn-toggle {
+//   flex: 1 !important;
+// }
+// .fullwidth-button-toggle {
+//   width: 100%;
+//   text-align: center;
+// }
+// /* ====================================== */
+// /* Button Rounded */
+// /* ====================================== */
+// .btn-rounded {
+//   border-radius: 40px;
+//   padding-left: 20px;
+//   padding-right: 20px;
+// }
+// /* ====================================== */
+// /* Button Primary */
+// /* ====================================== */
+// .btn-primary {
+//   background-color: $primary-color;
+// }
+// .btn-primary:hover {
+//   background-color: $primary-dark-color;
+// }
+// /* ====================================== */
+// /* Button Outline */
+// /* ====================================== */
+// .btn-outline-primary {
+//   color: $primary-color;
+// }
+// .btn-outline-primary:hover {
+//   color: $primary-dark-color;
+// }
+// /* ====================================== */
+// /* Button Custom Styles */
+// /* ====================================== */
+// #dashboard-btn-application {
+//   margin-top: -10px;
+// }
+// .btn-plaid {
+//   background-color: $primary-color !important;
+//   color: $white-color;
+//   padding: 12px 24px !important;
+//   border-radius: 5px !important;
+// }
+// .btn-progress-bar {
+//   background: none;
+//   color: $light-gray;
+//   border-color: $border-color;
+//   width: 100%;
+//   height: 100%;
+// }
+// .btn-progress-bar:focus,
+// .btn-progress-bar:hover,
+// .btn-progress-bar.active {
+//   background: $primary-color;
+//   color: $white-color;
+// }
+// .react-datepicker-wrapper,
+// .react-datepicker__input-container {
+//   display: block;
+// }
+// /* ====================================== */
+// /* Button Transparent inside input group */
+// /* ====================================== */
+// .btn-transparent {
+//   background: none;
+// }
+// .input-group-append {
+//   border-radius: 4px !important;
+//   background: none;
+//   .btn-transparent {
+//     border: none;
+//     background: none;
+//     position: absolute;
+//     right: 3px;
+//     top: 9px;
+//     color: $dark-gray !important;
+//     z-index: 999;
+//   }
+//   .btn-transparent:focus,
+//   .btn-transparent:active {
+//     border: none;
+//     background-color: transparent !important;
+//     outline: none;
+//     box-shadow: none !important;
+//   }
+// }
+// /* ====================================== */
+// /* Button icon */
+// /* ====================================== */
+// .btn-icon {
+//   box-shadow: none;
+//   outline: none;
+//   border: none;
+//   border-radius: 50%;
+//   width: 46px;
+//   height: 46px;
+//   font-size: 18px;
+//   line-height: 0.1em;
+// }
+// /* ====================================== */
+// /* Navar link selected */
+// /* ====================================== */
+// .navlink-selected {
+//   color: $primary-color !important;
+//   border-bottom: 4px solid $primary-color;
+//   font-weight: 700 !important;
+// }
+.btn-primary {
+  background-color: $primary-button-color !important;
+  border-color: $primary-button-color !important;
+}
+
+.btn-secondary {
+  color: #000 !important;
+  background-color: #fff !important;
+}
+
+.jumbotron-buttons {
+  border-radius: 30px;
+  padding: 15px;
+  width: 25%;
+}
+
+.try-tomati-button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btn-container {
+  margin-left: "auto";
+  margin-right: "auto";
+  width: "50%";
+}
+
+@media only screen and (max-width: 450px) {
+  .jumbotron-buttons {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 451px) and (max-width: 1023px) {
+  .jumbotron-buttons {
+    width: 40%;
+  }
+}
