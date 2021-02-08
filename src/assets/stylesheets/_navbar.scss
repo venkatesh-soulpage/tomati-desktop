@@ -1,0 +1,16 @@
+.nav-link {
+  font-weight: bold;
+  color: rgb(44, 58, 86);
+}
+.active-nav-text {
+  color: $primary-active-color !important;
+}
+
+.register-button {
+  border: 1px solid rgb(44, 58, 86);
+  border-radius: 20px;
+}
+
+.register-button.active-nav-text {
+  border-color: $primary-active-color !important;
+}
