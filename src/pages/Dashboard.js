@@ -3,16 +3,16 @@ import React from "react";
 import { connect } from "react-redux";
 
 // Router
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 // Bootstrap
-import { Badge, Alert, Button } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 // Data table
-import DataTable from "react-data-table-component";
+// import DataTable from "react-data-table-component";
 // helper functions
-import { getVariantColorByStatus } from "utils/helper";
+// import { getVariantColorByStatus } from "utils/helper";
 // Font awesome Icons
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 function Dashboard(props) {
   const [alertState, setAlertState] = React.useState({

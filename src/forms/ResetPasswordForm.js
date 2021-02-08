@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { resetPassword, receiveResetPasswordError } from "_actions/auth";
 // React router
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 //react bootstrap
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -15,13 +15,13 @@ function ResetPasswordForm(props) {
   const [values, setValues] = React.useState({
     token: "",
     password: "",
-    re_password: ""
+    re_password: "",
   });
 
   const [alert, setAlert] = React.useState({
     variant: "warning",
     message: "Password does not match",
-    switch: false
+    switch: false,
   });
 
   function onFormSubmit(event) {
@@ -30,7 +30,7 @@ function ResetPasswordForm(props) {
       setAlert({ ...alert, switch: false });
       var data = {
         token: values.token,
-        password: values.password
+        password: values.password,
       };
       props.dispatch(resetPassword(data));
     } else {
@@ -38,7 +38,7 @@ function ResetPasswordForm(props) {
     }
   }
 
-  const handleChange = name => event => {
+  const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
   };
 
