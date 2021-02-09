@@ -22,6 +22,8 @@ import Footer from "components/Footer";
 // Private Route For Auth redirection.
 // import PrivateRoute from "containers/PrivateRoute";
 import AuthRoute from "containers/AuthRoute";
+import Terms from "pages/Terms";
+import Privacy from "pages/Privacy";
 // import ResetPasswordSuccess from "pages/static/ResetPasswordSuccess";
 
 function App(props) {
@@ -71,6 +73,8 @@ function App(props) {
               component={ResetPasswordSuccess}
             /> */}
         {/* <PrivateRoute path="/dashboard/" exact component={Dashboard} /> */}
+        <Route exact path="/termspolicy" component={Terms} />
+        <Route exact path="/privacypolicy" component={Privacy} />
         <Route component={Page404} />
       </Switch>
 

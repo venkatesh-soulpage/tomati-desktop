@@ -134,14 +134,14 @@ const Footer = () => {
                     </p>
                   </div>
                   <div className="col-12  mt-1 mt-md-3">
-                    <Link to="/termspolicy" target="_top _blank">
+                    <Link to="/termspolicy" target="_top_blank">
                       <p>
                         <small style={{ color: "#fff" }}>Terms of Use</small>
                       </p>
                     </Link>
                   </div>
                   <div className="col-12  mt-1 mt-md-3">
-                    <Link to="/privacypolicy" target="_top _blank">
+                    <Link to="/privacypolicy" target="_top_blank">
                       <p>
                         <small style={{ color: "#fff" }}>Privacy Policy</small>
                       </p>

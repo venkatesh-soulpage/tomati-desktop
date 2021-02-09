@@ -3,7 +3,7 @@ import { MainHeader, Works, Faq, Features, MainSection } from "./components";
 
 function Home() {
   return (
-    <div className="container-fluid bg-light p-0 bg-white">
+    <div className="container-fluid bg-light p-0 ">
       <MainHeader />
       <Works />
       <MainSection />
