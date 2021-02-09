@@ -17,6 +17,7 @@ import LogIn from "pages/auth/LogIn";
 
 // Layouts
 import Navbar from "components/Navbar";
+import Footer from "components/Footer";
 // Private Route For Auth redirection.
 // import PrivateRoute from "containers/PrivateRoute";
 import AuthRoute from "containers/AuthRoute";
@@ -68,6 +69,7 @@ function App(props) {
             <Route component={Page404} />
           </Switch>
         </div>
+        <Footer />
       </div>
     </Router>
   );

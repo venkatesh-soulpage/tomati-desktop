@@ -109,7 +109,6 @@ function LogIn(props) {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

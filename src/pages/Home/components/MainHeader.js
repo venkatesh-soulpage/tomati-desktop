@@ -35,16 +35,18 @@ export default function MainHeader() {
             }}
           >
             {/* font-size: 48px font-weight: Bold line-height: 60px color: #2C3A56 margin-top : 200px */}
-            <Card.Title className="pt-5 display-4 fw-bold ">
+            <Card.Title className="container mt-5 display-4 fw-bold ">
               Create a Digital Menu for your bar/restaurant.
             </Card.Title>
-            <Card.Text className="pt-4 display-5">
+            <Card.Text className="mt-4" style={{ fontSize: "20px" }}>
               With supporting text below as a natural lead-in to additional
               content.
             </Card.Text>
-            <Card.Text className="pb-3">Instant Set-Up Free to try.</Card.Text>
+            <Card.Text className="mb-3" style={{ fontSize: "20px" }}>
+              Instant Set-Up Free to try.
+            </Card.Text>
           </div>
-          <div className="btn-container pt-5">
+          <div className="btn-container pt-5 mb-5">
             <Button variant="primary" className="jumbotron-buttons">
               Try Tomati &nbsp;
               <ArrowRight />
@@ -68,33 +70,103 @@ export default function MainHeader() {
           </Card.Title>
           <div className="container">
             <CardDeck>
-              <Card className="pl-4">
-                <Card.Title className=" ml-auto p-4">01</Card.Title>
-                <Card.Body className=" mr-auto  border border-danger rounded-circle ">
-                  <img src={MetroQR} />
+              <Card style={{ minHeight: "350px" }}>
+                <Card.Body className="d-flex p-3">
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <div
+                      className="border border-danger rounded-circle "
+                      style={{
+                        backgroundImage: `url(${MetroQR})`,
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        height: "100px",
+                        width: "100px",
+                      }}
+                    />
+
+                    <span
+                      className=" mt-3 "
+                      style={{ fontSize: "22px", textAlign: "left" }}
+                    >
+                      Scan Menu
+                      <br /> QR code
+                    </span>
+                  </div>
+                  <div>
+                    <span className="display-4 text-secondary ml-auto">01</span>
+                  </div>
                 </Card.Body>
-                <Card.Text className="mr-auto pt-2 pb-2">
-                  Scan Menu QR code
-                </Card.Text>
               </Card>
-              <Card className="pl-4">
-                <Card.Title className=" ml-auto p-4">02</Card.Title>
-                <Card.Body className=" mr-auto  border border-danger rounded-circle ">
-                  <img src={fileIcon} />
+              <Card>
+                <Card.Body className="d-flex p-3">
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <div
+                      className="border border-danger rounded-circle "
+                      style={{
+                        backgroundImage: `url(${fileIcon})`,
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        height: "100px",
+                        width: "100px",
+                      }}
+                    />
+
+                    <span
+                      className=" mt-3 "
+                      style={{ fontSize: "22px", textAlign: "left" }}
+                    >
+                      Browse menu and place order
+                    </span>
+                  </div>
+                  <div>
+                    <span className="display-4 text-secondary ml-auto">02</span>
+                  </div>
                 </Card.Body>
-                <Card.Text className="mr-auto pt-2 pb-2">
-                  Browse menu and place order
-                </Card.Text>
               </Card>
 
-              <Card className="pl-4">
-                <Card.Title className=" ml-auto p-4">03</Card.Title>
-                <Card.Body className=" mr-auto border border-danger rounded-circle ">
-                  <img src={BillIcon} />
+              <Card>
+                <Card.Body className="d-flex p-3">
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <div
+                      className="border border-danger rounded-circle "
+                      style={{
+                        backgroundImage: `url(${BillIcon})`,
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        height: "100px",
+                        width: "100px",
+                      }}
+                    />
+
+                    <span
+                      className=" mt-3 "
+                      style={{ fontSize: "22px", textAlign: "left" }}
+                    >
+                      Pay the bill as soon as you are ready
+                    </span>
+                  </div>
+                  <div>
+                    <span className="display-4 text-secondary ml-auto">03</span>
+                  </div>
                 </Card.Body>
-                <Card.Text className="mr-auto pt-2 pb-2">
-                  Pay the bill as soon as you are ready
-                </Card.Text>
               </Card>
             </CardDeck>
           </div>
@@ -181,7 +253,6 @@ export default function MainHeader() {
       <Card>
         <FAQ />
       </Card>
-      <Footer />
     </>
   );
 }
