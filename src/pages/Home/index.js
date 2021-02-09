@@ -1,10 +1,14 @@
 import React from "react";
-import { MainHeader } from "./components";
+import { MainHeader, Works, Faq, Features, MainSection } from "./components";
 
 function Home() {
   return (
-    <div className="container-fluid bg-light p-0">
+    <div className="container-fluid bg-light p-0 bg-white">
       <MainHeader />
+      <Works />
+      <MainSection />
+      <Features />
+      <Faq />
     </div>
   );
 }

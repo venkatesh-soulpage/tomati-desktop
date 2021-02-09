@@ -79,7 +79,7 @@ function Navigation(props) {
                       className="nav-link"
                       smooth={true}
                       duration={1000}
-                      to="works"
+                      to="features"
                       activeClass="active-nav-text"
                     >
                       Features
@@ -89,7 +89,7 @@ function Navigation(props) {
                       className="nav-link"
                       smooth={true}
                       duration={1000}
-                      to="works"
+                      to="faq"
                       activeClass="active-nav-text"
                     >
                       FAQ

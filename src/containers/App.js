@@ -11,15 +11,16 @@ import Home from "pages/Home";
 // import Dashboard from "pages/Dashboard";
 import Page404 from "pages/static/Page404";
 // Auth Components
-// import Register from "pages/auth/Register";
-// import LogIn from "pages/auth/LogIn";
+import Register from "pages/auth/Register";
+import LogIn from "pages/auth/LogIn";
 // import ForgotPassword from "pages/auth/ForgotPassword";
 
 // Layouts
 import Navbar from "components/Navbar";
+import Footer from "components/Footer";
 // Private Route For Auth redirection.
 // import PrivateRoute from "containers/PrivateRoute";
-// import AuthRoute from "containers/AuthRoute";
+import AuthRoute from "containers/AuthRoute";
 // import ResetPasswordSuccess from "pages/static/ResetPasswordSuccess";
 
 function App(props) {
@@ -46,7 +47,7 @@ function App(props) {
         <div className="app-container">
           <Switch>
             <Route path="/" name="home" exact component={Home} />
-            {/* <AuthRoute
+            <AuthRoute
               path="/register/"
               name="register"
               exact
@@ -54,12 +55,12 @@ function App(props) {
             />
             <AuthRoute path="/login/" name="login" exact component={LogIn} />
 
-            <AuthRoute
+            {/* <AuthRoute
               path="/forgot-password/"
               exact
               component={ForgotPassword}
-            />
-            <Route
+            /> */}
+            {/* <Route
               path="/forgot-password/success"
               exact
               component={ResetPasswordSuccess}
@@ -68,6 +69,7 @@ function App(props) {
             <Route component={Page404} />
           </Switch>
         </div>
+        <Footer />
       </div>
     </Router>
   );
