@@ -396,6 +396,7 @@ const Features = () => {
         <div className="row">
           <div
             className="col-6 p-3 text-center"
+            onClick={() => setPeriod("monthly")}
             style={
               period === "monthly"
                 ? {
@@ -403,21 +404,18 @@ const Features = () => {
                     borderRadius: 35,
                     background: "#E0475B",
                     color: "#fff",
+                    cursor: "pointer",
                   }
                 : {
                     borderLeft: "1px solid #C3CAD8",
                     borderRadius: 35,
                     background: "#fff",
                     color: "#2C3A56",
+                    cursor: "pointer",
                   }
             }
           >
-            <h5
-              className="font-weight-normal"
-              onClick={() => setPeriod("monthly")}
-            >
-              Monthly
-            </h5>
+            <h5 className="font-weight-normal">Monthly</h5>
           </div>
 
           <div
@@ -429,29 +427,27 @@ const Features = () => {
                     borderRadius: 35,
                     background: "#E0475B",
                     color: "#fff",
+                    cursor: "pointer",
                   }
                 : {
                     borderRadius: 35,
                     background: "#fff",
                     color: "#2C3A56",
+                    cursor: "pointer",
                   }
             }
+            onClick={() => setPeriod("yearly")}
           >
             {" "}
-            <h5
-              className="font-weight-normal"
-              onClick={() => setPeriod("yearly")}
-            >
-              Yearly
-            </h5>
+            <h5 className="font-weight-normal">Yearly</h5>
           </div>
         </div>
       </div>
     </div>
   );
   return (
-    <div className="row p-0 m-0 pb-5" id="features">
-      <div className="col-10 offset-1">
+    <div className="row mt-5 bg-white pb-5  " id="features">
+      <div className="col-10 offset-1 pb-5">
         <h3
           className="container pt-5 pb-5 m-auto text-center"
           style={HeadingStyle}
@@ -459,9 +455,9 @@ const Features = () => {
           Our Plans
         </h3>
         <Toggle2 />
-        <div className="d-none d-lg-block">
-          <Table period={period} setPeriod={setPeriod} />
-        </div>
+
+        <Table period={period} setPeriod={setPeriod} />
+
         <div className="d-block d-lg-none">
           <SmallTable />
         </div>

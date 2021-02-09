@@ -3,6 +3,9 @@ import { Image, Button } from "react-bootstrap";
 import CrossIcon from "assets/img/CrossIcon.svg";
 import RightIcon from "assets/img/RightIcon.svg";
 
+// react router
+import { Link } from "react-router-dom";
+
 const Table = ({ period, setPeriod }) => {
   const [details, setDetails] = useState({ type: "Outlet", plan: null });
 
@@ -53,7 +56,7 @@ const Table = ({ period, setPeriod }) => {
   const Style5 = { borderBottom: "1px solid #A9A9A9", height: "64px" };
 
   return (
-    <div className="row">
+    <div className="row mx-auto w-75">
       <div className="col-12 mx-auto" style={TableStyle}>
         <div className="row">
           <div
@@ -196,14 +199,16 @@ const Table = ({ period, setPeriod }) => {
                 className="col-12 d-flex align-items-center justify-content-center text-white"
                 style={{ height: "136px" }}
               >
-                <Button
-                  className="mt-2"
-                  variant="outline"
-                  style={ButtonStyle3}
-                  onClick={() => {}}
-                >
-                  <small> Choose Plan</small>
-                </Button>
+                <Link to="/register" style={{ textDecoration: "none" }}>
+                  <Button
+                    className="mt-2"
+                    variant="outline"
+                    style={ButtonStyle3}
+                    onClick={() => {}}
+                  >
+                    <small> Choose Plan</small>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -312,14 +317,17 @@ const Table = ({ period, setPeriod }) => {
                 className="col-12 d-flex justify-content-center align-items-center text-white"
                 style={{ height: "136px" }}
               >
-                <Button
-                  className="mt-2"
-                  variant="outline"
-                  style={ButtonStyle4}
-                  onClick={() => {}}
-                >
-                  <small>Choose Plan</small>
-                </Button>
+                <Link to="/register" style={{ textDecoration: "none" }}>
+                  {" "}
+                  <Button
+                    className="mt-2"
+                    variant="outline"
+                    style={ButtonStyle4}
+                    onClick={() => {}}
+                  >
+                    <small>Choose Plan</small>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -410,6 +418,7 @@ const Table = ({ period, setPeriod }) => {
                       fontSize: "10px",
                     }}
                     href="mailto:hello@tomati.app"
+                    target="_top_blank"
                   >
                     Need a custom plan?
                     <Button style={SmallButton}>Contact</Button>

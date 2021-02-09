@@ -30,29 +30,21 @@ export default function MainHeader() {
               Instant Set-Up Free to try.
             </Card.Text>
           </div>
-          <div className="w-50 mx-auto pt-5 mb-5">
+          <div className="w-50 mx-auto my-5">
             <Link to="/register" style={{ textDecoration: "none" }}>
-              <Button
-                variant="primary"
-                style={{ width: "240px" }}
-                onClick={() => {}}
-              >
+              <Button variant="primary" className="jumbotron-buttons">
                 Try Tomati &nbsp;
                 <ArrowRight />
               </Button>
             </Link>
-            <ScrollLink
-              className="nav-link"
-              smooth={true}
-              duration={1000}
-              to="works"
-              activeClass="active-nav-text"
-            >
-              <Button variant="secondary" style={{ width: "240px" }}>
+            &nbsp;
+            <ScrollLink smooth={true} duration={1000} to="works">
+              <Button variant="secondary" className="jumbotron-buttons">
                 How it Works
               </Button>
             </ScrollLink>
           </div>
+
           <div className="pt-5">
             <img src={Group1} alt="group" className="img-fluid" />
           </div>
