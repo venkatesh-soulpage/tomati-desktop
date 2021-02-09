@@ -5,13 +5,14 @@ import {
   userLogin,
   handleLoginError,
   receiveUserData,
-  clearLoginError
+  clearLoginError,
 } from "_actions/auth";
 // Router
 import { withRouter, Link } from "react-router-dom";
 // Bootstrap Components
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 // custom components
 import PasswordTextField from "components/PasswordTextField";
 import AlertMessage from "components/AlertMessage";
@@ -22,18 +23,18 @@ function LogIn(props) {
   const [values, setValues] = React.useState({
     email: "",
     password: "",
-    userLoginResponse: {}
+    userLoginResponse: {},
   });
 
-  React.useEffect(function() {
+  React.useEffect(function () {
     props.dispatch(receiveUserData({}));
     props.dispatch(handleLoginError(null));
   }, []);
 
   // For handling changes in the inputs
-  const handleChange = name => event => {
+  const handleChange = (name) => (event) => {
     const value = event.target.value;
-    setValues(values => ({ ...values, [name]: value }));
+    setValues((values) => ({ ...values, [name]: value }));
   };
 
   // Handling the login data and sending it to the service.
@@ -42,11 +43,11 @@ function LogIn(props) {
     // Creating post Data
     var postData = {
       email: values.email,
-      password: values.password
+      password: values.password,
     };
     props
       .dispatch(userLogin(postData))
-      .then(userData => {
+      .then((userData) => {
         if (userData.email_verified_at === null) {
           props.history.push("/verify-email");
         } else if (userData.sms_verified_at === null) {
@@ -55,7 +56,7 @@ function LogIn(props) {
           props.history.push("/dashboard");
         }
       })
-      .catch(error => {});
+      .catch((error) => {});
   }
 
   function handleAlertDismiss() {
@@ -64,50 +65,45 @@ function LogIn(props) {
 
   return (
     <div className="bg-light-blue overflow-auto">
-      <section className="section ">
-        <div className="container" style={{ minHeight: "600px" }}>
+      <section className="section pt-5 pb-5">
+        <div className="container">
           <div className="row justify-content-center">
             <div className="col-sm-8">
               <div className="paper elevated">
-                <h3 className="text-center form-legend">Login</h3>
-                <Form onSubmit={handleLoginData}>
-                  <AlertMessage
-                    variant="danger"
-                    error={props.auth.loginError}
-                    onDismiss={handleAlertDismiss}
-                  />
-                  <Form.Group>
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                      type="email"
-                      name="email"
-                      id="email"
-                      value={values.email}
-                      onChange={handleChange("email")}
-                      placeholder="Enter email"
+                <h3 className="text-center form-legend pb-5">Login</h3>
+                <Card className="p-5 ">
+                  <Form onSubmit={handleLoginData}>
+                    <AlertMessage
+                      variant="danger"
+                      error={props.auth.loginError}
+                      onDismiss={handleAlertDismiss}
                     />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label>Password</Form.Label>
-                    <PasswordTextField
-                      name="password"
-                      value={values.password}
-                      onChange={handleChange("password")}
-                      placeholder="Password"
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <Link to="/forgot-password">Forgot Password?</Link>
-                  </Form.Group>
-                  <Form.Group>
-                    <Button type="submit">Login</Button>
-                  </Form.Group>
-                  <Form.Group>
-                    <span>Don't Have an Account</span>
-                    <br />
-                    <Link to="/register">Sign Up Now</Link>
-                  </Form.Group>
-                </Form>
+                    <Form.Group>
+                      <Form.Control
+                        type="email"
+                        name="email"
+                        id="email"
+                        value={values.email}
+                        onChange={handleChange("email")}
+                        placeholder="Enter email"
+                      />
+                    </Form.Group>
+                    <Form.Group>
+                      <PasswordTextField
+                        name="password"
+                        value={values.password}
+                        onChange={handleChange("password")}
+                        placeholder="Password"
+                      />
+                    </Form.Group>
+                    <Form.Group className="d-flex justify-content-between">
+                      <Link to="/forgot-password" style={{ color: "#E0475B" }}>
+                        Forgot Password?
+                      </Link>
+                      <Button type="submit">Login</Button>
+                    </Form.Group>
+                  </Form>
+                </Card>
               </div>
             </div>
           </div>

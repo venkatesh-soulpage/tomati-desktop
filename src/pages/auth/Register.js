@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import {
   userRegistration,
   receiveUserData,
-  handleRegisterError
+  handleRegisterError,
 } from "_actions/auth";
 // Router imports
 import { Redirect, withRouter } from "react-router-dom";
@@ -17,24 +17,32 @@ import PasswordTextField from "components/PasswordTextField";
 import Footer from "components/Footer";
 // Alert Message
 import AlertMessage from "components/AlertMessage";
+import { Card } from "react-bootstrap";
+import PersonalDetails from "components/PersonalDetails";
+import EmailConfirmation from "components/EmailConfirmation";
+import LocationDetails from "components/LocationDetails";
 
 function Register(props) {
   const [values, setValues] = React.useState({
     email: "",
     password: "",
-    first_name: "",
-    last_name: ""
+    full_name: "",
+    company_name: "",
+    step: 1,
   });
 
-  React.useEffect(function() {
+  React.useEffect(function () {
     props.dispatch(receiveUserData({}));
     props.dispatch(handleRegisterError(null));
   }, []);
 
   // For handling changes in the inputs
-  const handleChange = name => event => {
+  const handleChange = (name) => (event) => {
     const value = event.target.value;
-    setValues(values => ({ ...values, [name]: value }));
+    setValues((values) => ({ ...values, [name]: value }));
+  };
+  const handleStep = (name, value) => (event) => {
+    setValues((values) => ({ ...values, [name]: value }));
   };
 
   // Handling the Signup data and sending it to the service.
@@ -43,130 +51,57 @@ function Register(props) {
     props.dispatch(userRegistration(values));
   }
 
+  const { step } = values;
   if (props.auth.userData.email) {
     return <Redirect to="/verify-email" />;
   } else {
     return (
       <div>
-        <section className="section bg-light-blue">
+        <section className="section bg-light-blue pt-5 pb-5">
           <div className="container">
             <div className="row justify-content-center">
               <div className="col-sm-8">
                 <div className="paper elevated">
-                  <h3 className="text-center form-legend">Register</h3>
-                  <Form
-                    onSubmit={handleSignUpData}
-                    onLoad={() => props.handleRegisterError(null)}
-                    autoComplete="off"
-                  >
-                    <AlertMessage
-                      variant="danger"
-                      error={props.auth.registerError}
-                      onDismiss={() => {
-                        props.handleRegisterError(null);
-                      }}
-                    ></AlertMessage>
-                    <Form.Group>
-                      <Form.Label>First Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="First Name"
-                        value={values.first_name}
-                        onChange={handleChange("first_name")}
-                        required
-                      />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Last Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Last Name"
-                        value={values.last_name}
-                        onChange={handleChange("last_name")}
-                        required
-                      />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Email address</Form.Label>
-                      <Form.Control
-                        type="email"
-                        placeholder="email@example.com"
-                        value={values.email}
-                        onChange={handleChange("email")}
-                        required
-                      />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Password</Form.Label>
-                      <PasswordTextField
-                        value={values.password}
-                        onChange={handleChange("password")}
-                        placeholder="Enter your password"
-                        required
-                      />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Check
-                        type="checkbox"
-                        label="I here by accepting all the terms and conditions"
-                        required
-                      />
-                    </Form.Group>
-                    <Form.Group
-                      style={{ height: "120px", overflowY: "scroll" }}
+                  <Card className="p-5 ">
+                    <h3 className="text-center form-legend pb-5">
+                      Tell us About Yourself
+                    </h3>
+                    <Form
+                      onSubmit={handleSignUpData}
+                      onLoad={() => props.handleRegisterError(null)}
+                      autoComplete="off"
                     >
-                      <span className="text-muted">
-                        TCPA Consent & Privacy. Notwithstanding any current or
-                        prior election to opt in or opt out of receiving
-                        telemarketing calls or SMS messages (including text
-                        messages) from Ivy Lender Inc, our agents,
-                        representatives, affiliates, or anyone calling on our
-                        behalf, you expressly consent to be contacted by us, our
-                        agents, representatives, affiliates, or anyone calling
-                        on our behalf for any and all purposes arising out of or
-                        relating to your loan and/or account, at any telephone
-                        number, or physical or electronic address you provide or
-                        at which you may be reached. You agree we may contact
-                        you in any way, including SMS messages (including text
-                        messages), calls using prerecorded messages or
-                        artificial voice, and calls and messages delivered using
-                        auto telephone dialing system or an automatic texting
-                        system. Automated messages may be played when the
-                        telephone is answered, whether by you or someone else.
-                        In the event that an agent or representative calls, he
-                        or she may also leave a message on your answering
-                        machine, voice mail, or send one via text.You consent to
-                        receive SMS messages (including text messages), calls
-                        and messages (including prerecorded and artificial voice
-                        and autodialed) from us, our agents, representatives,
-                        affiliates or anyone calling on our behalf at the
-                        specific number(s) you have provided to us, or numbers
-                        we can reasonably associate with your account (through
-                        skip trace, caller ID capture or other means), with
-                        information or questions about your application, loan
-                        and/or account. You certify, warrant and represent that
-                        the telephone numbers that you have provided to us are
-                        your contact numbers. You represent that you are
-                        permitted to receive calls at each of the telephone
-                        numbers you have provided to us. You agree to promptly
-                        alert us whenever you stop using a particular telephone
-                        number.Your cellular or mobile telephone provider will
-                        charge you according to the type of plan you carry. You
-                        also agree that we may contact you by e-mail, using any
-                        email address you have provided to us or that you
-                        provide to us in the future. We may listen to and/or
-                        record phone calls between you and our representatives
-                        without notice to you as permitted by applicable law.
-                        For example, we listen to and record calls for quality
-                        monitoring purposes.
-                      </span>
-                    </Form.Group>
-                    <Form.Group>
-                      <Button type="submit" className="btn btn-primary mt-3">
-                        Register
-                      </Button>
-                    </Form.Group>
-                  </Form>
+                      <AlertMessage
+                        variant="danger"
+                        error={props.auth.registerError}
+                        onDismiss={() => {
+                          props.handleRegisterError(null);
+                        }}
+                      ></AlertMessage>
+                      {step === 1 ? (
+                        <PersonalDetails
+                          values={values}
+                          handleChange={handleChange}
+                          setValues={setValues}
+                          handleStep={handleStep}
+                        />
+                      ) : step === 2 ? (
+                        <EmailConfirmation
+                          values={values}
+                          handleChange={handleChange}
+                          setValues={setValues}
+                          handleStep={handleStep}
+                        />
+                      ) : step === 3 ? (
+                        <LocationDetails
+                          values={values}
+                          handleChange={handleChange}
+                          setValues={setValues}
+                          handleStep={handleStep}
+                        />
+                      ) : null}
+                    </Form>
+                  </Card>
                 </div>
               </div>
             </div>
@@ -183,7 +118,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  handleRegisterError
+  handleRegisterError,
 };
 
 export default withRouter(connect(mapStateToProps)(Register));
