@@ -30,7 +30,7 @@ export default function MainHeader() {
               Instant Set-Up Free to try.
             </Card.Text>
           </div>
-          <div className="btn-container pt-5 mb-5">
+          <div className="mx-auto w-50 mt-5">
             <Button variant="primary" className="jumbotron-buttons">
               Try Tomati &nbsp;
               <ArrowRight />

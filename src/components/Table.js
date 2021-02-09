@@ -53,7 +53,7 @@ const Table = ({ period, setPeriod }) => {
   const Style5 = { borderBottom: "1px solid #A9A9A9", height: "64px" };
 
   return (
-    <div className="row">
+    <div className="row mx-auto w-75">
       <div className="col-12 mx-auto" style={TableStyle}>
         <div className="row">
           <div

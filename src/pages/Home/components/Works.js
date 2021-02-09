@@ -70,7 +70,7 @@ function Works() {
                 </div>
               </Card.Body>
             </Card>
-            <Card>
+            <Card style={{ minHeight: "350px" }}>
               <Card.Body className="d-flex p-3">
                 <div
                   style={{
@@ -103,7 +103,7 @@ function Works() {
               </Card.Body>
             </Card>
 
-            <Card>
+            <Card style={{ minHeight: "350px" }}>
               <Card.Body className="d-flex p-3">
                 <div
                   style={{

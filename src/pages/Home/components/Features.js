@@ -456,9 +456,9 @@ const Features = () => {
           Our Plans
         </h3>
         <Toggle2 />
-        <div className="d-none d-lg-block">
-          <Table period={period} setPeriod={setPeriod} />
-        </div>
+
+        <Table period={period} setPeriod={setPeriod} />
+
         <div className="d-block d-lg-none">
           <SmallTable />
         </div>
