@@ -18,8 +18,8 @@ import img9 from "assets/img/club-images/img9.png";
 import img10 from "assets/img/club-images/img10.png";
 
 const ClubImages = {
-  width: "50px",
-  height: "50px",
+  width: "100px",
+  height: "100px",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
   backgroundSize: "contain",
@@ -29,13 +29,20 @@ const ClubImages = {
 function Works() {
   return (
     <Card
-      style={{ marginTop: "-300px", border: "0" }}
+      style={{
+        marginTop: "-300px",
+        border: "0",
+        borderTopLeftRadius: "10%",
+        borderTopRightRadius: "10%",
+      }}
       className="pb-5"
       id="works"
     >
       <Card.Body>
-        <div className="container text-center ">
-          <h3 className=" p-2"> It's as easy as 1,2,3</h3>
+        <div className="container text-center mt-5 ">
+          <h3 className=" mb-5 p-2" style={{ fontSize: "30px" }}>
+            It's as easy as 1,2,3
+          </h3>
           <CardDeck>
             <Card style={{ minHeight: "350px" }}>
               <Card.Body className="d-flex p-3">
@@ -136,8 +143,10 @@ function Works() {
               </Card.Body>
             </Card>
           </CardDeck>
-          <h2 className="p-3"> Join the digital menu club</h2>
-          <CardDeck className="justify-content-center">
+          <div className="p-0 m-0 pt-5 mt-5 mb-5" style={{ fontSize: "24px" }}>
+            Join the digital menu club
+          </div>
+          <CardDeck className="justify-content-center m-0 mb-5">
             <div
               style={{ ...ClubImages, backgroundImage: `url(${Component1})` }}
             />

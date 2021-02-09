@@ -9,14 +9,16 @@ import CardImage from "assets/img/CardImage.svg";
 function MainSection() {
   return (
     <Card style={{ background: "#F5F6F9", border: "0" }}>
-      <Card.Body className="text-center">
-        <Card.Title className="pt-5 pb-5 " style={{ fontSize: "36px" }}>
-          Get 10 premium QR table tags for free
-          <br />
-          when you upgrade to our growth plan
+      <Card.Body className="text-center p-0 mt-5 mb-5">
+        <Card.Title
+          className="container pt-5 pb-5 m-auto"
+          style={{ fontSize: "36px" }}
+        >
+          Get 10 premium QR table tags for free when you upgrade to our growth
+          plan
         </Card.Title>
         <div className="container">
-          <CardDeck>
+          <CardDeck className="pb-5 mb-5">
             <Card className="pl-4">
               <Card.Title className=" p-4">For Outlet Managers</Card.Title>
               <Card.Body>

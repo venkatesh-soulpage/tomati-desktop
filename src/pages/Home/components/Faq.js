@@ -21,7 +21,9 @@ function Faq() {
     <div className="row">
       <div className="col-12 p-3" style={FAQStyle}>
         <div className="row">
-          <div className="col-10">{Q}</div>
+          <div className="col-10" style={{ fontSize: "20px" }}>
+            {Q}
+          </div>
           <div className="col-2 text-right">+</div>
         </div>
       </div>
@@ -37,7 +39,7 @@ function Faq() {
         </div>
       </div>
       <div className="row p-0 m-0">
-        <div className="col-md-4 mx-auto mb-5 col-11">
+        <div className="col-md-4 mx-auto pb-5 mb-5 col-11">
           <FAQ Q="Can this work in my venue?" />
           <FAQ Q="How is Tomati different?" />
           <FAQ Q="How will this drive savings in my business?" />
