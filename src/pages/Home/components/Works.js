@@ -10,7 +10,6 @@ import BillIcon from "assets/img/BillIcon.svg";
 import Component1 from "assets/img/club-images/Component 14 – 1.png";
 import Component2 from "assets/img/club-images/Component 15 – 1.png";
 import Component3 from "assets/img/club-images/Component 16 – 1.png";
-import Component4 from "assets/img/club-images/Component 17 – 1.png";
 import img6 from "assets/img/club-images/img6.png";
 import img7 from "assets/img/club-images/img7.png";
 import img8 from "assets/img/club-images/img8.png";
