@@ -11,6 +11,8 @@ import ResetPasswordForm from "forms/ResetPasswordForm";
 // constants
 import { AWS_S3_STATIC_URL } from "constants/APIRoutes";
 
+import { Card } from "react-bootstrap";
+
 function ForgetPassword(props) {
   React.useEffect(() => {
     props.dispatch(forgotPasswordToggle(false));
@@ -18,7 +20,18 @@ function ForgetPassword(props) {
   }, []);
 
   return (
-    <section
+    <div className="container-fluid bg-light h-50 d-flex justify-content-center align-items-center">
+      <div style={{ width: "35%" }}>
+        <h3 className="text-center p-4">Forgot Password</h3>
+        <Card className="p-3" style={{ borderRadius: "15px" }}>
+          {props.auth.forgotPasswordToggle ? (
+            <ResetPasswordForm />
+          ) : (
+            <ForgotPasswordForm />
+          )}
+        </Card>
+      </div>
+      {/* <section
       className="section bg-light-blue"
       style={{ minHeight: "100vh", height: "auto" }}
     >
@@ -43,7 +56,8 @@ function ForgetPassword(props) {
           </div>
         </div>
       </div>
-    </section>
+    </section> */}
+    </div>
   );
 }
 

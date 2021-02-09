@@ -17,7 +17,7 @@ import PasswordTextField from "components/PasswordTextField";
 import Footer from "components/Footer";
 // Alert Message
 import AlertMessage from "components/AlertMessage";
-import { Card } from "react-bootstrap";
+import { Card, ProgressBar } from "react-bootstrap";
 import PersonalDetails from "components/PersonalDetails";
 import EmailConfirmation from "components/EmailConfirmation";
 import LocationDetails from "components/LocationDetails";
@@ -56,57 +56,53 @@ function Register(props) {
     return <Redirect to="/verify-email" />;
   } else {
     return (
-      <div>
-        <section className="section bg-light-blue pt-5 pb-5">
-          <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-sm-8">
-                <div className="paper elevated">
-                  <Card className="p-5 ">
-                    <h3 className="text-center form-legend pb-5">
-                      Tell us About Yourself
-                    </h3>
-                    <Form
-                      onSubmit={handleSignUpData}
-                      onLoad={() => props.handleRegisterError(null)}
-                      autoComplete="off"
-                    >
-                      <AlertMessage
-                        variant="danger"
-                        error={props.auth.registerError}
-                        onDismiss={() => {
-                          props.handleRegisterError(null);
-                        }}
-                      ></AlertMessage>
-                      {step === 1 ? (
-                        <PersonalDetails
-                          values={values}
-                          handleChange={handleChange}
-                          setValues={setValues}
-                          handleStep={handleStep}
-                        />
-                      ) : step === 2 ? (
-                        <EmailConfirmation
-                          values={values}
-                          handleChange={handleChange}
-                          setValues={setValues}
-                          handleStep={handleStep}
-                        />
-                      ) : step === 3 ? (
-                        <LocationDetails
-                          values={values}
-                          handleChange={handleChange}
-                          setValues={setValues}
-                          handleStep={handleStep}
-                        />
-                      ) : null}
-                    </Form>
-                  </Card>
-                </div>
-              </div>
-            </div>
+      <div className="bg-light container-fluid py-5">
+        <div className="container">
+          <Card className="p-5 w-50 mx-auto">
+            <h3 className="text-center form-legend pb-5">
+              Tell us About Yourself
+            </h3>
+            <Form
+              onSubmit={handleSignUpData}
+              onLoad={() => props.handleRegisterError(null)}
+              autoComplete="off"
+            >
+              <AlertMessage
+                variant="danger"
+                error={props.auth.registerError}
+                onDismiss={() => {
+                  props.handleRegisterError(null);
+                }}
+              ></AlertMessage>
+              {step === 1 ? (
+                <PersonalDetails
+                  values={values}
+                  handleChange={handleChange}
+                  setValues={setValues}
+                  handleStep={handleStep}
+                />
+              ) : step === 2 ? (
+                <EmailConfirmation
+                  values={values}
+                  handleChange={handleChange}
+                  setValues={setValues}
+                  handleStep={handleStep}
+                />
+              ) : step === 3 ? (
+                <LocationDetails
+                  values={values}
+                  handleChange={handleChange}
+                  setValues={setValues}
+                  handleStep={handleStep}
+                />
+              ) : null}
+            </Form>
+          </Card>
+          <div className="w-25 mx-auto mt-4 text-center">
+            <ProgressBar now={step * 33} variant="primary" />
+            <small>Step {step}/3</small>
           </div>
-        </section>
+        </div>
       </div>
     );
   }

@@ -44,8 +44,7 @@ function PersonalDetails({ values, handleChange, setValues, handleStep }) {
       <Form.Group>
         <Form.Check
           type="checkbox"
-          label="
-                          I agree to Tomati Terms and Privacy Policy."
+          label="I agree to Tomati Terms and Privacy Policy."
           required
         />
       </Form.Group>
@@ -64,6 +63,7 @@ function PersonalDetails({ values, handleChange, setValues, handleStep }) {
             handleStep("step", 2);
           }}
           className="btn btn-primary mt-3"
+          style={{ borderRadius: "20px" }}
         >
           Continue
         </Button>

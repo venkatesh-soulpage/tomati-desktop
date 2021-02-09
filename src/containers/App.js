@@ -13,6 +13,7 @@ import Page404 from "pages/static/Page404";
 // Auth Components
 import Register from "pages/auth/Register";
 import LogIn from "pages/auth/LogIn";
+import ForgotPassword from "pages/auth/ForgotPassword";
 // import ForgotPassword from "pages/auth/ForgotPassword";
 
 // Layouts
@@ -41,36 +42,39 @@ function App(props) {
   // Rending Routes
   return (
     <Router history={history}>
-      <div>
-        <Navbar />
+      <Navbar />
 
-        <div className="app-container">
-          <Switch>
-            <Route path="/" name="home" exact component={Home} />
-            <AuthRoute
-              path="/register/"
-              name="register"
-              exact
-              component={Register}
-            />
-            <AuthRoute path="/login/" name="login" exact component={LogIn} />
+      <Switch>
+        <Route path="/" name="home" exact component={Home} />
+        <AuthRoute
+          path="/register"
+          name="register"
+          exact
+          component={Register}
+        />
+        <AuthRoute path="/login" name="login" exact component={LogIn} />
+        <AuthRoute
+          path="/forgot-password"
+          name="forgot-password"
+          exact
+          component={ForgotPassword}
+        />
 
-            {/* <AuthRoute
+        {/* <AuthRoute
               path="/forgot-password/"
               exact
               component={ForgotPassword}
             /> */}
-            {/* <Route
+        {/* <Route
               path="/forgot-password/success"
               exact
               component={ResetPasswordSuccess}
             /> */}
-            {/* <PrivateRoute path="/dashboard/" exact component={Dashboard} /> */}
-            <Route component={Page404} />
-          </Switch>
-        </div>
-        <Footer />
-      </div>
+        {/* <PrivateRoute path="/dashboard/" exact component={Dashboard} /> */}
+        <Route component={Page404} />
+      </Switch>
+
+      <Footer />
     </Router>
   );
 }

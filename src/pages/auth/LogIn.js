@@ -64,51 +64,48 @@ function LogIn(props) {
   }
 
   return (
-    <div className="bg-light-blue overflow-auto">
-      <section className="section pt-5 pb-5">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-sm-8">
-              <div className="paper elevated">
-                <h3 className="text-center form-legend pb-5">Login</h3>
-                <Card className="p-5 ">
-                  <Form onSubmit={handleLoginData}>
-                    <AlertMessage
-                      variant="danger"
-                      error={props.auth.loginError}
-                      onDismiss={handleAlertDismiss}
-                    />
-                    <Form.Group>
-                      <Form.Control
-                        type="email"
-                        name="email"
-                        id="email"
-                        value={values.email}
-                        onChange={handleChange("email")}
-                        placeholder="Enter email"
-                      />
-                    </Form.Group>
-                    <Form.Group>
-                      <PasswordTextField
-                        name="password"
-                        value={values.password}
-                        onChange={handleChange("password")}
-                        placeholder="Password"
-                      />
-                    </Form.Group>
-                    <Form.Group className="d-flex justify-content-between">
-                      <Link to="/forgot-password" style={{ color: "#E0475B" }}>
-                        Forgot Password?
-                      </Link>
-                      <Button type="submit">Login</Button>
-                    </Form.Group>
-                  </Form>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div className="container-fluid bg-light h-50 d-flex justify-content-center align-items-center">
+      <div>
+        <h3 className="text-center p-4">Login</h3>
+        <Card className="p-5" style={{ borderRadius: "15px" }}>
+          <Form onSubmit={handleLoginData} autoComplete="off">
+            <AlertMessage
+              variant="danger"
+              error={props.auth.loginError}
+              onDismiss={handleAlertDismiss}
+            />
+            <Form.Group>
+              <Form.Control
+                type="email"
+                name="email"
+                id="email"
+                value={values.email}
+                onChange={handleChange("email")}
+                placeholder="Enter email"
+              />
+            </Form.Group>
+            <Form.Group>
+              <PasswordTextField
+                name="password"
+                value={values.password}
+                onChange={handleChange("password")}
+                placeholder="Password"
+              />
+            </Form.Group>
+            <Form.Group className="d-flex justify-content-between">
+              <Link to="/forgot-password" style={{ color: "#E0475B" }}>
+                Forgot Password?
+              </Link>
+              <Button
+                type="submit"
+                style={{ borderRadius: "20px", width: "25%" }}
+              >
+                Login
+              </Button>
+            </Form.Group>
+          </Form>
+        </Card>
+      </div>
     </div>
   );
 }
