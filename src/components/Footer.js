@@ -97,7 +97,7 @@ const Footer = () => {
                       <li style={ListStyle}>
                         <a
                           target="_blank"
-                          href="https://api.whatsapp.com/send?phone=919603720713"
+                          href="https://wa.me/message/HGRXRF5QIYCWH1"
                         >
                           {" "}
                           <Image src={whatsapp} alt="icon" />

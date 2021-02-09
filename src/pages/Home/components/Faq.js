@@ -1,6 +1,6 @@
 import React from "react";
 
-const FAQPage = () => {
+function Faq() {
   const FAQStyle = {
     border: "1px solid #C3CAD8",
     borderRadius: "12px",
@@ -28,7 +28,7 @@ const FAQPage = () => {
     </div>
   );
   return (
-    <div>
+    <div style={{ background: "#F5F6F9" }} id="faq">
       <div className="row p-0 m-0">
         <div className="col-md-4 col-11 mx-auto mt-5">
           <p className="text-center" style={HeadingStyle}>
@@ -45,6 +45,6 @@ const FAQPage = () => {
       </div>
     </div>
   );
-};
+}
 
-export default FAQPage;
+export default Faq;

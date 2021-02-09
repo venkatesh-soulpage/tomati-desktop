@@ -39,20 +39,25 @@ const Table = ({ period, setPeriod }) => {
 
   const Style1 = { fontWeight: "600", fontSize: "24px", marginLeft: "10px" };
 
-  const Style2 = { borderBottom: "1px solid #A9A9A9", height: "50px" };
+  const Style2 = { borderBottom: "1px solid #A9A9A9", height: "64px" };
 
-  const Style3 = { fontWight: "medium", fontSize: "16px", marginLeft: "10px" };
+  const Style3 = {
+    fontWeight: "medium",
+    fontSize: "16px",
+    marginLeft: "10px",
+    marginBottom: "0px",
+  };
 
-  const Style4 = { borderBottom: "1px solid #A9A9A9", height: "50px" };
+  const Style4 = { borderBottom: "1px solid #A9A9A9", height: "64px" };
 
   const Style5 = { borderBottom: "1px solid #A9A9A9", height: "64px" };
 
   return (
     <div className="row">
-      <div className="col-8 mx-auto" style={TableStyle}>
+      <div className="col-12 mx-auto" style={TableStyle}>
         <div className="row">
           <div
-            className="col-md-6 d-none d-md-block"
+            className="col-lg-6 d-none d-lg-block"
             style={{ color: "#2C3A56" }}
           >
             <div className="row">
@@ -98,7 +103,7 @@ const Table = ({ period, setPeriod }) => {
               />
             </div>
           </div>
-          <div className="col-12 col-md-2" style={{ background: "#2C3A56" }}>
+          <div className="col-12 col-lg-2" style={{ background: "#2C3A56" }}>
             <div className="row">
               <div
                 className="col-12 text-white text-center pt-4"
@@ -203,7 +208,7 @@ const Table = ({ period, setPeriod }) => {
             </div>
           </div>
           <div
-            className="col-12 col-md-2 p-3"
+            className="col-12 col-lg-2 p-3"
             style={{
               background: "#E0475B",
               borderRadius: "15px 15px 0px 0px",
@@ -319,7 +324,7 @@ const Table = ({ period, setPeriod }) => {
             </div>
           </div>
           <div
-            className="col-12 col-md-2"
+            className="col-12 col-lg-2"
             style={{ background: "#2C3A56", borderRadius: "0px 12px 12px 0px" }}
           >
             <div className="row">
@@ -356,7 +361,7 @@ const Table = ({ period, setPeriod }) => {
                 style={Style4}
               >
                 <p className="text-center" style={Style3}>
-                  1 % <br /> (lowest fees)
+                  1 % (lowest fees)
                 </p>
               </div>
               <div
