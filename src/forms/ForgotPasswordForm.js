@@ -11,19 +11,19 @@ import Alert from "react-bootstrap/Alert";
 
 function ForgotPasswordForm(props) {
   const [values, setValues] = React.useState({
-    email: ""
+    email: "",
   });
 
   function onFormSubmit(event) {
     event.preventDefault();
     var postData = {
-      email: values.email
+      email: values.email,
     };
     props.dispatch(forgetPassword(postData));
   }
 
   return (
-    <Form onSubmit={onFormSubmit}>
+    <Form onSubmit={onFormSubmit} className="">
       <Form.Group>
         {props.auth.forgotPasswordError.status === "ERROR" && (
           <Alert
@@ -37,31 +37,32 @@ function ForgotPasswordForm(props) {
           </Alert>
         )}
       </Form.Group>
-      <h3>Reset Your Password</h3>
+      <small className="text-secondary d-flex justify-content-center p-3">
+        Please enter the email address associated with this account
+      </small>
       <Form.Group>
-        <Form.Label>
-          Please enter your email address below to receive a link to reset your
-          password.
-        </Form.Label>
         <Form.Control
           type="email"
           value={values.email}
-          onChange={event => {
+          onChange={(event) => {
             setValues({ ...values, email: event.target.value });
           }}
           placeholder="Email"
           required
         ></Form.Control>
       </Form.Group>
-      <Form.Group>
-        <Button type="submit" variant="primary">
-          Submit
-        </Button>
-      </Form.Group>
-      <div className="text-muted">
+      <div className="d-flex">
         <Link className="btn btn-link" to="/login">
           Back to Login
         </Link>
+        <Button
+          type="submit"
+          variant="primary"
+          className="ml-auto "
+          style={{ borderRadius: "20px" }}
+        >
+          Retrieve
+        </Button>
       </div>
     </Form>
   );

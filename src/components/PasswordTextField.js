@@ -7,7 +7,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 function PasswordTextFeild({ ...props }) {
   const [values, setValues] = React.useState({
-    hidden: true
+    hidden: true,
   });
 
   function handlePasswordToggle(event) {
@@ -24,15 +24,10 @@ function PasswordTextFeild({ ...props }) {
       />
       <div className="input-group-append">
         <Button
-          type="button"
-          className="btn-transparent"
+          className="btn-transparent active"
           onClick={handlePasswordToggle}
         >
-          {values.hidden ? (
-            <FontAwesomeIcon icon={faEye} className="fa-eye" />
-          ) : (
-            <FontAwesomeIcon icon={faEyeSlash} className="fa-eye-slash" />
-          )}
+          {values.hidden ? "Show" : "Hide"}
         </Button>
       </div>
     </div>

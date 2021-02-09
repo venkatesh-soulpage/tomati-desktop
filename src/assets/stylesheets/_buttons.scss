@@ -158,6 +158,13 @@
   width: "50%";
 }
 
+.btn-transparent.active {
+  background-color: transparent !important;
+  color: #000 !important;
+  border: 1px solid #eee !important;
+  outline: none;
+}
+
 @media only screen and (max-width: 450px) {
   .jumbotron-buttons {
     width: 100%;
