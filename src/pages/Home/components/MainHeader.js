@@ -3,9 +3,10 @@ import React from "react";
 import { Button, Card, CardDeck } from "react-bootstrap";
 // bootstrap-icons
 import { ArrowRight } from "react-bootstrap-icons";
-import Background from "../../../assets/img/Background.svg";
-import Group1 from "../../../assets/img/Group1.svg";
-
+import Background from "assets/img/Background.svg";
+import Group1 from "assets/img/Group1.svg";
+import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 export default function MainHeader() {
   return (
     <>
@@ -18,7 +19,6 @@ export default function MainHeader() {
               backgroundSize: "contain",
             }}
           >
-            {/* font-size: 48px font-weight: Bold line-height: 60px color: #2C3A56 margin-top : 200px */}
             <Card.Title className="container mt-5 display-4 fw-bold ">
               Create a Digital Menu for your bar/restaurant.
             </Card.Title>
@@ -30,15 +30,28 @@ export default function MainHeader() {
               Instant Set-Up Free to try.
             </Card.Text>
           </div>
-          <div className="btn-container pt-5 mb-5">
-            <Button variant="primary" className="jumbotron-buttons">
-              Try Tomati &nbsp;
-              <ArrowRight />
-            </Button>
-            &nbsp;
-            <Button variant="secondary" className="jumbotron-buttons">
-              How it Works
-            </Button>
+          <div className="w-50 mx-auto pt-5 mb-5">
+            <Link to="/register" style={{ textDecoration: "none" }}>
+              <Button
+                variant="primary"
+                style={{ width: "240px" }}
+                onClick={() => {}}
+              >
+                Try Tomati &nbsp;
+                <ArrowRight />
+              </Button>
+            </Link>
+            <ScrollLink
+              className="nav-link"
+              smooth={true}
+              duration={1000}
+              to="works"
+              activeClass="active-nav-text"
+            >
+              <Button variant="secondary" style={{ width: "240px" }}>
+                How it Works
+              </Button>
+            </ScrollLink>
           </div>
           <div className="pt-5">
             <img src={Group1} alt="group" className="img-fluid" />

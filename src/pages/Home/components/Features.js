@@ -452,7 +452,10 @@ const Features = () => {
   return (
     <div className="row p-0 m-0 pb-5" id="features">
       <div className="col-10 offset-1">
-        <h3 className="text-center" style={HeadingStyle}>
+        <h3
+          className="container pt-5 pb-5 m-auto text-center"
+          style={HeadingStyle}
+        >
           Our Plans
         </h3>
         <Toggle2 />
