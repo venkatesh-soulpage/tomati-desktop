@@ -44,3 +44,8 @@ small {
 input[type="checkbox"]:after {
   background-color: #e0475b !important;
 }
+
+.min-height {
+  height: 500px;
+  min-height: 600px;
+}
