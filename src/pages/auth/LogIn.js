@@ -65,50 +65,51 @@ function LogIn(props) {
   }
 
   return (
-    <div className="bg-light container-fluid d-flex justify-content-center align-items-center h-75">
-      <div className="container ">
-        <h3 className="text-center">Login</h3>
-        <Card
-          className=""
-          style={{ borderRadius: "15px", width: "fit-content", margin: "auto" }}
-        >
-          <Form onSubmit={handleLoginData} autoComplete="off" className="p-5">
-            <AlertMessage
-              variant="danger"
-              error={props.auth.loginError}
-              onDismiss={handleAlertDismiss}
-            />
-            <Form.Group>
-              <Form.Control
-                type="email"
-                name="email"
-                id="email"
-                value={values.email}
-                onChange={handleChange("email")}
-                placeholder="Enter email"
-              />
-            </Form.Group>
-            <Form.Group>
-              <PasswordTextField
-                name="password"
-                value={values.password}
-                onChange={handleChange("password")}
-                placeholder="Password"
-              />
-            </Form.Group>
-            <Form.Group className="d-flex justify-content-between">
-              <Link to="/forgot-password" style={{ color: "#E0475B" }}>
-                Forgot Password?
-              </Link>
-              <Button
-                type="submit"
-                style={{ borderRadius: "20px", width: "25%" }}
+    <div className="min-height mt-5">
+      <div className="container-fluid h-100">
+        <div className="row h-100 justify-content-center">
+          <div className="col-md-4 w-100 align-self-center">
+            <Card className="rounded shadow">
+              <Form
+                onSubmit={handleLoginData}
+                autoComplete="off"
+                className="p-5"
               >
-                Login
-              </Button>
-            </Form.Group>
-          </Form>
-        </Card>
+                <AlertMessage
+                  variant="danger"
+                  error={props.auth.loginError}
+                  onDismiss={handleAlertDismiss}
+                />
+                <Form.Group>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={values.email}
+                    onChange={handleChange("email")}
+                    placeholder="Enter email"
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <PasswordTextField
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange("password")}
+                    placeholder="Password"
+                  />
+                </Form.Group>
+                <Form.Group className="d-flex justify-content-between">
+                  <Link to="/forgot-password" style={{ color: "#E0475B" }}>
+                    Forgot Password?
+                  </Link>
+                  <Button type="submit" style={{ borderRadius: "20px" }}>
+                    Login
+                  </Button>
+                </Form.Group>
+              </Form>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

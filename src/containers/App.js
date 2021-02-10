@@ -24,6 +24,7 @@ import Footer from "components/Footer";
 import AuthRoute from "containers/AuthRoute";
 import Terms from "pages/Terms";
 import Privacy from "pages/Privacy";
+import DashboardPage from "pages/dashboard/DashboardPage";
 // import ResetPasswordSuccess from "pages/static/ResetPasswordSuccess";
 
 function App(props) {
@@ -75,6 +76,8 @@ function App(props) {
         {/* <PrivateRoute path="/dashboard/" exact component={Dashboard} /> */}
         <Route exact path="/termspolicy" component={Terms} />
         <Route exact path="/privacypolicy" component={Privacy} />
+        <Route exact path="/dashboard" component={DashboardPage} />
+
         <Route component={Page404} />
       </Switch>
 
