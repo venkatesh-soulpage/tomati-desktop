@@ -1,5 +1,5 @@
 // Auth Routes
-export const CLIENT_LOGIN = "/api/v1/auth/login";
+export const CLIENT_LOGIN = "/api/auth/login";
 export const CLIENT_REGISTER = "/api/v1/auth/client/register";
 export const AUTH_TOKEN_VALIDATION = "/api/v1/auth/token/validate";
 export const FORGOT_PASSWORD = "/api/v1/auth/forgot";
