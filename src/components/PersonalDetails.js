@@ -3,7 +3,13 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import PasswordTextField from "components/PasswordTextField";
 
-function PersonalDetails({ values, handleChange, setValues, handleStep }) {
+function PersonalDetails({
+  values,
+  handleChange,
+  setValues,
+  handleStep,
+  handleSignUpData,
+}) {
   return (
     <>
       <Form.Group>
@@ -58,10 +64,8 @@ function PersonalDetails({ values, handleChange, setValues, handleStep }) {
 
       <Form.Group className="d-flex justify-content-end">
         <Button
-          type="button"
-          onClick={() => {
-            handleStep("step", 2);
-          }}
+          type="submit"
+          form="register-form"
           className="btn btn-primary mt-3"
           style={{ borderRadius: "20px" }}
         >

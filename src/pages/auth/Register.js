@@ -30,6 +30,11 @@ function Register(props) {
     company_name: "",
     step: 1,
   });
+  const [code, setCode] = React.useState("");
+  const [location, setLocation] = React.useState({
+    location: "",
+    address: "",
+  });
 
   React.useEffect(function () {
     props.dispatch(receiveUserData({}));
@@ -41,71 +46,124 @@ function Register(props) {
     const value = event.target.value;
     setValues((values) => ({ ...values, [name]: value }));
   };
-  const handleStep = (name, value) => (event) => {
+  const handleChangeCode = (name) => (event) => {
+    const value = event.target.value;
+    setCode(value);
+  };
+  const handleChangeLocation = (name) => (event) => {
+    const value = event.target.value;
+    setLocation((values) => ({ ...values, [name]: value }));
+  };
+  const handleStep = (name, value) => {
     setValues((values) => ({ ...values, [name]: value }));
   };
 
   // Handling the Signup data and sending it to the service.
-  function handleSignUpData(event) {
+  const handleSignUpData = (event) => {
     event.preventDefault();
-    props.dispatch(userRegistration(values));
-  }
-
+    console.log(values, code, location);
+    handleStep("step", values.step + 1);
+  };
+  const HeaderText = {
+    fontSize: "24px",
+    fontFamily: "Poppins",
+    fontWeight: "600",
+  };
   const { step } = values;
-  if (props.auth.userData.email) {
-    return <Redirect to="/verify-email" />;
-  } else {
-    return (
-      <div className="bg-light container-fluid py-5">
-        <div className="container">
-          <Card className="p-5 w-50 mx-auto">
-            <h3 className="text-center form-legend pb-5">
-              Tell us About Yourself
-            </h3>
-            <Form
-              onSubmit={handleSignUpData}
-              onLoad={() => props.handleRegisterError(null)}
-              autoComplete="off"
-            >
-              <AlertMessage
-                variant="danger"
-                error={props.auth.registerError}
-                onDismiss={() => {
-                  props.handleRegisterError(null);
-                }}
-              ></AlertMessage>
-              {step === 1 ? (
+  return (
+    <div className="bg-light container-fluid py-5">
+      <div className="container">
+        <Card className="p-5 w-50 mx-auto">
+          {step === 1 ? (
+            <>
+              <div style={HeaderText} className="text-start form-legend pb-5">
+                Tell us About Yourself
+              </div>
+              <Form
+                id="register-form"
+                onSubmit={handleSignUpData}
+                // onLoad={() => props.handleRegisterError(null)}
+                autoComplete="off"
+              >
+                <AlertMessage
+                  variant="danger"
+                  error={props.auth.registerError}
+                  onDismiss={() => {
+                    props.handleRegisterError(null);
+                  }}
+                ></AlertMessage>
                 <PersonalDetails
                   values={values}
                   handleChange={handleChange}
                   setValues={setValues}
                   handleStep={handleStep}
+                  handleSignUpData={handleSignUpData}
                 />
-              ) : step === 2 ? (
+              </Form>
+            </>
+          ) : step === 2 ? (
+            <>
+              <div style={HeaderText} className="text-start form-legend pb-5">
+                Email Confimation
+              </div>
+              <Form
+                id="email-form"
+                onSubmit={handleSignUpData}
+                // onLoad={() => props.handleRegisterError(null)}
+                autoComplete="off"
+              >
+                <AlertMessage
+                  variant="danger"
+                  error={props.auth.registerError}
+                  onDismiss={() => {
+                    props.handleRegisterError(null);
+                  }}
+                ></AlertMessage>
                 <EmailConfirmation
-                  values={values}
-                  handleChange={handleChange}
-                  setValues={setValues}
+                  code={code}
+                  handleChangeCode={handleChangeCode}
+                  setCode={setCode}
                   handleStep={handleStep}
+                  handleSignUpData={handleSignUpData}
                 />
-              ) : step === 3 ? (
+              </Form>
+            </>
+          ) : step === 3 ? (
+            <>
+              <div style={HeaderText} className="text-start form-legend pb-5">
+                Location
+              </div>
+              <Form
+                id="location-form"
+                onSubmit={handleSignUpData}
+                // onLoad={() => props.handleRegisterError(null)}
+                autoComplete="off"
+              >
+                <AlertMessage
+                  variant="danger"
+                  error={props.auth.registerError}
+                  onDismiss={() => {
+                    props.handleRegisterError(null);
+                  }}
+                ></AlertMessage>
                 <LocationDetails
-                  values={values}
-                  handleChange={handleChange}
-                  setValues={setValues}
+                  location={location}
+                  handleChangeLocation={handleChangeLocation}
+                  setLocation={setLocation}
                   handleStep={handleStep}
+                  handleSignUpData={handleSignUpData}
                 />
-              ) : null}
-            </Form>
-          </Card>
-          <div className="w-25 mx-auto mt-4 text-center">
-            <ProgressBar now={step * 33} variant="primary" />
-            <small>Step {step}/3</small>
-          </div>
+              </Form>
+            </>
+          ) : null}
+        </Card>
+        <div className="w-25 mx-auto mt-4 text-center">
+          <ProgressBar now={step * 33} variant="primary" />
+          <small>Step {step}/3</small>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 function mapStateToProps(state) {
