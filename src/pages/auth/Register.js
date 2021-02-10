@@ -37,6 +37,7 @@ function Register(props) {
   });
 
   React.useEffect(function () {
+    window.scroll(0, 0);
     props.dispatch(receiveUserData({}));
     props.dispatch(handleRegisterError(null));
   }, []);
@@ -61,7 +62,6 @@ function Register(props) {
   // Handling the Signup data and sending it to the service.
   const handleSignUpData = (event) => {
     event.preventDefault();
-    console.log(values, code, location);
     handleStep("step", values.step + 1);
   };
   const HeaderText = {

@@ -13,13 +13,13 @@ import history from "utils/history";
  * @param {*} postData
  */
 export function userRegistration(postData) {
-  return function(dispatch) {
+  return function (dispatch) {
     return AuthService.postSignUpDetails(postData)
-      .then(responseData => {
+      .then((responseData) => {
         dispatch(receiveUserData(responseData.data.user));
         return responseData;
       })
-      .catch(errorData => {
+      .catch((errorData) => {
         dispatch(handleRegisterError(errorData));
       });
   };
@@ -31,7 +31,7 @@ export function userRegistration(postData) {
 export function handleRegisterError(error) {
   return {
     type: ActionTypes.HANDLE_REGISTER_ERROR,
-    payload: error
+    payload: error,
   };
 }
 /* ================================================================== */
@@ -43,32 +43,25 @@ export function handleRegisterError(error) {
  * @param {*} postData
  */
 export function userLogin(postData) {
-  return function(dispatch) {
+  return function (dispatch) {
     return AuthService.postLoginDetails(postData)
-      .then(responseData => {
+      .then((responseData) => {
         dispatch(handleLoginSuccess(responseData));
-        dispatch(receiveUserData(responseData.data.user));
-        if (responseData.data.user.type.name === "Client") {
-          if (responseData.data.access_token) {
-            dispatch(
-              setAuthTokenInSession(
-                "token",
-                responseData.data.access_token.accessToken
-              )
-            );
-            dispatch(handleIsUserAuthenticated(true));
-          }
+        dispatch(receiveUserData(responseData));
+        if (responseData.token) {
+          dispatch(setAuthTokenInSession("token", responseData.token));
+          dispatch(handleIsUserAuthenticated(true));
         } else {
           var errorData = {
             status: "ERROR",
             message:
-              "Access Denied, User Type not permitted to use this application"
+              "Access Denied, User Type not permitted to use this application",
           };
           dispatch(handleLoginError(errorData));
         }
         return responseData.data.user;
       })
-      .catch(errorData => {
+      .catch((errorData) => {
         dispatch(handleLoginError(errorData));
       });
   };
@@ -80,7 +73,7 @@ export function userLogin(postData) {
 export function handleLoginSuccess(loginResponse) {
   return {
     type: ActionTypes.HANDLE_LOGIN_SUCCESS,
-    payload: loginResponse
+    payload: loginResponse,
   };
 }
 /**
@@ -90,7 +83,7 @@ export function handleLoginSuccess(loginResponse) {
 export function handleLoginError(error) {
   return {
     type: ActionTypes.HANDLE_LOGIN_ERROR,
-    payload: error
+    payload: error,
   };
 }
 /**
@@ -99,7 +92,7 @@ export function handleLoginError(error) {
 export function clearLoginError() {
   return {
     type: ActionTypes.HANDLE_LOGIN_ERROR,
-    payload: null
+    payload: null,
   };
 }
 /* ================================================================== */
@@ -112,7 +105,7 @@ export function clearLoginError() {
 export function receiveUserData(userData) {
   return {
     type: ActionTypes.RECEIVE_USER_DATA,
-    payload: userData
+    payload: userData,
   };
 }
 /**
@@ -122,7 +115,7 @@ export function receiveUserData(userData) {
 export function receiveUserDataError(error) {
   return {
     type: ActionTypes.RECEIVE_USER_DATA_ERROR,
-    payload: error
+    payload: error,
   };
 }
 /* ================================================================== */
@@ -142,7 +135,7 @@ export function handleIsUserAuthenticated(payload) {
   }
   return {
     type: ActionTypes.HANDLE_IS_USER_AUTHENTICATED,
-    payload: payload
+    payload: payload,
   };
 }
 /**
@@ -151,7 +144,7 @@ export function handleIsUserAuthenticated(payload) {
  * @param {*} value
  */
 export function setAuthTokenInSession(key, value) {
-  return function(dispatch) {
+  return function (dispatch) {
     sessionStorage.setItem(key, value);
   };
 }
@@ -162,12 +155,12 @@ export function setAuthTokenInSession(key, value) {
  * Validating the existing user auth token is valid or not
  */
 export function validateAuthToken() {
-  return function(dispatch) {
+  return function (dispatch) {
     return AuthService.validateAuthToken()
-      .then(responseData => {
+      .then((responseData) => {
         dispatch(receiveUserData(responseData.data.user));
       })
-      .catch(errorData => {
+      .catch((errorData) => {
         dispatch(userSignOut());
       });
   };
@@ -180,7 +173,7 @@ export function validateAuthToken() {
  * and clearing session storage
  */
 export function userSignOut() {
-  return function(dispatch) {
+  return function (dispatch) {
     sessionStorage.clear();
     dispatch(handleIsUserAuthenticated(false));
   };
@@ -193,13 +186,13 @@ export function userSignOut() {
  * @param {*} postData
  */
 export function forgetPassword(postData) {
-  return function(dispatch) {
+  return function (dispatch) {
     return AuthService.forgetPassword(postData)
-      .then(responseData => {
+      .then((responseData) => {
         dispatch(receiveForgotPasswordToken(responseData));
         dispatch(forgotPasswordToggle(true));
       })
-      .catch(errorData => {
+      .catch((errorData) => {
         dispatch(receiveForgotPasswordError(errorData.data));
         dispatch(forgotPasswordToggle(false));
       });
@@ -212,7 +205,7 @@ export function forgetPassword(postData) {
 export function receiveForgotPasswordToken(data) {
   return {
     type: ActionTypes.RECEIVE_PASSWORD_RESET_TOKEN,
-    payload: data
+    payload: data,
   };
 }
 /**
@@ -222,7 +215,7 @@ export function receiveForgotPasswordToken(data) {
 export function receiveForgotPasswordError(error) {
   return {
     type: ActionTypes.RECEIVE_PASSWORD_RESET_TOKEN_ERROR,
-    payload: error
+    payload: error,
   };
 }
 /* ================================================================== */
@@ -233,13 +226,13 @@ export function receiveForgotPasswordError(error) {
  * @param {*} data
  */
 export function resetPassword(data) {
-  return function(dispatch) {
+  return function (dispatch) {
     return AuthService.resetPassword(data)
-      .then(responseData => {
+      .then((responseData) => {
         dispatch(receiveResetPassword(responseData));
         history.push("/forgot-password/success");
       })
-      .catch(errorData => {
+      .catch((errorData) => {
         dispatch(receiveResetPasswordError(errorData));
       });
   };
@@ -251,7 +244,7 @@ export function resetPassword(data) {
 export function receiveResetPassword(data) {
   return {
     type: ActionTypes.RESET_PASSWORD_TOKEN,
-    payload: data
+    payload: data,
   };
 }
 /**
@@ -261,7 +254,7 @@ export function receiveResetPassword(data) {
 export function receiveResetPasswordError(error) {
   return {
     type: ActionTypes.RESET_PASSWORD_ERROR,
-    payload: error
+    payload: error,
   };
 }
 /**
@@ -271,6 +264,6 @@ export function receiveResetPasswordError(error) {
 export function forgotPasswordToggle(data) {
   return {
     type: ActionTypes.FORGOT_PASSWORD_TOGGLE,
-    payload: data
+    payload: data,
   };
 }

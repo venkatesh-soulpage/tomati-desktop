@@ -58,7 +58,6 @@ function PersonalDetails({
         <Form.Check
           type="checkbox"
           label="I agree to receive Tomati news and updates."
-          required
         />
       </Form.Group>
 
