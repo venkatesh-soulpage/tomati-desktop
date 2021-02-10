@@ -40,3 +40,7 @@ small {
 .progress-bar.bg-primary {
   background-color: #e0475b !important;
 }
+
+input[type="checkbox"]:after {
+  background-color: #e0475b !important;
+}

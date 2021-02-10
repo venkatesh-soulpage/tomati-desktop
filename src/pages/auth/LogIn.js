@@ -65,11 +65,14 @@ function LogIn(props) {
   }
 
   return (
-    <div className="container-fluid bg-light h-50 d-flex justify-content-center align-items-center">
-      <div>
-        <h3 className="text-center p-4">Login</h3>
-        <Card className="p-5" style={{ borderRadius: "15px" }}>
-          <Form onSubmit={handleLoginData} autoComplete="off">
+    <div className="bg-light container-fluid d-flex justify-content-center align-items-center h-75">
+      <div className="container ">
+        <h3 className="text-center">Login</h3>
+        <Card
+          className=""
+          style={{ borderRadius: "15px", width: "fit-content", margin: "auto" }}
+        >
+          <Form onSubmit={handleLoginData} autoComplete="off" className="p-5">
             <AlertMessage
               variant="danger"
               error={props.auth.loginError}

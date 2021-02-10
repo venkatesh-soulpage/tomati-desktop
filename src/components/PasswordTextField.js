@@ -23,12 +23,21 @@ function PasswordTextFeild({ ...props }) {
         {...props}
       />
       <div className="input-group-append">
-        <Button
-          className="btn-transparent active"
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "60px",
+            border: "1px solid #ced4da",
+            borderTopRightRadius: "5px",
+            borderBottomRightRadius: "5px",
+            backgroundColor: "transparent",
+          }}
           onClick={handlePasswordToggle}
         >
-          {values.hidden ? "Show" : "Hide"}
-        </Button>
+          <small>{values.hidden ? "Show" : "Hide"}</small>
+        </div>
       </div>
     </div>
   );
