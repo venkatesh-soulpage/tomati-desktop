@@ -2,66 +2,75 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import PasswordTextField from "components/PasswordTextField";
-
-function LocationDetails({ values, handleChange, setValues, handleStep }) {
+import Back from "../assets/img/Back.svg";
+function LocationDetails({
+  location,
+  handleChangeLocation,
+  setLocation,
+  handleStep,
+  handleSignUpData,
+}) {
   return (
     <>
       <Form.Group>
-        <Form.Control
-          type="text"
-          placeholder="FullName"
-          value={values.full_name}
-          onChange={handleChange("full_name")}
-          required
-        />
+        <Form.Label style={{ fontSize: "15px", fontFamily: "Poppins" }}>
+          Ideal for Outlet working with a smaller team and focused on making the
+          dine in experience safer for guests.
+        </Form.Label>
       </Form.Group>
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Company Name"
-          value={values.company_name}
-          onChange={handleChange("company_name")}
+          placeholder="Location"
+          value={location.location}
+          onChange={handleChangeLocation("location")}
           required
         />
       </Form.Group>
       <Form.Group>
         <Form.Control
-          type="email"
-          placeholder="Email Address"
-          value={values.email}
-          onChange={handleChange("email")}
+          type="text"
+          placeholder="Street Address"
+          value={location.address}
+          onChange={handleChangeLocation("address")}
           required
         />
       </Form.Group>
-      <Form.Group>
-        <PasswordTextField
-          value={values.password}
-          onChange={handleChange("password")}
-          placeholder="Password"
-          required
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Check
-          type="checkbox"
-          label="
-                          I agree to Tomati Terms and Privacy Policy."
-          required
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Check
-          type="checkbox"
-          label="I agree to receive Tomati news and updates."
-          required
-        />
+      <Form.Group className="m-0 p-0 mt-5 mb-5">
+        <Form.Label
+          className="m-0 p-0"
+          style={{ fontSize: "16px", fontFamily: "Poppins" }}
+        >
+          Can't find your location?
+        </Form.Label>
+        <Form.Label
+          className="m-0 p-0"
+          style={{
+            fontSize: "16px",
+            fontFamily: "Poppins",
+            fontWeight: "600",
+            color: "#E0475B",
+          }}
+        >
+          &nbsp; Tell us
+        </Form.Label>
       </Form.Group>
 
-      <Form.Group className="d-flex justify-content-end">
+      <Form.Group className="d-flex justify-content-between">
+        <img
+          className="mt-3"
+          style={{ height: "54px" }}
+          src={Back}
+          alt="icon"
+          onClick={() => {
+            handleStep("step", 2);
+          }}
+        />
         <Button
           type="submit"
-          onClick={handleStep("step", 4)}
+          form="location-form"
           className="btn btn-primary mt-3"
+          style={{ borderRadius: "20px", width: "140px", height: "54px" }}
         >
           Continue
         </Button>
