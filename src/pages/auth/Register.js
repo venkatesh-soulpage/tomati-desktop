@@ -30,6 +30,11 @@ function Register(props) {
     company_name: "",
     step: 1,
   });
+  const [code, setCode] = React.useState("");
+  const [location, setLocation] = React.useState({
+    location: "",
+    address: "",
+  });
 
   React.useEffect(function () {
     window.scroll(0, 0);
@@ -42,71 +47,114 @@ function Register(props) {
     const value = event.target.value;
     setValues((values) => ({ ...values, [name]: value }));
   };
-  const handleStep = (name, value) => (event) => {
+  const handleChangeCode = (name) => (event) => {
+    const value = event.target.value;
+    setCode(value);
+  };
+  const handleChangeLocation = (name) => (event) => {
+    const value = event.target.value;
+    setLocation((values) => ({ ...values, [name]: value }));
+  };
+  const handleStep = (name, value) => {
     setValues((values) => ({ ...values, [name]: value }));
   };
 
   // Handling the Signup data and sending it to the service.
-  function handleSignUpData(event) {
+  const handleSignUpData = (event) => {
     event.preventDefault();
-    // props.dispatch(userRegistration(values));
     handleStep("step", values.step + 1);
-  }
-
+  };
+  const HeaderText = {
+    fontSize: "24px",
+    fontFamily: "Poppins",
+    fontWeight: "600",
+  };
   const { step } = values;
-
-  console.log(values);
-
   return (
-    <div className="bg-light container-fluid d-flex justify-content-center align-items-center h-100 mt-5">
-      <div className="container ">
-        <Card
-          style={{
-            borderRadius: "15px",
-            width: "fit-content",
-            margin: "auto",
-          }}
-        >
-          <h3 className="text-center form-legend mt-5">
-            Tell us About Yourself
-          </h3>
-
+    <div className="bg-light container-fluid py-5">
+      <div className="container">
+        <Card className="p-5 w-50 mt-5 mx-auto">
           {step === 1 ? (
-            <Form
-              onSubmit={handleSignUpData}
-              onLoad={() => props.handleRegisterError(null)}
-              autoComplete="off"
-              className="p-5"
-              id="personal-form"
-            >
-              <AlertMessage
-                variant="danger"
-                error={props.auth.registerError}
-                onDismiss={() => {
-                  props.handleRegisterError(null);
-                }}
-              ></AlertMessage>
-              <PersonalDetails
-                values={values}
-                handleChange={handleChange}
-                setValues={setValues}
-                handleStep={handleStep}
-              />
-            </Form>
+            <>
+              <div style={HeaderText} className="text-start form-legend pb-5">
+                Tell us About Yourself
+              </div>
+              <Form
+                id="register-form"
+                onSubmit={handleSignUpData}
+                // onLoad={() => props.handleRegisterError(null)}
+                autoComplete="off"
+              >
+                <AlertMessage
+                  variant="danger"
+                  error={props.auth.registerError}
+                  onDismiss={() => {
+                    props.handleRegisterError(null);
+                  }}
+                ></AlertMessage>
+                <PersonalDetails
+                  values={values}
+                  handleChange={handleChange}
+                  setValues={setValues}
+                  handleStep={handleStep}
+                  handleSignUpData={handleSignUpData}
+                />
+              </Form>
+            </>
           ) : step === 2 ? (
-            <EmailConfirmation
-              values={values}
-              handleChange={handleChange}
-              setValues={setValues}
-              handleStep={handleStep}
-            />
+            <>
+              <div style={HeaderText} className="text-start form-legend pb-5">
+                Email Confimation
+              </div>
+              <Form
+                id="email-form"
+                onSubmit={handleSignUpData}
+                // onLoad={() => props.handleRegisterError(null)}
+                autoComplete="off"
+              >
+                <AlertMessage
+                  variant="danger"
+                  error={props.auth.registerError}
+                  onDismiss={() => {
+                    props.handleRegisterError(null);
+                  }}
+                ></AlertMessage>
+                <EmailConfirmation
+                  code={code}
+                  handleChangeCode={handleChangeCode}
+                  setCode={setCode}
+                  handleStep={handleStep}
+                  handleSignUpData={handleSignUpData}
+                />
+              </Form>
+            </>
           ) : step === 3 ? (
-            <LocationDetails
-              values={values}
-              handleChange={handleChange}
-              setValues={setValues}
-              handleStep={handleStep}
-            />
+            <>
+              <div style={HeaderText} className="text-start form-legend pb-5">
+                Location
+              </div>
+              <Form
+                id="location-form"
+                onSubmit={handleSignUpData}
+                // onLoad={() => props.handleRegisterError(null)}
+                autoComplete="off"
+              >
+                <AlertMessage
+                  variant="danger"
+                  error={props.auth.registerError}
+                  onDismiss={() => {
+                    props.handleRegisterError(null);
+                  }}
+                ></AlertMessage>
+                <LocationDetails
+                  location={location}
+                  handleChangeLocation={handleChangeLocation}
+                  setLocation={setLocation}
+                  handleStep={handleStep}
+                  handleSignUpData={handleSignUpData}
+                />
+              </Form>
+            </>
           ) : null}
         </Card>
         <div className="w-25 mx-auto mt-4 text-center">
