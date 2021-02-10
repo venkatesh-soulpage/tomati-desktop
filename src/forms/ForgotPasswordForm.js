@@ -30,7 +30,7 @@ function ForgotPasswordForm(props) {
           style={{ borderRadius: "15px", width: "fit-content", margin: "auto" }}
         >
           <Form onSubmit={onFormSubmit} className="p-5">
-            {props.auth.forgotPasswordError.status === "ERROR" && (
+            {props.auth.forgotPasswordError === "No account found" && (
               <Alert
                 variant="danger"
                 onClose={() => {
@@ -38,7 +38,7 @@ function ForgotPasswordForm(props) {
                 }}
                 dismissible
               >
-                Email Doesn't exist please try again with another.
+                Email Doesn't exist please try again.
               </Alert>
             )}
 
