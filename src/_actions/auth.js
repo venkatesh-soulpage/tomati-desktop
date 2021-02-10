@@ -193,7 +193,7 @@ export function forgetPassword(postData) {
         dispatch(forgotPasswordToggle(true));
       })
       .catch((errorData) => {
-        dispatch(receiveForgotPasswordError(errorData.data));
+        dispatch(receiveForgotPasswordError(errorData));
         dispatch(forgotPasswordToggle(false));
       });
   };
