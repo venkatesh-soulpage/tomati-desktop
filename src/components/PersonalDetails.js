@@ -52,16 +52,14 @@ function PersonalDetails({ values, handleChange, setValues, handleStep }) {
         <Form.Check
           type="checkbox"
           label="I agree to receive Tomati news and updates."
-          required
         />
       </Form.Group>
 
       <Form.Group className="d-flex justify-content-end">
         <Button
-          type="button"
-          onClick={() => {
-            handleStep("step", 2);
-          }}
+          form="personal-form"
+          type="submit"
+          // onClick={handleStep("step", 2)}
           className="btn btn-primary mt-3"
           style={{ borderRadius: "20px" }}
         >

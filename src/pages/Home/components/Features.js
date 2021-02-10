@@ -446,7 +446,7 @@ const Features = () => {
     </div>
   );
   return (
-    <div className="row mt-5 bg-white pb-5  " id="features">
+    <div className="row mt-5 bg-white pb-5 mx-0" id="features">
       <div className="col-10 offset-1 pb-5">
         <h3
           className="container pt-5 pb-5 m-auto text-center"
