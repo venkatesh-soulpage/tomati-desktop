@@ -26,10 +26,6 @@ function LogIn(props) {
     userLoginResponse: {},
   });
 
-  const handleSubmit = () => {
-    console.log("HANDLE SUBMIT CALLED");
-  };
-
   React.useEffect(function () {
     window.scroll(0, 0);
     props.dispatch(receiveUserData({}));
