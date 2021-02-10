@@ -1,15 +1,20 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import PasswordTextField from "components/PasswordTextField";
+import "rsuite/lib/styles/index.less";
 import Back from "../assets/img/Back.svg";
-function LocationDetails({
-  location,
-  handleChangeLocation,
-  setLocation,
-  handleStep,
-  handleSignUpData,
-}) {
+function LocationDetails({ values, handleChange, handleStep, props }) {
+  const arr =
+    props.auth.locations &&
+    props.auth.locations.filter((location) => {
+      return location.id === 7;
+    });
+  const arr2 =
+    props.auth.locations &&
+    props.auth.locations.filter((location) => {
+      return location.id !== 7;
+    });
+  const newLocations = arr && arr.concat(arr2);
   return (
     <>
       <Form.Group>
@@ -20,19 +25,33 @@ function LocationDetails({
       </Form.Group>
       <Form.Group>
         <Form.Control
-          type="text"
+          as="select"
           placeholder="Location"
-          value={location.location}
-          onChange={handleChangeLocation("location")}
+          value={values.location}
+          onChange={handleChange("location")}
           required
-        />
+        >
+          <option>Select Location</option>
+          <option value={7}>Nigeria</option>
+          <option disabled>Angola (Coming Soon)</option>
+          <option disabled>Brazil (Coming Soon)</option>
+          <option disabled>Colombia (Coming Soon)</option>
+          <option disabled>France (Coming Soon)</option>
+          <option disabled>Ghana (Coming Soon)</option>
+          <option disabled>Kenya (Coming Soon)</option>
+          <option disabled>Poland (Coming Soon)</option>
+          <option disabled>South Africa (Coming Soon)</option>
+          <option disabled>Spain (Coming Soon)</option>
+          <option disabled>United Arab Emirates (Coming Soon)</option>
+          <option disabled>United Kingdom (Coming Soon)</option>
+        </Form.Control>
       </Form.Group>
       <Form.Group>
         <Form.Control
           type="text"
           placeholder="Street Address"
-          value={location.address}
-          onChange={handleChangeLocation("address")}
+          value={values.address}
+          onChange={handleChange("address")}
           required
         />
       </Form.Group>

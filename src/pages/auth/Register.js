@@ -5,16 +5,22 @@ import {
   userRegistration,
   receiveUserData,
   handleRegisterError,
+  verify,
+  resetMessage,
+  getEmailRegisterOtp,
+  getLocationRegister,
+  checkEmailCode,
 } from "_actions/auth";
 // Router imports
 import { Redirect, withRouter } from "react-router-dom";
 // Bootstrap Imports
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
+// import Alert from "react-bootstrap/Alert";
 // custom components
-import PasswordTextField from "components/PasswordTextField";
+// import PasswordTextField from "components/PasswordTextField";
 // footer
-import Footer from "components/Footer";
+// import Footer from "components/Footer";
 // Alert Message
 import AlertMessage from "components/AlertMessage";
 import { Card, ProgressBar } from "react-bootstrap";
@@ -29,17 +35,21 @@ function Register(props) {
     full_name: "",
     company_name: "",
     step: 1,
-  });
-  const [code, setCode] = React.useState("");
-  const [location, setLocation] = React.useState({
+    code: "",
     location: "",
     address: "",
   });
+  // const [code, setCode] = React.useState("");
+  // const [location, setLocation] = React.useState({
+  //   location: "",
+  //   address: "",
+  // });
 
   React.useEffect(function () {
     window.scroll(0, 0);
     props.dispatch(receiveUserData({}));
     props.dispatch(handleRegisterError(null));
+    props.dispatch(getLocationRegister());
   }, []);
 
   // For handling changes in the inputs
@@ -47,14 +57,14 @@ function Register(props) {
     const value = event.target.value;
     setValues((values) => ({ ...values, [name]: value }));
   };
-  const handleChangeCode = (name) => (event) => {
-    const value = event.target.value;
-    setCode(value);
-  };
-  const handleChangeLocation = (name) => (event) => {
-    const value = event.target.value;
-    setLocation((values) => ({ ...values, [name]: value }));
-  };
+  // const handleChangeCode = (name) => (event) => {
+  //   const value = event.target.value;
+  //   setCode(value);
+  // };
+  // const handleChangeLocation = (name) => (event) => {
+  //   const value = event.target.value;
+  //   setLocation((values) => ({ ...values, [name]: value }));
+  // };
   const handleStep = (name, value) => {
     setValues((values) => ({ ...values, [name]: value }));
   };
@@ -63,6 +73,22 @@ function Register(props) {
   const handleSignUpData = (event) => {
     event.preventDefault();
     handleStep("step", values.step + 1);
+    props.dispatch(getEmailRegisterOtp({ email: values.email }));
+  };
+  // Handling the email confirmation data and sending it to the service.
+  const handleConfirmation = (event) => {
+    event.preventDefault();
+    handleStep("step", values.step + 1);
+    props.dispatch(checkEmailCode({ email: values.email, code: values.code }));
+  };
+  // Handling the location data and sending it to the service.
+  const handleLocation = (event) => {
+    event.preventDefault();
+    props.dispatch(userRegistration(values));
+  };
+  const handleEmailCheck = (email) => {
+    props.dispatch(verify(email));
+    props.dispatch(resetMessage());
   };
   const HeaderText = {
     fontSize: "24px",
@@ -95,9 +121,8 @@ function Register(props) {
                 <PersonalDetails
                   values={values}
                   handleChange={handleChange}
-                  setValues={setValues}
-                  handleStep={handleStep}
-                  handleSignUpData={handleSignUpData}
+                  handleEmailCheck={handleEmailCheck}
+                  props={props}
                 />
               </Form>
             </>
@@ -108,7 +133,7 @@ function Register(props) {
               </div>
               <Form
                 id="email-form"
-                onSubmit={handleSignUpData}
+                onSubmit={handleConfirmation}
                 // onLoad={() => props.handleRegisterError(null)}
                 autoComplete="off"
               >
@@ -120,11 +145,11 @@ function Register(props) {
                   }}
                 ></AlertMessage>
                 <EmailConfirmation
-                  code={code}
-                  handleChangeCode={handleChangeCode}
-                  setCode={setCode}
+                  values={values}
+                  handleChange={handleChange}
                   handleStep={handleStep}
-                  handleSignUpData={handleSignUpData}
+                  props={props}
+                  getEmailRegisterOtp={getEmailRegisterOtp}
                 />
               </Form>
             </>
@@ -135,7 +160,7 @@ function Register(props) {
               </div>
               <Form
                 id="location-form"
-                onSubmit={handleSignUpData}
+                onSubmit={handleLocation}
                 // onLoad={() => props.handleRegisterError(null)}
                 autoComplete="off"
               >
@@ -147,11 +172,10 @@ function Register(props) {
                   }}
                 ></AlertMessage>
                 <LocationDetails
-                  location={location}
-                  handleChangeLocation={handleChangeLocation}
-                  setLocation={setLocation}
+                  values={values}
+                  handleChange={handleChange}
                   handleStep={handleStep}
-                  handleSignUpData={handleSignUpData}
+                  props={props}
                 />
               </Form>
             </>
