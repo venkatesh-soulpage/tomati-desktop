@@ -5,11 +5,11 @@ import { resetPassword, receiveResetPasswordError } from "_actions/auth";
 // React router
 import { Link } from "react-router-dom";
 //react bootstrap
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Alert from "react-bootstrap/Alert";
+
 // local components
 import PasswordTextField from "components/PasswordTextField";
+
+import { Alert, Card, Button, Form } from "react-bootstrap";
 
 function ResetPasswordForm(props) {
   const [values, setValues] = React.useState({
@@ -43,75 +43,77 @@ function ResetPasswordForm(props) {
   };
 
   return (
-    <Form onSubmit={onFormSubmit}>
-      <Alert variant="success">
-        We have sent you an email with a token to reset you password.
-      </Alert>
-      <Alert
-        variant={alert.variant}
-        show={alert.switch}
-        onClick={() => {
-          setAlert({ ...alert, switch: false });
-        }}
-        dismissible
-      >
-        {alert.message}
-      </Alert>
-      <Form.Group>
-        {props.auth.resetPasswordError.status === 404 && (
-          <Alert
-            variant="danger"
-            onClose={() => {
-              receiveResetPasswordError({});
-            }}
-            dismissible
-          >
-            {props.auth.resetPasswordError.data.message}
-          </Alert>
-        )}
-      </Form.Group>
-      <h3>Reset Password</h3>
-      <Form.Group>
-        <Form.Label>Token</Form.Label>
-        <Form.Control
-          type="text"
-          value={values.token}
-          onChange={handleChange("token")}
-          placeholder="Please enter your token from email"
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>New Password</Form.Label>
-        <PasswordTextField
-          name="password"
-          value={values.password}
-          onChange={handleChange("password")}
-          placeholder="New Password"
-          autoComplete="off"
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Control
-          type="password"
-          value={values.re_password}
-          onChange={handleChange("re_password")}
-          placeholder="Confirm New Password"
-        />
-      </Form.Group>
-      <Form.Group>
-        <Button type="submit" variant="primary">
-          Submit
-        </Button>{" "}
-        <Button type="submit" variant="light">
-          Cancel
-        </Button>
-      </Form.Group>
-      <div className="text-muted">
-        <Link className="btn btn-link" to="/login">
-          Login as a different user
-        </Link>
+    <div className="bg-light container-fluid d-flex justify-content-center align-items-center h-75 mt-5">
+      <div className="container ">
+        <h3 className="text-center">Forgot Password</h3>
+        <Card
+          className="mt-5"
+          style={{ borderRadius: "15px", width: "fit-content", margin: "auto" }}
+        >
+          <Form onSubmit={onFormSubmit} className="p-5">
+            <Alert variant="success">
+              We have sent you an email with a token to reset you password.
+            </Alert>
+            <Alert
+              variant={alert.variant}
+              show={alert.switch}
+              onClick={() => {
+                setAlert({ ...alert, switch: false });
+              }}
+              dismissible
+            >
+              {alert.message}
+            </Alert>
+            <Form.Group>
+              {props.auth.resetPasswordError.status === 404 && (
+                <Alert
+                  variant="danger"
+                  onClose={() => {
+                    receiveResetPasswordError({});
+                  }}
+                  dismissible
+                >
+                  {props.auth.resetPasswordError.data.message}
+                </Alert>
+              )}
+            </Form.Group>
+            <h3>Reset Password</h3>
+
+            <Form.Group>
+              <Form.Label>New Password</Form.Label>
+              <PasswordTextField
+                name="password"
+                value={values.password}
+                onChange={handleChange("password")}
+                placeholder="New Password"
+                autoComplete="off"
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                type="password"
+                value={values.re_password}
+                onChange={handleChange("re_password")}
+                placeholder="Confirm New Password"
+              />
+            </Form.Group>
+            <Form.Group>
+              <Button type="submit" variant="primary">
+                Update
+              </Button>{" "}
+              <Button type="submit" variant="light">
+                Cancel
+              </Button>
+            </Form.Group>
+            <div className="text-muted">
+              <Link className="btn btn-link" to="/login">
+                Login as a different user
+              </Link>
+            </div>
+          </Form>
+        </Card>
       </div>
-    </Form>
+    </div>
   );
 }
 
