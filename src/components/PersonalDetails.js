@@ -36,6 +36,7 @@ function PersonalDetails({
           placeholder="Email Address"
           value={values.email}
           onChange={handleChange("email")}
+          onBlur={() => {}}
           required
         />
       </Form.Group>

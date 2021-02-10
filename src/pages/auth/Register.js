@@ -73,7 +73,7 @@ function Register(props) {
   return (
     <div className="bg-light container-fluid py-5">
       <div className="container">
-        <Card className="p-5 w-50 mx-auto">
+        <Card className="p-5 w-50 mt-5 mx-auto">
           {step === 1 ? (
             <>
               <div style={HeaderText} className="text-start form-legend pb-5">
