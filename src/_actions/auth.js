@@ -14,6 +14,8 @@ import history from "utils/history";
  */
 export function userRegistration(postData) {
   return function (dispatch) {
+    // console.log("action\n", postData);
+
     return AuthService.postSignUpDetails(postData)
       .then((responseData) => {
         dispatch(receiveUserData(responseData.data.user));
@@ -22,6 +24,51 @@ export function userRegistration(postData) {
       .catch((errorData) => {
         dispatch(handleRegisterError(errorData));
       });
+  };
+}
+/**
+ * Email Otp
+ * On registration is success - User Details
+ * On registration Failed  - handling user registration error
+ * @param {*} postData
+ */
+export function getEmailRegisterOtp(postData) {
+  return function (dispatch) {
+    return AuthService.getEmailOtp(postData)
+      .then((responseData) => {
+        return responseData;
+      })
+      .catch((errorData) => {
+        dispatch(handleRegisterError(errorData));
+      });
+  };
+}
+/**
+ * get locations
+ * @param {*}
+ */
+export function getLocationRegister() {
+  return function (dispatch) {
+    return AuthService.getLocations()
+      .then((responseData) => {
+        dispatch(getLocationSuccess(responseData));
+        return responseData;
+      })
+      .catch((errorData) => {
+        dispatch(getLocationError(errorData));
+      });
+  };
+}
+export function getLocationSuccess(responseData) {
+  return {
+    type: ActionTypes.GET_LOCATION_SUCCESS,
+    payload: responseData,
+  };
+}
+export function getLocationError(error) {
+  return {
+    type: ActionTypes.GET_LOCATION_ERROR,
+    payload: error,
   };
 }
 /**
@@ -93,6 +140,67 @@ export function clearLoginError() {
   return {
     type: ActionTypes.HANDLE_LOGIN_ERROR,
     payload: null,
+  };
+}
+/**
+ * Verify with email
+ * @param {*} postData
+ */
+export function verify(postData) {
+  return function (dispatch) {
+    return AuthService.verifyCredentails(postData)
+      .then((responseData) => {
+        dispatch(handleEmailSuccess(responseData.Message));
+        return responseData;
+      })
+      .catch((errorData) => {
+        dispatch(handleEmailError(errorData.Message));
+        return errorData;
+      });
+  };
+}
+/**
+ * Verify Reset Response
+ * @param {*}
+ */
+export function resetMessage() {
+  return {
+    type: ActionTypes.RESET_MESSAGE,
+    payload: null,
+  };
+}
+/**
+ * Verify Success Response
+ * @param {*} Message
+ */
+export function handleEmailSuccess(Message) {
+  return {
+    type: ActionTypes.HANDLE_EMAIL_SUCCESS,
+    payload: Message,
+  };
+}
+/**
+ * Verify Error Response
+ * @param {*} error
+ */
+export function handleEmailError(error) {
+  return {
+    type: ActionTypes.HANDLE_EMAIL_ERROR,
+    payload: error,
+  };
+}
+
+export function checkEmailCode(postData) {
+  return function (dispatch) {
+    return AuthService.checkCode(postData)
+      .then((responseData) => {
+        dispatch(handleEmailSuccess(responseData.Message));
+        return responseData;
+      })
+      .catch((errorData) => {
+        dispatch(handleEmailError(errorData.Message));
+        return errorData;
+      });
   };
 }
 /* ================================================================== */

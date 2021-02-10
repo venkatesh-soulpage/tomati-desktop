@@ -2,14 +2,8 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import PasswordTextField from "components/PasswordTextField";
-
-function PersonalDetails({
-  values,
-  handleChange,
-  setValues,
-  handleStep,
-  handleSignUpData,
-}) {
+import { Link } from "react-router-dom";
+function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
   return (
     <>
       <Form.Group>
@@ -36,9 +30,21 @@ function PersonalDetails({
           placeholder="Email Address"
           value={values.email}
           onChange={handleChange("email")}
-          onBlur={() => {}}
+          onBlur={() => {
+            console.log("blur");
+            handleEmailCheck(values.email);
+          }}
           required
         />
+        <Form.Text>
+          {props.auth.verifySuccess ? (
+            <small style={{ color: "#4BB543" }}>Email is available</small>
+          ) : (
+            props.auth.verifyError && (
+              <small style={{ color: "#E0475B" }}>Email is already taken</small>
+            )
+          )}
+        </Form.Text>
       </Form.Group>
       <Form.Group>
         <PasswordTextField
@@ -48,12 +54,24 @@ function PersonalDetails({
           required
         />
       </Form.Group>
-      <Form.Group>
-        <Form.Check
-          type="checkbox"
-          label="I agree to Tomati Terms and Privacy Policy."
-          required
-        />
+      <Form.Group className="d-flex ">
+        <Form.Check type="checkbox" required />
+        <Form.Text>
+          <p>
+            I agree to Tomati{" "}
+            <Link to="/termspolicy" target="_top">
+              <u>
+                <b>Terms</b>
+              </u>
+            </Link>{" "}
+            and{" "}
+            <Link to="/privacypolicy" target="_top">
+              <u>
+                <b>Privacy Policy.</b>
+              </u>
+            </Link>
+          </p>
+        </Form.Text>
       </Form.Group>
       <Form.Group>
         <Form.Check
