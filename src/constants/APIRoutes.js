@@ -5,8 +5,8 @@ export const GET_EMAIL_OTP = "/api/verifications/email/get-code";
 export const GET_LOCATIONS = "/api/outletlocations";
 export const CHECK_EMAIL_CODE = "/api/verifications/email/check-code";
 export const AUTH_TOKEN_VALIDATION = "/api/v1/auth/token/validate";
-export const FORGOT_PASSWORD = "/api/v1/auth/forgot";
-export const RESET_PASSWORD = "/api/v1/auth/reset";
+export const FORGOT_PASSWORD = "/api/auth/tomati-forgot";
+export const RESET_PASSWORD = "/api/auth/reset";
 export const VERIFY_CREDENTIALS = "/api/auth/verify-credentials";
 // Application Routes
 export const APPLICATION_CREATE = "/api/v1/application/create";

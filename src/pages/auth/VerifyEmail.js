@@ -5,7 +5,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   authCodeVerification,
-  resendVerificationEmail
+  resendVerificationEmail,
 } from "_actions/verification";
 import { receiveUserDataError } from "_actions/auth";
 // React Bootstrap
@@ -18,7 +18,7 @@ import ReactCodeInput from "react-code-input";
 function VerifyEmail(props) {
   const [values, setValues] = React.useState({
     verificationCode: "",
-    resend_response: null
+    resend_response: null,
   });
   function onCodeChange(value) {
     setValues({ ...values, verificationCode: value });
@@ -30,21 +30,24 @@ function VerifyEmail(props) {
 
   function resendCode(event) {
     var data = {
-      email: props.auth.userData.email
+      email: props.auth.userData.email,
     };
     props
       .dispatch(resendVerificationEmail(data))
-      .then(responseData => {
+      .then((responseData) => {
         console.log(responseData);
         setValues({
           ...values,
-          resend_response: { message: responseData.message, variant: "success" }
+          resend_response: {
+            message: responseData.message,
+            variant: "success",
+          },
         });
       })
-      .catch(errorData => {
+      .catch((errorData) => {
         setValues({
           ...values,
-          resend_response: { message: errorData.message, variant: "danger" }
+          resend_response: { message: errorData.message, variant: "danger" },
         });
       });
   }

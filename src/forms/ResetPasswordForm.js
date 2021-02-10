@@ -1,15 +1,15 @@
 import React from "react";
 //redux
 import { connect } from "react-redux";
-import { resetPassword, receiveResetPasswordError } from "_actions/auth";
+import { resetPassword } from "_actions/auth";
 // React router
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 //react bootstrap
 
 // local components
 import PasswordTextField from "components/PasswordTextField";
 
-import { Alert, Card, Button, Form } from "react-bootstrap";
+import { Card, Button, Form } from "react-bootstrap";
 
 function ResetPasswordForm(props) {
   const [values, setValues] = React.useState({
@@ -23,18 +23,23 @@ function ResetPasswordForm(props) {
     message: "Password does not match",
     switch: false,
   });
-
+  const useQuery = () => {
+    return new URLSearchParams(useLocation().search);
+  };
+  const query = useQuery();
   function onFormSubmit(event) {
     event.preventDefault();
+    const email = query.get("email");
+    const token = query.get("token");
     if (values.password === values.re_password) {
-      setAlert({ ...alert, switch: false });
       var data = {
-        token: values.token,
+        email,
+        token,
         password: values.password,
       };
+      console.log(data, "DATA");
       props.dispatch(resetPassword(data));
     } else {
-      setAlert({ ...alert, switch: true });
     }
   }
 
@@ -51,32 +56,7 @@ function ResetPasswordForm(props) {
           style={{ borderRadius: "15px", width: "fit-content", margin: "auto" }}
         >
           <Form onSubmit={onFormSubmit} className="p-5">
-            <Alert variant="success">
-              We have sent you an email with a token to reset you password.
-            </Alert>
-            <Alert
-              variant={alert.variant}
-              show={alert.switch}
-              onClick={() => {
-                setAlert({ ...alert, switch: false });
-              }}
-              dismissible
-            >
-              {alert.message}
-            </Alert>
-            <Form.Group>
-              {props.auth.resetPasswordError.status === 404 && (
-                <Alert
-                  variant="danger"
-                  onClose={() => {
-                    receiveResetPasswordError({});
-                  }}
-                  dismissible
-                >
-                  {props.auth.resetPasswordError.data.message}
-                </Alert>
-              )}
-            </Form.Group>
+            <Form.Group></Form.Group>
             <h3>Reset Password</h3>
 
             <Form.Group>
