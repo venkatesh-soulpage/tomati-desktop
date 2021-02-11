@@ -96,6 +96,27 @@ class AuthAPI {
         throw error.response.data;
       });
   }
+  static getUser() {
+    return axios
+      .get(APIRoutes.GET_USER)
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        throw error.response.data;
+      });
+  }
+  static updateUser(data) {
+    return axios
+      .post(APIRoutes.UPDATE_USER, data)
+      .then((response) => {
+        console.log(response);
+        return response.data;
+      })
+      .catch((error) => {
+        throw error.response.data;
+      });
+  }
 }
 
 export default AuthAPI;

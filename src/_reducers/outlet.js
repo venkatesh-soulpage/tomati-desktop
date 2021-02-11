@@ -14,6 +14,8 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         outlets: action.payload,
+        success: false,
+        message: null,
       };
     case ActionTypes.GET_SINGLE_OUTLET:
       console.log(action.payload);
@@ -25,6 +27,8 @@ export default function authReducer(state = initialState, action) {
       console.log(action.payload, "res from reducer");
       return {
         ...state,
+        message: action.payload.message,
+        success: action.payload.res,
       };
 
     default:

@@ -1,12 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-<<<<<<< HEAD
-// import "rsuite/lib/styles/index.less";
-=======
 import Modal from "react-bootstrap/Modal";
-import "rsuite/lib/styles/index.less";
->>>>>>> ca221f725493f781500a3c102427eb8982b48555
 import Back from "../assets/img/Back.svg";
 import Success from "../assets/img/Success.svg";
 import { Link } from "react-router-dom";
