@@ -18,7 +18,8 @@ export function userRegistration(postData) {
 
     return AuthService.postSignUpDetails(postData)
       .then((responseData) => {
-        dispatch(receiveUserData(responseData.data.user));
+        console.log("action then\n", responseData);
+        dispatch(receiveUserData(responseData));
         return responseData;
       })
       .catch((errorData) => {
@@ -150,7 +151,17 @@ export function verify(postData) {
   return function (dispatch) {
     return AuthService.verifyCredentails(postData)
       .then((responseData) => {
-        dispatch(handleEmailSuccess(responseData.Message));
+        console.log("REsponse\n", responseData);
+        console.log("REsponse\n", postData);
+        if (
+          new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(postData)
+        ) {
+          console.log("REsponse if\n", responseData);
+          dispatch(handleEmailSuccess(responseData.Message));
+        } else {
+          console.log("REsponse else\n", responseData);
+          dispatch(handleEmailSuccess("Enter valid Email"));
+        }
         return responseData;
       })
       .catch((errorData) => {

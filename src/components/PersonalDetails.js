@@ -37,8 +37,14 @@ function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
           required
         />
         <Form.Text>
-          {props.auth.verifySuccess ? (
-            <small style={{ color: "#4BB543" }}>Email is available</small>
+          {props.auth.verifySuccess === "This Email is available" ? (
+            <small style={{ color: "#4BB543" }}>
+              {props.auth.verifySuccess}
+            </small>
+          ) : props.auth.verifySuccess === "Enter valid Email" ? (
+            <small style={{ color: "#E0475B" }}>
+              {props.auth.verifySuccess}
+            </small>
           ) : (
             props.auth.verifyError && (
               <small style={{ color: "#E0475B" }}>Email is already taken</small>
@@ -59,17 +65,26 @@ function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
         <Form.Text>
           <p>
             I agree to Tomati{" "}
-            <Link to="/termspolicy" target="_top">
+            <Link
+              style={{ color: "#E0475B" }}
+              to="/termspolicy"
+              target="_blank"
+            >
               <u>
                 <b>Terms</b>
               </u>
             </Link>{" "}
             and{" "}
-            <Link to="/privacypolicy" target="_top">
+            <Link
+              style={{ color: "#E0475B" }}
+              to="/privacypolicy"
+              target="_top"
+            >
               <u>
-                <b>Privacy Policy.</b>
+                <b>Privacy Policy</b>
               </u>
             </Link>
+            .
           </p>
         </Form.Text>
       </Form.Group>
@@ -85,7 +100,7 @@ function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
           type="submit"
           form="register-form"
           className="btn btn-primary mt-3"
-          style={{ borderRadius: "20px" }}
+          style={{ borderRadius: "30px", width: "140px", height: "54px" }}
         >
           Continue
         </Button>
