@@ -23,11 +23,12 @@ import ForgotPassword from "pages/auth/ForgotPassword";
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
 // Private Route For Auth redirection.
-// import PrivateRoute from "containers/PrivateRoute";
+import PrivateRoute from "containers/PrivateRoute";
 import AuthRoute from "containers/AuthRoute";
 import Terms from "pages/Terms";
 import Privacy from "pages/Privacy";
 import DashboardPage from "pages/dashboard/DashboardPage";
+// import PrivateRoute from "./PrivateRoute";
 // import ResetPasswordSuccess from "pages/static/ResetPasswordSuccess";
 
 function App(props) {
@@ -79,6 +80,7 @@ function App(props) {
         {/* <PrivateRoute path="/dashboard/" exact component={Dashboard} /> */}
         <Route exact path="/termspolicy" component={Terms} />
         <Route exact path="/privacypolicy" component={Privacy} />
+
         <Route exact path="/reset" component={ResetPassword} />
         <Route exact path="/dashboard" component={DashboardPage} />
         <Route exact path="/order-summary" component={OrderSummary} />
