@@ -1,9 +1,19 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import "rsuite/lib/styles/index.less";
 import Back from "../assets/img/Back.svg";
-function LocationDetails({ values, handleChange, handleStep, props }) {
+import Success from "../assets/img/Success.svg";
+import { Link } from "react-router-dom";
+function LocationDetails({
+  values,
+  handleChange,
+  handleStep,
+  props,
+  handleClose,
+  show,
+}) {
   const arr =
     props.auth.locations &&
     props.auth.locations.filter((location) => {
@@ -89,11 +99,46 @@ function LocationDetails({ values, handleChange, handleStep, props }) {
           type="submit"
           form="location-form"
           className="btn btn-primary mt-3"
-          style={{ borderRadius: "20px", width: "140px", height: "54px" }}
+          style={{ borderRadius: "30px", width: "140px", height: "54px" }}
         >
-          Continue
+          Finish
         </Button>
       </Form.Group>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        style={{
+          position: "absolute",
+          // left: "50%",
+          top: "25%",
+          // transform: 'translate(-50%, -50%)',
+        }}
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <div className="text-center">
+            <img className="img-fluid mt-3" src={Success} alt="icon" />
+            <p
+              className="mt-3"
+              style={{
+                fontSize: "16px",
+                fontFamily: "Poppins",
+                fontWeight: "600",
+              }}
+            >
+              Thanks for the headsup !
+            </p>
+            <Link to="/order-summary">
+              <Button
+                className="btn btn-primary mt-3"
+                style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+              >
+                Continue
+              </Button>
+            </Link>
+          </div>
+        </Modal.Body>
+      </Modal>
     </>
   );
 }
