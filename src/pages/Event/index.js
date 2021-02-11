@@ -31,7 +31,12 @@ const Index = (props) => {
       <div className="card px-4 py-3 shadow-sm mt-3">
         <div className="d-flex align-items-center">
           <div>
-            <button className="btn btn-danger">+ Add New Event</button>
+            <button
+              onClick={() => props.history.push("/dashboard/addevent")}
+              className="btn btn-danger"
+            >
+              + Add New Event
+            </button>
           </div>
           <div className="ml-auto mr-3">
             <select class="form-control">
@@ -64,7 +69,9 @@ const Index = (props) => {
                   <p className="m-0 text-dark">{event.address}</p>
                 </div>
                 <div className="ml-auto mr-3">
-                  <Link to="/dashboard/viewoutlet">
+                  <Link
+                    to={{ pathname: "/dashboard/viewevent", state: event.id }}
+                  >
                     <button className="btn btn-danger">View</button>
                   </Link>
                 </div>
