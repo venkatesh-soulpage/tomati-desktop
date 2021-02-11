@@ -85,7 +85,7 @@ function EmailConfirmation({
           type="submit"
           form="email-form"
           className="btn btn-primary mt-3"
-          style={{ borderRadius: "20px", width: "140px", height: "54px" }}
+          style={{ borderRadius: "30px", width: "140px", height: "54px" }}
         >
           Continue
         </Button>

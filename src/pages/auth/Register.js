@@ -39,11 +39,9 @@ function Register(props) {
     location: "",
     address: "",
   });
-  // const [code, setCode] = React.useState("");
-  // const [location, setLocation] = React.useState({
-  //   location: "",
-  //   address: "",
-  // });
+  const [show, setShow] = React.useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   React.useEffect(function () {
     window.scroll(0, 0);
@@ -57,14 +55,7 @@ function Register(props) {
     const value = event.target.value;
     setValues((values) => ({ ...values, [name]: value }));
   };
-  // const handleChangeCode = (name) => (event) => {
-  //   const value = event.target.value;
-  //   setCode(value);
-  // };
-  // const handleChangeLocation = (name) => (event) => {
-  //   const value = event.target.value;
-  //   setLocation((values) => ({ ...values, [name]: value }));
-  // };
+  // For handling step in the inputs
   const handleStep = (name, value) => {
     setValues((values) => ({ ...values, [name]: value }));
   };
@@ -72,19 +63,58 @@ function Register(props) {
   // Handling the Signup data and sending it to the service.
   const handleSignUpData = (event) => {
     event.preventDefault();
-    handleStep("step", values.step + 1);
-    props.dispatch(getEmailRegisterOtp({ email: values.email }));
+    if (props.auth.verifyError === "This Email is already taken") {
+    } else {
+      handleStep("step", values.step + 1);
+      props.dispatch(getEmailRegisterOtp({ email: values.email }));
+    }
   };
   // Handling the email confirmation data and sending it to the service.
   const handleConfirmation = (event) => {
     event.preventDefault();
     handleStep("step", values.step + 1);
-    props.dispatch(checkEmailCode({ email: values.email, code: values.code }));
+    props.dispatch(
+      checkEmailCode({
+        email: values.email,
+        code: values.code,
+      })
+    );
+    // .then((responseData) => {
+    // console.log("confirmation\n", responseData);
+    // if (responseData.Message === "Success") {
+    //   handleShow();
+    // }
+    // });
   };
+
+  const validate =
+    values.full_name !== "" ||
+    values.company_name !== "" ||
+    values.email !== "" ||
+    values.password !== "";
   // Handling the location data and sending it to the service.
   const handleLocation = (event) => {
     event.preventDefault();
-    props.dispatch(userRegistration(values));
+    if (validate) {
+      props
+        .dispatch(
+          userRegistration({
+            full_name: values.full_name,
+            company_name: values.company_name,
+            email: values.email,
+            password_hash: values.password,
+            plan_id: 1,
+            location_id: values.location,
+          })
+        )
+        .then((responseData) => {
+          if (responseData.Message === "Success") {
+            handleShow();
+          }
+        });
+    } else {
+      console.log("Missing Forms");
+    }
   };
   const handleEmailCheck = (email) => {
     props.dispatch(verify(email));
@@ -96,6 +126,7 @@ function Register(props) {
     fontWeight: "600",
   };
   const { step } = values;
+  console.log("props\n", props);
   return (
     <div className="bg-light container-fluid py-5">
       <div className="container">
@@ -176,6 +207,9 @@ function Register(props) {
                   handleChange={handleChange}
                   handleStep={handleStep}
                   props={props}
+                  show={show}
+                  alert={alert}
+                  handleClose={handleClose}
                 />
               </Form>
             </>
