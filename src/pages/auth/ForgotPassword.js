@@ -11,14 +11,16 @@ import ResetPasswordForm from "forms/ResetPasswordForm";
 
 function ForgetPassword(props) {
   React.useEffect(() => {
-    props.dispatch(forgotPasswordToggle(true));
+    props.dispatch(forgotPasswordToggle(false));
     props.dispatch(receiveResetPassword({}));
   }, []);
 
   return (
     <>
       {props.auth.forgotPasswordToggle ? (
-        <ResetPasswordForm />
+        // <ResetPasswordForm />
+        //TO DO GET A MODAl WITH A TICK
+        <div></div>
       ) : (
         <ForgotPasswordForm />
       )}

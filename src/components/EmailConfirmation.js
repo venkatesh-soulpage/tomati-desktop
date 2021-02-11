@@ -1,29 +1,28 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import PasswordTextField from "components/PasswordTextField";
 import Back from "../assets/img/Back.svg";
 function EmailConfirmation({
-  code,
-  handleChangeCode,
-  setCode,
+  values,
+  handleChange,
   handleStep,
-  handleSignUpData,
+  props,
+  getEmailRegisterOtp,
 }) {
   return (
     <>
       <Form.Group>
         <Form.Label style={{ fontSize: "15px", fontFamily: "Poppins" }}>
-          We've sent you a six-digit confirmation code to jerry@sitename.com.
-          Please enter it below to confirm your email address.
+          We've sent you a six-digit confirmation code to {values.email}. Please
+          enter it below to confirm your email address.
         </Form.Label>
       </Form.Group>
       <Form.Group>
         <Form.Control
           type="text"
           placeholder="Enter 6-digit code"
-          value={code}
-          onChange={handleChangeCode("code")}
+          value={values.code}
+          onChange={handleChange("code")}
           required
         />
       </Form.Group>
@@ -41,6 +40,9 @@ function EmailConfirmation({
             fontFamily: "Poppins",
             fontWeight: "600",
             color: "#E0475B",
+          }}
+          onClick={() => {
+            props.dispatch(getEmailRegisterOtp({ email: values.email }));
           }}
         >
           &nbsp; Send code again
@@ -60,6 +62,9 @@ function EmailConfirmation({
             fontFamily: "Poppins",
             fontWeight: "600",
             color: "#E0475B",
+          }}
+          onClick={() => {
+            handleStep("step", 1);
           }}
         >
           &nbsp; Change email

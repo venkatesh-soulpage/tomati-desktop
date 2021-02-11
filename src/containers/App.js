@@ -12,6 +12,8 @@ import Home from "pages/Home";
 import Page404 from "pages/static/Page404";
 // Auth Components
 import Register from "pages/auth/Register";
+import ResetPassword from "pages/auth/ResetPassword";
+
 import LogIn from "pages/auth/LogIn";
 import ForgotPassword from "pages/auth/ForgotPassword";
 // import ForgotPassword from "pages/auth/ForgotPassword";
@@ -77,7 +79,9 @@ function App(props) {
         {/* <PrivateRoute path="/dashboard/" exact component={Dashboard} /> */}
         <Route exact path="/termspolicy" component={Terms} />
         <Route exact path="/privacypolicy" component={Privacy} />
-        <PrivateRoute path="/dashboard" component={DashboardPage} />
+
+        <Route exact path="/reset" component={ResetPassword} />
+        <Route exact path="/dashboard" component={DashboardPage} />
 
         <Route component={Page404} />
       </Switch>

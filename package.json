@@ -21,6 +21,7 @@
     "react-code-input": "^3.8.1",
     "react-data-table-component": "^3.5.1",
     "react-dom": "^16.10.2",
+    "react-dropdown-tree-select": "^2.5.1",
     "react-dropzone": "^10.1.10",
     "react-intl": "^3.3.2",
     "react-number-format": "^4.3.0",
@@ -35,6 +36,7 @@
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "rsuite": "^4.8.9",
     "styled-components": "^4.4.0"
   },
   "scripts": {

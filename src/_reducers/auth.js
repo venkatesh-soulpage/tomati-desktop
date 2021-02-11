@@ -14,7 +14,11 @@ var initialState = {
   resetPasswordError: {},
   forgotPasswordToken: {},
   forgotPasswordError: {},
-  forgotPasswordToggle: false
+  forgotPasswordToggle: false,
+  verifySuccess: null,
+  verifyError: null,
+  locations: null,
+  locationsError: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -22,67 +26,93 @@ export default function authReducer(state = initialState, action) {
     case ActionTypes.RECEIVE_USER_DATA:
       return {
         ...state,
-        userData: action.payload
+        userData: action.payload,
       };
     case ActionTypes.RECEIVE_USER_DATA_ERROR:
       return {
         ...state,
-        userDataError: action.payload
+        userDataError: action.payload,
       };
     case ActionTypes.HANDLE_LOGIN_SUCCESS:
       return {
         ...state,
-        loginSuccess: action.payload
+        loginSuccess: action.payload,
       };
     case ActionTypes.HANDLE_LOGIN_ERROR:
       return {
         ...state,
-        loginError: action.payload
+        loginError: action.payload,
+      };
+    case ActionTypes.HANDLE_EMAIL_SUCCESS:
+      return {
+        ...state,
+        verifySuccess: action.payload,
+      };
+    case ActionTypes.HANDLE_EMAIL_ERROR:
+      return {
+        ...state,
+        verifyError: action.payload,
+      };
+    case ActionTypes.RESET_MESSAGE:
+      return {
+        ...state,
+        verifySuccess: action.payload,
+        verifyError: action.payload,
+      };
+    case ActionTypes.GET_LOCATION_SUCCESS:
+      return {
+        ...state,
+        locations: action.payload,
+      };
+    case ActionTypes.GET_LOCATION_ERROR:
+      return {
+        ...state,
+        locationsError: action.payload,
       };
     case ActionTypes.HANDLE_REGISTER_ERROR:
       return {
         ...state,
-        registerError: action.payload
+        registerError: action.payload,
       };
     case ActionTypes.HANDLE_IS_USER_AUTHENTICATED:
       return {
         ...state,
-        isAuthenticated: action.payload
+        isAuthenticated: action.payload,
       };
     case ActionTypes.HANDLE_IS_USER_VERIFIED:
       return {
         ...state,
-        isUserVerified: action.payload
+        isUserVerified: action.payload,
       };
     case ActionTypes.HANDLE_IS_VERIFICATION_CODE_SENT:
       return {
         ...state,
-        isVerificationCodeSent: action.payload
+        isVerificationCodeSent: action.payload,
       };
     case ActionTypes.RECEIVE_PASSWORD_RESET_TOKEN:
       return {
         ...state,
-        forgotPasswordToken: action.payload
+        forgotPasswordToken: action.payload,
       };
     case ActionTypes.RECEIVE_PASSWORD_RESET_TOKEN_ERROR:
       return {
         ...state,
-        forgotPasswordError: action.payload
+        forgotPasswordError: action.payload,
       };
     case ActionTypes.RESET_PASSWORD_TOKEN:
       return {
         ...state,
-        resetPassword: action.payload
+        resetPassword: action.payload,
       };
     case ActionTypes.RESET_PASSWORD_ERROR:
       return {
         ...state,
-        resetPasswordError: action.payload
+        resetPasswordError: action.payload,
       };
     case ActionTypes.FORGOT_PASSWORD_TOGGLE:
       return {
         ...state,
-        forgotPasswordToggle: action.payload
+        forgotPasswordToggle: action.payload,
       };
     default:
       return state;
