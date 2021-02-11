@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 // import { handleIsUserAuthenticated, validateAuthToken } from "_actions/auth";
 // Local Components
 import Home from "pages/Home";
+import OrderSummary from "pages/OrderSummary";
 // import Dashboard from "pages/Dashboard";
 import Page404 from "pages/static/Page404";
 // Auth Components
@@ -80,6 +81,7 @@ function App(props) {
         <Route exact path="/privacypolicy" component={Privacy} />
         <Route exact path="/reset" component={ResetPassword} />
         <Route exact path="/dashboard" component={DashboardPage} />
+        <Route exact path="/order-summary" component={OrderSummary} />
 
         <Route component={Page404} />
       </Switch>

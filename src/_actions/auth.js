@@ -18,7 +18,6 @@ export function userRegistration(postData) {
 
     return AuthService.postSignUpDetails(postData)
       .then((responseData) => {
-        console.log("action then\n", responseData);
         dispatch(receiveUserData(responseData));
         return responseData;
       })
@@ -69,6 +68,34 @@ export function getLocationSuccess(responseData) {
 export function getLocationError(error) {
   return {
     type: ActionTypes.GET_LOCATION_ERROR,
+    payload: error,
+  };
+}
+/**
+ * get plans
+ * @param {*}
+ */
+export function getPlansRequest() {
+  return function (dispatch) {
+    return AuthService.getPlans()
+      .then((responseData) => {
+        dispatch(getPlansSuccess(responseData));
+        return responseData;
+      })
+      .catch((errorData) => {
+        dispatch(getPlansError(errorData));
+      });
+  };
+}
+export function getPlansSuccess(responseData) {
+  return {
+    type: ActionTypes.GET_PLANS_SUCCESS,
+    payload: responseData,
+  };
+}
+export function getPlansError(error) {
+  return {
+    type: ActionTypes.GET_PLANS_ERROR,
     payload: error,
   };
 }
@@ -195,6 +222,7 @@ export function handleEmailSuccess(Message) {
  * @param {*} error
  */
 export function handleEmailError(error) {
+  console.log("handle error\n", error);
   return {
     type: ActionTypes.HANDLE_EMAIL_ERROR,
     payload: error,
@@ -206,10 +234,12 @@ export function checkEmailCode(postData) {
     return AuthService.checkCode(postData)
       .then((responseData) => {
         dispatch(handleEmailSuccess(responseData.Message));
+        console.log("confirmation\n", responseData);
         return responseData;
       })
       .catch((errorData) => {
-        dispatch(handleEmailError(errorData.Message));
+        dispatch(handleEmailError(errorData));
+        console.log("error\n", errorData);
         return errorData;
       });
   };

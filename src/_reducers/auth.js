@@ -19,6 +19,8 @@ var initialState = {
   verifyError: null,
   locations: null,
   locationsError: null,
+  plans: null,
+  plansError: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -68,6 +70,16 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         locationsError: action.payload,
+      };
+    case ActionTypes.GET_PLANS_SUCCESS:
+      return {
+        ...state,
+        plans: action.payload,
+      };
+    case ActionTypes.GET_PLANS_ERROR:
+      return {
+        ...state,
+        plansError: action.payload,
       };
     case ActionTypes.HANDLE_REGISTER_ERROR:
       return {

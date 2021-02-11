@@ -13,8 +13,15 @@ function EmailConfirmation({
     <>
       <Form.Group>
         <Form.Label style={{ fontSize: "15px", fontFamily: "Poppins" }}>
-          We've sent you a six-digit confirmation code to {values.email}. Please
-          enter it below to confirm your email address.
+          We've sent you a six-digit confirmation code to
+        </Form.Label>
+        <Form.Label
+          style={{ fontSize: "15px", fontWeight: "600", fontFamily: "Poppins" }}
+        >
+          &nbsp; {values.email}
+        </Form.Label>
+        <Form.Label style={{ fontSize: "15px", fontFamily: "Poppins" }}>
+          . Please enter it below to confirm your email address.
         </Form.Label>
       </Form.Group>
       <Form.Group>
@@ -25,6 +32,11 @@ function EmailConfirmation({
           onChange={handleChange("code")}
           required
         />
+        <Form.Text>
+          {JSON.parse(props.auth.verifyError)?.status === 400 ? (
+            <small style={{ color: "#E0475B" }}>Wrong Code</small>
+          ) : null}
+        </Form.Text>
       </Form.Group>
       <Form.Group className="m-0 p-0 mt-5">
         <Form.Label
@@ -40,6 +52,7 @@ function EmailConfirmation({
             fontFamily: "Poppins",
             fontWeight: "600",
             color: "#E0475B",
+            cursor: "pointer",
           }}
           onClick={() => {
             props.dispatch(getEmailRegisterOtp({ email: values.email }));
@@ -62,6 +75,7 @@ function EmailConfirmation({
             fontFamily: "Poppins",
             fontWeight: "600",
             color: "#E0475B",
+            cursor: "pointer",
           }}
           onClick={() => {
             handleStep("step", 1);

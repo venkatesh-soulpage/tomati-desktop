@@ -128,7 +128,7 @@ function LocationDetails({
             >
               Thanks for the headsup !
             </p>
-            <Link to="/order-summary">
+            <Link to={{ pathname: "/order-summary", state: { values } }}>
               <Button
                 className="btn btn-primary mt-3"
                 style={{ borderRadius: "30px", width: "140px", height: "54px" }}

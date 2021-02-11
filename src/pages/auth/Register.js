@@ -72,49 +72,53 @@ function Register(props) {
   // Handling the email confirmation data and sending it to the service.
   const handleConfirmation = (event) => {
     event.preventDefault();
-    handleStep("step", values.step + 1);
-    props.dispatch(
-      checkEmailCode({
-        email: values.email,
-        code: values.code,
-      })
-    );
-    // .then((responseData) => {
-    // console.log("confirmation\n", responseData);
-    // if (responseData.Message === "Success") {
-    //   handleShow();
-    // }
-    // });
+
+    props
+      .dispatch(
+        checkEmailCode({
+          email: values.email,
+          code: values.code,
+        })
+      )
+      .then((responseData) => {
+        console.log("confirmation\n", responseData);
+        if (responseData === "Success!") {
+          handleStep("step", values.step + 1);
+        }
+      });
   };
 
+  // Validation true or false
   const validate =
     values.full_name !== "" ||
     values.company_name !== "" ||
     values.email !== "" ||
     values.password !== "";
+
   // Handling the location data and sending it to the service.
   const handleLocation = (event) => {
     event.preventDefault();
-    if (validate) {
-      props
-        .dispatch(
-          userRegistration({
-            full_name: values.full_name,
-            company_name: values.company_name,
-            email: values.email,
-            password_hash: values.password,
-            plan_id: 1,
-            location_id: values.location,
-          })
-        )
-        .then((responseData) => {
-          if (responseData.Message === "Success") {
-            handleShow();
-          }
-        });
-    } else {
-      console.log("Missing Forms");
-    }
+    handleShow();
+    // if (validate) {
+    //   props
+    //     .dispatch(
+    //       userRegistration({
+    //         full_name: values.full_name,
+    //         company_name: values.company_name,
+    //         email: values.email,
+    //         password_hash: values.password,
+    //         plan_id: 1,
+    //         location_id: values.location,
+    //       })
+    //     )
+    //     .then((responseData) => {
+    //       if (responseData.Message === "Success") {
+    //         handleShow();
+    //       }
+    //     });
+    // } else {
+    //   console.log("Missing Forms");
+    // }
   };
   const handleEmailCheck = (email) => {
     props.dispatch(verify(email));
