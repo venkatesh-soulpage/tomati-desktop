@@ -15,6 +15,13 @@ export const RESEND_VERIFICATION_SMS = "/api/v1/auth/code/sms";
 // Country States
 export const STATES_FROM_COUNTRY = "/api/v1/country/";
 
+//Outlets
+export const GET_OUTLETS = "/api/outletvenues/user-venues";
+export const GET_OUTLET = "/api/outletvenues";
+
+//Events
+export const GET_EVENTS = "/api/outletevents/user-events";
+
 // s3 routes
 export const AWS_S3_STATIC_URL =
   "https://ivy-lender-bucket.s3.ca-central-1.amazonaws.com/static";

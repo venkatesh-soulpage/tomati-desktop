@@ -46,6 +46,7 @@ export function userLogin(postData) {
   return function (dispatch) {
     return AuthService.postLoginDetails(postData)
       .then((responseData) => {
+        console.log(responseData);
         dispatch(handleLoginSuccess(responseData));
         dispatch(receiveUserData(responseData));
         if (responseData.token) {
