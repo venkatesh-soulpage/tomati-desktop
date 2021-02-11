@@ -19,7 +19,7 @@ export function userOutlets() {
       .get(APIRoutes.GET_OUTLETS)
       .then((responseData) => {
         dispatch(receiveUserOutlets(responseData.data));
-        return responseData;
+        // return responseData;
       })
       .catch((errorData) => {
         console.log(errorData);
@@ -36,7 +36,7 @@ export function getOutlet(id) {
         console.log(responseData);
 
         dispatch(getSingleOutlet(responseData.data));
-        return responseData;
+        // return responseData;
       })
       .catch((errorData) => {
         console.log(errorData);
@@ -58,6 +58,7 @@ export function addOutlet(data) {
       })
       .catch((errorData) => {
         console.log(errorData.response);
+        // return errorData;
         // dispatch(handleRegisterError(errorData));
       });
   };
@@ -70,12 +71,12 @@ export function addOutletMenu(id, menu) {
       .post(`${APIRoutes.ADD_OUTLET_REQUEST}/${id}/menu`, menu)
       .then((responseData) => {
         console.log(responseData);
+        history.push("/dashboard/outlet");
         if (responseData.data === "VenueMenu Created Successfully") {
           dispatch(addOutletResponse(responseData.data, true));
+        } else {
+          // return responseData;
         }
-        history.push("/dashboard/outlet");
-
-        // return responseData;
       })
       .catch((errorData) => {
         console.log(errorData.response);
@@ -92,7 +93,7 @@ export function updateOutlet(id, data) {
       .then((responseData) => {
         history.push("/dashboard/outlet");
         // dispatch(postUpdatedOutlet(responseData.data, true));
-        // // return responseData;
+        // return responseData;
       })
       .catch((errorData) => {
         console.log(errorData);

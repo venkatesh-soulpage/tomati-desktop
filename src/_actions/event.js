@@ -50,6 +50,7 @@ export function addEventMenu(id, menu) {
       .post(`${APIRoutes.ADD_EVENT_REQUEST}/${id}/menu`, menu)
       .then((responseData) => {
         console.log(responseData);
+        history.push("/dashboard/event");
         // dispatch(addEventMenu(responseData.data.Event.id, data.menu));
         // return responseData;
       })

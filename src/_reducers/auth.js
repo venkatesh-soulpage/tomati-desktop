@@ -19,6 +19,7 @@ var initialState = {
   verifyError: null,
   locations: null,
   locationsError: null,
+  user: null,
   plans: null,
   plansError: null,
 };
@@ -125,6 +126,11 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         forgotPasswordToggle: action.payload,
+      };
+    case ActionTypes.SET_USER_DATA:
+      return {
+        ...state,
+        user: action.payload,
       };
     default:
       return state;

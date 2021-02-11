@@ -143,6 +143,7 @@ const Index = (props) => {
                   setValues={setValues}
                   handleStep={handleStep}
                   handleCreateOutlet={handleCreateOutlet}
+                  props={props}
                 />
               </Form>
             </>

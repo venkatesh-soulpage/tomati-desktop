@@ -1,13 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-import { getEvent } from "_actions/event";
+import { getEvent, addEventMenu } from "_actions/event";
 import { connect } from "react-redux";
 import { withRouter, Link, Switch, Route } from "react-router-dom";
+import { Modal, Button, Card, Form } from "react-bootstrap";
+import Papa from "papaparse";
+import _ from "lodash";
 
 import QR from "./QR";
 import About from "./About";
 
 function Index(props) {
+  const [addMenu, setAddmenu] = useState(false);
+  const [menu, setMenu] = useState(null);
   console.log(props);
 
   const { state } = props.location;
@@ -16,6 +21,15 @@ function Index(props) {
   useEffect(() => {
     props.dispatch(getEvent(state));
   }, []);
+
+  const uploadFile = (data) => {
+    const { data: csv_data } = data;
+    setMenu(_.reject(csv_data, { name: "" }));
+  };
+
+  const handleMenu = () => {
+    props.dispatch(addEventMenu(event.id, menu));
+  };
 
   return (
     <div className="p-3">
@@ -74,7 +88,12 @@ function Index(props) {
                 </button>
               </div>
               <div>
-                <button className="btn btn-danger">Upload Menu</button>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => setAddmenu(true)}
+                >
+                  Upload Menu
+                </button>
               </div>
             </div>
           </div>
@@ -93,6 +112,52 @@ function Index(props) {
           </Switch>
         </div>
       </div>
+      <Modal
+        show={addMenu}
+        onHide={() => setAddmenu(false)}
+        style={{
+          position: "absolute",
+          // left: "50%",
+          top: "25%",
+          // transform: 'translate(-50%, -50%)',
+        }}
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <div className="text-center">
+            <Form.Group>
+              <Form.File
+                id="coverImage"
+                accept=".csv"
+                label="Custom file input"
+                custom
+                className="d-none"
+                onChange={(e) => {
+                  Papa.parse(e.target.files[0], {
+                    complete: uploadFile,
+                    header: true,
+                    transformHeader: (header) =>
+                      header.toLowerCase().replace(/\W/g, "_"),
+                  });
+                }}
+              />
+              <Card className="p-4">
+                <label for="coverImage">
+                  <h6>Upload Menu</h6>
+                </label>
+              </Card>
+            </Form.Group>
+
+            <Button
+              className="btn btn-primary mt-3"
+              style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+              onClick={handleMenu}
+            >
+              Upload Menu
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

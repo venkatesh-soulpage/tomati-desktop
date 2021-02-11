@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import SideDrawer from "../SideDrawer";
 import Outlet from "../Outlet";
@@ -7,9 +7,18 @@ import ViewOutlet from "../ViewOutlet";
 import ViewEvent from "../ViewEvent";
 import AddOutlet from "../AddOutlet";
 import AddEvent from "../AddEvent";
+import Settings from "../Settings";
+
+import { connect } from "react-redux";
+import { getUser, updateUser } from "_actions/auth";
+// Router
+import { withRouter, Link } from "react-router-dom";
 
 function DashboardPage(props) {
-  console.log(props);
+  useEffect(() => {
+    props.dispatch(getUser());
+  }, []);
+
   return (
     <div className="container mt-4">
       <div style={{ marginTop: "100px" }}>
@@ -50,6 +59,11 @@ function DashboardPage(props) {
                 path={`${props.match.path}/addevent`}
                 component={AddEvent}
               />
+              <Route
+                exact
+                path={`${props.match.path}/settings`}
+                component={Settings}
+              />
             </Switch>
           </div>
         </div>
@@ -58,4 +72,8 @@ function DashboardPage(props) {
   );
 }
 
-export default DashboardPage;
+function mapStateToProps(state) {
+  return { auth: state.auth };
+}
+
+export default withRouter(connect(mapStateToProps)(DashboardPage));
