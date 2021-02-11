@@ -25,6 +25,7 @@
     "react-data-table-component": "^3.5.1",
     "react-datetime": "^3.0.4",
     "react-dom": "^16.10.2",
+    "react-dropdown": "^1.9.2",
     "react-dropdown-tree-select": "^2.5.1",
     "react-dropzone": "^10.1.10",
     "react-intl": "^3.3.2",

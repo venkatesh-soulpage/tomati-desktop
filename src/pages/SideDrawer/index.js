@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Icondashboard from "../../assets/img/Icondashboard.svg";
-import Iconoutlet from "../../assets/img/Iconoutlet.svg";
-import Iconwallet from "../../assets/img/IconWallet.svg";
-import Iconsettings from "../../assets/img/IconSetting.svg";
-import Iconpower from "../../assets/img/IconLogout.svg";
-import velvet2 from "../../assets/img/velvet2.svg";
+import Icondashboard from "assets/img/Icondashboard.svg";
+import Iconoutlet from "assets/img/Iconoutlet.svg";
+import Iconwallet from "assets/img/Iconwallet.svg";
+import Iconsettings from "assets/img/IconSetting.svg";
+import Iconpower from "assets/img/IconLogout.svg";
+import velvet2 from "assets/img/velvet2.svg";
 
 const Index = () => {
   return (

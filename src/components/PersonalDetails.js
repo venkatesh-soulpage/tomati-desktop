@@ -78,7 +78,7 @@ function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
             <Link
               style={{ color: "#E0475B" }}
               to="/privacypolicy"
-              target="_top"
+              target="_blank"
             >
               <u>
                 <b>Privacy Policy</b>

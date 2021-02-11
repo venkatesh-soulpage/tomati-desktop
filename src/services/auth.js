@@ -33,6 +33,7 @@ class AuthAPI {
         return response.data;
       })
       .catch(function (error) {
+        console.log("error code\n", error.response);
         throw error.response.data;
       });
   }
@@ -59,6 +60,16 @@ class AuthAPI {
   static getLocations() {
     return axios
       .get(APIRoutes.GET_LOCATIONS)
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+        throw error.response.data;
+      });
+  }
+  static getPlans() {
+    return axios
+      .get(APIRoutes.GET_PLANS)
       .then(function (response) {
         return response.data;
       })
