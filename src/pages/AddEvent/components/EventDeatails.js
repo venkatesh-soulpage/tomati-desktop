@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, Button, Card } from "react-bootstrap";
 
-const OutletDetails = ({
+const EventDetails = ({
   handleStep,
   values,
   handleChange,
@@ -13,7 +13,7 @@ const OutletDetails = ({
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Outlet Name"
+          placeholder="Event Name"
           value={values.name}
           onChange={handleChange("name")}
           required
@@ -53,7 +53,7 @@ const OutletDetails = ({
       <Form.Group>
         <Form.Control
           id="coverImage"
-          accept=".png, .jpg,.jpeg"
+          accept=".png ,.jpg, .jpeg"
           label="Custom file input"
           type="file"
           custom
@@ -97,4 +97,4 @@ const OutletDetails = ({
   );
 };
 
-export default OutletDetails;
+export default EventDetails;

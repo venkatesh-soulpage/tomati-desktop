@@ -22,9 +22,12 @@ export const STATES_FROM_COUNTRY = "/api/v1/country/";
 //Outlets
 export const GET_OUTLETS = "/api/outletvenues/user-venues";
 export const GET_OUTLET = "/api/outletvenues";
+export const ADD_OUTLET_REQUEST = "/api/outletvenues";
 
 //Events
 export const GET_EVENTS = "/api/outletevents/user-events";
+export const GET_EVENT = "/api/outletevents";
+export const ADD_EVENT_REQUEST = "/api/outletevents/";
 
 // s3 routes
 export const AWS_S3_STATIC_URL =
