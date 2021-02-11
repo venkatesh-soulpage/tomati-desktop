@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getOutlet, updateOutlet } from "_actions/outlet";
+import { getEvent, updateEvent } from "_actions/event";
 
 const About = (props) => {
   useEffect(() => {
-    getOutlet(props.location.state);
+    getEvent(props.location.state);
   }, []);
 
-  const { outlet } = props.outlet;
+  const { event } = props.event;
   const [values, setValues] = useState({
-    name: outlet && outlet.name,
-    description: outlet && outlet.description,
+    name: event && event.name,
+    description: event && event.description,
   });
 
   const handleChange = (e) => {
@@ -25,7 +25,7 @@ const About = (props) => {
 
   const handleUpdate = () => {
     console.log(values);
-    props.dispatch(updateOutlet(props.location.state, values));
+    props.dispatch(updateEvent(props.location.state, values));
   };
   return (
     <div className="card bg-white border p-5 mt-2">
@@ -62,7 +62,7 @@ const About = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { outlet: state.outlet };
+  return { event: state.event };
 }
 
 export default withRouter(connect(mapStateToProps)(About));

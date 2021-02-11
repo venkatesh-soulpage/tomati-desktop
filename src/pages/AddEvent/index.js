@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from "react";
-import OutletDetails from "./components/OutletDetails";
+import EventDetails from "./components/EventDeatails";
 import CreateMenu from "./components/CreateMenu";
+import EventSchedule from "./components/EventSchedule";
 import { Card, Form } from "react-bootstrap";
 import Papa from "papaparse";
 import _ from "lodash";
-import { addOutlet } from "_actions/outlet";
+import { addEvent } from "_actions/event";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 
 const Index = (props) => {
   const [tempMenu, setMenu] = useState(null);
   const [values, setValues] = useState({
-    name: "",
-    cover_image: null,
-    logo_img: null,
-    menu: [],
-    plan: 1,
-    location_id: null,
+    name: null,
     phone_number: null,
-    latitude: null,
-    longitude: null,
-    description: null,
+    start_time: new Date(),
+    end_time: new Date(),
+    expected_guests: null,
+    expected_hourly_guests: null,
+    comments: null,
     address: null,
+    location_id: null,
+    cover_image: null,
+    description: null,
+    showVenueModal: false,
+    menu: [],
+    inviteModal: false,
+    owner_email: null,
+    display_name: null,
+    custom_message: null,
+    logo_img: null,
     step: 1,
   });
   const { step } = values;
@@ -57,20 +65,22 @@ const Index = (props) => {
       cover_image,
       logo_img,
       menu,
-      plan,
       location_id,
       phone_number,
-      latitude,
-      longitude,
       description,
       address,
+      start_time,
+      end_time,
+      comments,
+      expected_guests,
+      expected_hourly_guests,
     } = values;
 
     const url = await fileToBase64(cover_image[0]);
     const url2 = await fileToBase64(logo_img[0]);
 
     props.dispatch(
-      addOutlet({
+      addEvent({
         name,
         phone_number,
         address,
@@ -79,6 +89,11 @@ const Index = (props) => {
         cover_image: { name: cover_image[0].name, data: url },
         logo_img: { name: logo_img[0].name, data: url2 },
         menu,
+        start_time,
+        end_time,
+        comments,
+        expected_guests,
+        expected_hourly_guests,
       })
     );
   };
@@ -95,7 +110,7 @@ const Index = (props) => {
           {step === 1 ? (
             <>
               <div style={HeaderText} className="text-start form-legend pb-5">
-                Outlet Details
+                Event Details
               </div>
               <Form
                 id="register-form"
@@ -109,7 +124,7 @@ const Index = (props) => {
                 props.handleRegisterError(null);
               }}
             ></AlertMessage> */}
-                <OutletDetails
+                <EventDetails
                   values={values}
                   setValues={setValues}
                   handleChange={handleChange}
@@ -122,7 +137,34 @@ const Index = (props) => {
           ) : step === 2 ? (
             <>
               <div style={HeaderText} className="text-start form-legend pb-5">
-                Create Menu
+                Event Scedule
+              </div>
+              <Form
+                id="email-form"
+                onSubmit={handleCreateOutlet}
+                // onLoad={() => props.handleRegisterError(null)}
+                autoComplete="off"
+              >
+                {/* <AlertMessage
+              variant="danger"
+              error={props.auth.registerError}
+              onDismiss={() => {
+                props.handleRegisterError(null);
+              }}
+            ></AlertMessage> */}
+                <EventSchedule
+                  values={values}
+                  handleChange={handleChange}
+                  setValues={setValues}
+                  handleStep={handleStep}
+                  handleCreateOutlet={handleCreateOutlet}
+                />
+              </Form>
+            </>
+          ) : step === 3 ? (
+            <>
+              <div style={HeaderText} className="text-start form-legend pb-5">
+                Upload Menu
               </div>
               <Form
                 id="email-form"
@@ -154,7 +196,7 @@ const Index = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { outlet: state.outlet };
+  return { event: state.event };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

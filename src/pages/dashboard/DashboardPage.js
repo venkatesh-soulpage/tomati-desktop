@@ -6,6 +6,7 @@ import Event from "../Event";
 import ViewOutlet from "../ViewOutlet";
 import ViewEvent from "../ViewEvent";
 import AddOutlet from "../AddOutlet";
+import AddEvent from "../AddEvent";
 
 function DashboardPage(props) {
   console.log(props);
@@ -36,7 +37,6 @@ function DashboardPage(props) {
                 component={ViewOutlet}
               />
               <Route
-                exact
                 path={`${props.match.path}/viewevent`}
                 component={ViewEvent}
               />
@@ -44,6 +44,11 @@ function DashboardPage(props) {
                 exact
                 path={`${props.match.path}/addoutlet`}
                 component={AddOutlet}
+              />
+              <Route
+                exact
+                path={`${props.match.path}/addevent`}
+                component={AddEvent}
               />
             </Switch>
           </div>
