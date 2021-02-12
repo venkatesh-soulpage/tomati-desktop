@@ -33,8 +33,8 @@ function EmailConfirmation({
           required
         />
         <Form.Text>
-          {JSON.parse(props.auth.verifyError)?.status === 400 ? (
-            <small style={{ color: "#E0475B" }}>Wrong Code</small>
+          {JSON.parse(props.auth.verifyEmailCodeError)?.status === 400 ? (
+            <small style={{ color: "#E0475B" }}>Invalid Code</small>
           ) : null}
         </Form.Text>
       </Form.Group>
@@ -88,7 +88,7 @@ function EmailConfirmation({
       <Form.Group className="d-flex justify-content-between">
         <img
           className="mt-3"
-          style={{ height: "54px" }}
+          style={{ height: "54px", cursor: "pointer" }}
           src={Back}
           alt="icon"
           onClick={() => {

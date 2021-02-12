@@ -229,6 +229,13 @@ export function handleEmailError(error) {
     payload: error,
   };
 }
+export function handleEmailCodeError(error) {
+  console.log("handle error\n", error);
+  return {
+    type: ActionTypes.HANDLE_EMAIL_CODE_ERROR,
+    payload: error,
+  };
+}
 
 export function checkEmailCode(postData) {
   return function (dispatch) {
@@ -239,8 +246,9 @@ export function checkEmailCode(postData) {
         return responseData;
       })
       .catch((errorData) => {
-        dispatch(handleEmailError(errorData));
         console.log("error\n", errorData);
+        dispatch(handleEmailCodeError(errorData));
+
         return errorData;
       });
   };

@@ -17,6 +17,7 @@ var initialState = {
   forgotPasswordToggle: false,
   verifySuccess: null,
   verifyError: null,
+  verifyEmailCodeError: null,
   locations: null,
   locationsError: null,
   plans: null,
@@ -54,6 +55,11 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         verifyError: action.payload,
+      };
+    case ActionTypes.HANDLE_EMAIL_CODE_ERROR:
+      return {
+        ...state,
+        verifyEmailCodeError: action.payload,
       };
     case ActionTypes.RESET_MESSAGE:
       return {

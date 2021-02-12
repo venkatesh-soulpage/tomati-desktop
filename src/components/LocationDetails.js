@@ -14,6 +14,10 @@ function LocationDetails({
   handleClose,
   show,
 }) {
+  const [modal, setModal] = React.useState(false);
+  const handleCloseup = () => setModal(false);
+  const handleModal = () => setModal(true);
+
   const arr =
     props.auth.locations &&
     props.auth.locations.filter((location) => {
@@ -25,6 +29,8 @@ function LocationDetails({
       return location.id !== 7;
     });
   const newLocations = arr && arr.concat(arr2);
+
+  console.log(newLocations);
   return (
     <>
       <Form.Group>
@@ -79,6 +85,10 @@ function LocationDetails({
             fontFamily: "Poppins",
             fontWeight: "600",
             color: "#E0475B",
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            handleModal();
           }}
         >
           &nbsp; Tell us
@@ -88,7 +98,7 @@ function LocationDetails({
       <Form.Group className="d-flex justify-content-between">
         <img
           className="mt-3"
-          style={{ height: "54px" }}
+          style={{ height: "54px", cursor: "pointer" }}
           src={Back}
           alt="icon"
           onClick={() => {
@@ -104,6 +114,76 @@ function LocationDetails({
           Finish
         </Button>
       </Form.Group>
+      <Modal
+        show={modal}
+        onHide={handleCloseup}
+        style={{
+          position: "absolute",
+          // left: "50%",
+          top: "25%",
+          // transform: 'translate(-50%, -50%)',
+        }}
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <div className="text-center">
+            <p
+              className="mt-1"
+              style={{
+                fontSize: "20px",
+                fontFamily: "Poppins",
+                fontWeight: "600",
+              }}
+            >
+              Tell us your location
+            </p>
+            <p
+              className="mt-3"
+              style={{
+                fontSize: "15px",
+                fontFamily: "Poppins",
+                fontWeight: "400",
+              }}
+            >
+              We will let you know as soon as we get there.
+            </p>
+            <Form.Group>
+              <Form.Control
+                as="select"
+                placeholder="Location"
+                value={values.location}
+                onChange={handleChange("location")}
+                required
+              >
+                <option>Select Location</option>
+                <option value={7}>Nigeria</option>
+                <option disabled>Angola (Coming Soon)</option>
+                <option disabled>Brazil (Coming Soon)</option>
+                <option disabled>Colombia (Coming Soon)</option>
+                <option disabled>France (Coming Soon)</option>
+                <option disabled>Ghana (Coming Soon)</option>
+                <option disabled>Kenya (Coming Soon)</option>
+                <option disabled>Poland (Coming Soon)</option>
+                <option disabled>South Africa (Coming Soon)</option>
+                <option disabled>Spain (Coming Soon)</option>
+                <option disabled>United Arab Emirates (Coming Soon)</option>
+                <option disabled>United Kingdom (Coming Soon)</option>
+              </Form.Control>
+            </Form.Group>
+            {/* <Link to={{ pathname: "/order-summary", state: { values } }}> */}
+            <Button
+              onClick={() => {
+                handleCloseup();
+              }}
+              className="btn btn-primary mt-3"
+              style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+            >
+              Submit
+            </Button>
+            {/* </Link> */}
+          </div>
+        </Modal.Body>
+      </Modal>
       <Modal
         show={show}
         onHide={handleClose}
