@@ -30,12 +30,15 @@ function MainSection() {
 
           <CardDeck style={{ background: "#F5F6F9", border: "0" }}>
             <Card style={{ borderRadius: "15px" }}>
-              <Card.Body className="">
+              <Card.Body className="p-3">
                 <div style={{ minHeight: "250px" }}>
                   <h4 className="my-4 p-3">For Outlet Managers</h4>
                   <p className="custom-font mt-3 p-3 mb-5 font-weight-light">
-                    who want to reduce manpower cost and make the dine in
-                    experience safer for guests with contactless menus and
+                    who want to reduce manpower
+                    <br /> cost and make the dine in
+                    <br />
+                    experience safer for guests with <br /> contactless menus
+                    and <br />
                     payment.
                   </p>
                 </div>
@@ -44,7 +47,9 @@ function MainSection() {
                     Proceed
                   </Button>
                 </Link>
-                <Card.Text style={{ cursor: "pointer", textDecoration: "" }}>
+                <Card.Text
+                  style={{ cursor: "pointer", textDecoration: "underline" }}
+                >
                   <ScrollLink to="features">See Features</ScrollLink>
                 </Card.Text>
               </Card.Body>
@@ -64,7 +69,9 @@ function MainSection() {
                     Proceed
                   </Button>
                 </Link>
-                <Card.Text style={{ cursor: "pointer", textDecoration: "" }}>
+                <Card.Text
+                  style={{ cursor: "pointer", textDecoration: "underline" }}
+                >
                   <ScrollLink to="features">See Features</ScrollLink>
                 </Card.Text>
               </Card.Body>

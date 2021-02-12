@@ -104,14 +104,15 @@ function LocationDetails({
             handleStep("step", 2);
           }}
         />
-        <Button
-          type="submit"
-          form="location-form"
-          className="btn btn-primary mt-3"
-          style={{ borderRadius: "30px", width: "140px", height: "54px" }}
-        >
-          Finish
-        </Button>
+        <Link to={{ pathname: "/order-summary", state: { values } }}>
+          <Button
+            form="location-form"
+            className="btn btn-primary mt-3"
+            style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+          >
+            Finish
+          </Button>
+        </Link>
       </Form.Group>
       <Modal
         show={modal}
@@ -183,7 +184,7 @@ function LocationDetails({
           </div>
         </Modal.Body>
       </Modal>
-      <Modal
+      {/* <Modal
         show={show}
         onHide={handleClose}
         style={{
@@ -217,7 +218,7 @@ function LocationDetails({
             </Link>
           </div>
         </Modal.Body>
-      </Modal>
+      </Modal> */}
     </>
   );
 }

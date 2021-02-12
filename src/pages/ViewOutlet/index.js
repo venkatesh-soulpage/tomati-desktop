@@ -171,13 +171,10 @@ function Index(props) {
         show={addCollaborator}
         onHide={() => setCollaborator(false)}
         style={{
-          position: "absolute",
-          // left: "50%",
-          top: "25%",
-          // transform: 'translate(-50%, -50%)',
+          marginTop: "15%",
         }}
       >
-        <Modal.Header closeButton></Modal.Header>
+        <Modal.Header className="border-0" closeButton></Modal.Header>
         <Modal.Body>
           <div className="text-center">
             <Form.Group>
@@ -213,7 +210,7 @@ function Index(props) {
               style={{ borderRadius: "30px", width: "140px", height: "54px" }}
               onClick={handleCollaborator}
             >
-              Add Collaborator
+              Save
             </Button>
           </div>
         </Modal.Body>
@@ -222,10 +219,7 @@ function Index(props) {
         show={addMenu}
         onHide={() => setAddmenu(false)}
         style={{
-          position: "absolute",
-          // left: "50%",
-          top: "25%",
-          // transform: 'translate(-50%, -50%)',
+          marginTop: "15%",
         }}
       >
         <Modal.Header className="border-0" closeButton></Modal.Header>
@@ -249,19 +243,18 @@ function Index(props) {
               />
               <Card className="p-4">
                 <label for="coverImage">
-                  <h6>Upload Menu</h6>
+                  <h6>Select a Menu</h6>
                 </label>
               </Card>
             </Form.Group>
-            <Link to="/order-summary">
-              <Button
-                className="btn btn-primary mt-3"
-                style={{ borderRadius: "30px", width: "140px", height: "54px" }}
-                onClick={handleMenu}
-              >
-                Upload Menu
-              </Button>
-            </Link>
+
+            <Button
+              className="btn btn-primary mt-3"
+              style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+              onClick={handleMenu}
+            >
+              Upload Menu
+            </Button>
           </div>
         </Modal.Body>
       </Modal>

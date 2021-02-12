@@ -95,10 +95,10 @@ const Index = (props) => {
   return (
     <div className="container-fluid">
       <div className="container">
-        <Button variant="primary" onClick={() => setModalShow(true)}>
+        {/* <Button variant="primary" onClick={() => setModalShow(true)}>
           Launch vertically centered modal
         </Button>
-        <CustomModal show={modalShow} onHide={() => setModalShow(false)} />
+        <CustomModal show={modalShow} onHide={() => setModalShow(false)} /> */}
         <div className="row justify-content-center">
           <div className="col-md-8">
             <Card className="p-5 rounded">

@@ -436,6 +436,7 @@ export function updateUser(data) {
     return AuthService.updateUser(data)
       .then((responseData) => {
         console.log(responseData, "User Updated");
+        history.push("/dashboard/settings");
         // dispatch(receiveResetPassword(responseData));
         // history.push("/forgot-password/success");
       })

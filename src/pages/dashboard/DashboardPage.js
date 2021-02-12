@@ -27,7 +27,10 @@ function DashboardPage(props) {
           <div className="dashboard-left-sidebar">
             <SideDrawer />
           </div>
-          <div className="dashboard-grid-main">
+          <div
+            className="dashboard-grid-main"
+            style={{ backgroung: "#F5F6F9" }}
+          >
             <Switch>
               <Route exact path={props.match.path} component={Outlet} />
 

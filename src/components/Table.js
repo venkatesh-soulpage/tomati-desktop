@@ -42,7 +42,7 @@ const Table = ({ period, setPeriod }) => {
 
   const Style1 = { fontWeight: "600", fontSize: "24px", marginLeft: "10px" };
 
-  const Style2 = { borderBottom: "1px solid #A9A9A9", height: "64px" };
+  const Style2 = { borderBottom: "1px solid #A9A9A9", height: "50px" };
 
   const Style3 = {
     fontWeight: "medium",
@@ -51,9 +51,9 @@ const Table = ({ period, setPeriod }) => {
     marginBottom: "0px",
   };
 
-  const Style4 = { borderBottom: "1px solid #A9A9A9", height: "64px" };
+  const Style4 = { borderBottom: "1px solid #A9A9A9", height: "50px" };
 
-  const Style5 = { borderBottom: "1px solid #A9A9A9", height: "64px" };
+  const Style5 = { borderBottom: "1px solid #A9A9A9", height: "50px" };
 
   return (
     <div className="row mx-auto w-75">
@@ -96,14 +96,6 @@ const Table = ({ period, setPeriod }) => {
               <div className="col-12 d-flex align-items-center" style={Style2}>
                 <p style={Style3}>Replace tomati.app with your brand</p>
               </div>
-              <div
-                className="col-12 d-flex align-items-center"
-                style={Style5}
-              />
-              <div
-                className="col-12 d-flex align-items-center"
-                style={Style2}
-              />
             </div>
           </div>
           <div className="col-12 col-lg-2" style={{ background: "#2C3A56" }}>
@@ -154,17 +146,13 @@ const Table = ({ period, setPeriod }) => {
                 className="col-12 d-flex align-items-center justify-content-center text-white"
                 style={Style4}
               >
-                <p>
-                  <Image src={CrossIcon} alt="icon" />
-                </p>
+                <Image src={CrossIcon} alt="icon" />
               </div>
               <div
                 className="col-12 d-flex align-items-center justify-content-center text-white"
                 style={Style4}
               >
-                <p>
-                  <Image src={CrossIcon} alt="icon" />
-                </p>
+                <Image src={CrossIcon} alt="icon" />
               </div>
 
               <div
@@ -181,27 +169,18 @@ const Table = ({ period, setPeriod }) => {
                 className="col-12 d-flex align-items-center justify-content-center text-white"
                 style={Style4}
               >
-                <p>
-                  <Image src={CrossIcon} alt="icon" />
-                </p>
+                <Image src={CrossIcon} alt="icon" />
               </div>
+
               <div
-                className="col-12 d-flex align-items-center justify-content-center text-white"
-                style={Style5}
-              />
-              <div
-                className="col-12 d-flex align-items-center justify-content-center text-white"
-                style={Style4}
-              >
-                <p style={Style3}>Free</p>
-              </div>
-              <div
-                className="col-12 d-flex align-items-center justify-content-center text-white"
+                className="col-12 d-flex flex-column justify-content-top mt-1 align-items-center text-white"
                 style={{ height: "136px" }}
               >
+                <p style={Style3}>Free</p>
+
                 <Link to="/register" style={{ textDecoration: "none" }}>
                   <Button
-                    className="mt-2"
+                    className="mt-1"
                     variant="outline"
                     style={ButtonStyle3}
                     onClick={() => {}}
@@ -242,9 +221,7 @@ const Table = ({ period, setPeriod }) => {
                 className="col-12 d-flex justify-content-center align-items-center"
                 style={Style4}
               >
-                <p>
-                  <Image src={RightIcon} alt="icon" />
-                </p>
+                <Image src={RightIcon} alt="icon" />
               </div>
               <div
                 className="col-12 d-flex justify-content-center align-items-center text-white"
@@ -268,17 +245,13 @@ const Table = ({ period, setPeriod }) => {
                 className="col-12 d-flex justify-content-center align-items-center text-white"
                 style={Style4}
               >
-                <p>
-                  <Image src={RightIcon} alt="icon" />
-                </p>
+                <Image src={RightIcon} alt="icon" />
               </div>
               <div
                 className="col-12 d-flex justify-content-center align-items-center text-white"
                 style={Style4}
               >
-                <p>
-                  <Image src={CrossIcon} alt="icon" />
-                </p>
+                <Image src={CrossIcon} alt="icon" />
               </div>
 
               <div
@@ -295,28 +268,18 @@ const Table = ({ period, setPeriod }) => {
                 className="col-12 d-flex justify-content-center align-items-center text-white"
                 style={Style4}
               >
-                <p>
-                  <Image src={CrossIcon} alt="icon" />
-                </p>
+                <Image src={CrossIcon} alt="icon" />
               </div>
+
               <div
-                className="col-12 d-flex justify-content-center align-items-center text-white"
-                style={Style5}
-              />
-              <div
-                className="col-12 d-flex justify-content-center align-items-center text-white"
-                style={Style4}
+                className="col-12 d-flex flex-column justify-content-top mt-1 align-items-center text-white"
+                style={{ height: "136px" }}
               >
                 {period === "monthly" ? (
                   <h6 style={Style3}>$39</h6>
                 ) : (
                   <h6 style={Style3}>$374</h6>
                 )}
-              </div>
-              <div
-                className="col-12 d-flex justify-content-center align-items-center text-white"
-                style={{ height: "136px" }}
-              >
                 <Link to="/register" style={{ textDecoration: "none" }}>
                   {" "}
                   <Button
@@ -346,11 +309,7 @@ const Table = ({ period, setPeriod }) => {
                 className="col-12 d-flex align-items-center justify-content-center"
                 style={Style4}
               >
-                <p>
-                  <small>
-                    <Image src={RightIcon} alt="icon" />
-                  </small>
-                </p>
+                <Image src={RightIcon} alt="icon" />
               </div>
               <div
                 className="col-12 d-flex align-items-center justify-content-center text-white"
@@ -376,17 +335,13 @@ const Table = ({ period, setPeriod }) => {
                 className="col-12 d-flex align-items-center justify-content-center text-white"
                 style={Style4}
               >
-                <p>
-                  <Image src={RightIcon} alt="icon" />
-                </p>
+                <Image src={RightIcon} alt="icon" />
               </div>
               <div
                 className="col-12 d-flex align-items-center justify-content-center text-white"
                 style={Style4}
               >
-                <p>
-                  <Image src={RightIcon} alt="icon" />
-                </p>
+                <Image src={RightIcon} alt="icon" />
               </div>
               <div
                 className="col-12 d-flex align-items-center justify-content-center text-white"
@@ -402,14 +357,26 @@ const Table = ({ period, setPeriod }) => {
                 className="col-12 d-flex align-items-center justify-content-center text-white"
                 style={Style4}
               >
-                <p>
-                  <Image src={RightIcon} alt="icon" />
-                </p>
+                <Image src={RightIcon} alt="icon" />
               </div>
+
               <div
-                className="col-12 d-flex align-items-center justify-content-center text-white"
-                style={Style5}
+                className="col-12 d-flex flex-column align-items-center justify-content-center text-white"
+                style={{ height: "136px" }}
               >
+                {period === "monthly" ? (
+                  <h6 style={Style3}>$79</h6>
+                ) : (
+                  <h6 style={Style3}>$758</h6>
+                )}
+                <Button
+                  className="mt-2"
+                  variant="outline"
+                  style={ButtonStyle3}
+                  disabled
+                >
+                  <small>Choose Plan</small>
+                </Button>
                 <p className="text-center">
                   <a
                     style={{
@@ -424,30 +391,6 @@ const Table = ({ period, setPeriod }) => {
                     <Button style={SmallButton}>Contact</Button>
                   </a>
                 </p>
-              </div>
-              <div
-                className="col-12 d-flex align-items-center justify-content-center text-white"
-                style={Style4}
-              >
-                {period === "monthly" ? (
-                  <h6 style={Style3}>$79</h6>
-                ) : (
-                  <h6 style={Style3}>$758</h6>
-                )}
-              </div>
-
-              <div
-                className="col-12 d-flex align-items-center justify-content-center text-white"
-                style={{ height: "136px" }}
-              >
-                <Button
-                  className="mt-2"
-                  variant="outline"
-                  style={ButtonStyle3}
-                  disabled
-                >
-                  <small>Contact Sales</small>
-                </Button>
               </div>
             </div>
           </div>
