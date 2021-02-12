@@ -134,12 +134,15 @@ function Register(props) {
   return (
     <div className="bg-light container-fluid py-5">
       <div className="container">
-        <Card className="p-5 w-50 mt-5 mx-auto">
+        <Card
+          className="p-5 w-50 mt-5 mx-auto"
+          style={{ borderRadius: "12px" }}
+        >
           {step === 1 ? (
             <>
-              <div style={HeaderText} className="text-start form-legend pb-5">
+              <h4 className="text-start form-legend font-weight-medium pb-3">
                 Tell us About Yourself
-              </div>
+              </h4>
               <Form
                 id="register-form"
                 onSubmit={handleSignUpData}
@@ -164,7 +167,7 @@ function Register(props) {
           ) : step === 2 ? (
             <>
               <div style={HeaderText} className="text-start form-legend pb-5">
-                Email Confimation
+                Email Confirmation
               </div>
               <Form
                 id="email-form"

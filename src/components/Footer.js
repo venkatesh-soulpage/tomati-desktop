@@ -35,7 +35,7 @@ const Footer = () => {
                   <div className="col-12 mt-4 ">
                     <p>
                       <small style={{ color: "#C3CAD8" }}>
-                        Tomati.app is a ZontLabs OU product.{" "}
+                        Tomati.app is a ZontLabs OÜ product.{" "}
                       </small>
                     </p>
                   </div>
@@ -167,7 +167,7 @@ const Footer = () => {
               </div>
               <div className="col-md-6 col-12 text-right mt-1 mt-md-0">
                 <p style={{ color: "#C3CAD8" }}>
-                  Copyright © 2021 Adobe. All rights reserved.{" "}
+                  Copyright © 2021 ZontLabs OÜ. All rights reserved.{" "}
                 </p>
               </div>
             </div>

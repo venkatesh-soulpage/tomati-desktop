@@ -48,50 +48,58 @@ function ResetPasswordForm(props) {
   };
 
   return (
-    <div className="bg-light container-fluid d-flex justify-content-center align-items-center h-75 mt-5">
-      <div className="container ">
-        <h3 className="text-center">Forgot Password</h3>
-        <Card
-          className="mt-5"
-          style={{ borderRadius: "15px", width: "fit-content", margin: "auto" }}
-        >
-          <Form onSubmit={onFormSubmit} className="p-5">
-            <Form.Group></Form.Group>
-            <h3>Reset Password</h3>
-
-            <Form.Group>
-              <Form.Label>New Password</Form.Label>
-              <PasswordTextField
-                name="password"
-                value={values.password}
-                onChange={handleChange("password")}
-                placeholder="New Password"
-                autoComplete="off"
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Control
-                type="password"
-                value={values.re_password}
-                onChange={handleChange("re_password")}
-                placeholder="Confirm New Password"
-              />
-            </Form.Group>
-            <Form.Group>
-              <Button type="submit" variant="primary">
-                Update
-              </Button>{" "}
-              <Button type="submit" variant="light">
-                Cancel
-              </Button>
-            </Form.Group>
-            <div className="text-muted">
-              <Link className="btn btn-link" to="/login">
-                Login as a different user
-              </Link>
-            </div>
-          </Form>
-        </Card>
+    <div className="min-height mt-5 pt-5">
+      <div className="container">
+        <div className="row h-100 justify-content-center mt-5">
+          <div className="col-md-6 w-100 align-self-center">
+            <h2 className="text-dark mb-0 text-center mb-4">Update Password</h2>
+            <Card className="p-5 pb-3" style={{ borderRadius: "15px" }}>
+              <Form onSubmit={onFormSubmit}>
+                <Form.Group>
+                  <Form.Label>New Password</Form.Label>
+                  <PasswordTextField
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange("password")}
+                    placeholder="New Password"
+                    autoComplete="off"
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Control
+                    type="password"
+                    value={values.re_password}
+                    onChange={handleChange("re_password")}
+                    placeholder="Confirm New Password"
+                  />
+                </Form.Group>
+                <div className="text-right">
+                  <Form.Group className="mt-3">
+                    <Button
+                      type="submit"
+                      variant="danger"
+                      className="rounded-pill"
+                    >
+                      Update
+                    </Button>{" "}
+                    <Button
+                      type="submit"
+                      variant="light"
+                      className="rounded-pill"
+                    >
+                      Cancel
+                    </Button>
+                  </Form.Group>
+                </div>
+                <div className="text-muted">
+                  <Link className="btn btn-link" to="/login">
+                    Login as a different user
+                  </Link>
+                </div>
+              </Form>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
