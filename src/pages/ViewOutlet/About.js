@@ -79,7 +79,10 @@ const About = (props) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <button className="btn btn-danger" onClick={handleUpdate}>
+          <button
+            className="btn btn-danger rounded-pill"
+            onClick={handleUpdate}
+          >
             Save
           </button>
         </div>

@@ -17,8 +17,12 @@ const QR = ({ outlet }) => {
           <p className="text-dark font-weight-light">
             {outlet && outlet.description}
           </p>
-          <button className="btn btn-danger mr-2">Download QR Code</button>
-          <button className="btn btn-outline-dark ">Order Menu tags</button>
+          <button className="btn btn-danger mr-2 rounded-pill">
+            Download QR Code
+          </button>
+          <button className="btn btn-outline-dark rounded-pill ">
+            Order Menu tags
+          </button>
         </div>
       </div>
     </div>
