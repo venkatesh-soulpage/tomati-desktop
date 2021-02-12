@@ -49,7 +49,11 @@ function Navigation(props) {
                     to="/dashboard"
                     activeClassName="navlink-selected"
                   >
-                    <img className="rounded-circle img-fluid" />
+                    <img
+                      className="rounded-circle img-fluid ml-2"
+                      height="50px"
+                      width="50px"
+                    />
                   </Nav.Link>
                 </Nav>
               ) : (
@@ -101,7 +105,7 @@ function Navigation(props) {
                     </>
                   )}
                   <Nav.Link
-                    className="px-3 text-dark"
+                    className="px-3 text-dark mr-3"
                     as={NavLink}
                     exact
                     to="/login"
@@ -111,11 +115,10 @@ function Navigation(props) {
                     Login
                   </Nav.Link>
                   <Nav.Link
-                    className="px-3 text-dark"
                     as={NavLink}
                     exact
                     to="/register"
-                    className="register-button"
+                    className="register-button px-4 text-dark"
                     activeClassName="active-nav-text"
                     style={{ color: "inherit", cursor: "pointer" }}
                   >

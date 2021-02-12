@@ -10,13 +10,16 @@ import {
 // Router
 import { withRouter, Link } from "react-router-dom";
 // Bootstrap Components
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+
+import { InputGroup, Form, Button, Card } from "react-bootstrap";
 // custom components
 import PasswordTextField from "components/PasswordTextField";
 import AlertMessage from "components/AlertMessage";
 import Footer from "components/Footer";
+
+// icons
+import Lock from "assets/img/Lock.svg";
+import Mail from "assets/img/Mail.svg";
 
 function LogIn(props) {
   // Form states
@@ -69,40 +72,56 @@ function LogIn(props) {
       <div className="container-fluid h-100">
         <div className="row h-100 justify-content-center">
           <div className="col-md-4 w-100 align-self-center">
-            <Card className="rounded shadow">
-              <Form
-                onSubmit={handleLoginData}
-                autoComplete="off"
-                className="p-5"
-              >
+            <h2 className="text-dark mb-0 text-center mb-4">Login</h2>
+            <Card className="p-5 pb-3" style={{ borderRadius: "15px" }}>
+              <Form onSubmit={handleLoginData} autoComplete="off">
                 <AlertMessage
                   variant="danger"
                   error={props.auth.loginError}
                   onDismiss={handleAlertDismiss}
                 />
                 <Form.Group>
-                  <Form.Control
-                    type="email"
-                    name="email"
-                    id="email"
-                    value={values.email}
-                    onChange={handleChange("email")}
-                    placeholder="Enter email"
-                  />
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text className="bg-white border-right-0">
+                        <img src={Mail} className="img-fluid" width="12" />
+                      </InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <Form.Control
+                      className="border-left-0"
+                      type="email"
+                      name="email"
+                      id="email"
+                      value={values.email}
+                      onChange={handleChange("email")}
+                      placeholder="Enter email"
+                    />
+                  </InputGroup>
                 </Form.Group>
                 <Form.Group>
-                  <PasswordTextField
-                    name="password"
-                    value={values.password}
-                    onChange={handleChange("password")}
-                    placeholder="Password"
-                  />
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text className="bg-white border-right-0">
+                        <img src={Lock} className="img-fluid" width="12" />
+                      </InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <Form.Control
+                      className="border-left-0"
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange("password")}
+                      placeholder="Password"
+                    />
+                  </InputGroup>
                 </Form.Group>
-                <Form.Group className="d-flex justify-content-between">
+                <Form.Group className="d-flex justify-content-between mt-4">
                   <Link to="/forgot-password" style={{ color: "#E0475B" }}>
                     Forgot Password?
                   </Link>
-                  <Button type="submit" style={{ borderRadius: "20px" }}>
+                  <Button
+                    className="rounded-pill btn-danger px-4"
+                    type="submit"
+                  >
                     Login
                   </Button>
                 </Form.Group>

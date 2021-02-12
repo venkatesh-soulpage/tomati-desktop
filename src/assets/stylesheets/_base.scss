@@ -6,6 +6,8 @@ body,
   height: 100%;
   font-family: "Poppins", sans-serif;
   background-color: #f5f6f9;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 h1,
 h2,

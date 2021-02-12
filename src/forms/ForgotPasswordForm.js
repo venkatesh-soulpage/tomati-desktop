@@ -6,7 +6,8 @@ import { forgetPassword, receiveForgotPasswordError } from "_actions/auth";
 import { Link } from "react-router-dom";
 //react bootstrap
 
-import { Alert, Card, Button, Form } from "react-bootstrap";
+import { Alert, Card, Button, Form, InputGroup } from "react-bootstrap";
+import Mail from "assets/img/Mail.svg";
 
 function ForgotPasswordForm(props) {
   const [values, setValues] = React.useState({
@@ -41,21 +42,30 @@ function ForgotPasswordForm(props) {
                 Email Doesn't exist please try again.
               </Alert>
             )}
-
             <small className="text-secondary d-flex justify-content-center p-3">
               Please enter the email address associated with this account
             </small>
+
             <Form.Group>
-              <Form.Control
-                type="email"
-                value={values.email}
-                onChange={(event) => {
-                  setValues({ ...values, email: event.target.value });
-                }}
-                placeholder="Email"
-                required
-              ></Form.Control>
+              <InputGroup>
+                <InputGroup.Prepend>
+                  <InputGroup.Text className="bg-white border-right-0">
+                    <img src={Mail} className="img-fluid" width="12" />
+                  </InputGroup.Text>
+                </InputGroup.Prepend>
+                <Form.Control
+                  type="email"
+                  className="border-left-0"
+                  value={values.email}
+                  onChange={(event) => {
+                    setValues({ ...values, email: event.target.value });
+                  }}
+                  placeholder="Email"
+                  required
+                ></Form.Control>
+              </InputGroup>
             </Form.Group>
+
             <div className="d-flex">
               <Link
                 className="btn btn-link"

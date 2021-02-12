@@ -121,430 +121,347 @@ function Index(props) {
       });
   };
   return (
-    <div className="container">
-      <div style={{ marginTop: "65px" }}>
-        <div className="dashboard-grid-wrapper">
-          <div className="dashboard-grid-header">
-            <div className="container">
-              <div className="row mt-5">
-                <div className="col-md-8 ">
-                  <div
-                    style={{
-                      border: "1px solid #C3CAD8",
-                      borderRadius: "10px",
-                      background: "#fff",
-                    }}
-                  >
-                    <div>
-                      <div className="col-12">
-                        <h5 className="font-weight-normal mt-5">
-                          Order Summary
-                        </h5>
-                      </div>
-                      <div className="col-12 mt-4">
-                        <div
-                          className="container p-3"
-                          style={{
-                            border: "1px solid #C3CAD8",
-                            borderRadius: 5,
-                          }}
-                        >
-                          <div className="row">
-                            <div className="col-12">
-                              <h6 className="font-weight-normal">
-                                <small>Your Details</small>
-                              </h6>
-                            </div>
-                            <div className="col-4 mt-3">
-                              <h6 className="font-weight-normal">
-                                Full Name :
-                              </h6>
-                            </div>
-                            <div className="col-8 mt-3">
-                              {" "}
-                              <h6 className="font-weight-normal">
-                                {full_name}
-                              </h6>
-                            </div>
-                            <div className="col-4 mt-3">
-                              <h6 className="font-weight-normal">
-                                Company Name :
-                              </h6>
-                            </div>
-                            <div className="col-8 mt-3">
-                              {" "}
-                              <h6 className="font-weight-normal">
-                                {company_name}
-                              </h6>
-                            </div>
-                            <div className="col-4 mt-3">
-                              <h6 className="font-weight-normal">Email:</h6>
-                            </div>
-                            <div className="col-8 mt-3">
-                              {" "}
-                              <h6 className="font-weight-normal">{email}</h6>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="col-12 mt-4">
-                        <div
-                          className="container p-3"
-                          style={{
-                            border: "1px solid #C3CAD8",
-                            borderRadius: 5,
-                          }}
-                        >
-                          <div className="row">
-                            <div className="col-12">
-                              <h6 className="font-weight-normal">
-                                <small>Address</small>
-                              </h6>
-                            </div>
-                            <div className="col-4 mt-3">
-                              <h6 className="font-weight-normal">Country :</h6>
-                            </div>
-                            <div className="col-8 mt-3">
-                              {" "}
-                              <h6 className="font-weight-normal">Columbia</h6>
-                            </div>
-                            <div className="col-4 mt-3">
-                              <h6 className="font-weight-normal">State :</h6>
-                            </div>
-                            <div className="col-8 mt-3">
-                              {" "}
-                              <h6 className="font-weight-normal">Erioc</h6>
-                            </div>
-                            <div className="col-4 mt-3">
-                              <h6 className="font-weight-normal">City:</h6>
-                            </div>
-                            <div className="col-8 mt-3">
-                              {" "}
-                              <h6 className="font-weight-normal">Eyland</h6>
-                            </div>
-                            <div className="col-4 mt-3">
-                              <h6 className="font-weight-normal">Street:</h6>
-                            </div>
-                            <div className="col-8 mt-3">
-                              {" "}
-                              <h6 className="font-weight-normal">
-                                24 Fermont Street
-                              </h6>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+    <div className="container mt-5 mb-5 pt-5">
+      <div className="row">
+        <div className="col-md-8">
+          <div className="card px-4">
+            <h5 className="font-weight-normal mt-5 mb-5">Order Summary</h5>
 
-                    <div className="col-12 mt-4">
-                      <div className="container p-3">
-                        <div>
-                          <h3>Payment Options</h3>
-                          <div class="radio">
-                            <label>
-                              <input type="radio" name="optradio" checked />
-                              Credit/Debit Card
-                            </label>
-                          </div>
-                          <div class="radio">
-                            <label>
-                              <input type="radio" name="optradio" />
-                              Bank Transfer - for customers in Nigeria
-                            </label>
-                          </div>
-                          {error ? (
-                            <div>
-                              <small style={{ color: "#E0475B" }}>
-                                Please select the plan
-                              </small>
-                            </div>
-                          ) : null}
-
-                          {Total > 0 ? (
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setHide(true);
-                              }}
-                              className="btn btn-primary mt-3"
-                              style={{
-                                borderRadius: "30px",
-                                width: "140px",
-                                height: "54px",
-                              }}
-                            >
-                              Pay Now
-                            </button>
-                          ) : (
-                            <button
-                              type="button"
-                              onClick={() => {
-                                if (!id) {
-                                  setError(true);
-                                  console.log("PLEASE SELECT THE PLAN");
-                                } else {
-                                  handlePayment();
-                                }
-                              }}
-                              className="btn btn-primary mt-3"
-                              style={{
-                                borderRadius: "30px",
-                                width: "140px",
-                                height: "54px",
-                              }}
-                            >
-                              Finish
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+            <div
+              className="container p-3"
+              style={{
+                border: "1px solid #C3CAD8",
+                borderRadius: 5,
+              }}
+            >
+              <div className="row">
+                <div className="col-12">
+                  <h6 className="font-weight-normal">
+                    <small>Your Details</small>
+                  </h6>
                 </div>
-                <div className="col-md-4">
-                  <div
-                    style={{
-                      border: "1px solid #C3CAD8",
-                      borderRadius: "10px",
-                      background: "#fff",
-                    }}
-                  >
-                    <div className="col-12">
-                      <p
-                        className="mt-5"
-                        style={{
-                          fontSize: "20px",
-                          fontWeight: "500",
-                        }}
-                      >
-                        Your Order
-                      </p>
-                    </div>
-                    <div className="col-12 mt-3">
-                      <p
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: "400",
-                        }}
-                      >
-                        Plan
-                      </p>
-                    </div>
-                    <div className="col-12 mt-3">
-                      <select
-                        style={{
-                          width: "100%",
-                          height: "56px",
-                        }}
-                        onChange={handleChange}
-                        className="pl-3"
-                      >
-                        <option value="">Select Plan</option>
-                        {props?.auth?.plans?.map((plan) => (
-                          <option value={plan.id}>{plan.plan}</option>
-                        ))}
-                      </select>
-                    </div>
+                <div className="col-4 mt-3">
+                  <h6 className="font-weight-normal">Full Name :</h6>
+                </div>
+                <div className="col-8 mt-3">
+                  {" "}
+                  <h6 className="font-weight-normal">{full_name}</h6>
+                </div>
+                <div className="col-4 mt-3">
+                  <h6 className="font-weight-normal">Company Name :</h6>
+                </div>
+                <div className="col-8 mt-3">
+                  {" "}
+                  <h6 className="font-weight-normal">{company_name}</h6>
+                </div>
+                <div className="col-4 mt-3">
+                  <h6 className="font-weight-normal">Email:</h6>
+                </div>
+                <div className="col-8 mt-3">
+                  {" "}
+                  <h6 className="font-weight-normal">{email}</h6>
+                </div>
+              </div>
+            </div>
 
-                    <div>
-                      <div className="col-12 mt-3 pt-3 d-flex border-top">
-                        <p
-                          style={{
-                            fontSize: "16px",
-                            fontWeight: "500",
-                          }}
-                        >
-                          {" "}
-                          Number of outlets
-                        </p>
-                      </div>
-
-                      <div className="col-12 mt-0">
-                        <p
-                          style={{
-                            fontSize: "14px",
-                            fontWeight: "400",
-                          }}
-                        >
-                          A location that requires a separate menu and/or QR
-                          Code
-                        </p>
-                      </div>
-
-                      <div className="col-12">
-                        <div className="row">
-                          <div
-                            className="col-6 ml-3 mt-3"
-                            style={{
-                              border: "1px solid #C3CAD8",
-                              borderRadius: 5,
-                            }}
-                          >
-                            <div className="row">
-                              <div
-                                className="col-6 p-2"
-                                style={{ borderRight: "1px solid #C3CAD8" }}
-                              >
-                                <h6 className="font-weight-normal text-center">
-                                  {no_of_outlets}
-                                </h6>
-                              </div>
-
-                              <div
-                                className="col-3 p-2 text-center"
-                                style={{ borderRight: "1px solid #C3CAD8" }}
-                              >
-                                <Dash
-                                  onClick={() => handleOutlet(false)}
-                                  style={{ cursor: "pointer" }}
-                                />
-                              </div>
-
-                              <div className="col-3 p-2 text-center">
-                                <Plus
-                                  onClick={() => handleOutlet(true)}
-                                  style={{ cursor: "pointer" }}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-5 mt-3 p-2">
-                            <h6 className="text-center">
-                              <small
-                                style={{ color: "#2C3A56", fontSize: "16px" }}
-                              >
-                                ₦ {outletTotal}
-                              </small>
-                            </h6>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="col-12 mt-3 pt-3 border-top">
-                        <p
-                          style={{
-                            fontSize: "16px",
-                            fontWeight: "500",
-                          }}
-                        >
-                          {" "}
-                          QR Menu Tags?
-                        </p>
-                      </div>
-                      <div className="col-12 mt-3">
-                        <p
-                          style={{
-                            fontSize: "14px",
-                            fontWeight: "400",
-                          }}
-                        >
-                          This plan already includes 10 free tags, need more?
-                        </p>
-                      </div>
-                      <div className="col-12">
-                        <div className="row mb-3">
-                          <div
-                            className="col-6 ml-3 mt-3"
-                            style={{
-                              border: "1px solid #C3CAD8",
-                              borderRadius: 5,
-                            }}
-                          >
-                            <div className="row">
-                              <div
-                                className="col-6 p-2"
-                                style={{ borderRight: "1px solid #C3CAD8" }}
-                              >
-                                <h6 className="font-weight-normal text-center">
-                                  {no_of_qrcodes}
-                                </h6>
-                              </div>
-
-                              <div
-                                className="col-3 p-2 text-center"
-                                style={{ borderRight: "1px solid #C3CAD8" }}
-                              >
-                                <Dash
-                                  onClick={() => handleQrCode(false)}
-                                  style={{ cursor: "pointer" }}
-                                />
-                              </div>
-
-                              <div className="col-3 p-2 text-center">
-                                <Plus
-                                  onClick={() => handleQrCode(true)}
-                                  style={{ cursor: "pointer" }}
-                                />
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="col-5 mt-3 p-2">
-                            <h6 className="text-center">
-                              <small
-                                style={{ color: "#2C3A56", fontSize: "16px" }}
-                              >
-                                ₦ {qrTotal}
-                              </small>
-                            </h6>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-12 mt-2 pt-3 border-top border-bottom">
-                      <Form.Group>
-                        <Form.Control
-                          type="text"
-                          placeholder="Discount code (Optional)"
-                          value={""}
-                          onChange={() => {}}
-                        />
-                      </Form.Group>
-                      {false ? (
-                        <Form.Group
-                          className="d-flex flex-row justify-content-between"
-                          style={{ background: "#F5F6F9" }}
-                        >
-                          <p style={{ fontSize: "12px" }}>
-                            Discount value applied
-                          </p>
-                          <p style={{ fontSize: "12px" }}>₦ 0</p>
-                        </Form.Group>
-                      ) : null}
-                    </div>
-                    <div className="col-12 mt-5">
-                      <h6 className="text-right">
-                        <small style={{ fontSize: "16px" }}>
-                          Sub Total:{" "}
-                          <small style={{ color: "#2C3A56", fontSize: "16px" }}>
-                            ₦{outletTotal + qrTotal}
-                          </small>
-                        </small>
-                      </h6>
-                    </div>
-                    <div className="col-12 mt-2">
-                      <h6 className="text-right">
-                        <small style={{ fontSize: "16px" }}>
-                          Tax:{" "}
-                          <small style={{ color: "#2C3A56" }}>₦{Tax}</small>{" "}
-                        </small>
-                      </h6>
-                    </div>
-                    <div className="col-12 mt-5">
-                      <h6 className="text-right">
-                        <small style={{ fontSize: "16px" }}>
-                          Total:{" "}
-                          <small style={{ color: "#2C3A56", fontSize: "16px" }}>
-                            ₦{Total}
-                          </small>
-                        </small>
-                      </h6>
-                    </div>
+            <div className="mt-4">
+              <div
+                className=" p-3"
+                style={{
+                  border: "1px solid #C3CAD8",
+                  borderRadius: 5,
+                }}
+              >
+                <div className="row mt-2">
+                  <div className="col-12">
+                    <h6 className="font-weight-normal">
+                      <small>Location</small>
+                    </h6>
+                  </div>
+                  <div className="col-4 mt-3">
+                    <h6 className="font-weight-normal">Country :</h6>
+                  </div>
+                  <div className="col-8 mt-3">
+                    {" "}
+                    <h6 className="font-weight-normal">Columbia</h6>
+                  </div>
+                  <div className="col-4 mt-3">
+                    <h6 className="font-weight-normal">State :</h6>
+                  </div>
+                  <div className="col-8 mt-3">
+                    {" "}
+                    <h6 className="font-weight-normal">Erioc</h6>
+                  </div>
+                  <div className="col-4 mt-3">
+                    <h6 className="font-weight-normal">City:</h6>
+                  </div>
+                  <div className="col-8 mt-3">
+                    {" "}
+                    <h6 className="font-weight-normal">Eyland</h6>
+                  </div>
+                  <div className="col-4 mt-3">
+                    <h6 className="font-weight-normal">Street:</h6>
+                  </div>
+                  <div className="col-8 mt-3">
+                    {" "}
+                    <h6 className="font-weight-normal">24 Fermont Street</h6>
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div>
+              <div className="container p-3 pb-5">
+                <div>
+                  <p className="text-dark">Payment Options</p>
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="optradio" checked />
+                      &nbsp; Credit/Debit Card
+                    </label>
+                  </div>
+                  <hr className="m-0 mb-3" />
+                  <div class="radio">
+                    <label>
+                      <input type="radio" name="optradio" />
+                      &nbsp; Bank Transfer - for customers in Nigeria
+                    </label>
+                  </div>
+                  {error ? (
+                    <div>
+                      <small style={{ color: "#E0475B" }}>
+                        Please select the plan
+                      </small>
+                    </div>
+                  ) : null}
+
+                  {Total > 0 ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setHide(true);
+                      }}
+                      className="btn btn-danger btn-lg rounded-pill mt-3 px-5"
+                    >
+                      Pay Now
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (!id) {
+                          setError(true);
+                          console.log("PLEASE SELECT THE PLAN");
+                        } else {
+                          handlePayment();
+                        }
+                      }}
+                      className="btn btn-danger btn-lg rounded-pill mt-3 px-5"
+                    >
+                      Finish
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="card px-3 py-3">
+            <h5 className="font-weight-normal mt-5 mb-3">Your Order</h5>
+
+            <p>Plan</p>
+
+            <select onChange={handleChange} className="form-control pl-3">
+              <option value="">Select Plan</option>
+              {props?.auth?.plans?.map((plan) => (
+                <option value={plan.id}>{plan.plan}</option>
+              ))}
+            </select>
+
+            <hr />
+
+            <div>
+              <p className="mb-2">Number of outlets</p>
+
+              <p className="m-0 font-weight-light">
+                A location that requires a separate menu and/or QR Code
+              </p>
+
+              <div className="row">
+                <div
+                  className="col-6 ml-3 mt-3"
+                  style={{
+                    border: "1px solid #C3CAD8",
+                    borderRadius: 5,
+                  }}
+                >
+                  <div className="row">
+                    <div
+                      className="col-6 p-2"
+                      style={{ borderRight: "1px solid #C3CAD8" }}
+                    >
+                      <h6 className="font-weight-normal m-0 mt-1 text-center">
+                        {no_of_outlets}
+                      </h6>
+                    </div>
+
+                    <div
+                      className="col-3 p-2 text-center"
+                      style={{ borderRight: "1px solid #C3CAD8" }}
+                    >
+                      <Dash
+                        onClick={() => handleOutlet(false)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </div>
+
+                    <div className="col-3 p-2 text-center">
+                      <Plus
+                        onClick={() => handleOutlet(true)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-5 mt-3 p-2">
+                  <h6 className="text-center text-dark">
+                    <small
+                      style={{
+                        color: "#2C3A56",
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      ₦ {outletTotal}
+                    </small>
+                  </h6>
+                </div>
+              </div>
+
+              <hr />
+              <p
+                style={{
+                  fontSize: "16px",
+                  fontWeight: "500",
+                }}
+              >
+                {" "}
+                QR Menu Tags?
+              </p>
+
+              <div className="row mb-3">
+                <div
+                  className="col-6 ml-3 mt-3"
+                  style={{
+                    border: "1px solid #C3CAD8",
+                    borderRadius: 5,
+                  }}
+                >
+                  <div className="row">
+                    <div
+                      className="col-6 p-2"
+                      style={{ borderRight: "1px solid #C3CAD8" }}
+                    >
+                      <h6 className="font-weight-normal text-center m-0 mt-1">
+                        {no_of_qrcodes}
+                      </h6>
+                    </div>
+
+                    <div
+                      className="col-3 p-2 text-center"
+                      style={{ borderRight: "1px solid #C3CAD8" }}
+                    >
+                      <Dash
+                        onClick={() => handleQrCode(false)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </div>
+
+                    <div className="col-3 p-2 text-center">
+                      <Plus
+                        onClick={() => handleQrCode(true)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-5 mt-3 p-2">
+                  <h6 className="text-center font-weight-bold">
+                    <small
+                      style={{
+                        color: "#2C3A56",
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      ₦ {qrTotal}
+                    </small>
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div className="mt-2 pt-3 border-top border-bottom">
+              <Form.Group>
+                <Form.Control
+                  type="text"
+                  placeholder="Discount code                        Optional"
+                  value={""}
+                  onChange={() => {}}
+                />
+              </Form.Group>
+              {false ? (
+                <Form.Group
+                  className="d-flex flex-row justify-content-between"
+                  style={{ background: "#F5F6F9" }}
+                >
+                  <p style={{ fontSize: "12px" }}>Discount value applied</p>
+                  <p style={{ fontSize: "12px" }}>₦ 0</p>
+                </Form.Group>
+              ) : null}
+            </div>
+            <div className="col-12 mt-5">
+              <h6 className="text-right">
+                <small style={{ fontSize: "16px" }}>
+                  Sub Total:{" "}
+                  <small
+                    style={{
+                      color: "#2C3A56",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    ₦{outletTotal + qrTotal}
+                  </small>
+                </small>
+              </h6>
+            </div>
+            <div className="col-12 mt-2">
+              <h6 className="text-right">
+                <small style={{ fontSize: "16px" }}>
+                  Tax:{" "}
+                  <small style={{ color: "#2C3A56", fontWeight: "bold" }}>
+                    ₦{Tax}
+                  </small>{" "}
+                </small>
+              </h6>
+            </div>
+            <div className="col-12 mt-4">
+              <h6 className="text-right">
+                <small style={{ fontSize: "16px" }}>
+                  Total:{" "}
+                  <small
+                    style={{
+                      color: "#2C3A56",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    ₦{Total}
+                  </small>
+                </small>
+              </h6>
             </div>
           </div>
         </div>

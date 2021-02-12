@@ -12,6 +12,7 @@ import { Modal, Button, Card, Form } from "react-bootstrap";
 import Papa from "papaparse";
 import _ from "lodash";
 import { Camera } from "react-bootstrap-icons";
+import IconQR from "assets/img/IconQR.svg";
 
 import QR from "./QR";
 import About from "./About";
@@ -122,8 +123,13 @@ function Index(props) {
                     pathname: "/dashboard/viewevent",
                     state: props.location.state,
                   }}
+                  style={{ color: "#2C3A56", textDecoration: "none" }}
                 >
-                  <h6 className="m-0">QR Code</h6>
+                  <h6 className="m-0">
+                    {" "}
+                    <img src={IconQR} className="mr-2" />
+                    QR Code
+                  </h6>
                 </Link>
               </div>
               <div className="mr-auto ml-5">
@@ -132,13 +138,14 @@ function Index(props) {
                     pathname: "/dashboard/viewevent/about",
                     state: props.location.state,
                   }}
+                  style={{ color: "#2C3A56", textDecoration: "none" }}
                 >
                   <h6 className="m-0">About</h6>
                 </Link>
               </div>
               <div className="ml-auto mr-2">
                 <button
-                  className="btn btn-outline-dark"
+                  className="btn btn-outline-dark rounded-pill"
                   onClick={() => setCollaborator(true)}
                 >
                   Add Collaborators
@@ -146,7 +153,7 @@ function Index(props) {
               </div>
               <div>
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger rounded-pill"
                   onClick={() => setAddmenu(true)}
                 >
                   Upload Menu

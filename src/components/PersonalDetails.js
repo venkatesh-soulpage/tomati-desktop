@@ -60,10 +60,10 @@ function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
           required
         />
       </Form.Group>
-      <Form.Group className="d-flex ">
-        <Form.Check type="checkbox" required />
+      <Form.Group className="d-flex">
+        <Form.Check className="mt-0" type="checkbox" required />
         <Form.Text>
-          <p>
+          <p className="m-0">
             I agree to Tomati{" "}
             <Link
               style={{ color: "#E0475B" }}
@@ -99,8 +99,7 @@ function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
         <Button
           type="submit"
           form="register-form"
-          className="btn btn-primary mt-3"
-          style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+          className="btn btn-danger mt-3 rounded-pill px-4"
         >
           Continue
         </Button>
