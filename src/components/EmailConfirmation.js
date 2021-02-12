@@ -18,10 +18,10 @@ function EmailConfirmation({
         <Form.Label
           style={{ fontSize: "15px", fontWeight: "600", fontFamily: "Poppins" }}
         >
-          &nbsp; {values.email}
+          &nbsp; {values.email}.
         </Form.Label>
         <Form.Label style={{ fontSize: "15px", fontFamily: "Poppins" }}>
-          . Please enter it below to confirm your email address.
+          Please enter it below to confirm your email address.
         </Form.Label>
       </Form.Group>
       <Form.Group>
