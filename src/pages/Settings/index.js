@@ -56,7 +56,8 @@ const Index = (props) => {
   }
   console.log(values);
   return (
-    <div className="p-2" style={{ marginTop: "15%" }}>
+    <div className="p-3" style={{ marginTop: "3%" }}>
+      <h4 className="text-start form-legend pb-5">Settings</h4>
       <div className="card bg-white border p-5 mt-2">
         <div className="d-flex align-items-center">
           <div>

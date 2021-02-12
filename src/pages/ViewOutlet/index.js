@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getOutlet, addOutletMenu, updateOutlet } from "_actions/outlet";
+import {
+  getOutlet,
+  addOutletMenu,
+  updateOutlet,
+  inviteCollaborator,
+} from "_actions/outlet";
 import Papa from "papaparse";
 import _ from "lodash";
 
@@ -13,7 +18,14 @@ import About from "./About";
 
 function Index(props) {
   const [addMenu, setAddmenu] = useState(false);
+  const [addCollaborator, setCollaborator] = useState(false);
   const [menu, setMenu] = useState(null);
+  const [collaboratorDetail, setCollaboratorDetail] = useState({
+    owner_email: "",
+    display_name: "",
+    custom_message: "",
+    outlet_venue: null,
+  });
 
   useEffect(() => {
     props.dispatch(getOutlet(props.location.state));
@@ -28,6 +40,21 @@ function Index(props) {
 
   const handleMenu = () => {
     props.dispatch(addOutletMenu(outlet.id, menu));
+  };
+
+  const handleChange = (name) => (e) => {
+    const val = e.target.value;
+    setCollaboratorDetail((collaboratorDetail) => ({
+      ...collaboratorDetail,
+      [name]: val,
+    }));
+  };
+
+  const handleCollaborator = () => {
+    console.log({ ...collaboratorDetail, outlet_venue: outlet.id });
+    props.dispatch(
+      inviteCollaborator({ ...collaboratorDetail, outlet_venue: outlet.id })
+    );
   };
 
   const fileToBase64 = async (file) =>
@@ -61,14 +88,16 @@ function Index(props) {
             </label>
 
             <Form.Group>
-              <Form.File
+              <Form.Control
                 id="logoImage"
                 type="file"
                 className="d-none"
                 onChange={async (e) => {
                   const name = e.target.files[0];
                   const url = await fileToBase64(e.target.files[0]);
-                  props.dispatch(updateOutlet(outlet.id, { name, data: url }));
+                  props.dispatch(
+                    updateOutlet(outlet.id, { logo_img: { name, data: url } })
+                  );
                 }}
               />
             </Form.Group>
@@ -106,7 +135,10 @@ function Index(props) {
                 </Link>
               </div>
               <div className="ml-auto mr-2">
-                <button className="btn btn-outline-dark">
+                <button
+                  className="btn btn-outline-dark"
+                  onClick={() => setCollaborator(true)}
+                >
                   Add Collaborators
                 </button>
               </div>
@@ -136,6 +168,57 @@ function Index(props) {
         </div>
       </div>
       <Modal
+        show={addCollaborator}
+        onHide={() => setCollaborator(false)}
+        style={{
+          position: "absolute",
+          // left: "50%",
+          top: "25%",
+          // transform: 'translate(-50%, -50%)',
+        }}
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <div className="text-center">
+            <Form.Group>
+              <Form.Control
+                type="text"
+                placeholder="Owner Email"
+                value={collaboratorDetail.owner_email}
+                required
+                onChange={handleChange("owner_email")}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                type="text"
+                placeholder="Display Name"
+                value={collaboratorDetail.display_name}
+                required
+                onChange={handleChange("display_name")}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                type="text"
+                placeholder="Custom Message"
+                value={collaboratorDetail.custom_message}
+                required
+                onChange={handleChange("custom_message")}
+              />
+            </Form.Group>
+
+            <Button
+              className="btn btn-primary mt-3"
+              style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+              onClick={handleCollaborator}
+            >
+              Add Collaborator
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+      <Modal
         show={addMenu}
         onHide={() => setAddmenu(false)}
         style={{
@@ -145,7 +228,7 @@ function Index(props) {
           // transform: 'translate(-50%, -50%)',
         }}
       >
-        <Modal.Header closeButton></Modal.Header>
+        <Modal.Header className="border-0" closeButton></Modal.Header>
         <Modal.Body>
           <div className="text-center">
             <Form.Group>

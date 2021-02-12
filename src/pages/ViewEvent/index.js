@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from "react";
 
-import { getEvent, addEventMenu } from "_actions/event";
+import {
+  getEvent,
+  addEventMenu,
+  inviteCollaborator,
+  updateEvent,
+} from "_actions/event";
 import { connect } from "react-redux";
 import { withRouter, Link, Switch, Route } from "react-router-dom";
 import { Modal, Button, Card, Form } from "react-bootstrap";
 import Papa from "papaparse";
 import _ from "lodash";
+import { Camera } from "react-bootstrap-icons";
 
 import QR from "./QR";
 import About from "./About";
 
 function Index(props) {
   const [addMenu, setAddmenu] = useState(false);
+  const [addCollaborator, setCollaborator] = useState(false);
   const [menu, setMenu] = useState(null);
+  const [collaboratorDetail, setCollaboratorDetail] = useState({
+    owner_email: "",
+    display_name: "",
+    custom_message: "",
+    outlet_event: null,
+  });
   console.log(props);
 
   const { state } = props.location;
@@ -30,6 +43,29 @@ function Index(props) {
   const handleMenu = () => {
     props.dispatch(addEventMenu(event.id, menu));
   };
+
+  const handleChange = (name) => (e) => {
+    const val = e.target.value;
+    setCollaboratorDetail((collaboratorDetail) => ({
+      ...collaboratorDetail,
+      [name]: val,
+    }));
+  };
+
+  const handleCollaborator = () => {
+    console.log({ ...collaboratorDetail, outlet_event: event.id });
+    props.dispatch(
+      inviteCollaborator({ ...collaboratorDetail, outlet_event: event.id })
+    );
+  };
+
+  const fileToBase64 = async (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (e) => reject(e);
+    });
 
   return (
     <div className="p-3">
@@ -49,6 +85,24 @@ function Index(props) {
               src={event && event.logo_img}
               width="150"
             />
+            <label for="logoImage">
+              <Camera style={{ color: "#fff" }} />
+            </label>
+
+            <Form.Group>
+              <Form.Control
+                id="logoImage"
+                type="file"
+                className="d-none"
+                onChange={async (e) => {
+                  const name = e.target.files[0];
+                  const url = await fileToBase64(e.target.files[0]);
+                  props.dispatch(
+                    updateEvent(event.id, { logo_img: { name, data: url } })
+                  );
+                }}
+              />
+            </Form.Group>
           </div>
           <div className="col-md-8 align-self-center">
             <h4 className="text-white font-weight-bold">
@@ -83,7 +137,10 @@ function Index(props) {
                 </Link>
               </div>
               <div className="ml-auto mr-2">
-                <button className="btn btn-outline-dark">
+                <button
+                  className="btn btn-outline-dark"
+                  onClick={() => setCollaborator(true)}
+                >
                   Add Collaborators
                 </button>
               </div>
@@ -112,6 +169,57 @@ function Index(props) {
           </Switch>
         </div>
       </div>
+      <Modal
+        show={addCollaborator}
+        onHide={() => setCollaborator(false)}
+        style={{
+          position: "absolute",
+          // left: "50%",
+          top: "25%",
+          // transform: 'translate(-50%, -50%)',
+        }}
+      >
+        <Modal.Header closeButton></Modal.Header>
+        <Modal.Body>
+          <div className="text-center">
+            <Form.Group>
+              <Form.Control
+                type="text"
+                placeholder="Owner Email"
+                value={collaboratorDetail.owner_email}
+                required
+                onChange={handleChange("owner_email")}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                type="text"
+                placeholder="Display Name"
+                value={collaboratorDetail.display_name}
+                required
+                onChange={handleChange("display_name")}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                type="text"
+                placeholder="Custom Message"
+                value={collaboratorDetail.custom_message}
+                required
+                onChange={handleChange("custom_message")}
+              />
+            </Form.Group>
+
+            <Button
+              className="btn btn-primary mt-3"
+              style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+              onClick={handleCollaborator}
+            >
+              Add Collaborator
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
       <Modal
         show={addMenu}
         onHide={() => setAddmenu(false)}

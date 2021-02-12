@@ -334,6 +334,7 @@ export function userSignOut() {
   return function (dispatch) {
     sessionStorage.clear();
     dispatch(handleIsUserAuthenticated(false));
+    history.push("/");
   };
 }
 /* ================================================================== */
