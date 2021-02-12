@@ -12,6 +12,8 @@ import {
   getPlansRequest,
   getLocationRegister,
 } from "_actions/auth";
+import _ from "lodash";
+
 // Router imports
 import { Redirect, withRouter } from "react-router-dom";
 
@@ -134,6 +136,8 @@ function Index(props) {
 
   const country = _.filter(props.auth.locations, ["id", location]);
 
+  const selected_state = _.filter(country[0].childrens, ["id", state]);
+
   return (
     <div className="container mt-5 mb-5 pt-5">
       <div className="row">
@@ -197,14 +201,18 @@ function Index(props) {
                   </div>
                   <div className="col-8 mt-3">
                     {" "}
-                    <h6 className="font-weight-normal">{location}</h6>
+                    <h6 className="font-weight-normal">
+                      {country && country[0].name}
+                    </h6>
                   </div>
                   <div className="col-4 mt-3">
                     <h6 className="font-weight-normal">State :</h6>
                   </div>
                   <div className="col-8 mt-3">
                     {" "}
-                    <h6 className="font-weight-normal">{state}</h6>
+                    <h6 className="font-weight-normal">
+                      {selected_state && selected_state[0].name}
+                    </h6>
                   </div>
                   <div className="col-4 mt-3">
                     <h6 className="font-weight-normal">City:</h6>
