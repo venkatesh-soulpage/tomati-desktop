@@ -7,6 +7,7 @@ import { userSignOut } from "_actions/auth";
 // Bootstrap imports
 import { Navbar, Nav, Dropdown, NavItem, Container } from "react-bootstrap";
 import NavLinkB from "react-bootstrap/NavLink";
+import { Bell } from "react-bootstrap-icons";
 // assets
 import Logo from "assets/img/Logo.svg";
 // react-scroll
@@ -41,18 +42,15 @@ function Navigation(props) {
                     to="/dashboard"
                     activeClassName="navlink-selected"
                   >
-                    Dashboard
+                    <Bell />
                   </Nav.Link>
-                  <Dropdown as={NavItem} alignRight>
-                    <Dropdown.Toggle as={NavLinkB}>
-                      {props.auth.userData.first_name}
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      <Dropdown.Item onClick={handleSignOut}>
-                        LogOut
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
+                  <Nav.Link
+                    as={NavLink}
+                    to="/dashboard"
+                    activeClassName="navlink-selected"
+                  >
+                    <img className="rounded-circle img-fluid" />
+                  </Nav.Link>
                 </Nav>
               ) : (
                 <Nav>

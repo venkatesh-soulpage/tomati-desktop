@@ -7,6 +7,7 @@ import Success from "assets/img/Success.svg";
 
 const Index = (props) => {
   const [error, setError] = useState(false);
+  const [search, setSearch] = useState("");
   console.log(props);
   useEffect(() => {
     props.dispatch(userOutlets());
@@ -14,15 +15,25 @@ const Index = (props) => {
 
   const { outlet, auth } = props;
 
-  const handleAddoutlet = () => {
-    console.log(outlet.outlets.length);
+  let filteredOutlets =
+    outlet &&
+    outlet.outlets.filter((outlet) => {
+      console.log(outlet);
+      return outlet.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+    });
 
-    if (auth.user.plan_id === 1 && outlet.outlets.length >= 1) {
+  console.log(filteredOutlets);
+
+  const handleAddoutlet = () => {
+    console.log(auth.user.plan.outlet_limit);
+
+    if (auth.user.plan[0].outlet_limit === outlet.outlets.length) {
       setError(true);
     } else {
       props.history.push("/dashboard/addoutlet");
     }
   };
+
   return (
     <div className="p-4 ml-4">
       {/* stats */}
@@ -31,7 +42,7 @@ const Index = (props) => {
           <h3 className="font-weight-bold text-dark m-0">Outlet</h3>
         </div>
         <div className="ml-auto  mr-3">
-          <h4 className="lead m-0">Total Outlets: X</h4>
+          <h4 className="lead m-0">Total Outlets: {outlet?.outlets.length}</h4>
         </div>
         <div className=" mr-3">
           <button className="btn btn-dark btn-sm">Premium/Monthly</button>
@@ -58,6 +69,8 @@ const Index = (props) => {
               class="form-control"
               type="text"
               placeholder="Filter by search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
           </div>
         </div>
@@ -68,8 +81,8 @@ const Index = (props) => {
         A simple warning alert—check it out!
       </div>
       {/* show outlets */}
-      {outlet &&
-        outlet.outlets.map((outlet, id) => {
+      {filteredOutlets &&
+        filteredOutlets.map((outlet, id) => {
           return (
             <div key={id} className="card px-4 py-3  mt-3">
               <div className="d-flex align-items-center">
@@ -99,12 +112,7 @@ const Index = (props) => {
       <Modal
         show={error}
         onHide={() => setError(false)}
-        style={{
-          position: "absolute",
-          // left: "50%",
-          top: "25%",
-          // transform: 'translate(-50%, -50%)',
-        }}
+        style={{ marginTop: "15%" }}
       >
         {" "}
         <Modal.Header className="border-0" closeButton></Modal.Header>
@@ -121,7 +129,19 @@ const Index = (props) => {
             >
               Please Upgrade Your Plan !
             </p>
-            <Link to={{ pathname: "/dashboard/outlet" }}>
+            <Link
+              to={{
+                pathname: "/order-summary",
+                state: {
+                  values: {
+                    company_name: auth?.user?.last_name,
+                    email: auth?.user?.email,
+                    full_name: auth?.user?.first_name,
+                    location: auth?.user?.location,
+                  },
+                },
+              }}
+            >
               <Button
                 className="btn btn-primary mt-3"
                 style={{ borderRadius: "30px", width: "140px", height: "54px" }}
