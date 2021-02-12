@@ -41,6 +41,7 @@ const Index = (props) => {
     e.preventDefault();
     const { current_password, new_password } = values;
     props.dispatch(updateUser({ current_password, new_password }));
+    setShow(false);
   };
 
   const fileToBase64 = async (file) =>
@@ -54,10 +55,12 @@ const Index = (props) => {
   if (!user) {
     return <div>loading</div>;
   }
-  console.log(values);
+  console.log(user);
   return (
-    <div className="p-3" style={{ marginTop: "3%" }}>
-      <h4 className="text-start form-legend pb-5">Settings</h4>
+    <div className="pt-0 pr-3 pl-4 pb-3">
+      <h4 className="text-start form-legend pb-5" style={{ fontSize: "26px" }}>
+        Settings
+      </h4>
       <div className="card bg-white border p-5 mt-2">
         <div className="d-flex align-items-center">
           <div>
@@ -103,7 +106,7 @@ const Index = (props) => {
             <h4 className="text-dark">Profile Picture</h4>
             <img
               className="rounded-circle mr-5 ml-3"
-              src={values.profile_img || user.profile_img}
+              src={user.profile_img}
               height={50}
               width={50}
             />

@@ -247,15 +247,14 @@ function Index(props) {
                 </label>
               </Card>
             </Form.Group>
-            <Link to="/order-summary">
-              <Button
-                className="btn btn-primary mt-3"
-                style={{ borderRadius: "30px", width: "140px", height: "54px" }}
-                onClick={handleMenu}
-              >
-                Upload Menu
-              </Button>
-            </Link>
+
+            <Button
+              className="btn btn-primary mt-3"
+              style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+              onClick={handleMenu}
+            >
+              Upload Menu
+            </Button>
           </div>
         </Modal.Body>
       </Modal>

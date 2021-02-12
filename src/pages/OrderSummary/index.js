@@ -132,6 +132,7 @@ function Index(props) {
                     style={{
                       border: "1px solid #C3CAD8",
                       borderRadius: "10px",
+                      background: "#fff",
                     }}
                   >
                     <div>
@@ -307,6 +308,7 @@ function Index(props) {
                     style={{
                       border: "1px solid #C3CAD8",
                       borderRadius: "10px",
+                      background: "#fff",
                     }}
                   >
                     <div className="col-12">

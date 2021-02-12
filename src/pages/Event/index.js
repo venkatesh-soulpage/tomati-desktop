@@ -34,7 +34,7 @@ const Index = (props) => {
   };
 
   return (
-    <div className="p-4 ml-4">
+    <div className="pt-0 pr-3 pl-4 pb-3">
       {/* stats */}
       <div className="d-flex align-items-center">
         <div className="">
