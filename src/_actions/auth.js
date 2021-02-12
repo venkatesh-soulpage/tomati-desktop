@@ -246,9 +246,13 @@ export function checkEmailCode(postData) {
         return responseData;
       })
       .catch((errorData) => {
-        console.log("error\n", errorData);
+        if (
+          typeof JSON.parse(errorData) === Object &&
+          JSON.parse(errorData).status === 400
+        ) {
+          return dispatch(handleEmailCodeError("Invalid code"));
+        }
         dispatch(handleEmailCodeError(errorData));
-
         return errorData;
       });
   };
