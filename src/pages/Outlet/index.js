@@ -2,16 +2,27 @@ import React, { useEffect, useState } from "react";
 import { userOutlets } from "_actions/outlet";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
+import { Modal, Button } from "react-bootstrap";
+import Success from "assets/img/Success.svg";
 
 const Index = (props) => {
+  const [error, setError] = useState(false);
   console.log(props);
   useEffect(() => {
     props.dispatch(userOutlets());
   }, []);
 
-  const { outlet } = props;
+  const { outlet, auth } = props;
 
-  // console.log(outlets);
+  const handleAddoutlet = () => {
+    console.log(outlet.outlets.length);
+
+    if (auth.user.plan_id === 1 && outlet.outlets.length >= 1) {
+      setError(true);
+    } else {
+      props.history.push("/dashboard/addoutlet");
+    }
+  };
   return (
     <div className="p-4 ml-4">
       {/* stats */}
@@ -33,10 +44,7 @@ const Index = (props) => {
       <div className="card px-4 py-3 shadow-sm mt-3">
         <div className="d-flex align-items-center">
           <div>
-            <button
-              className="btn btn-danger"
-              onClick={() => props.history.push("/dashboard/addoutlet")}
-            >
+            <button className="btn btn-danger" onClick={handleAddoutlet}>
               + Add New Outlet
             </button>
           </div>
@@ -88,12 +96,48 @@ const Index = (props) => {
             </div>
           );
         })}
+      <Modal
+        show={error}
+        onHide={() => setError(false)}
+        style={{
+          position: "absolute",
+          // left: "50%",
+          top: "25%",
+          // transform: 'translate(-50%, -50%)',
+        }}
+      >
+        {" "}
+        <Modal.Header className="border-0" closeButton></Modal.Header>
+        <Modal.Body>
+          <div className="text-center">
+            <img className="img-fluid mt-3" src={Success} alt="icon" />
+            <p
+              className="mt-3"
+              style={{
+                fontSize: "16px",
+                fontFamily: "Poppins",
+                fontWeight: "600",
+              }}
+            >
+              Please Upgrade Your Plan !
+            </p>
+            <Link to={{ pathname: "/dashboard/outlet" }}>
+              <Button
+                className="btn btn-primary mt-3"
+                style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+              >
+                Continue
+              </Button>
+            </Link>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
 
 function mapStateToProps(state) {
-  return { outlet: state.outlet };
+  return { outlet: state.outlet, auth: state.auth };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));
