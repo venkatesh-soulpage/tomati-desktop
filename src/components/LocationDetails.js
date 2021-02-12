@@ -6,9 +6,7 @@ import Back from "../assets/img/Back.svg";
 import Success from "../assets/img/Success.svg";
 import { Link } from "react-router-dom";
 import _ from "lodash";
-import { TreePicker } from "rsuite";
 
-import "rsuite/dist/styles/rsuite-default.css";
 
 function LocationDetails({
   values,
