@@ -168,7 +168,6 @@ function Works() {
               <div style={{ ...ClubImages, backgroundImage: `url(${img6})` }} />
               <div style={{ ...ClubImages, backgroundImage: `url(${img7})` }} />
               <div style={{ ...ClubImages, backgroundImage: `url(${img8})` }} />
-              <div style={{ ...ClubImages, backgroundImage: `url(${img8})` }} />
               <div style={{ ...ClubImages, backgroundImage: `url(${img9})` }} />
               <div
                 style={{ ...ClubImages, backgroundImage: `url(${img10})` }}

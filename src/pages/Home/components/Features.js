@@ -391,7 +391,7 @@ const Features = () => {
     </div>
   );
   const Toggle2 = () => (
-    <div className="row mb-5">
+    <div className="row mb-1">
       <div className="col-md-6 mx-auto" style={ToggleStyle2}>
         <div className="row">
           <div
@@ -447,9 +447,9 @@ const Features = () => {
   );
   return (
     <div className="row mt-5 bg-white pb-5 mx-0" id="features">
-      <div className="col-10 offset-1 pb-5">
+      <div className="col-10 offset-1 pb-1">
         <h3
-          className="container pt-5 pb-5 m-auto text-center"
+          className="container pt-5 pb-1 m-auto text-center"
           style={HeadingStyle}
         >
           Our Plans
