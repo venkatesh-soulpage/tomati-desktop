@@ -792,7 +792,9 @@ function Index(props) {
                   color: "#8B7E0D",
                 }}
               >
-                <p style={{ color: "#8B7E0D" }}>TM56748393764</p>
+                <p style={{ color: "#8B7E0D", padding: "5px", margin: 0 }}>
+                  TM56748393764
+                </p>
               </div>
               <div className="col-12 mt-2">
                 <h6>
@@ -803,23 +805,23 @@ function Index(props) {
                 </h6>
               </div>
               <div
-                className="col-12"
+                className="col-12 "
                 style={{ borderTop: "1px solid #F5F6F9" }}
               />
-              <div className="col-12 mt-2">
-                <h6 style={{ color: "#2C3A56" }}>Account Details</h6>
+              <div className="col-12 mt-2 p-0 ml-2 ">
+                <p style={{ color: "#2C3A56" }}>Account Details</p>
               </div>
               <div
-                className="col-12 p-3"
+                className="col-12 ml-2 p-3"
                 style={{
                   background: "#F5F6F9",
                   borderRadius: 5,
                   color: "#2C3A56",
                 }}
               >
-                <h6>Liquid Intel LTD</h6>
-                <h6>1018881300</h6>
-                <h6>Zenith Bank</h6>
+                <p>Liquid Intel LTD</p>
+                <p>1018881300</p>
+                <p>Zenith Bank</p>
               </div>
               <div className="col-12 p-2 text-center">
                 <h6>

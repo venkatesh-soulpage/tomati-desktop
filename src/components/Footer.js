@@ -86,18 +86,23 @@ const Footer = () => {
                   <div className="col-12 mt-4 mt-md-4">
                     <ul style={{ padding: 0 }}>
                       <li style={ListStyle}>
-                        <a target="_blank" href="mailto:hello@tomati.app">
+                        <a
+                          style={{ textDecoration: "none" }}
+                          target="_blank"
+                          href="mailto:hello@tomati.app"
+                        >
                           <Image src={Envelop} alt="icon" />
                         </a>
                       </li>
-                      <li style={ListStyle}>
+                      <li className="ml-2" style={ListStyle}>
                         {" "}
                         <Image src={telegram} alt="icon" disabled />
                       </li>
-                      <li style={ListStyle}>
+                      <li className="ml-2" style={ListStyle}>
                         <a
                           target="_blank"
                           href="https://wa.me/message/HGRXRF5QIYCWH1"
+                          style={{ textDecoration: "none" }}
                         >
                           {" "}
                           <Image src={whatsapp} alt="icon" />

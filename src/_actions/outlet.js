@@ -102,6 +102,23 @@ export function updateOutlet(id, data) {
   };
 }
 
+export function inviteCollaborator(data) {
+  return function (dispatch) {
+    axios
+      .post(APIRoutes.ADD_OUTLET_COLLABORATOR, data)
+      .then((responseData) => {
+        console.log(responseData);
+        history.push("/dashboard/outlet");
+        // dispatch(postUpdatedOutlet(responseData.data, true));
+        return responseData;
+      })
+      .catch((errorData) => {
+        console.log(errorData);
+        // dispatch(handleRegisterError(errorData));
+      });
+  };
+}
+
 export function receiveUserOutlets(data) {
   return {
     type: ActionTypes.RECEIVE_USER_OUTLETS,

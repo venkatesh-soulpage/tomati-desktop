@@ -82,9 +82,8 @@ function App(props) {
         <Route exact path="/privacypolicy" component={Privacy} />
 
         <Route exact path="/reset" component={ResetPassword} />
-        <Route path="/dashboard" component={DashboardPage} />
+        <PrivateRoute path="/dashboard" component={DashboardPage} />
         <Route exact path="/order-summary" component={OrderSummary} />
-
 
         <Route component={Page404} />
       </Switch>
