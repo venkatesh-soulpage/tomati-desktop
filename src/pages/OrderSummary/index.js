@@ -4,22 +4,24 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { Dash, Plus, CheckCircle } from "react-bootstrap-icons";
 import Success from "assets/img/Success.svg";
-// import Success from "../../assets";
-import {
-  userRegistration,
-  // receiveUserData,
-  // handleRegisterError,
-  // verify,
-  // resetMessage,
-  // getEmailRegisterOtp,
-  // getLocationRegister,
-  // checkEmailCode,
-  getPlansRequest,
-} from "_actions/auth";
+import { userRegistration, userLogin, getPlansRequest } from "_actions/auth";
 // Router imports
 import { Redirect, withRouter } from "react-router-dom";
 
 function Index(props) {
+  const [id, setId] = React.useState(null);
+  const [price, setPrice] = React.useState(0);
+  const [hide, setHide] = React.useState(false);
+  const [show, setShow] = React.useState(false);
+  const [no_of_outlets, setOutlet] = React.useState(1);
+  const [no_of_qrcodes, setQrcodes] = React.useState(1);
+  const [outletaddonprice, setOutletaddonprice] = React.useState(0);
+  const [qraddonprice, setQraddonprice] = React.useState(0);
+  const [ioutletaddonprice, setIOutletaddonprice] = React.useState(0);
+  const [iqraddonprice, setIQraddonprice] = React.useState(0);
+  const [ioutlet, setIOutlet] = React.useState(0);
+  const [iqr, setIQr] = React.useState(0);
+  const [error, setError] = React.useState(false);
   const {
     address,
     company_name,
@@ -31,27 +33,9 @@ function Index(props) {
 
   React.useEffect(function () {
     window.scroll(0, 0);
-    // props.dispatch(receiveUserData({}));
-    // props.dispatch(handleRegisterError(null));
-    // props.dispatch(getLocationRegister());
     props.dispatch(getPlansRequest());
   }, []);
-
-  const [price, setPrice] = React.useState(0);
-  const [id, setId] = React.useState(1);
-  const [hide, setHide] = React.useState(false);
-  const [show, setShow] = React.useState(false);
-  const [no_of_outlets, setOutlet] = React.useState(1);
-  const [no_of_qrcodes, setQrcodes] = React.useState(1);
-  const [outletaddonprice, setOutletaddonprice] = React.useState(0);
-  const [qraddonprice, setQraddonprice] = React.useState(0);
-  const [ioutletaddonprice, setIOutletaddonprice] = React.useState(0);
-  const [iqraddonprice, setIQraddonprice] = React.useState(0);
-  const [ioutlet, setIOutlet] = React.useState(0);
-  const [iqr, setIQr] = React.useState(0);
-  // const handlePrice = (val) => setPrice(val);
-
-  const handlePrice = (e) => {
+  const handleChange = (e) => {
     console.log(e.target.value);
     const id = e.target.value;
     setId(id);
@@ -60,9 +44,6 @@ function Index(props) {
         return item;
       }
     });
-    console.log("cost\n", cost);
-    console.log("cost outlet price\n", cost[0].outlet_addon_price);
-    console.log("cost qr price\n", cost[0].qr_tags_addon_price);
     setPrice(cost[0].price);
     setQrcodes(cost[0].no_of_qr_tags);
     setOutlet(cost[0].no_of_outlets);
@@ -77,28 +58,22 @@ function Index(props) {
   const handleOutlet = (val) => {
     if (val) {
       setOutlet(no_of_outlets + 1);
-      // setOutletaddon(outletaddon + 1);
     } else {
       if (no_of_outlets !== ioutlet) {
         setOutlet(no_of_outlets - 1);
       }
-      // setOutletaddon(outletaddon - 1);
     }
   };
   const handleQrCode = (val) => {
     if (val) {
       setQrcodes(no_of_qrcodes + 1);
-      // setQraddonprice(qraddonprice + 1);
     } else {
       if (no_of_qrcodes !== iqr) {
         setQrcodes(no_of_qrcodes - 1);
       }
-      // setQraddonprice(qraddonprice - 1);
     }
   };
-  const handlePayment = (event) => {
-    event.preventDefault();
-    // if (validate) {
+  const handlePayment = () => {
     props
       .dispatch(
         userRegistration({
@@ -111,27 +86,38 @@ function Index(props) {
         })
       )
       .then((response) => {
+        setShow(true);
         console.log("response\n", response);
       })
       .catch((error) => {
         console.log("error\n", error);
       });
-    //     .then((responseData) => {
-    //       if (responseData.Message === "Success") {
-    //         handleShow();
-    //       }
-    //     });
-    // } else {
-    //   console.log("Missing Forms");
+    console.log("Missing Forms");
     // }
   };
-  console.log("order\n", props);
-  // console.log("pricer\n", price);
-  // console.log("id\n", id);
-  // console.log("id\n", id);
   let outletTotal = outletaddonprice * (no_of_outlets - ioutletaddonprice);
   let qrTotal = qraddonprice * (no_of_qrcodes - iqraddonprice);
   let Tax = 0;
+  let Total = outletTotal + qrTotal + price - Tax;
+
+  const handleLoginData = () => {
+    const { email, password } = props.location.state.values;
+    console.log(email, "EAMIL FROM HANDLE LOGIN");
+    console.log(password, "PASSWORD FROM HANDLE LOGIN");
+    var postData = {
+      email: email,
+      password: password,
+    };
+    props
+      .dispatch(userLogin(postData))
+      .then((userData) => {
+        console.log(userData, "USER DATA FROM SUCESS MESSAGE");
+        props.history.push("/dashboard");
+      })
+      .catch((error) => {
+        console.log(error, "ERROR FROM AXIOS");
+      });
+  };
   return (
     <div className="container">
       <div style={{ marginTop: "65px" }}>
@@ -250,21 +236,50 @@ function Index(props) {
                             Bank Transfer - for customers in Nigeria
                           </label>
                         </div>
+                        {error ? (
+                          <div>
+                            <small style={{ color: "#E0475B" }}>
+                              Please select the plan
+                            </small>
+                          </div>
+                        ) : null}
 
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setHide(true);
-                          }}
-                          className="btn btn-primary mt-3"
-                          style={{
-                            borderRadius: "30px",
-                            width: "140px",
-                            height: "54px",
-                          }}
-                        >
-                          Pay Now
-                        </button>
+                        {Total > 0 ? (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setHide(true);
+                            }}
+                            className="btn btn-primary mt-3"
+                            style={{
+                              borderRadius: "30px",
+                              width: "140px",
+                              height: "54px",
+                            }}
+                          >
+                            Pay Now
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (!id) {
+                                setError(true);
+                                console.log("PLEASE SELECT THE PLAN");
+                              } else {
+                                handlePayment();
+                              }
+                            }}
+                            className="btn btn-primary mt-3"
+                            style={{
+                              borderRadius: "30px",
+                              width: "140px",
+                              height: "54px",
+                            }}
+                          >
+                            Finish
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -294,23 +309,15 @@ function Index(props) {
                     </p>
                   </div>
                   <div className="col-12 mt-3">
-                    {/* <Dropdown
-                    options={plans}
-                    onChange={e => setPlan(e.value)}
-                    // value={plan}
-                    placeholder="Select a Plan"
-                  /> */}
-
                     <select
                       style={{
                         width: "100%",
                         height: "56px",
                       }}
-                      // value={price}
-                      onChange={handlePrice}
+                      onChange={handleChange}
                       className="pl-3"
                     >
-                      <option disabled>Select Plan</option>
+                      <option value="">Select Plan</option>
                       {props?.auth?.plans?.map((plan) => (
                         <option value={plan.id}>{plan.plan}</option>
                       ))}
@@ -382,8 +389,6 @@ function Index(props) {
                           <h6 className="text-center">
                             <small style={{ color: "#2C3A56" }}>
                               ₦ {outletTotal}
-                              {/* {no_of_outlets * p} */}
-                              {/* {props?.auth?.plans?.outletprice} */}
                             </small>
                           </h6>
                         </div>
@@ -453,8 +458,6 @@ function Index(props) {
                           <h6 className="text-center">
                             <small style={{ color: "#2C3A56" }}>
                               ₦ {qrTotal}
-                              {/* {no_of_qrcodes * p} */}
-                              {/* {props?.auth?.plans?.qrcodeprice} */}
                             </small>
                           </h6>
                         </div>
@@ -467,7 +470,6 @@ function Index(props) {
                         Sub Total:{" "}
                         <small style={{ color: "#2C3A56" }}>
                           ₦{outletTotal + qrTotal}
-                          {/* {no_of_qrcodes * p + no_of_outlets * p} */}
                         </small>
                       </small>
                     </h6>
@@ -483,9 +485,7 @@ function Index(props) {
                     <h6 className="text-right">
                       <small>
                         Total:{" "}
-                        <small style={{ color: "#2C3A56" }}>
-                          ₦{outletTotal + qrTotal - Tax}
-                        </small>
+                        <small style={{ color: "#2C3A56" }}>₦{Total}</small>
                       </small>
                     </h6>
                   </div>
@@ -568,8 +568,8 @@ function Index(props) {
                   }}
                   block
                   onClick={() => {
+                    handlePayment();
                     setHide(false);
-                    setShow(true);
                   }}
                 >
                   Confirm transfer
@@ -613,6 +613,7 @@ function Index(props) {
                     border: "0.5px solid black",
                     // backgroundColor: "transparent",
                   }}
+                  onClick={handleLoginData}
                 >
                   Login
                 </button>
