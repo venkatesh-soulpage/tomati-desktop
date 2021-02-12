@@ -13,9 +13,9 @@ import { userSignOut } from "_actions/auth";
 
 const Index = (props) => {
   return (
-    <div className="sidebar-sticky">
+    <div className="sidebar-sticky rounded">
       <ul className="nav flex-column">
-        <li disabled className="py-3 border-bottom">
+        <li disabled className="py-4 border-bottom">
           <NavLink
             exact
             className="drawer-link"
@@ -23,31 +23,31 @@ const Index = (props) => {
             to="/dashboard"
             style={{ cursor: "not-allowed", pointerEvents: "none" }}
           >
-            <img src={Icondashboard} alt="icon" /> Dashboard{" "}
+            <img className="mr-3" src={Icondashboard} alt="icon" /> Dashboard
             <span className="sr-only">(current)</span>
           </NavLink>
         </li>
-        <li className=" py-3 border-bottom">
+        <li className=" py-4 border-bottom">
           <NavLink
             exact
             className="drawer-link"
             activeClassName="drawer-link-active"
             to="/dashboard/outlet"
           >
-            <img src={Iconoutlet} alt="icon" /> Outlet
+            <img className="mr-3" src={Iconoutlet} alt="icon" /> Outlet
           </NavLink>
         </li>
-        <li className=" py-3 border-bottom">
+        <li className=" py-4 border-bottom">
           <NavLink
             exact
             className=" drawer-link"
             activeClassName="drawer-link-active"
             to="/dashboard/event"
           >
-            <img src={velvet2} alt="icon" /> Event
+            <img className="mr-3" src={velvet2} alt="icon" /> Event
           </NavLink>
         </li>
-        <li className=" py-3 border-bottom">
+        <li className=" py-4 border-bottom">
           <NavLink
             disabled
             className=" drawer-link"
@@ -55,17 +55,17 @@ const Index = (props) => {
             to="/dashboard/wallet"
             style={{ cursor: "not-allowed", pointerEvents: "none" }}
           >
-            <img src={Iconwallet} alt="icon" /> Wallet
+            <img className="mr-3" src={Iconwallet} alt="icon" /> Wallet
           </NavLink>
         </li>
-        <li className=" py-3 border-bottom">
+        <li className=" py-4 border-bottom">
           <NavLink
             disabled
             className=" drawer-link"
             activeClassName="drawer-link-active"
             to="/dashboard/settings"
           >
-            <img src={Iconsettings} alt="icon" /> Settings
+            <img className="mr-3" src={Iconsettings} alt="icon" /> Settings
           </NavLink>
         </li>
         <li className=" py-3 border-bottom">
@@ -75,7 +75,7 @@ const Index = (props) => {
             to="#"
             onClick={() => props.dispatch(userSignOut())}
           >
-            <img src={Iconpower} alt="icon" /> Logout
+            <img className="mr-3" src={Iconpower} alt="icon" /> Logout
           </NavLink>
         </li>
       </ul>

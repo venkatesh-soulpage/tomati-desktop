@@ -45,7 +45,7 @@ const Index = (props) => {
           <h4 className="lead m-0">Total Outlets: {outlet?.outlets.length}</h4>
         </div>
         <div className=" mr-3">
-          <button className="btn btn-dark btn-sm">Premium/Monthly</button>
+          <button className="btn btn-dark btn-sm">Premium/monthly</button>
         </div>
         <div className="">
           <button className="btn btn-outline-dark btn-sm">Change</button>
