@@ -34,7 +34,7 @@ function Register(props) {
     password: "",
     full_name: "",
     company_name: "",
-    step: 1,
+    step: 3,
     code: "",
     location: "",
     address: "",
