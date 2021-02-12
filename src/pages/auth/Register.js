@@ -77,7 +77,7 @@ function Register(props) {
       .dispatch(
         checkEmailCode({
           email: values.email,
-          code: values.code,
+          code: parseInt(values.code),
         })
       )
       .then((responseData) => {

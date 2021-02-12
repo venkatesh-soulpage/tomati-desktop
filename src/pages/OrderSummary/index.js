@@ -166,8 +166,6 @@ function Index(props) {
         setShow(true);
       })
       .catch((error) => {});
-    console.log("Missing Forms");
-    // }
   };
   let outletTotal = outletaddonprice * (no_of_outlets - ioutletaddonprice);
   let eventTotal = eventaddonprice * (no_of_events - ieventaddonprice);

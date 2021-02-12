@@ -229,18 +229,28 @@ export function handleEmailError(error) {
     payload: error,
   };
 }
+export function handleEmailCodeError(error) {
+  console.log("handle error\n", error);
+  return {
+    type: ActionTypes.HANDLE_EMAIL_CODE_ERROR,
+    payload: error,
+  };
+}
 
 export function checkEmailCode(postData) {
   return function (dispatch) {
     return AuthService.checkCode(postData)
       .then((responseData) => {
         dispatch(handleEmailSuccess(responseData.Message));
-        console.log("confirmation\n", responseData);
         return responseData;
       })
       .catch((errorData) => {
-        dispatch(handleEmailError(errorData));
-        console.log("error\n", errorData);
+        if (
+          typeof JSON.parse(errorData) === Object &&
+          JSON.parse(errorData).status === 400
+        ) {
+          return dispatch(handleEmailCodeError("Invalid code"));
+        }
         return errorData;
       });
   };
