@@ -38,13 +38,15 @@ export default function MainHeader() {
                 </Button>
               </Link>
               &nbsp;
-              <Button
-                size="md"
-                variant="secondary"
-                className="rounded-pill px-4 py-2"
-              >
-                <span className="text-muted">How it Works</span>
-              </Button>
+              <ScrollLink smooth={true} duration={1000} to="works">
+                <Button
+                  size="md"
+                  variant="secondary"
+                  className="rounded-pill px-4 py-2"
+                >
+                  <span className="text-muted">How it Works</span>
+                </Button>
+              </ScrollLink>
               <div className="pt-4">
                 <img src={Group1} className="img-fluid" width="700" />
               </div>

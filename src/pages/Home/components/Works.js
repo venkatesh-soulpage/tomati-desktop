@@ -17,12 +17,13 @@ import img9 from "assets/img/club-images/img9.png";
 import img10 from "assets/img/club-images/img10.png";
 
 const ClubImages = {
-  width: "100px",
-  height: "100px",
+  width: "80px",
+  height: "80px",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "center",
   backgroundSize: "contain",
-  margin: "5px  ",
+  margin: "5px 15px",
+  filter: "grayscale(100%)",
 };
 
 function Works() {
