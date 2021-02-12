@@ -6,7 +6,12 @@ import Form from "react-bootstrap/Form";
 import PasswordTextField from "components/PasswordTextField";
 import { Dash, Plus, CheckCircle } from "react-bootstrap-icons";
 import Success from "assets/img/Success.svg";
-import { userRegistration, userLogin, getPlansRequest } from "_actions/auth";
+import {
+  userRegistration,
+  userLogin,
+  getPlansRequest,
+  getLocationRegister,
+} from "_actions/auth";
 // Router imports
 import { Redirect, withRouter } from "react-router-dom";
 
@@ -31,11 +36,14 @@ function Index(props) {
     full_name,
     location,
     password,
+    state,
+    city,
   } = props.location.state.values;
 
   React.useEffect(function () {
     window.scroll(0, 0);
     props.dispatch(getPlansRequest());
+    props.dispatch(getLocationRegister());
   }, []);
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -120,6 +128,12 @@ function Index(props) {
         console.log(error, "ERROR FROM AXIOS");
       });
   };
+  if (!props.auth.locations) {
+    return <>Loading...</>;
+  }
+
+  const country = _.filter(props.auth.locations, ["id", location]);
+
   return (
     <div className="container mt-5 mb-5 pt-5">
       <div className="row">
@@ -183,28 +197,28 @@ function Index(props) {
                   </div>
                   <div className="col-8 mt-3">
                     {" "}
-                    <h6 className="font-weight-normal">Columbia</h6>
+                    <h6 className="font-weight-normal">{location}</h6>
                   </div>
                   <div className="col-4 mt-3">
                     <h6 className="font-weight-normal">State :</h6>
                   </div>
                   <div className="col-8 mt-3">
                     {" "}
-                    <h6 className="font-weight-normal">Erioc</h6>
+                    <h6 className="font-weight-normal">{state}</h6>
                   </div>
                   <div className="col-4 mt-3">
                     <h6 className="font-weight-normal">City:</h6>
                   </div>
                   <div className="col-8 mt-3">
                     {" "}
-                    <h6 className="font-weight-normal">Eyland</h6>
+                    <h6 className="font-weight-normal">{city}</h6>
                   </div>
                   <div className="col-4 mt-3">
                     <h6 className="font-weight-normal">Street:</h6>
                   </div>
                   <div className="col-8 mt-3">
                     {" "}
-                    <h6 className="font-weight-normal">24 Fermont Street</h6>
+                    <h6 className="font-weight-normal">{address}</h6>
                   </div>
                 </div>
               </div>
