@@ -113,7 +113,7 @@ function LocationDetails({
           // transform: 'translate(-50%, -50%)',
         }}
       >
-        <Modal.Header closeButton></Modal.Header>
+        <Modal.Header className="border-0" closeButton></Modal.Header>
         <Modal.Body>
           <div className="text-center">
             <img className="img-fluid mt-3" src={Success} alt="icon" />

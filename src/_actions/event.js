@@ -33,12 +33,11 @@ export function addEvent(data) {
     axios
       .post(APIRoutes.ADD_EVENT_REQUEST, data)
       .then((responseData) => {
-        console.log(responseData);
-        dispatch(addEventMenu(responseData.data.Event.id, data.menu));
-        return responseData;
+        return dispatch(addEventMenu(responseData.data.Event.id, data.menu));
       })
       .catch((errorData) => {
         console.log(errorData);
+        return errorData;
         // dispatch(handleRegisterError(errorData));
       });
   };
@@ -49,10 +48,9 @@ export function addEventMenu(id, menu) {
     axios
       .post(`${APIRoutes.ADD_EVENT_REQUEST}/${id}/menu`, menu)
       .then((responseData) => {
-        console.log(responseData);
         history.push("/dashboard/event");
         // dispatch(addEventMenu(responseData.data.Event.id, data.menu));
-        // return responseData;
+        return responseData;
       })
       .catch((errorData) => {
         console.log(errorData);
@@ -87,6 +85,23 @@ export function updateEvent(id, data) {
         history.push("/dashboard/event");
         // dispatch(postUpdatedOutlet(responseData.data));
         // return responseData;
+      })
+      .catch((errorData) => {
+        console.log(errorData);
+        // dispatch(handleRegisterError(errorData));
+      });
+  };
+}
+
+export function inviteCollaborator(data) {
+  return function (dispatch) {
+    axios
+      .post(APIRoutes.ADD_EVENT_COLLABORATOR, data)
+      .then((responseData) => {
+        console.log(responseData);
+        history.push("/dashboard/event");
+        // dispatch(postUpdatedOutlet(responseData.data, true));
+        return responseData;
       })
       .catch((errorData) => {
         console.log(errorData);
