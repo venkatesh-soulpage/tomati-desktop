@@ -20,10 +20,10 @@ const Index = (props) => {
           <h3 className="font-weight-bold text-dark m-0">Outlet</h3>
         </div>
         <div className="ml-auto  mr-3">
-          <h4 className="lead m-0">Total Outlets: X</h4>
+          <h6 className="m-0 text-muted">Total Events: X</h6>
         </div>
         <div className=" mr-3">
-          <button className="btn btn-dark btn-sm">Premium/Monthly</button>
+          <button className="btn btn-dark btn-sm">Premium/monthly</button>
         </div>
         <div className="">
           <button className="btn btn-outline-dark btn-sm">Change</button>
@@ -34,7 +34,7 @@ const Index = (props) => {
         <div className="d-flex align-items-center">
           <div>
             <button
-              className="btn btn-danger"
+              className="btn btn-danger rounded-pill py-2 px-3"
               onClick={() => props.history.push("/dashboard/addoutlet")}
             >
               + Add New Outlet
