@@ -1,6 +1,8 @@
 import React from "react";
 import { Form, Button, Card } from "react-bootstrap";
 
+// modal
+
 const OutletDetails = ({
   handleStep,
   values,
