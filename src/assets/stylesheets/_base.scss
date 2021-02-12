@@ -5,6 +5,7 @@ body,
   padding: 0;
   height: 100%;
   font-family: "Poppins", sans-serif;
+  background-color: #f5f6f9;
 }
 h1,
 h2,
@@ -49,3 +50,9 @@ input[type="checkbox"]:after {
   height: 500px;
   min-height: 600px;
 }
+
+$dark: #2c3a56;
+$danger: #e0475b;
+
+// Bootstrap Override
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";

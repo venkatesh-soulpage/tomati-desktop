@@ -57,6 +57,7 @@ function Navigation(props) {
               ) : (
                 <Nav>
                   <Nav.Link
+                    className="px-3 text-dark"
                     as={NavLink}
                     exact
                     to="/"
@@ -68,7 +69,7 @@ function Navigation(props) {
                   {location.pathname === "/" && (
                     <>
                       <Link
-                        className="nav-link"
+                        className="nav-link px-3 text-dark"
                         smooth={true}
                         duration={1000}
                         to="works"
@@ -79,7 +80,7 @@ function Navigation(props) {
                       </Link>
 
                       <Link
-                        className="nav-link"
+                        className="nav-link px-3 text-dark"
                         smooth={true}
                         duration={1000}
                         to="features"
@@ -90,7 +91,7 @@ function Navigation(props) {
                       </Link>
 
                       <Link
-                        className="nav-link"
+                        className="nav-link px-3 text-dark"
                         smooth={true}
                         duration={1000}
                         to="faq"
@@ -102,6 +103,7 @@ function Navigation(props) {
                     </>
                   )}
                   <Nav.Link
+                    className="px-3 text-dark"
                     as={NavLink}
                     exact
                     to="/login"
@@ -111,6 +113,7 @@ function Navigation(props) {
                     Login
                   </Nav.Link>
                   <Nav.Link
+                    className="px-3 text-dark"
                     as={NavLink}
                     exact
                     to="/register"

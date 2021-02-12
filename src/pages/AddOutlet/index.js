@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import OutletDetails from "./components/OutletDetails";
 import CreateMenu from "./components/CreateMenu";
-import { Card, Form } from "react-bootstrap";
+import { Card, Form, Button } from "react-bootstrap";
 import Papa from "papaparse";
 import _ from "lodash";
 import { addOutlet } from "_actions/outlet";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
+
+import CustomModal from "components/CustomModal";
 
 const Index = (props) => {
   const [tempMenu, setMenu] = useState(null);
@@ -88,67 +90,83 @@ const Index = (props) => {
     fontFamily: "Poppins",
     fontWeight: "600",
   };
+  const [modalShow, setModalShow] = React.useState(false);
+
   return (
-    <div className="bg-light container-fluid py-5">
+    <div className="container-fluid">
       <div className="container">
-        <Card className="p-5 w-50 mt-5 mx-auto">
-          {step === 1 ? (
-            <>
-              <div style={HeaderText} className="text-start form-legend pb-5">
-                Outlet Details
-              </div>
-              <Form
-                id="register-form"
-                // onLoad={() => props.handleRegisterError(null)}
-                autoComplete="off"
-              >
-                {/* <AlertMessage
+        <Button variant="primary" onClick={() => setModalShow(true)}>
+          Launch vertically centered modal
+        </Button>
+        <CustomModal show={modalShow} onHide={() => setModalShow(false)} />
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <Card className="p-5 rounded">
+              {step === 1 ? (
+                <>
+                  <div
+                    style={HeaderText}
+                    className="text-start form-legend mb-3"
+                  >
+                    Outlet Details
+                  </div>
+                  <Form
+                    id="register-form"
+                    // onLoad={() => props.handleRegisterError(null)}
+                    autoComplete="off"
+                  >
+                    {/* <AlertMessage
               variant="danger"
               error={props.auth.registerError}
               onDismiss={() => {
                 props.handleRegisterError(null);
               }}
             ></AlertMessage> */}
-                <OutletDetails
-                  values={values}
-                  setValues={setValues}
-                  handleChange={handleChange}
-                  handleFile={handleFile}
-                  handleStep={handleStep}
-                  // handleSignUpData={handleSignUpData}
-                />
-              </Form>
-            </>
-          ) : step === 2 ? (
-            <>
-              <div style={HeaderText} className="text-start form-legend pb-5">
-                Create Menu
-              </div>
-              <Form
-                id="email-form"
-                onSubmit={handleCreateOutlet}
-                // onLoad={() => props.handleRegisterError(null)}
-                autoComplete="off"
-              >
-                {/* <AlertMessage
+                    <OutletDetails
+                      values={values}
+                      setValues={setValues}
+                      handleChange={handleChange}
+                      handleFile={handleFile}
+                      handleStep={handleStep}
+                      // handleSignUpData={handleSignUpData}
+                    />
+                  </Form>
+                </>
+              ) : step === 2 ? (
+                <>
+                  <div
+                    style={HeaderText}
+                    className="text-start form-legend pb-5"
+                  >
+                    Create Menu
+                  </div>
+                  <Form
+                    id="email-form"
+                    onSubmit={handleCreateOutlet}
+                    // onLoad={() => props.handleRegisterError(null)}
+                    autoComplete="off"
+                  >
+                    {/* <AlertMessage
               variant="danger"
               error={props.auth.registerError}
               onDismiss={() => {
                 props.handleRegisterError(null);
               }}
             ></AlertMessage> */}
-                <CreateMenu
-                  values={values}
-                  handleChange={handleChange}
-                  setValues={setValues}
-                  handleStep={handleStep}
-                  handleCreateOutlet={handleCreateOutlet}
-                  props={props}
-                />
-              </Form>
-            </>
-          ) : null}
-        </Card>
+                    <CreateMenu
+                      values={values}
+                      handleChange={handleChange}
+                      setValues={setValues}
+                      handleStep={handleStep}
+                      handleCreateOutlet={handleCreateOutlet}
+                      props={props}
+                    />
+                  </Form>
+                </>
+              ) : null}
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

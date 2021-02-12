@@ -1,7 +1,7 @@
 import axios from "axios";
 
 if (process.env.NODE_ENV === "production") {
-  axios.defaults.baseURL = "https://booze-boss-api.herokuapp.com";
+  axios.defaults.baseURL = "https://tomati-api.herokuapp.com";
 } else {
   axios.defaults.baseURL = "http://127.0.0.1:3000";
 }

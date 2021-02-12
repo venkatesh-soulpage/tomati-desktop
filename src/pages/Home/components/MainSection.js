@@ -29,58 +29,48 @@ function MainSection() {
           </h3>
 
           <CardDeck style={{ background: "#F5F6F9", border: "0" }}>
-            <Card style={{ minHeight: "400px", borderRadius: "15px" }}>
+            <Card style={{ borderRadius: "15px" }}>
               <Card.Body className="">
-                <h4 className="my-4 p-3">For Outlet Managers</h4>
-                <small className="mt-3 p-3 mb-5">
-                  {" "}
-                  who want to reduce manpower cost and make the dine in
-                  experience safer for guests with contactless menus and
-                  payment.
-                </small>
+                <div style={{ minHeight: "250px" }}>
+                  <h4 className="my-4 p-3">For Outlet Managers</h4>
+                  <p className="custom-font mt-3 p-3 mb-5 font-weight-light">
+                    who want to reduce manpower cost and make the dine in
+                    experience safer for guests with contactless menus and
+                    payment.
+                  </p>
+                </div>
                 <Link to="/register" style={{ textDecoration: "none" }}>
-                  <Button
-                    variant="primary"
-                    className="mt-5 mb-3"
-                    style={{ borderRadius: "28px", width: "50%" }}
-                  >
+                  <Button variant="primary" className=" mb-3 rounded-pill">
                     Proceed
                   </Button>
                 </Link>
-                <Card.Text
-                  style={{ cursor: "pointer", textDecoration: "underline" }}
-                >
+                <Card.Text style={{ cursor: "pointer", textDecoration: "" }}>
                   <ScrollLink to="features">See Features</ScrollLink>
                 </Card.Text>
               </Card.Body>
             </Card>
-            <Card style={{ minHeight: "400px", borderRadius: "15px" }}>
+            <Card style={{ borderRadius: "15px" }}>
               <Card.Body className=" p-3">
-                <h4 className="my-4 p-3">For Event Managers</h4>
-                <small className="mt-3 p-3 mb-5">
-                  {" "}
-                  The easiest way to handle food or beverage orders and
-                  payments. 100% contactless Auto-reconciliation Reports and
-                  analytics
-                </small>
+                <div style={{ minHeight: "250px" }}>
+                  <h4 className="my-4 p-3">For Event Managers</h4>
+                  <p className="custom-font mt-3 p-3 mb-5 font-weight-light">
+                    The easiest way to handle food or beverage orders and
+                    payments. 100% contactless
+                    <br /> Auto-reconciliation <br /> Reports and analytics.
+                  </p>
+                </div>
                 <Link to="/register" style={{ textDecoration: "none" }}>
-                  <Button
-                    variant="primary"
-                    className="mt-5 mb-3"
-                    style={{ borderRadius: "28px", width: "50%" }}
-                  >
+                  <Button variant="primary" className=" mb-3 rounded-pill">
                     Proceed
                   </Button>
                 </Link>
-                <Card.Text
-                  style={{ cursor: "pointer", textDecoration: "underline" }}
-                >
+                <Card.Text style={{ cursor: "pointer", textDecoration: "" }}>
                   <ScrollLink to="features">See Features</ScrollLink>
                 </Card.Text>
               </Card.Body>
             </Card>
 
-            <Card style={{ minHeight: "400px", borderRadius: "15px" }}>
+            <Card style={{ minHeight: "", borderRadius: "15px" }}>
               <Card.Body className="p-0">
                 <div
                   style={{
