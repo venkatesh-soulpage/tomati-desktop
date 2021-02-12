@@ -22,7 +22,10 @@ function Navigation(props) {
   const location = useLocation();
 
   return (
-    <div className="fixed-top bg-white border-bottom">
+    <div
+      className="fixed-top bg-white border-bottom"
+      style={{ zIndex: "999999999" }}
+    >
       <Container>
         <Navbar expand="md">
           <Navbar.Brand href="/">

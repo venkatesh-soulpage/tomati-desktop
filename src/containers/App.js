@@ -5,7 +5,7 @@ import history from "utils/history";
 // Redux component connect
 import { connect } from "react-redux";
 // Importing redux actions
-// import { handleIsUserAuthenticated, validateAuthToken } from "_actions/auth";
+import { handleIsUserAuthenticated } from "_actions/auth";
 // Local Components
 import Home from "pages/Home";
 import OrderSummary from "pages/OrderSummary";
@@ -32,22 +32,22 @@ import DashboardPage from "pages/dashboard/DashboardPage";
 // import ResetPasswordSuccess from "pages/static/ResetPasswordSuccess";
 
 function App(props) {
-  console.log(props);
   /**
    * Similar to componentDidMount and componentDidUpdate:
    * Checking for the user token availability and changing the isAuthenticated flag value.
    */
-  // useEffect(() => {
-  //   if (sessionStorage.getItem("token")) {
-  //     props.dispatch(validateAuthToken());
-  //     props.dispatch(handleIsUserAuthenticated(true));
-  //     // props.dispatch(resetApplicationStep());
-  //   } else {
-  //     props.dispatch(handleIsUserAuthenticated(false));
-  //   }
-  // }, [sessionStorage.getItem("token")]);
+  React.useEffect(() => {
+    if (sessionStorage.getItem("token")) {
+      // props.dispatch(validateAuthToken());
+      props.dispatch(handleIsUserAuthenticated(true));
+      // props.dispatch(resetApplicationStep());
+    } else {
+      props.dispatch(handleIsUserAuthenticated(false));
+    }
+  }, [sessionStorage.getItem("token")]);
 
   // Rending Routes
+
   return (
     <Router history={history}>
       <Navbar />
@@ -89,7 +89,7 @@ function App(props) {
         <Route component={Page404} />
       </Switch>
 
-      <Footer />
+      {!props.auth.user && <Footer />}
     </Router>
   );
 }
