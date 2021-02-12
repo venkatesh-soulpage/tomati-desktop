@@ -242,7 +242,6 @@ export function checkEmailCode(postData) {
     return AuthService.checkCode(postData)
       .then((responseData) => {
         dispatch(handleEmailSuccess(responseData.Message));
-        console.log("confirmation\n", responseData);
         return responseData;
       })
       .catch((errorData) => {
