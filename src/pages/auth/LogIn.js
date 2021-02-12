@@ -77,7 +77,9 @@ function LogIn(props) {
               <Form onSubmit={handleLoginData} autoComplete="off">
                 <AlertMessage
                   variant="danger"
-                  error={props.auth.loginError}
+                  error={
+                    props.auth.loginError && { message: props.auth.loginError }
+                  }
                   onDismiss={handleAlertDismiss}
                 />
                 <Form.Group>

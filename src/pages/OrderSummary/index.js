@@ -134,9 +134,11 @@ function Index(props) {
     return <>Loading...</>;
   }
 
-  const country = _.filter(props.auth.locations, ["id", location]);
+  const country = _.filter(props.auth.locations, ["id", parseInt(location)]);
 
-  const selected_state = _.filter(country[0].childrens, ["id", state]);
+  const selected_state =
+    country.length > 0 &&
+    _.filter(country[0].childrens, ["id", parseInt(state)]);
 
   return (
     <div className="container mt-5 mb-5 pt-5">
@@ -202,7 +204,7 @@ function Index(props) {
                   <div className="col-8 mt-3">
                     {" "}
                     <h6 className="font-weight-normal">
-                      {country && country[0].name}
+                      {country.length > 0 && country[0].name}
                     </h6>
                   </div>
                   <div className="col-4 mt-3">
