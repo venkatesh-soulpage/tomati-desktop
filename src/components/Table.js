@@ -25,7 +25,6 @@ const Table = ({ period, setPeriod }) => {
   };
 
   const SmallButton = {
-    border: "1px solid black",
     borderRadius: "20px",
     background: "#fff",
     color: "#000",
@@ -180,12 +179,11 @@ const Table = ({ period, setPeriod }) => {
 
                 <Link to="/register" style={{ textDecoration: "none" }}>
                   <Button
-                    className="mt-1"
-                    variant="outline"
-                    style={ButtonStyle3}
+                    className="mt-5 rounded-pill"
+                    variant="light"
                     onClick={() => {}}
                   >
-                    <small> Choose Plan</small>
+                    Choose Plan
                   </Button>
                 </Link>
               </div>
@@ -206,12 +204,9 @@ const Table = ({ period, setPeriod }) => {
               >
                 <h5 style={Style1}>Growth</h5>
                 <div
-                  className="p-1 mt-2"
+                  className="p-1 mt-2 rounded-pill"
                   style={{
-                    // border: '1px solid #707070',
-                    borderRadius: 24,
-                    background: "rgb(204 17 68 / 55%)",
-                    // opacity: '11%',
+                    background: "#c83f51",
                   }}
                 >
                   <small className="text-white">Most Popular</small>
@@ -276,19 +271,20 @@ const Table = ({ period, setPeriod }) => {
                 style={{ height: "136px" }}
               >
                 {period === "monthly" ? (
-                  <h6 style={Style3}>$39</h6>
+                  <h6 className="mt-1" style={Style3}>
+                    $39
+                  </h6>
                 ) : (
                   <h6 style={Style3}>$374</h6>
                 )}
                 <Link to="/register" style={{ textDecoration: "none" }}>
                   {" "}
                   <Button
-                    className="mt-2"
-                    variant="outline"
-                    style={ButtonStyle4}
+                    className="mt-5 rounded-pill"
+                    variant="dark"
                     onClick={() => {}}
                   >
-                    <small>Choose Plan</small>
+                    Choose Plan
                   </Button>
                 </Link>
               </div>
@@ -365,17 +361,14 @@ const Table = ({ period, setPeriod }) => {
                 style={{ height: "136px" }}
               >
                 {period === "monthly" ? (
-                  <h6 style={Style3}>$79</h6>
+                  <h6 className="mt-1" style={Style3}>
+                    $79
+                  </h6>
                 ) : (
                   <h6 style={Style3}>$758</h6>
                 )}
-                <Button
-                  className="mt-2"
-                  variant="outline"
-                  style={ButtonStyle3}
-                  disabled
-                >
-                  <small>Choose Plan</small>
+                <Button className="mt-2 rounded-pill" variant="light">
+                  Choose Plan
                 </Button>
                 <p className="text-center">
                   <a
@@ -388,7 +381,12 @@ const Table = ({ period, setPeriod }) => {
                     target="_top_blank"
                   >
                     Need a custom plan?
-                    <Button style={SmallButton}>Contact</Button>
+                    <Button
+                      className="rounded-pill px-4"
+                      style={{ background: "#c83f51" }}
+                    >
+                      Contact
+                    </Button>
                   </a>
                 </p>
               </div>
