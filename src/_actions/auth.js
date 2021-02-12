@@ -251,6 +251,7 @@ export function checkEmailCode(postData) {
         ) {
           return dispatch(handleEmailCodeError("Invalid code"));
         }
+        dispatch(handleEmailCodeError(errorData));
         return errorData;
       });
   };
