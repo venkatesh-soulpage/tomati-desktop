@@ -6,52 +6,24 @@ import Form from "react-bootstrap/Form";
 import PasswordTextField from "components/PasswordTextField";
 import { Dash, Plus, CheckCircle } from "react-bootstrap-icons";
 import Success from "assets/img/Success.svg";
-import {
-  userRegistration,
-  userLogin,
-  getPlansRequest,
-  getLocationRegister,
-} from "_actions/auth";
+import { userRegistration, userLogin, getPlansRequest } from "_actions/auth";
 // Router imports
 import { Redirect, withRouter } from "react-router-dom";
-import { localeData } from "moment";
 
 function Index(props) {
-  // Plan Id State Intialisation
   const [id, setId] = React.useState(null);
-
-  // Normal State Intialisation
-  const [error, setError] = React.useState(false);
+  const [price, setPrice] = React.useState(0);
   const [hide, setHide] = React.useState(false);
   const [show, setShow] = React.useState(false);
-
-  //Price State Initialisation
-  const [price, setPrice] = React.useState(0);
-
-  // Outlet State Intialisation
-  const [no_of_outlets, setOutlet] = React.useState(0);
-  const [ioutlet, setIOutlet] = React.useState(0);
+  const [no_of_outlets, setOutlet] = React.useState(1);
+  const [no_of_qrcodes, setQrcodes] = React.useState(1);
   const [outletaddonprice, setOutletaddonprice] = React.useState(0);
-  const [ioutletaddonprice, setIOutletaddonprice] = React.useState(0);
-
-  // Event State Intialisation
-  const [no_of_events, setEvent] = React.useState(0);
-  const [ievent, setIEvent] = React.useState(0);
-  const [eventaddonprice, setEventaddonprice] = React.useState(0);
-  const [ieventaddonprice, setIEventaddonprice] = React.useState(0);
-
-  // Qr Code State Intialisation
-  const [no_of_qrcodes, setQrcodes] = React.useState(0);
-  const [iqr, setIQr] = React.useState(0);
   const [qraddonprice, setQraddonprice] = React.useState(0);
+  const [ioutletaddonprice, setIOutletaddonprice] = React.useState(0);
   const [iqraddonprice, setIQraddonprice] = React.useState(0);
-
-  // Users State Intialisation
-  const [no_of_users, setUsers] = React.useState(0);
-  const [iuser, setIUser] = React.useState(0);
-  const [useraddonprice, setUseraddonprice] = React.useState(0);
-  const [iuseraddonprice, setIUseraddonprice] = React.useState(0);
-
+  const [ioutlet, setIOutlet] = React.useState(0);
+  const [iqr, setIQr] = React.useState(0);
+  const [error, setError] = React.useState(false);
   const {
     address,
     company_name,
@@ -64,14 +36,9 @@ function Index(props) {
   React.useEffect(function () {
     window.scroll(0, 0);
     props.dispatch(getPlansRequest());
-    props.dispatch(getLocationRegister());
   }, []);
-  const locationObj = props?.auth?.locations?.filter((loc) => {
-    if (loc.id == location) {
-      return loc;
-    }
-  });
   const handleChange = (e) => {
+    console.log(e.target.value);
     const id = e.target.value;
     setId(id);
     let cost = props?.auth?.plans?.filter((item) => {
@@ -79,33 +46,15 @@ function Index(props) {
         return item;
       }
     });
-
-    // Set Price on onchange
     setPrice(cost[0].price);
-
-    // set Qr codes states on change
-    setQrcodes(cost[0].qr_tags_limit);
-    setIQr(cost[0].qr_tags_limit);
-    setQraddonprice(cost[0].qr_tags_addon_price);
-    setIQraddonprice(cost[0].qr_tags_limit);
-
-    // set Users states on change
-    setUsers(cost[0].user_limit);
-    setUseraddonprice(cost[0].user_addon_price);
-    setIUseraddonprice(cost[0].user_limit);
-    setIUser(cost[0].user_limit);
-
-    // set Outlet states on change
-    setOutlet(cost[0].outlet_limit);
+    setQrcodes(cost[0].no_of_qr_tags);
+    setOutlet(cost[0].no_of_outlets);
     setOutletaddonprice(cost[0].outlet_addon_price);
-    setIOutletaddonprice(cost[0].outlet_limit);
-    setIOutlet(cost[0].outlet_limit);
-
-    // set Event states on change
-    setEvent(cost[0].event_limit);
-    setEventaddonprice(cost[0].event_addon_price);
-    setIEventaddonprice(cost[0].event_limit);
-    setIEvent(cost[0].event_limit);
+    setQraddonprice(cost[0].qr_tags_addon_price);
+    setIOutletaddonprice(cost[0].no_of_outlets);
+    setIQraddonprice(cost[0].no_of_qr_tags);
+    setIOutlet(cost[0].no_of_outlets);
+    setIQr(cost[0].no_of_qr_tags);
   };
 
   const handleOutlet = (val) => {
@@ -117,32 +66,12 @@ function Index(props) {
       }
     }
   };
-
-  const handleEvent = (val) => {
-    if (val) {
-      setEvent(no_of_events + 1);
-    } else {
-      if (no_of_events !== ievent) {
-        setEvent(no_of_events - 1);
-      }
-    }
-  };
   const handleQrCode = (val) => {
     if (val) {
       setQrcodes(no_of_qrcodes + 1);
     } else {
       if (no_of_qrcodes !== iqr) {
         setQrcodes(no_of_qrcodes - 1);
-      }
-    }
-  };
-
-  const handleUser = (val) => {
-    if (val) {
-      setUsers(no_of_users + 1);
-    } else {
-      if (no_of_users !== iuser) {
-        setUsers(no_of_users - 1);
       }
     }
   };
@@ -156,28 +85,27 @@ function Index(props) {
           password_hash: password,
           plan_id: id,
           location_id: location,
-          no_of_outlets,
-          no_of_events,
-          no_of_users,
-          no_of_qrcodes,
         })
       )
       .then((response) => {
         setShow(true);
+        console.log("response\n", response);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log("error\n", error);
+      });
+    console.log("Missing Forms");
+    // }
   };
   let outletTotal = outletaddonprice * (no_of_outlets - ioutletaddonprice);
-  let eventTotal = eventaddonprice * (no_of_events - ieventaddonprice);
   let qrTotal = qraddonprice * (no_of_qrcodes - iqraddonprice);
-  let userTotal = useraddonprice * (no_of_users - iuseraddonprice);
-
-  let subTotal = outletTotal + qrTotal + eventTotal + userTotal + price;
   let Tax = 0;
-  let Total = outletTotal + qrTotal + eventTotal + userTotal + price - Tax;
+  let Total = outletTotal + qrTotal + price - Tax;
 
   const handleLoginData = () => {
     const { email, password } = props.location.state.values;
+    console.log(email, "EAMIL FROM HANDLE LOGIN");
+    console.log(password, "PASSWORD FROM HANDLE LOGIN");
     var postData = {
       email: email,
       password: password,
@@ -185,15 +113,18 @@ function Index(props) {
     props
       .dispatch(userLogin(postData))
       .then((userData) => {
+        console.log(userData, "USER DATA FROM SUCESS MESSAGE");
         props.history.push("/dashboard");
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log(error, "ERROR FROM AXIOS");
+      });
   };
   return (
-    <div>
-      <div style={{ marginTop: "100px", marginBottom: "50px" }}>
-        <div>
-          <div>
+    <div className="container">
+      <div style={{ marginTop: "65px" }}>
+        <div className="dashboard-grid-wrapper">
+          <div className="dashboard-grid-header">
             <div className="container">
               <div className="row mt-5">
                 <div className="col-md-8 ">
@@ -277,21 +208,16 @@ function Index(props) {
                             </div>
                             <div className="col-8 mt-3">
                               {" "}
-                              <h6 className="font-weight-normal">
-                                {locationObj && locationObj[0].name}
-                              </h6>
+                              <h6 className="font-weight-normal">Columbia</h6>
                             </div>
                             <div className="col-4 mt-3">
                               <h6 className="font-weight-normal">State :</h6>
                             </div>
                             <div className="col-8 mt-3">
                               {" "}
-                              <h6 className="font-weight-normal">
-                                {locationObj &&
-                                  locationObj[0].childrens[0].name}
-                              </h6>
+                              <h6 className="font-weight-normal">Erioc</h6>
                             </div>
-                            {/* <div className="col-4 mt-3">
+                            <div className="col-4 mt-3">
                               <h6 className="font-weight-normal">City:</h6>
                             </div>
                             <div className="col-8 mt-3">
@@ -306,7 +232,7 @@ function Index(props) {
                               <h6 className="font-weight-normal">
                                 24 Fermont Street
                               </h6>
-                            </div> */}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -357,6 +283,7 @@ function Index(props) {
                               onClick={() => {
                                 if (!id) {
                                   setError(true);
+                                  console.log("PLEASE SELECT THE PLAN");
                                 } else {
                                   handlePayment();
                                 }
@@ -494,78 +421,6 @@ function Index(props) {
                           </div>
                         </div>
                       </div>
-                      <div className="col-12 mt-3 pt-3 d-flex border-top">
-                        <p
-                          style={{
-                            fontSize: "16px",
-                            fontWeight: "500",
-                          }}
-                        >
-                          {" "}
-                          Number of events
-                        </p>
-                      </div>
-
-                      <div className="col-12 mt-0">
-                        <p
-                          style={{
-                            fontSize: "14px",
-                            fontWeight: "400",
-                          }}
-                        >
-                          A location that requires a separate menu and/or QR
-                          Code
-                        </p>
-                      </div>
-
-                      <div className="col-12">
-                        <div className="row">
-                          <div
-                            className="col-6 ml-3 mt-3"
-                            style={{
-                              border: "1px solid #C3CAD8",
-                              borderRadius: 5,
-                            }}
-                          >
-                            <div className="row">
-                              <div
-                                className="col-6 p-2"
-                                style={{ borderRight: "1px solid #C3CAD8" }}
-                              >
-                                <h6 className="font-weight-normal text-center">
-                                  {no_of_events}
-                                </h6>
-                              </div>
-
-                              <div
-                                className="col-3 p-2 text-center"
-                                style={{ borderRight: "1px solid #C3CAD8" }}
-                              >
-                                <Dash
-                                  onClick={() => handleEvent(false)}
-                                  style={{ cursor: "pointer" }}
-                                />
-                              </div>
-
-                              <div className="col-3 p-2 text-center">
-                                <Plus
-                                  onClick={() => handleEvent(true)}
-                                  style={{ cursor: "pointer" }}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-5 mt-3 p-2">
-                            <h6 className="text-center">
-                              <small
-                                style={{ color: "#2C3A56", fontSize: "16px" }}
-                              >
-                                ₦ {eventTotal}
-                              </small>
-                            </h6>
-                          </div>
-                        </div>
-                      </div>
 
                       <div className="col-12 mt-3 pt-3 border-top">
                         <p
@@ -637,76 +492,6 @@ function Index(props) {
                           </div>
                         </div>
                       </div>
-                      <div className="col-12 mt-3 pt-3 border-top">
-                        <p
-                          style={{
-                            fontSize: "16px",
-                            fontWeight: "500",
-                          }}
-                        >
-                          {" "}
-                          Users ?
-                        </p>
-                      </div>
-                      <div className="col-12 mt-3">
-                        <p
-                          style={{
-                            fontSize: "14px",
-                            fontWeight: "400",
-                          }}
-                        >
-                          This plan already includes 10 users, need more?
-                        </p>
-                      </div>
-                      <div className="col-12">
-                        <div className="row mb-3">
-                          <div
-                            className="col-6 ml-3 mt-3"
-                            style={{
-                              border: "1px solid #C3CAD8",
-                              borderRadius: 5,
-                            }}
-                          >
-                            <div className="row">
-                              <div
-                                className="col-6 p-2"
-                                style={{ borderRight: "1px solid #C3CAD8" }}
-                              >
-                                <h6 className="font-weight-normal text-center">
-                                  {no_of_users}
-                                </h6>
-                              </div>
-
-                              <div
-                                className="col-3 p-2 text-center"
-                                style={{ borderRight: "1px solid #C3CAD8" }}
-                              >
-                                <Dash
-                                  onClick={() => handleUser(false)}
-                                  style={{ cursor: "pointer" }}
-                                />
-                              </div>
-
-                              <div className="col-3 p-2 text-center">
-                                <Plus
-                                  onClick={() => handleUser(true)}
-                                  style={{ cursor: "pointer" }}
-                                />
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="col-5 mt-3 p-2">
-                            <h6 className="text-center">
-                              <small
-                                style={{ color: "#2C3A56", fontSize: "16px" }}
-                              >
-                                ₦ {userTotal}
-                              </small>
-                            </h6>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                     <div className="col-12 mt-2 pt-3 border-top border-bottom">
                       <Form.Group>
@@ -734,7 +519,7 @@ function Index(props) {
                         <small style={{ fontSize: "16px" }}>
                           Sub Total:{" "}
                           <small style={{ color: "#2C3A56", fontSize: "16px" }}>
-                            ₦{subTotal}
+                            ₦{outletTotal + qrTotal}
                           </small>
                         </small>
                       </h6>
