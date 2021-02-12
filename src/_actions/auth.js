@@ -356,6 +356,30 @@ export function forgetPassword(postData) {
       });
   };
 }
+
+/* ================================================================== */
+/* Get USer */
+/* ================================================================== */
+/**
+ * Requesting User Details
+ * @param {*} getData
+ */
+export function getUser() {
+  return function (dispatch) {
+    return AuthService.getUser()
+      .then((responseData) => {
+        // console.log(responseData);
+        dispatch(setUserData(responseData));
+        // dispatch(forgotPasswordToggle(true));
+      })
+      .catch((errorData) => {
+        console.log(errorData.response);
+
+        // dispatch(receiveForgotPasswordError(errorData));
+        // dispatch(forgotPasswordToggle(false));
+      });
+  };
+}
 /**
  * On Success Receives Reset Token
  * @param {*} data
@@ -395,6 +419,26 @@ export function resetPassword(data) {
       });
   };
 }
+/* ================================================================== */
+/* Update User */
+/* ================================================================== */
+/**
+ * FOr Updating User Information
+ * @param {*} data
+ */
+export function updateUser(data) {
+  return function (dispatch) {
+    return AuthService.updateUser(data)
+      .then((responseData) => {
+        console.log(responseData, "User Updated");
+        // dispatch(receiveResetPassword(responseData));
+        // history.push("/forgot-password/success");
+      })
+      .catch((errorData) => {
+        // dispatch(receiveResetPasswordError(errorData));
+      });
+  };
+}
 /**
  * When reset password is successful
  * @param {*} data
@@ -422,6 +466,17 @@ export function receiveResetPasswordError(error) {
 export function forgotPasswordToggle(data) {
   return {
     type: ActionTypes.FORGOT_PASSWORD_TOGGLE,
+    payload: data,
+  };
+}
+
+/**
+ * Reset password toggle for switching views
+ * @param {*} data
+ */
+export function setUserData(data) {
+  return {
+    type: ActionTypes.SET_USER_DATA,
     payload: data,
   };
 }

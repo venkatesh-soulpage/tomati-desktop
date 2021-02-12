@@ -3,6 +3,8 @@ import * as ActionTypes from "constants/ActionTypes";
 var initialState = {
   outlets: [],
   outlet: {},
+  success: false,
+  message: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -12,12 +14,21 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         outlets: action.payload,
+        success: false,
+        message: null,
       };
     case ActionTypes.GET_SINGLE_OUTLET:
       console.log(action.payload);
       return {
         ...state,
         outlet: action.payload,
+      };
+    case ActionTypes.OUTLET_RESPONSE:
+      console.log(action.payload, "res from reducer");
+      return {
+        ...state,
+        message: action.payload.message,
+        success: action.payload.res,
       };
 
     default:

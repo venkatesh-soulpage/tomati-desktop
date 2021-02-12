@@ -2,7 +2,6 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import "rsuite/lib/styles/index.less";
 import Back from "../assets/img/Back.svg";
 import Success from "../assets/img/Success.svg";
 import { Link } from "react-router-dom";

@@ -2,6 +2,9 @@ import * as ActionTypes from "constants/ActionTypes";
 
 var initialState = {
   events: [],
+  event: null,
+  success: false,
+  message: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -11,6 +14,11 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         events: action.payload,
+      };
+    case ActionTypes.GET_SINGLE_EVENT:
+      return {
+        ...state,
+        event: action.payload,
       };
 
     default:
