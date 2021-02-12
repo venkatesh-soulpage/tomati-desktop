@@ -5,6 +5,11 @@ import Modal from "react-bootstrap/Modal";
 import Back from "../assets/img/Back.svg";
 import Success from "../assets/img/Success.svg";
 import { Link } from "react-router-dom";
+import _ from "lodash";
+import { TreePicker } from "rsuite";
+
+import "rsuite/dist/styles/rsuite-default.css";
+
 function LocationDetails({
   values,
   handleChange,
@@ -41,25 +46,56 @@ function LocationDetails({
       <Form.Group>
         <Form.Control
           as="select"
-          placeholder="Location"
-          value={values.location}
+          value={values.location || undefined}
           onChange={handleChange("location")}
+          placeholder="Location"
           required
         >
           <option>Select Location</option>
-          <option value={7}>Nigeria</option>
-          <option disabled>Angola (Coming Soon)</option>
-          <option disabled>Brazil (Coming Soon)</option>
-          <option disabled>Colombia (Coming Soon)</option>
-          <option disabled>France (Coming Soon)</option>
-          <option disabled>Ghana (Coming Soon)</option>
-          <option disabled>Kenya (Coming Soon)</option>
-          <option disabled>Poland (Coming Soon)</option>
-          <option disabled>South Africa (Coming Soon)</option>
-          <option disabled>Spain (Coming Soon)</option>
-          <option disabled>United Arab Emirates (Coming Soon)</option>
-          <option disabled>United Kingdom (Coming Soon)</option>
+          {_.map(newLocations, function (location) {
+            return (
+              <option
+                key={location.id}
+                value={location.id}
+                disabled={location.id !== 7}
+              >
+                {location.name} {location.id !== 7 && "(Coming Soon)"}
+              </option>
+            );
+          })}
         </Form.Control>
+      </Form.Group>
+      <Form.Group>
+        <Form.Control
+          as="select"
+          value={values.state || undefined}
+          onChange={handleChange("state")}
+          placeholder="State"
+          required
+        >
+          <option>Select State</option>
+          {_.map(
+            _.filter(newLocations, ["id", parseInt(values.location)]),
+            function (location) {
+              return _.map(location.childrens, (item) => {
+                return (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                );
+              });
+            }
+          )}
+        </Form.Control>
+      </Form.Group>
+      <Form.Group>
+        <Form.Control
+          type="text"
+          placeholder="City"
+          value={values.city}
+          onChange={handleChange("city")}
+          required
+        />
       </Form.Group>
       <Form.Group>
         <Form.Control
@@ -104,15 +140,26 @@ function LocationDetails({
             handleStep("step", 2);
           }}
         />
-        <Link to={{ pathname: "/order-summary", state: { values } }}>
-          <Button
-            form="location-form"
-            className="btn btn-primary mt-3"
-            style={{ borderRadius: "30px", width: "140px", height: "54px" }}
-          >
-            Finish
-          </Button>
-        </Link>
+
+        <Button
+          form="location-form"
+          type="submit"
+          className="btn btn-primary mt-3"
+          style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+          onClick={() => {
+            console.log(values, "vales");
+            const { location, state, city, address } = values;
+            if (!location || !state || !city || !address) {
+              return;
+            }
+            props.history.push({
+              pathname: "/order-summary",
+              state: { values },
+            });
+          }}
+        >
+          Finish
+        </Button>
       </Form.Group>
       <Modal
         show={modal}

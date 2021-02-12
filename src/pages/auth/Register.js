@@ -34,10 +34,12 @@ function Register(props) {
     password: "",
     full_name: "",
     company_name: "",
-    step: 1,
+    step: 3,
     code: "",
+    city: "",
     location: "",
     address: "",
+    state: "",
   });
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
