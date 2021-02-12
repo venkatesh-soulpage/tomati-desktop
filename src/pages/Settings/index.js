@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { getUser, updateUser } from "_actions/auth";
 import { useFormik } from "formik";
+import { CameraFill } from "react-bootstrap-icons";
 // Router
 import { withRouter, Link } from "react-router-dom";
 const Index = (props) => {
@@ -112,7 +113,10 @@ const Index = (props) => {
             />
 
             <button className="btn btn-outline-dark ml-5 mr-5">
-              <label for="profileImage">Add New</label>
+              <label for="profileImage">
+                <CameraFill className="mr-3" />
+                {"  "} Add New
+              </label>
             </button>
             <Form.Group>
               <Form.File

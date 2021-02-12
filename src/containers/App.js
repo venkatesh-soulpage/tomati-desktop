@@ -32,6 +32,7 @@ import DashboardPage from "pages/dashboard/DashboardPage";
 // import ResetPasswordSuccess from "pages/static/ResetPasswordSuccess";
 
 function App(props) {
+  console.log(props);
   /**
    * Similar to componentDidMount and componentDidUpdate:
    * Checking for the user token availability and changing the isAuthenticated flag value.
