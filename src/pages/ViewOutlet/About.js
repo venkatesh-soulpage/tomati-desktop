@@ -13,6 +13,8 @@ const About = (props) => {
   const [values, setValues] = useState({
     name: outlet && outlet.name,
     description: outlet && outlet.description,
+    address: outlet && outlet.address,
+    phone_number: outlet && outlet.phone_number,
   });
 
   const handleChange = (e) => {
@@ -31,6 +33,7 @@ const About = (props) => {
     <div className="card bg-white border p-5 mt-2">
       <div className="d-flex align-items-center">
         <div className="mr-auto">
+          <label>Outlet Name</label>
           <Form.Group>
             <Form.Control
               type="text"
@@ -40,14 +43,38 @@ const About = (props) => {
               onChange={handleChange}
             />
           </Form.Group>
+          <label>Phone Number</label>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              value={values.phone_number}
+              name="phone_number"
+              required
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <label>Outlet Description</label>
+
           <Form.Group>
             <Form.Control
               type="text"
               as="textarea"
               rows={3}
-              placeholder="FullName"
               name="description"
               value={values.description}
+              required
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <label>Outlet Address</label>
+
+          <Form.Group>
+            <Form.Control
+              type="text"
+              as="textarea"
+              rows={3}
+              name="address"
+              value={values.address}
               required
               onChange={handleChange}
             />

@@ -173,14 +173,14 @@ const Table = ({ period, setPeriod }) => {
               </div>
 
               <div
-                className="col-12 d-flex flex-column align-items-center justify-content-center text-white"
+                className="col-12 d-flex flex-column justify-content-top mt-1 align-items-center text-white"
                 style={{ height: "136px" }}
               >
                 <p style={Style3}>Free</p>
 
                 <Link to="/register" style={{ textDecoration: "none" }}>
                   <Button
-                    className="mt-2"
+                    className="mt-1"
                     variant="outline"
                     style={ButtonStyle3}
                     onClick={() => {}}
@@ -272,7 +272,7 @@ const Table = ({ period, setPeriod }) => {
               </div>
 
               <div
-                className="col-12 d-flex flex-column justify-content-center align-items-center text-white"
+                className="col-12 d-flex flex-column justify-content-top mt-1 align-items-center text-white"
                 style={{ height: "136px" }}
               >
                 {period === "monthly" ? (
