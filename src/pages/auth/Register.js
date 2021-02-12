@@ -36,8 +36,10 @@ function Register(props) {
     company_name: "",
     step: 3,
     code: "",
+    city: "",
     location: "",
     address: "",
+    state: "",
   });
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
