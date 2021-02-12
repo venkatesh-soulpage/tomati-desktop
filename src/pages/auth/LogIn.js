@@ -27,6 +27,7 @@ function LogIn(props) {
     email: "",
     password: "",
     userLoginResponse: {},
+    hidden: true,
   });
 
   React.useEffect(function () {
@@ -41,6 +42,10 @@ function LogIn(props) {
     setValues((values) => ({ ...values, [name]: value }));
   };
 
+  function handlePasswordToggle(event) {
+    event.preventDefault();
+    setValues({ ...values, hidden: !values.hidden });
+  }
   // Handling the login data and sending it to the service.
   function handleLoginData(event) {
     event.preventDefault();
@@ -113,7 +118,26 @@ function LogIn(props) {
                       value={values.password}
                       onChange={handleChange("password")}
                       placeholder="Password"
+                      type={values.hidden ? "password" : "text"}
                     />
+                    <div className="input-group-append">
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          width: "60px",
+                          border: "1px solid #ced4da",
+                          borderTopRightRadius: "5px",
+                          borderBottomRightRadius: "5px",
+                          backgroundColor: "transparent",
+                          cursor: "pointer",
+                        }}
+                        onClick={handlePasswordToggle}
+                      >
+                        <small>{values.hidden ? "Show" : "Hide"}</small>
+                      </div>
+                    </div>
                   </InputGroup>
                 </Form.Group>
                 <Form.Group className="d-flex justify-content-between mt-4">
