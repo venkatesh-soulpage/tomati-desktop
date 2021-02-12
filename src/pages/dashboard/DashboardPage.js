@@ -16,6 +16,7 @@ import { withRouter, Link } from "react-router-dom";
 
 function DashboardPage(props) {
   useEffect(() => {
+    window.scroll(0, 0);
     props.dispatch(getUser());
   }, []);
 
