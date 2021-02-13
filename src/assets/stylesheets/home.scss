@@ -27,3 +27,21 @@
   font-size: 15px;
   line-height: 1.4;
 }
+
+.zoom {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.zoom img {
+  transition: transform 0.5s ease;
+  height: 400px;
+}
+
+.zoom:hover img {
+  -ms-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+}

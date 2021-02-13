@@ -77,14 +77,18 @@ function MainSection() {
             <Card style={{ minHeight: "", borderRadius: "15px" }}>
               <Card.Body className="p-0">
                 <div
-                  style={{
-                    backgroundImage: `url('${CardBackground}')`,
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    height: "100%",
-                    borderRadius: "15px",
-                  }}
-                ></div>
+                  className="zoom"
+                  // style={{
+                  //   backgroundImage: `url('${CardBackground}')`,
+                  //   backgroundPosition: "center",
+                  //   backgroundSize: "cover",
+                  //   height: "100%",
+                  //   borderRadius: "15px",
+                  //   transition: transform .2s;
+                  // }}
+                >
+                  <img src={CardBackground} alt="background" />
+                </div>
               </Card.Body>
             </Card>
           </CardDeck>
