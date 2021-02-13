@@ -11,26 +11,21 @@ import {
   userLogin,
   getPlansRequest,
   getLocationRegister,
+  postDiscountValue,
+  resetMessage,
 } from "_actions/auth";
-import _ from "lodash";
+import _, { values } from "lodash";
 
 // Router imports
 import { Redirect, withRouter } from "react-router-dom";
 
 function Index(props) {
-  const [id, setId] = React.useState(null);
-  const [price, setPrice] = React.useState(0);
+  const [error, setError] = React.useState(false);
+  const [activePlan, setActivePlan] = React.useState(null);
+  const [userValues, setUserValues] = React.useState({});
   const [hide, setHide] = React.useState(false);
   const [show, setShow] = React.useState(false);
-  const [no_of_outlets, setOutlet] = React.useState(1);
-  const [no_of_qrcodes, setQrcodes] = React.useState(1);
-  const [outletaddonprice, setOutletaddonprice] = React.useState(0);
-  const [qraddonprice, setQraddonprice] = React.useState(0);
-  const [ioutletaddonprice, setIOutletaddonprice] = React.useState(0);
-  const [iqraddonprice, setIQraddonprice] = React.useState(0);
-  const [ioutlet, setIOutlet] = React.useState(0);
-  const [iqr, setIQr] = React.useState(0);
-  const [error, setError] = React.useState(false);
+  const [discountValue, setDiscountValue] = React.useState(undefined);
   const {
     address,
     company_name,
@@ -47,70 +42,76 @@ function Index(props) {
     props.dispatch(getPlansRequest());
     props.dispatch(getLocationRegister());
   }, []);
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    const id = e.target.value;
-    setId(id);
-    let cost = props?.auth?.plans?.filter((item) => {
-      if (item.id == id) {
-        return item;
-      }
-    });
-    setPrice(cost[0].price);
-    setQrcodes(cost[0].no_of_qr_tags);
-    setOutlet(cost[0].no_of_outlets);
-    setOutletaddonprice(cost[0].outlet_addon_price);
-    setQraddonprice(cost[0].qr_tags_addon_price);
-    setIOutletaddonprice(cost[0].no_of_outlets);
-    setIQraddonprice(cost[0].no_of_qr_tags);
-    setIOutlet(cost[0].no_of_outlets);
-    setIQr(cost[0].no_of_qr_tags);
+  React.useEffect(
+    function () {
+      if (props.auth.plans?.length > 0) setActivePlan(props.auth.plans[0]);
+    },
+    [props.auth.plans]
+  );
+
+  const handleActivePlan = (e) => {
+    const active_plan = _.filter(props.auth.plans, [
+      "id",
+      parseInt(e.target.value),
+    ]);
+    active_plan && setActivePlan(active_plan[0]);
+    setUserValues({});
   };
 
-  const handleOutlet = (val) => {
-    if (val) {
-      setOutlet(no_of_outlets + 1);
+  const handleOutlet = (action) => (event) => {
+    if (action === "plus") {
+      if ("outletaddons" in userValues) {
+        setUserValues((values) => {
+          return { ...values, outletaddons: userValues.outletaddons + 1 };
+        });
+      } else {
+        setUserValues((values) => {
+          return { ...values, outletaddons: activePlan.outlet_limit + 1 };
+        });
+      }
     } else {
-      if (no_of_outlets !== ioutlet) {
-        setOutlet(no_of_outlets - 1);
+      if ("outletaddons" in userValues) {
+        if (userValues.outletaddons > activePlan.outlet_limit) {
+          setUserValues((values) => {
+            return {
+              ...values,
+              outletaddons: userValues.outletaddons - 1,
+            };
+          });
+        }
       }
     }
   };
-  const handleQrCode = (val) => {
-    if (val) {
-      setQrcodes(no_of_qrcodes + 1);
+  const handleQr = (action) => (event) => {
+    if (action === "plus") {
+      if ("qraddons" in userValues) {
+        setUserValues((values) => {
+          return {
+            ...values,
+            qraddons: userValues.qraddons + 1,
+          };
+        });
+      } else {
+        setUserValues((values) => {
+          return {
+            ...values,
+            qraddons: activePlan.qr_tags_limit + 1,
+          };
+        });
+      }
     } else {
-      if (no_of_qrcodes !== iqr) {
-        setQrcodes(no_of_qrcodes - 1);
+      if ("qraddons" in userValues) {
+        if (userValues.qraddons > activePlan.qr_tags_limit) {
+          setUserValues((values) => {
+            return {
+              ...values,
+              qraddons: userValues.qraddons - 1,
+            };
+          });
+        }
       }
     }
   };
-  const handlePayment = () => {
-    props
-      .dispatch(
-        userRegistration({
-          full_name: full_name,
-          company_name: company_name,
-          email: email,
-          password_hash: password,
-          plan_id: id,
-          location_id: location,
-        })
-      )
-      .then((response) => {
-        setShow(true);
-        console.log("response\n", response);
-      })
-      .catch((error) => {
-        console.log("error\n", error);
-      });
-    console.log("Missing Forms");
-    // }
-  };
-  let outletTotal = outletaddonprice * (no_of_outlets - ioutletaddonprice);
-  let qrTotal = qraddonprice * (no_of_qrcodes - iqraddonprice);
-  let Tax = 0;
-  let Total = outletTotal + qrTotal + price - Tax;
 
   const handleLoginData = () => {
     const { email, password } = props.location.state.values;
@@ -139,7 +140,63 @@ function Index(props) {
   const selected_state =
     country.length > 0 &&
     _.filter(country[0].childrens, ["id", parseInt(state)]);
+  let outletPrice = 0;
 
+  if ("outletaddons" in userValues) {
+    const { outlet_addon_price, outlet_limit } = activePlan;
+    outletPrice = outlet_addon_price * (userValues.outletaddons - outlet_limit);
+  }
+  let qrPrice = 0;
+  if ("qraddons" in userValues) {
+    const { qr_tags_addon_price, qr_tags_limit } = activePlan;
+    qrPrice = qr_tags_addon_price * (userValues.qraddons - qr_tags_limit);
+  }
+  let discount_value = 0;
+  let subTotal = parseFloat(activePlan.price) + outletPrice + qrPrice;
+
+  if (props.auth.discountVal) {
+    discount_value =
+      parseInt(props.auth.discountVal?.discount_value) * subTotal * 0.01;
+    discount_value = discount_value.toFixed(2);
+    subTotal -=
+      parseInt(props.auth.discountVal?.discount_value) * subTotal * 0.01;
+  }
+  let tax = subTotal * 0.075;
+  tax = parseFloat(tax.toFixed(2));
+  let total = subTotal + tax;
+  const handlePayment = () => {
+    console.log("payment uservalues\n ", userValues);
+    props
+      .dispatch(
+        userRegistration({
+          full_name: full_name,
+          company_name: company_name,
+          email: email,
+          password_hash: password,
+          plan_id: activePlan.id,
+          location_id: location,
+
+          state: selected_state && selected_state[0].name,
+          city: city,
+          street: address,
+          no_of_outlets:
+            "outletaddons" in userValues
+              ? userValues?.outletaddons
+              : activePlan?.outlet_limit,
+          no_of_qrcodes:
+            "qraddons" in userValues
+              ? userValues?.qraddons
+              : activePlan?.qr_tags_limit,
+        })
+      )
+      .then((response) => {
+        setShow(true);
+        console.log("response for payment\n", response);
+      })
+      .catch((error) => {
+        console.log("error\n", error);
+      });
+  };
   return (
     <div className="container mt-5 mb-5 pt-5">
       <div className="row">
@@ -258,8 +315,7 @@ function Index(props) {
                       </small>
                     </div>
                   ) : null}
-
-                  {Total > 0 ? (
+                  {total > 0 ? (
                     <button
                       type="button"
                       onClick={() => {
@@ -273,12 +329,7 @@ function Index(props) {
                     <button
                       type="button"
                       onClick={() => {
-                        if (!id) {
-                          setError(true);
-                          console.log("PLEASE SELECT THE PLAN");
-                        } else {
-                          handlePayment();
-                        }
+                        handlePayment();
                       }}
                       className="btn btn-danger btn-lg rounded-pill mt-3 px-5"
                     >
@@ -296,8 +347,8 @@ function Index(props) {
 
             <p>Plan</p>
 
-            <select onChange={handleChange} className="form-control pl-3">
-              <option value="">Select Plan</option>
+            <select onChange={handleActivePlan} className="form-control pl-3">
+              {/* <option value="">Select Plan</option> */}
               {props?.auth?.plans?.map((plan) => (
                 <option value={plan.id}>{plan.plan}</option>
               ))}
@@ -326,7 +377,9 @@ function Index(props) {
                       style={{ borderRight: "1px solid #C3CAD8" }}
                     >
                       <h6 className="font-weight-normal m-0 mt-1 text-center">
-                        {no_of_outlets}
+                        {"outletaddons" in userValues
+                          ? userValues?.outletaddons
+                          : activePlan?.outlet_limit}
                       </h6>
                     </div>
 
@@ -335,14 +388,14 @@ function Index(props) {
                       style={{ borderRight: "1px solid #C3CAD8" }}
                     >
                       <Dash
-                        onClick={() => handleOutlet(false)}
+                        onClick={handleOutlet("minus")}
                         style={{ cursor: "pointer" }}
                       />
                     </div>
 
                     <div className="col-3 p-2 text-center">
                       <Plus
-                        onClick={() => handleOutlet(true)}
+                        onClick={handleOutlet("plus")}
                         style={{ cursor: "pointer" }}
                       />
                     </div>
@@ -357,7 +410,7 @@ function Index(props) {
                         fontWeight: "bold",
                       }}
                     >
-                      ₦ {outletTotal}
+                      ₦ {outletPrice}
                     </small>
                   </h6>
                 </div>
@@ -388,7 +441,9 @@ function Index(props) {
                       style={{ borderRight: "1px solid #C3CAD8" }}
                     >
                       <h6 className="font-weight-normal text-center m-0 mt-1">
-                        {no_of_qrcodes}
+                        {"qraddons" in userValues
+                          ? userValues?.qraddons
+                          : activePlan?.qr_tags_limit}
                       </h6>
                     </div>
 
@@ -397,14 +452,14 @@ function Index(props) {
                       style={{ borderRight: "1px solid #C3CAD8" }}
                     >
                       <Dash
-                        onClick={() => handleQrCode(false)}
+                        onClick={handleQr("minus")}
                         style={{ cursor: "pointer" }}
                       />
                     </div>
 
                     <div className="col-3 p-2 text-center">
                       <Plus
-                        onClick={() => handleQrCode(true)}
+                        onClick={handleQr("plus")}
                         style={{ cursor: "pointer" }}
                       />
                     </div>
@@ -420,7 +475,7 @@ function Index(props) {
                         fontWeight: "bold",
                       }}
                     >
-                      ₦ {qrTotal}
+                      ₦ {qrPrice}
                     </small>
                   </h6>
                 </div>
@@ -431,17 +486,38 @@ function Index(props) {
                 <Form.Control
                   type="text"
                   placeholder="Discount code                        Optional"
-                  value={""}
-                  onChange={() => {}}
+                  value={discountValue}
+                  onChange={(e) => {
+                    setDiscountValue(e.target.value);
+                  }}
+                  onBlur={() => {
+                    props.dispatch(
+                      postDiscountValue({ discount_code: discountValue })
+                    );
+                    props.dispatch(resetMessage());
+                  }}
                 />
               </Form.Group>
-              {false ? (
+              {props.auth.discountVal ? (
                 <Form.Group
-                  className="d-flex flex-row justify-content-between"
+                  className="d-flex flex-row justify-content-between align-text-center my-3 "
                   style={{ background: "#F5F6F9" }}
                 >
-                  <p style={{ fontSize: "12px" }}>Discount value applied</p>
-                  <p style={{ fontSize: "12px" }}>₦ 0</p>
+                  <p style={{ fontSize: "14px", fontWeight: "400", margin: 0 }}>
+                    Discount value applied
+                  </p>
+                  <p style={{ fontSize: "14px", margin: 0 }}>
+                    ₦ {discount_value}
+                  </p>
+                </Form.Group>
+              ) : props?.auth?.discountValError ? (
+                <Form.Group
+                  className="d-flex flex-row justify-content-between align-items-center my-3"
+                  style={{ background: "#F5F6F9" }}
+                >
+                  <p style={{ fontSize: "14px", color: "#E0475B", margin: 0 }}>
+                    Invalid Discount Code
+                  </p>
                 </Form.Group>
               ) : null}
             </div>
@@ -456,7 +532,7 @@ function Index(props) {
                       fontWeight: "bold",
                     }}
                   >
-                    ₦{outletTotal + qrTotal}
+                    ₦ {subTotal}
                   </small>
                 </small>
               </h6>
@@ -466,7 +542,7 @@ function Index(props) {
                 <small style={{ fontSize: "16px" }}>
                   Tax:{" "}
                   <small style={{ color: "#2C3A56", fontWeight: "bold" }}>
-                    ₦{Tax}
+                    ₦ {tax}
                   </small>{" "}
                 </small>
               </h6>
@@ -482,7 +558,7 @@ function Index(props) {
                       fontWeight: "bold",
                     }}
                   >
-                    ₦{Total}
+                    ₦ {total}
                   </small>
                 </small>
               </h6>
