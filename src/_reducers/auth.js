@@ -23,6 +23,8 @@ var initialState = {
   user: null,
   plans: null,
   plansError: null,
+  discountVal: null,
+  discountValError: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -67,6 +69,8 @@ export default function authReducer(state = initialState, action) {
         ...state,
         verifySuccess: action.payload,
         verifyError: action.payload,
+        discountVal: action.payload,
+        discountValError: action.payload,
       };
     case ActionTypes.GET_LOCATION_SUCCESS:
       return {
@@ -87,6 +91,16 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         plansError: action.payload,
+      };
+    case ActionTypes.GET_DISCOUNT_VALUE_SUCCESS:
+      return {
+        ...state,
+        discountVal: action.payload,
+      };
+    case ActionTypes.GET_DISCOUNT_VALUE_ERROR:
+      return {
+        ...state,
+        discountValError: action.payload,
       };
     case ActionTypes.HANDLE_REGISTER_ERROR:
       return {

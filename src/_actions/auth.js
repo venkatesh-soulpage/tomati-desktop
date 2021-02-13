@@ -99,6 +99,35 @@ export function getPlansError(error) {
     payload: error,
   };
 }
+
+/**
+ * get discount
+ * @param {*}
+ */
+export function postDiscountValue(postData) {
+  return function (dispatch) {
+    return AuthService.getDiscount(postData)
+      .then((responseData) => {
+        dispatch(getDiscountValueSuccess(responseData));
+        return responseData;
+      })
+      .catch((errorData) => {
+        dispatch(getDiscountValueError(errorData));
+      });
+  };
+}
+export function getDiscountValueSuccess(responseData) {
+  return {
+    type: ActionTypes.GET_DISCOUNT_VALUE_SUCCESS,
+    payload: responseData,
+  };
+}
+export function getDiscountValueError(error) {
+  return {
+    type: ActionTypes.GET_DISCOUNT_VALUE_ERROR,
+    payload: error,
+  };
+}
 /**
  * User Registration Failed Response
  * @param {*} error

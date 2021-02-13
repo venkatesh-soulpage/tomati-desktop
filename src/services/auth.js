@@ -77,6 +77,16 @@ class AuthAPI {
         throw error.response.data;
       });
   }
+  static getDiscount(postData) {
+    return axios
+      .post(APIRoutes.GET_DISCOUNT, postData)
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+        throw error.response.data;
+      });
+  }
   static validateAuthToken() {
     return axios
       .get(APIRoutes.AUTH_TOKEN_VALIDATION)
