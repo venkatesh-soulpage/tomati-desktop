@@ -4,7 +4,7 @@ import React from "react";
 import { Card, CardDeck, Button } from "react-bootstrap";
 
 // assets
-import CardImage from "assets/img/CardImage.svg";
+import CardBackground from "assets/img/CardBackground.jpg";
 
 // react-router
 import { Link } from "react-router-dom";
@@ -22,8 +22,8 @@ function MainSection() {
       className="my-5"
     >
       <Card.Body>
-        <div className="container text-center mt-5 ">
-          <h3 className="w-50 mb-5 p-2 mx-auto" style={{ fontSize: "30px" }}>
+        <div className="container text-center mt-4 ">
+          <h3 className="w-75 mb-5 p-2 mx-auto" style={{ fontSize: "30px" }}>
             Get 10 premium QR table tags for free when you upgrade to our growth
             plan
           </h3>
@@ -34,11 +34,8 @@ function MainSection() {
                 <div style={{ minHeight: "250px" }}>
                   <h4 className="my-4 p-3">For Outlet Managers</h4>
                   <p className="custom-font mt-3 p-3 mb-5 font-weight-light">
-                    who want to reduce manpower
-                    <br /> cost and make the dine in
-                    <br />
-                    experience safer for guests with <br /> contactless menus
-                    and <br />
+                    who want to reduce manpower cost and make the dine in
+                    experience safer for guests with contactless menus and
                     payment.
                   </p>
                 </div>
@@ -60,8 +57,8 @@ function MainSection() {
                   <h4 className="my-4 p-3">For Event Managers</h4>
                   <p className="custom-font mt-3 p-3 mb-5 font-weight-light">
                     The easiest way to handle food or beverage orders and
-                    payments. 100% contactless
-                    <br /> Auto-reconciliation <br /> Reports and analytics.
+                    payments. 100% contactless Auto-reconciliation Reports and
+                    analytics.
                   </p>
                 </div>
                 <Link to="/register" style={{ textDecoration: "none" }}>
@@ -81,7 +78,7 @@ function MainSection() {
               <Card.Body className="p-0">
                 <div
                   style={{
-                    backgroundImage: `url('${CardImage}')`,
+                    backgroundImage: `url('${CardBackground}')`,
                     backgroundPosition: "center",
                     backgroundSize: "cover",
                     height: "100%",

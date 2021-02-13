@@ -5,10 +5,14 @@ import { withRouter, Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 import Success from "assets/img/Success.svg";
 import { values } from "lodash";
+import moment from "moment";
+import { GeoAltFill } from "react-bootstrap-icons";
 
 const Index = (props) => {
   const [search, setSearch] = useState("");
   const [error, setError] = useState(false);
+  var date = new Date();
+  var currentMonth = date.getMonth();
 
   useEffect(() => {
     props.dispatch(userEvents());
@@ -25,9 +29,13 @@ const Index = (props) => {
     });
 
   const handleAddEvent = () => {
-    console.log(auth.user.plan.event_limit);
+    const eventsPerMonth = event.events.filter((event) => {
+      if (moment(event.created_at).month() === currentMonth) {
+        return event;
+      }
+    });
 
-    if (auth.user.plan[0].event_limit === event.events.length) {
+    if (auth.user.plan[0].event_limit === eventsPerMonth.length) {
       setError(true);
     } else {
       props.history.push("/dashboard/addevent");
@@ -45,7 +53,9 @@ const Index = (props) => {
           <h4 className="lead m-0">Total Events: {event?.events.length}</h4>
         </div>
         <div className=" mr-3">
-          <button className="btn btn-dark btn-sm">Premium/Monthly</button>
+          <button className="btn btn-dark btn-sm">
+            {auth?.user?.plan[0]?.plan}
+          </button>
         </div>
         <div className="">
           <Link
@@ -107,13 +117,16 @@ const Index = (props) => {
           return (
             <div
               key={id}
-              className="card px-4 py-3  mt-3"
+              className="card px-4 py-4  mt-3"
               style={{ borderRadius: 6 }}
             >
               <div className="d-flex align-items-center">
                 <div>
                   <h6 className="m-0 font-weight-bold">{event.name}</h6>
-                  <p className="m-0 text-dark">{event.address}</p>
+                  <p className="m-0 mt-2  text-dark">
+                    <GeoAltFill className="mr-2" />
+                    {event.address}
+                  </p>
                 </div>
                 <div className="ml-auto mr-3">
                   <Link
