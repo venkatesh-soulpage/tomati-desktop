@@ -24,7 +24,7 @@ const Index = (props) => {
     cover_image: null,
     description: null,
     showVenueModal: false,
-    menu: [],
+    menu: null,
     inviteModal: false,
     owner_email: null,
     display_name: null,
@@ -54,6 +54,10 @@ const Index = (props) => {
 
   const handleStep = (values) => {
     setValues((values) => ({ ...values, step: values.step + 1 }));
+  };
+
+  const handleStepPrev = (values) => {
+    setValues((values) => ({ ...values, step: values.step - 1 }));
   };
 
   console.log(values);
@@ -104,9 +108,9 @@ const Index = (props) => {
     fontWeight: "600",
   };
   return (
-    <div className="bg-light container-fluid py-5">
+    <div className="bg-light container-fluid py-1">
       <div className="container">
-        <Card className="p-5 w-50 mt-5 mx-auto">
+        <Card className="p-5 w-75 mt-0 mx-auto">
           {step === 1 ? (
             <>
               <div style={HeaderText} className="text-start form-legend pb-5">
@@ -158,6 +162,7 @@ const Index = (props) => {
                   setValues={setValues}
                   handleStep={handleStep}
                   handleCreateOutlet={handleCreateOutlet}
+                  handleStepPrev={handleStepPrev}
                 />
               </Form>
             </>
@@ -185,6 +190,7 @@ const Index = (props) => {
                   setValues={setValues}
                   handleStep={handleStep}
                   handleCreateOutlet={handleCreateOutlet}
+                  handleStepPrev={handleStepPrev}
                 />
               </Form>
             </>

@@ -16,7 +16,7 @@ const Index = (props) => {
     name: "",
     cover_image: null,
     logo_img: null,
-    menu: [],
+    menu: null,
     plan: 1,
     location_id: null,
     phone_number: null,
@@ -48,6 +48,10 @@ const Index = (props) => {
 
   const handleStep = (values) => {
     setValues((values) => ({ ...values, step: values.step + 1 }));
+  };
+
+  const handleStepPrev = (values) => {
+    setValues((values) => ({ ...values, step: values.step - 1 }));
   };
 
   console.log(values);
@@ -159,6 +163,7 @@ const Index = (props) => {
                       setValues={setValues}
                       handleStep={handleStep}
                       handleCreateOutlet={handleCreateOutlet}
+                      handleStepPrev={handleStepPrev}
                       props={props}
                     />
                   </Form>

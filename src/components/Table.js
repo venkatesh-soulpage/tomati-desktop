@@ -36,7 +36,7 @@ const Table = ({ period, setPeriod }) => {
   const TableStyle = {
     border: "2px solid #2C3A56",
     borderRadius: "15px",
-    marginTop: "90px",
+    marginTop: "42px",
   };
 
   const Style1 = { fontWeight: "600", fontSize: "24px", marginLeft: "10px" };
