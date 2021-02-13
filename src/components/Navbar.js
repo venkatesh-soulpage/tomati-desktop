@@ -28,7 +28,7 @@ function Navigation(props) {
     >
       <Container>
         <Navbar expand="md">
-          <Navbar.Brand href="/">
+          <Navbar.Brand href={props.auth.isAuthenticated ? "/dashboard" : "/"}>
             <img
               src={Logo}
               className="d-inline-block align-top"

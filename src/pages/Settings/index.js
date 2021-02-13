@@ -153,7 +153,7 @@ const Index = (props) => {
                   const url = await fileToBase64(e.target.files[0]);
                   props.dispatch(
                     updateUser({
-                      profile_img: { name, data: url },
+                      profile_image: { name, data: url },
                     })
                   );
                 }}
@@ -169,40 +169,6 @@ const Index = (props) => {
           </h4>
           {show ? (
             <div>
-              {/* <Form.Group>
-                <InputGroup>
-                  <InputGroup.Prepend>
-                    <InputGroup.Text className="bg-white border-right-0">
-                      <img src={Lock} className="img-fluid" width="12" />
-                    </InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <Form.Control
-                    className="border-left-0"
-                    name="password"
-                    onChange={handleChange("password")}
-                    placeholder="Password"
-                    type={values.hidden ? "password" : "text"}
-                  />
-                  <div className="input-group-append">
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "60px",
-                        border: "1px solid #ced4da",
-                        borderTopRightRadius: "5px",
-                        borderBottomRightRadius: "5px",
-                        backgroundColor: "transparent",
-                        cursor: "pointer",
-                      }}
-                      onClick={handlePasswordToggle}
-                    >
-                      <small>{values.hidden ? "Show" : "Hide"}</small>
-                    </div>
-                  </div>
-                </InputGroup>
-              </Form.Group> */}
               <Form.Group>
                 <InputGroup style={{ width: "50%" }}>
                   <Form.Control
