@@ -54,6 +54,13 @@ const Table = ({ period, setPeriod }) => {
 
   const Style5 = { borderBottom: "1px solid #A9A9A9", height: "50px" };
 
+  const Style6 = {
+    fontWeight: "medium",
+    fontSize: "16px",
+    marginLeft: "0px",
+    marginBottom: "0px",
+  };
+
   return (
     <div className="row mx-auto w-75">
       <div className="col-12 mx-auto" style={TableStyle}>
@@ -172,18 +179,17 @@ const Table = ({ period, setPeriod }) => {
               </div>
 
               <div
-                className="col-12 d-flex flex-column justify-content-top mt-1 align-items-center text-white"
+                className="col-12 d-flex flex-column justify-content-center mt-1 align-items-center text-white"
                 style={{ height: "136px" }}
               >
-                <p style={Style3}>Free</p>
-
                 <Link to="/register" style={{ textDecoration: "none" }}>
                   <Button
-                    className="mt-5 rounded-pill"
+                    className="mt-2 rounded-pill px-4 d-flex flex-column align-items-center "
                     variant="light"
                     onClick={() => {}}
                   >
                     Choose Plan
+                    <p style={Style6}>Free</p>
                   </Button>
                 </Link>
               </div>
@@ -267,24 +273,24 @@ const Table = ({ period, setPeriod }) => {
               </div>
 
               <div
-                className="col-12 d-flex flex-column justify-content-top mt-1 align-items-center text-white"
+                className="col-12 d-flex flex-column justify-content-center mt-1 align-items-center text-white"
                 style={{ height: "136px" }}
               >
-                {period === "monthly" ? (
-                  <h6 className="mt-1" style={Style3}>
-                    $39
-                  </h6>
-                ) : (
-                  <h6 style={Style3}>$374</h6>
-                )}
                 <Link to="/register" style={{ textDecoration: "none" }}>
                   {" "}
                   <Button
-                    className="mt-5 rounded-pill"
+                    className="mt-2 rounded-pill px-4 d-flex flex-column align-items-center"
                     variant="dark"
                     onClick={() => {}}
                   >
                     Choose Plan
+                    {period === "monthly" ? (
+                      <h6 className="mt-1" style={Style6}>
+                        $39
+                      </h6>
+                    ) : (
+                      <h6 style={Style6}>$374</h6>
+                    )}
                   </Button>
                 </Link>
               </div>
@@ -357,19 +363,26 @@ const Table = ({ period, setPeriod }) => {
               </div>
 
               <div
-                className="col-12 d-flex flex-column align-items-center justify-content-center text-white"
+                className="col-12 d-flex flex-column justify-content-center mt-4 align-items-center text-white"
                 style={{ height: "136px" }}
               >
-                {period === "monthly" ? (
-                  <h6 className="mt-1" style={Style3}>
-                    $79
-                  </h6>
-                ) : (
-                  <h6 style={Style3}>$758</h6>
-                )}
-                <Button className="mt-2 rounded-pill" variant="light">
-                  Choose Plan
-                </Button>
+                <Link to="/register" style={{ textDecoration: "none" }}>
+                  {" "}
+                  <Button
+                    className="mt-2 rounded-pill px-4 d-flex flex-column align-items-center"
+                    variant="light"
+                    onClick={() => {}}
+                  >
+                    Choose Plan
+                    {period === "monthly" ? (
+                      <h6 className="mt-1" style={Style6}>
+                        $79
+                      </h6>
+                    ) : (
+                      <h6 style={Style6}>$758</h6>
+                    )}
+                  </Button>
+                </Link>
                 <p className="text-center">
                   <a
                     style={{
@@ -380,13 +393,8 @@ const Table = ({ period, setPeriod }) => {
                     href="mailto:hello@tomati.app"
                     target="_top_blank"
                   >
-                    Need a custom plan?
-                    <Button
-                      className="rounded-pill px-4"
-                      style={{ background: "#c83f51" }}
-                    >
-                      Contact
-                    </Button>
+                    Need a custom plan?&nbsp;
+                    <u className="rounded-pill px-0 mt-0 pt-0 ">Contact</u>
                   </a>
                 </p>
               </div>
