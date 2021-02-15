@@ -42,6 +42,27 @@ const Index = (props) => {
     }
   };
 
+  const handleSortByDate = (e) => {
+    console.log(e.target.value);
+    const val = e.target.value;
+    if (val === "date") {
+      var sortByDate =
+        event &&
+        event.events.sort((a, b) => {
+          return (
+            new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+          );
+        });
+
+      console.log(sortByDate);
+      filteredEvents = sortByDate;
+      console.log(filteredEvents);
+      return filteredEvents;
+    }
+    return filteredEvents;
+  };
+  console.log(filteredEvents, "filtered Events By data");
+
   return (
     <div className="pt-0 pr-3 pl-4 pb-3">
       {/* stats */}
@@ -90,8 +111,9 @@ const Index = (props) => {
             </button>
           </div>
           <div className="ml-auto mr-3">
-            <select class="form-control">
+            <select class="form-control" onChange={handleSortByDate}>
               <option>Sort By</option>
+              {/* <option value="date">By Date</option> */}
             </select>
           </div>
           <div>
