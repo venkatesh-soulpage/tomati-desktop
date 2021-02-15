@@ -458,9 +458,9 @@ const Features = () => {
 
         <Table period={period} setPeriod={setPeriod} />
 
-        <div className="d-block d-lg-none">
+        {/* <div className="d-block d-lg-none">
           <SmallTable />
-        </div>
+        </div> */}
       </div>
     </div>
   );

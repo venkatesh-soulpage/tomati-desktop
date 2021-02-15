@@ -134,10 +134,10 @@ function Register(props) {
   const { step } = values;
   console.log("props\n", props);
   return (
-    <div className="bg-light container-fluid py-5">
-      <div className="container">
+    <div className="bg-light container-fluid py-md-5 p-0 px-md-4">
+      <div className="container px-md-5 p-0">
         <Card
-          className="p-5 w-50 mt-5 mx-auto"
+          className="p-5 register-card mt-5 mx-auto card"
           style={{ borderRadius: "12px" }}
         >
           {step === 1 ? (
@@ -165,6 +165,10 @@ function Register(props) {
                   props={props}
                 />
               </Form>
+              <div className="w-100 d-md-none mx-auto mt-4 text-center">
+                <ProgressBar now={step * 33} variant="primary" />
+                <small>Step {step}/3</small>
+              </div>
             </>
           ) : step === 2 ? (
             <>
@@ -192,6 +196,10 @@ function Register(props) {
                   getEmailRegisterOtp={getEmailRegisterOtp}
                 />
               </Form>
+              <div className="w-100 d-md-none mx-auto mt-4 text-center">
+                <ProgressBar now={step * 33} variant="primary" />
+                <small>Step {step}/3</small>
+              </div>
             </>
           ) : step === 3 ? (
             <>
@@ -221,10 +229,14 @@ function Register(props) {
                   handleClose={handleClose}
                 />
               </Form>
+              <div className="w-100 d-md-none mx-auto mt-4 text-center">
+                <ProgressBar now={step * 33} variant="primary" />
+                <small>Step {step}/3</small>
+              </div>
             </>
           ) : null}
         </Card>
-        <div className="w-25 mx-auto mt-4 text-center">
+        <div className="w-25 d-none d-md-block mx-auto mt-4 text-center">
           <ProgressBar now={step * 33} variant="primary" />
           <small>Step {step}/3</small>
         </div>

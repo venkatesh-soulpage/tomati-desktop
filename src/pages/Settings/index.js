@@ -177,7 +177,7 @@ const Index = (props) => {
                     value={values.old_password}
                     onChange={handleChange("old_password")}
                     required
-                    style={{ width: "50%" }}
+                    style={{ width: "50%", borderRight: "none" }}
                   />
                   <div className="input-group-append">
                     <div
@@ -207,7 +207,7 @@ const Index = (props) => {
                     value={values.new_password}
                     onChange={handleChange("new_password")}
                     required
-                    style={{ width: "50%" }}
+                    style={{ width: "50%", borderRight: "none" }}
                   />
                   <div className="input-group-append">
                     <div
