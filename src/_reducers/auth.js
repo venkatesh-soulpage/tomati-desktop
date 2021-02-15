@@ -39,15 +39,22 @@ export default function authReducer(state = initialState, action) {
         ...state,
         userDataError: action.payload,
       };
+    case ActionTypes.HANDLE_LOGIN_REQUEST:
+      return {
+        ...state,
+        isFetching: true,
+      };
     case ActionTypes.HANDLE_LOGIN_SUCCESS:
       return {
         ...state,
         loginSuccess: action.payload,
+        isFetching: false,
       };
     case ActionTypes.HANDLE_LOGIN_ERROR:
       return {
         ...state,
         loginError: action.payload,
+        isFetching: false,
       };
     case ActionTypes.HANDLE_EMAIL_SUCCESS:
       return {

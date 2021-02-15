@@ -152,7 +152,7 @@ function Index(props) {
     qrPrice = qr_tags_addon_price * (userValues.qraddons - qr_tags_limit);
   }
   let discount_value = 0;
-  let subTotal = parseFloat(activePlan.price) + outletPrice + qrPrice;
+  let subTotal = parseFloat(activePlan?.price) + outletPrice + qrPrice;
 
   if (props.auth.discountVal) {
     discount_value =
@@ -173,7 +173,7 @@ function Index(props) {
           company_name: company_name,
           email: email,
           password_hash: password,
-          plan_id: activePlan.id,
+          plan_id: activePlan?.id,
           location_id: location,
 
           state: selected_state && selected_state[0].name,
