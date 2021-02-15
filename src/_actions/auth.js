@@ -148,6 +148,7 @@ export function handleRegisterError(error) {
  */
 export function userLogin(postData) {
   return function (dispatch) {
+    dispatch(loginRequest());
     return AuthService.postLoginDetails(postData)
       .then((responseData) => {
         console.log(responseData);
@@ -169,6 +170,15 @@ export function userLogin(postData) {
       .catch((errorData) => {
         dispatch(handleLoginError(errorData));
       });
+  };
+}
+/**
+ * Login Request
+ * @param {*}
+ */
+export function loginRequest() {
+  return {
+    type: ActionTypes.HANDLE_LOGIN_REQUEST,
   };
 }
 /**
