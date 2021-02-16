@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
+// redux
+import { connect } from "react-redux";
+import { getUser } from "_actions/auth";
+// react-router
 import { Route, Switch } from "react-router-dom";
+// local components
 import SideDrawer from "../SideDrawer";
 import Outlet from "../Outlet";
 import Event from "../Event";
@@ -9,10 +14,8 @@ import AddOutlet from "../AddOutlet";
 import AddEvent from "../AddEvent";
 import Settings from "../Settings";
 
-import { connect } from "react-redux";
-import { getUser, updateUser } from "_actions/auth";
 // Router
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 function DashboardPage(props) {
   useEffect(() => {

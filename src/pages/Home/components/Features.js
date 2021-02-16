@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import Table from "components/Table";
+//bootstrap
 import { Button } from "react-bootstrap";
+// components
+import Table from "components/Table";
 
 const Features = () => {
   const [details, setDetails] = useState({ type: "Outlet", plan: null });
@@ -395,7 +397,7 @@ const Features = () => {
       <div className="col-md-6 mx-auto" style={ToggleStyle2}>
         <div className="row">
           <div
-            className="col-6 p-3 text-center"
+            className="col-6 py-2 py-md-3 text-center"
             onClick={() => setPeriod("monthly")}
             style={
               period === "monthly"
@@ -415,11 +417,13 @@ const Features = () => {
                   }
             }
           >
-            <h5 className="font-weight-normal">Monthly</h5>
+            <h5 className="font-weight-normal m-0 hero-text-secondary">
+              Monthly
+            </h5>
           </div>
 
           <div
-            className="col-6 p-3 text-center"
+            className="col-6 py-2 py-md-3 text-center "
             style={
               period === "yearly"
                 ? {
@@ -439,28 +443,28 @@ const Features = () => {
             onClick={() => setPeriod("yearly")}
           >
             {" "}
-            <h5 className="font-weight-normal">Yearly</h5>
+            <h5 className="font-weight-normal m-0 hero-text-secondary">
+              Yearly
+            </h5>
           </div>
         </div>
       </div>
     </div>
   );
   return (
-    <div className="row mt-5 bg-white pb-5 mx-0" id="features">
-      <div className="col-10 offset-1 pb-1">
-        <h3
-          className="container pt-5 pb-0 m-auto text-center"
-          style={HeadingStyle}
-        >
+    <div className="row bg-white pb-5 mx-0" id="features">
+      <div className="col-10 offset-1 pb-1 pt-5">
+        <h3 className="container pt-5 pb-0 m-auto text-center faq-header">
           Our Plans
         </h3>
         <Toggle2 />
-
-        <Table period={period} setPeriod={setPeriod} />
-
-        <div className="d-block d-lg-none">
-          <SmallTable />
+        <div className="d-block ">
+          <Table period={period} setPeriod={setPeriod} />
         </div>
+
+        {/* <div className="d-block d-lg-none">
+          <SmallTable />
+        </div> */}
       </div>
     </div>
   );

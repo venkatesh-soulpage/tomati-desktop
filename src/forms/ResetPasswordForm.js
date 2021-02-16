@@ -29,17 +29,18 @@ function ResetPasswordForm(props) {
   const query = useQuery();
   function onFormSubmit(event) {
     event.preventDefault();
+    console.log("hitted", values);
     const email = query.get("email");
     const token = query.get("token");
+    var data = {
+      email,
+      token,
+      password: values.password,
+    };
     if (values.password === values.re_password) {
-      var data = {
-        email,
-        token,
-        password: values.password,
-      };
       console.log(data, "DATA");
-      props.dispatch(resetPassword(data));
     } else {
+      props.dispatch(resetPassword(data));
     }
   }
 
@@ -54,7 +55,7 @@ function ResetPasswordForm(props) {
           <div className="col-md-6 w-100 align-self-center">
             <h2 className="text-dark mb-0 text-center mb-4">Update Password</h2>
             <Card className="p-5 pb-3" style={{ borderRadius: "15px" }}>
-              <Form onSubmit={onFormSubmit}>
+              <Form>
                 <Form.Group>
                   <Form.Label>New Password</Form.Label>
                   <PasswordTextField
@@ -76,9 +77,9 @@ function ResetPasswordForm(props) {
                 <div className="text-right">
                   <Form.Group className="mt-3">
                     <Button
-                      type="submit"
                       variant="danger"
                       className="rounded-pill"
+                      onClick={onFormSubmit}
                     >
                       Update
                     </Button>{" "}

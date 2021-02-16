@@ -61,7 +61,7 @@ const EventSchedule = ({
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="commnents"
+          placeholder="Comments"
           value={values.comments}
           onChange={handleChange("comments")}
           required

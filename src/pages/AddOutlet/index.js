@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
+// redux
+import { connect } from "react-redux";
+import { addOutlet } from "_actions/outlet";
+// react router
+import { withRouter, Link } from "react-router-dom";
+// local components
 import OutletDetails from "./components/OutletDetails";
 import CreateMenu from "./components/CreateMenu";
+// react bootstrap
 import { Card, Form, Button } from "react-bootstrap";
-import Papa from "papaparse";
+// lodash
 import _ from "lodash";
-import { addOutlet } from "_actions/outlet";
-import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
 
 import CustomModal from "components/CustomModal";
 

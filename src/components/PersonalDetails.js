@@ -1,9 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import PasswordTextField from "components/PasswordTextField";
 import { Link } from "react-router-dom";
 function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState("");
+  const strongRegex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+  );
+  const mediumRegex = new RegExp(
+    "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})"
+  );
+
+  const analyze = (e) => {
+    const val = e.target.value;
+    if (strongRegex.test(e.target.value)) {
+      setError(true);
+      setMessage("Strong Password");
+    } else if (mediumRegex.test(e.target.value)) {
+      setError(true);
+      setMessage("Weak Password");
+    } else {
+      setError(true);
+      setMessage(
+        "Password must contain one capital letter, one small letter, one number and one symbol"
+      );
+    }
+  };
+
   return (
     <>
       <Form.Group>
@@ -58,9 +83,22 @@ function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
           onChange={handleChange("password")}
           placeholder="Password"
           required
+          onBlur={analyze}
         />
+        {error ? (
+          <span
+            style={
+              message ===
+              "Password must contain one capital letter, one small letter, one number and one symbol"
+                ? { color: "#cc3300", marginTop: "2px" }
+                : { color: "#4BB543", marginTop: "2px" }
+            }
+          >
+            {message}
+          </span>
+        ) : null}
       </Form.Group>
-      <Form.Group className="d-flex">
+      <Form.Group className="d-flex mt-3 mt-md-0">
         <Form.Check className="mt-0" type="checkbox" required />
         <Form.Text>
           <p className="m-0">
@@ -95,11 +133,12 @@ function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
         />
       </Form.Group>
 
-      <Form.Group className="d-flex justify-content-end">
+      <Form.Group className="d-flex justify-content-end mt-5">
         <Button
           type="submit"
           form="register-form"
-          className="btn btn-danger mt-3 rounded-pill px-4"
+          className="btn btn-danger mt-md-3 mt-5 rounded-pill px-4"
+          style={{ borderRadius: "30px", width: "140px", height: "54px" }}
         >
           Continue
         </Button>

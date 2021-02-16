@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Form, InputGroup } from "react-bootstrap";
+// redux
 import { connect } from "react-redux";
-import { getUser, updateUser } from "_actions/auth";
-import { useFormik } from "formik";
+import { updateUser } from "_actions/auth";
+// react bootstrap
+import { Form, InputGroup } from "react-bootstrap";
+// bootstrap icons
 import { CameraFill } from "react-bootstrap-icons";
 // Router
 import { withRouter, Link } from "react-router-dom";
-import Lock from "assets/img/Lock.svg";
 
 const Index = (props) => {
   const [show, setShow] = useState(false);
@@ -177,7 +178,7 @@ const Index = (props) => {
                     value={values.old_password}
                     onChange={handleChange("old_password")}
                     required
-                    style={{ width: "50%" }}
+                    style={{ width: "50%", borderRight: "none" }}
                   />
                   <div className="input-group-append">
                     <div
@@ -207,7 +208,7 @@ const Index = (props) => {
                     value={values.new_password}
                     onChange={handleChange("new_password")}
                     required
-                    style={{ width: "50%" }}
+                    style={{ width: "50%", borderRight: "none" }}
                   />
                   <div className="input-group-append">
                     <div

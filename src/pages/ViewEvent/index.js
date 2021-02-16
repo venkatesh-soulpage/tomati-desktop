@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+// redux
 import {
   getEvent,
   addEventMenu,
@@ -7,11 +7,17 @@ import {
   updateEvent,
 } from "_actions/event";
 import { connect } from "react-redux";
+//react router
 import { withRouter, Link, Switch, Route } from "react-router-dom";
+// react bootstrap
 import { Modal, Button, Card, Form } from "react-bootstrap";
+// papaparse
 import Papa from "papaparse";
+// lodash
 import _ from "lodash";
+// bootstrap icons
 import { Camera } from "react-bootstrap-icons";
+// image assets
 import IconQR from "assets/img/IconQR.svg";
 import UploadCover from "assets/img/UploadCover.svg";
 
