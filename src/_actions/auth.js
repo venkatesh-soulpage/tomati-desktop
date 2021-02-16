@@ -128,6 +128,35 @@ export function getDiscountValueError(error) {
     payload: error,
   };
 }
+
+/**
+ * make payment
+ * @param {*}
+ */
+export function makePaymentRequest(postData) {
+  return function (dispatch) {
+    return AuthService.makePayment(postData)
+      .then((responseData) => {
+        dispatch(makePaymentSuccess(responseData));
+        return responseData;
+      })
+      .catch((errorData) => {
+        dispatch(makePaymentError(errorData));
+      });
+  };
+}
+export function makePaymentSuccess(responseData) {
+  return {
+    type: ActionTypes.MAKE_PAYMENT_SUCCESS,
+    payload: responseData,
+  };
+}
+export function makePaymentError(error) {
+  return {
+    type: ActionTypes.MAKE_PAYMENT_ERROR,
+    payload: error,
+  };
+}
 /**
  * User Registration Failed Response
  * @param {*} error
