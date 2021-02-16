@@ -2,10 +2,37 @@
   .register-card {
     width: 100% !important;
   }
+  .login-card {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .club-images {
+    width: 80px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin: 5px 120px;
+    filter: grayscale(100%);
+  }
 }
 
 @media only screen and (min-width: 768px) {
   .register-card {
     width: 50% !important;
+    height: 100%;
+  }
+  .login {
+    align-items: center;
+  }
+  .club-images {
+    width: 80px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin: 5px 15px;
+    filter: grayscale(100%);
   }
 }

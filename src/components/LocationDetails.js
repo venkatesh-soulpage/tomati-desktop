@@ -7,7 +7,6 @@ import Success from "../assets/img/Success.svg";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 
-
 function LocationDetails({
   values,
   handleChange,
@@ -163,13 +162,10 @@ function LocationDetails({
         show={modal}
         onHide={handleCloseup}
         style={{
-          position: "absolute",
-          // left: "50%",
-          top: "25%",
-          // transform: 'translate(-50%, -50%)',
+          marginTop: "50%",
         }}
       >
-        <Modal.Header closeButton></Modal.Header>
+        <Modal.Header className="border-0" closeButton></Modal.Header>
         <Modal.Body>
           <div className="text-center">
             <p

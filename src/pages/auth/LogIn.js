@@ -75,10 +75,12 @@ function LogIn(props) {
   return (
     <div className="min-height mt-5">
       <div className="container-fluid h-100">
-        <div className="row h-100 justify-content-center">
-          <div className="col-md-4 w-100 align-self-center">
-            <h2 className="text-dark mb-0 text-center mb-4">Login</h2>
-            <Card className="p-5 pb-3" style={{ borderRadius: "15px" }}>
+        <div className="row h-100 login d-flex justify-content-center">
+          <div className="col-md-4 w-100 p-0 ">
+            <h2 className="text-dark d-none d-md-block mb-0 text-center mb-4">
+              Login
+            </h2>
+            <Card className="p-md-5 pb-md-3 login-card card-border">
               <Form onSubmit={handleLoginData} autoComplete="off">
                 <AlertMessage
                   variant="danger"
@@ -113,7 +115,7 @@ function LogIn(props) {
                       </InputGroup.Text>
                     </InputGroup.Prepend>
                     <Form.Control
-                      className="border-left-0"
+                      className="border-left-0 border-right-none"
                       name="password"
                       value={values.password}
                       onChange={handleChange("password")}
@@ -122,17 +124,7 @@ function LogIn(props) {
                     />
                     <div className="input-group-append">
                       <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          width: "60px",
-                          border: "1px solid #ced4da",
-                          borderTopRightRadius: "5px",
-                          borderBottomRightRadius: "5px",
-                          backgroundColor: "transparent",
-                          cursor: "pointer",
-                        }}
+                        className="show-button"
                         onClick={handlePasswordToggle}
                       >
                         <small>{values.hidden ? "Show" : "Hide"}</small>
@@ -141,7 +133,7 @@ function LogIn(props) {
                   </InputGroup>
                 </Form.Group>
                 <Form.Group className="d-flex justify-content-between mt-4">
-                  <Link to="/forgot-password" style={{ color: "#E0475B" }}>
+                  <Link className="red-link" to="/forgot-password">
                     Forgot Password?
                   </Link>
                   <Button

@@ -172,10 +172,7 @@ const Index = (props) => {
                 },
               }}
             >
-              <Button
-                className="btn btn-primary mt-3"
-                style={{ borderRadius: "30px", width: "140px", height: "54px" }}
-              >
+              <Button className="btn btn-primary mt-3 rounded-pill px-4 py-2">
                 Continue
               </Button>
             </Link>

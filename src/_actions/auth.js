@@ -441,11 +441,12 @@ export function receiveForgotPasswordError(error) {
  * @param {*} data
  */
 export function resetPassword(data) {
+  console.log(data);
   return function (dispatch) {
     return AuthService.resetPassword(data)
       .then((responseData) => {
         dispatch(receiveResetPassword(responseData));
-        history.push("/forgot-password/success");
+        history.push("/login");
       })
       .catch((errorData) => {
         dispatch(receiveResetPasswordError(errorData));

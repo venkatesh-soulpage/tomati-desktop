@@ -157,20 +157,36 @@ function Works() {
             </div>
             <CardDeck className="justify-content-center m-0 mb-5">
               <div
-                style={{ ...ClubImages, backgroundImage: `url(${Component1})` }}
+                className="club-images"
+                style={{ backgroundImage: `url(${Component1})` }}
               />
               <div
-                style={{ ...ClubImages, backgroundImage: `url(${Component2})` }}
+                className="club-images"
+                style={{ backgroundImage: `url(${Component2})` }}
               />
               <div
-                style={{ ...ClubImages, backgroundImage: `url(${Component3})` }}
+                className="club-images"
+                style={{ backgroundImage: `url(${Component3})` }}
               />
-              <div style={{ ...ClubImages, backgroundImage: `url(${img6})` }} />
-              <div style={{ ...ClubImages, backgroundImage: `url(${img7})` }} />
-              <div style={{ ...ClubImages, backgroundImage: `url(${img8})` }} />
-              <div style={{ ...ClubImages, backgroundImage: `url(${img9})` }} />
               <div
-                style={{ ...ClubImages, backgroundImage: `url(${img10})` }}
+                className="club-images"
+                style={{ backgroundImage: `url(${img6})` }}
+              />
+              <div
+                className="club-images"
+                style={{ backgroundImage: `url(${img7})` }}
+              />
+              <div
+                className="club-images"
+                style={{ backgroundImage: `url(${img8})` }}
+              />
+              <div
+                className="club-images"
+                style={{ backgroundImage: `url(${img9})` }}
+              />
+              <div
+                className="club-images"
+                style={{ backgroundImage: `url(${img10})` }}
               />
             </CardDeck>
           </div>

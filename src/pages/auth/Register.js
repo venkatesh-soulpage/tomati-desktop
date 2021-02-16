@@ -126,11 +126,7 @@ function Register(props) {
     props.dispatch(verify(email));
     props.dispatch(resetMessage());
   };
-  const HeaderText = {
-    fontSize: "24px",
-    fontFamily: "Poppins",
-    fontWeight: "600",
-  };
+
   const { step } = values;
   console.log("props\n", props);
   return (
@@ -172,7 +168,7 @@ function Register(props) {
             </>
           ) : step === 2 ? (
             <>
-              <div style={HeaderText} className="text-start form-legend pb-5">
+              <div className="text-start font-weight-medium form-legend pb-5">
                 Email Confirmation
               </div>
               <Form
@@ -203,7 +199,7 @@ function Register(props) {
             </>
           ) : step === 3 ? (
             <>
-              <div style={HeaderText} className="text-start form-legend pb-5">
+              <div className="text-start font-weight-medium form-legend pb-5">
                 Location
               </div>
               <Form
