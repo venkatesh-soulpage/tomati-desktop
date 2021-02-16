@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+// redux
 import { userOutlets } from "_actions/outlet";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
+// react bootstrap
 import { Modal, Button } from "react-bootstrap";
+// bootstrap icons
 import { GeoAltFill } from "react-bootstrap-icons";
+//local component
 import Success from "assets/img/Success.svg";
 
 const Index = (props) => {

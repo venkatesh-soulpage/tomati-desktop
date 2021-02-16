@@ -139,7 +139,7 @@ const Footer = () => {
             className="col-8 mx-auto mt-5 mb-2"
             style={{ borderTop: "1px solid #C3CAD8" }}
           />
-          <div className="col-8 mx-auto mt-3 pb-4 text-center text-md-left">
+          <div className="col-md-8 mx-auto mt-3 pb-4 text-center text-md-left">
             <div className="row">
               <div className="col-12 text-md-left mt-1 mt-md-0">
                 <p>
@@ -165,7 +165,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div className="col-md-6 col-12 text-right mt-1 mt-md-0">
+              <div className="col-md-6 col-12 text-md-right text-center mt-1 mt-md-0">
                 <p style={{ color: "#C3CAD8" }}>
                   Copyright © 2021 ZontLabs OÜ. All rights reserved.{" "}
                 </p>

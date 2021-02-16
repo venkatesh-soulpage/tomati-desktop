@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
+// redux
 import { userEvents } from "_actions/event";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
+// react bootstrap
 import { Modal, Button } from "react-bootstrap";
 import Success from "assets/img/Success.svg";
-import { values } from "lodash";
+// moment
 import moment from "moment";
+// bootstrap icons
 import { GeoAltFill } from "react-bootstrap-icons";
 
 const Index = (props) => {

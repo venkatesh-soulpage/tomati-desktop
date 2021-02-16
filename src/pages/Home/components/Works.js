@@ -1,12 +1,10 @@
 import React from "react";
 // react-bootstrap
 import { Card, CardDeck } from "react-bootstrap";
-
 // assets
 import MetroQR from "assets/img/metro-qrcode.svg";
 import fileIcon from "assets/img/fileIcon.svg";
 import BillIcon from "assets/img/BillIcon.svg";
-
 import Component1 from "assets/img/club-images/Component 14 – 1.png";
 import Component2 from "assets/img/club-images/Component 15 – 1.png";
 import Component3 from "assets/img/club-images/Component 16 – 1.png";
@@ -16,28 +14,10 @@ import img8 from "assets/img/club-images/img8.png";
 import img9 from "assets/img/club-images/img9.png";
 import img10 from "assets/img/club-images/img10.png";
 
-const ClubImages = {
-  width: "80px",
-  height: "80px",
-  backgroundRepeat: "no-repeat",
-  backgroundPosition: "center",
-  backgroundSize: "contain",
-  margin: "5px 15px",
-  filter: "grayscale(100%)",
-};
-
 function Works() {
   return (
     <div>
-      <Card
-        style={{
-          border: "0",
-          borderTopLeftRadius: "30% 5%",
-          borderTopRightRadius: "30% 5%",
-        }}
-        className="pb-5 how-it-works-section"
-        id="works"
-      >
+      <Card className="pb-5 how-it-works-section curve-border" id="works">
         <Card.Body>
           <div className="container text-center mt-5 ">
             <h3 className=" mb-5 p-2" style={{ fontSize: "30px" }}>
@@ -149,10 +129,7 @@ function Works() {
                 </Card.Body>
               </Card>
             </CardDeck>
-            <div
-              className="p-0 m-0 pt-5 mt-5 mb-5"
-              style={{ fontSize: "24px" }}
-            >
+            <div className="p-0 m-0 pt-5 mt-5 mb-5 section-card-header">
               Join the digital menu club
             </div>
             <CardDeck className="justify-content-center m-0 mb-5">

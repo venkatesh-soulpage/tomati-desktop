@@ -1,6 +1,7 @@
 @media only screen and (max-width: 768px) {
   .register-card {
     width: 100% !important;
+    height: 100%;
   }
   .login-card {
     height: 100%;
@@ -15,6 +16,18 @@
     background-size: contain;
     margin: 5px 120px;
     filter: grayscale(100%);
+  }
+  .background-home {
+    margin-top: -50%;
+  }
+  .curve-border {
+    border: 0;
+    border-top-left-radius: 40% 3%;
+    margin-top: -116%;
+    border-top-right-radius: 40% 3%;
+  }
+  .register-container {
+    height: 100%;
   }
 }
 
@@ -34,5 +47,10 @@
     background-size: contain;
     margin: 5px 15px;
     filter: grayscale(100%);
+  }
+  .curve-border {
+    border: 0;
+    border-top-left-radius: 30% 5%;
+    border-top-right-radius: 30% 5%;
   }
 }

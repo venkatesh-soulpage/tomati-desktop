@@ -1,9 +1,4 @@
 import React from "react";
-// React Bootstrap
-import Button from "react-bootstrap/Button";
-// Font Awesome Imports
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 function PasswordTextFeild({ ...props }) {
   const [values, setValues] = React.useState({
@@ -19,7 +14,7 @@ function PasswordTextFeild({ ...props }) {
     <div className="input-group">
       <input
         type={values.hidden ? "password" : "text"}
-        className="form-control"
+        className="form-control border-right-0"
         {...props}
       />
       <div className="input-group-append">
@@ -34,6 +29,7 @@ function PasswordTextFeild({ ...props }) {
             borderBottomRightRadius: "5px",
             backgroundColor: "transparent",
             cursor: "pointer",
+            borderLeft: "none",
           }}
           onClick={handlePasswordToggle}
         >

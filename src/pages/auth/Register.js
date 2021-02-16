@@ -15,15 +15,9 @@ import {
 import { Redirect, withRouter } from "react-router-dom";
 // Bootstrap Imports
 import Form from "react-bootstrap/Form";
-// import Button from "react-bootstrap/Button";
-// import Alert from "react-bootstrap/Alert";
-// custom components
-// import PasswordTextField from "components/PasswordTextField";
-// footer
-// import Footer from "components/Footer";
-// Alert Message
-import AlertMessage from "components/AlertMessage";
 import { Card, ProgressBar } from "react-bootstrap";
+// components
+import AlertMessage from "components/AlertMessage";
 import PersonalDetails from "components/PersonalDetails";
 import EmailConfirmation from "components/EmailConfirmation";
 import LocationDetails from "components/LocationDetails";
@@ -130,15 +124,18 @@ function Register(props) {
   const { step } = values;
   console.log("props\n", props);
   return (
-    <div className="bg-light container-fluid py-md-5 p-0 px-md-4">
-      <div className="container px-md-5 p-0">
+    <div
+      className="bg-light container-fluid py-md-5 p-0 px-md-4"
+      style={{ height: "100vh" }}
+    >
+      <div className="container px-md-5 p-0 register-container">
         <Card
-          className="p-5 register-card mt-5 mx-auto card"
+          className="p-3 pt-5 p-md-5 register-card mt-5 mx-auto card align-self-center"
           style={{ borderRadius: "12px" }}
         >
           {step === 1 ? (
             <>
-              <h4 className="text-start form-legend font-weight-medium pb-3">
+              <h4 className="text-md-start text-center form-legend font-weight-medium pb-3">
                 Tell us About Yourself
               </h4>
               <Form
@@ -168,7 +165,7 @@ function Register(props) {
             </>
           ) : step === 2 ? (
             <>
-              <div className="text-start font-weight-medium form-legend pb-5">
+              <div className="text-md-start text-center font-weight-medium form-legend pb-5">
                 Email Confirmation
               </div>
               <Form
@@ -199,7 +196,7 @@ function Register(props) {
             </>
           ) : step === 3 ? (
             <>
-              <div className="text-start font-weight-medium form-legend pb-5">
+              <div className="text-md-start text-center font-weight-medium form-legend pb-5">
                 Location
               </div>
               <Form

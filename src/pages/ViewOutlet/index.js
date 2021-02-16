@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
+//redux
 import {
   getOutlet,
   addOutletMenu,
   updateOutlet,
   inviteCollaborator,
 } from "_actions/outlet";
-import Papa from "papaparse";
-import _ from "lodash";
-
 import { connect } from "react-redux";
 import { withRouter, Link, Switch, Route } from "react-router-dom";
+// papaparse
+import Papa from "papaparse";
+//lodash
+import _ from "lodash";
+// react bootstrap
 import { Modal, Button, Card, Form } from "react-bootstrap";
+// bootstrap icons
 import { Camera } from "react-bootstrap-icons";
+// image assets
 import IconQR from "assets/img/IconQR.svg";
 import UploadCover from "assets/img/UploadCover.svg";
 

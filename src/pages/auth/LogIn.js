@@ -10,7 +10,6 @@ import {
 // Router
 import { withRouter, Link } from "react-router-dom";
 // Bootstrap Components
-
 import { InputGroup, Form, Button, Card } from "react-bootstrap";
 // custom components
 import PasswordTextField from "components/PasswordTextField";
@@ -89,7 +88,10 @@ function LogIn(props) {
                 </div>
               </div>
             ) : (
-              <Card className="p-md-5 pb-md-3 login-card card-border">
+              <Card className="p-md-5 pb-md-3 p-2 login-card card-border">
+                <h2 className="text-dark d-blocl d-md-none mb-0 text-center mb-4">
+                  Login
+                </h2>
                 <Form onSubmit={handleLoginData} autoComplete="off">
                   <AlertMessage
                     variant="danger"

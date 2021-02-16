@@ -98,7 +98,7 @@ function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
           </span>
         ) : null}
       </Form.Group>
-      <Form.Group className="d-flex">
+      <Form.Group className="d-flex mt-3 mt-md-0">
         <Form.Check className="mt-0" type="checkbox" required />
         <Form.Text>
           <p className="m-0">
@@ -137,7 +137,8 @@ function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
         <Button
           type="submit"
           form="register-form"
-          className="btn btn-danger mt-3 rounded-pill px-4"
+          className="btn btn-danger mt-md-3 mt-5 rounded-pill px-4"
+          style={{ borderRadius: "30px", width: "140px", height: "54px" }}
         >
           Continue
         </Button>
