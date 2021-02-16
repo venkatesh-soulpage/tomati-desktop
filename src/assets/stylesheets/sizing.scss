@@ -18,7 +18,7 @@
     filter: grayscale(100%);
   }
   .background-home {
-    margin-top: -50%;
+    margin-top: -62%;
   }
   .curve-border {
     border: 0;
@@ -28,6 +28,12 @@
   }
   .register-container {
     height: 100%;
+  }
+  .logo-img {
+    height: 25px;
+  }
+  .image-container {
+    overflow-x: scroll;
   }
 }
 

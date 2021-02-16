@@ -165,7 +165,7 @@ function Register(props) {
             </>
           ) : step === 2 ? (
             <>
-              <div className="text-md-start text-center font-weight-medium form-legend pb-5">
+              <div className="text-md-start text-center font-weight-medium form-legend pb-3">
                 Email Confirmation
               </div>
               <Form
@@ -196,7 +196,7 @@ function Register(props) {
             </>
           ) : step === 3 ? (
             <>
-              <div className="text-md-start text-center font-weight-medium form-legend pb-5">
+              <div className="text-md-start text-center font-weight-medium form-legend pb-3">
                 Location
               </div>
               <Form

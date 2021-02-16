@@ -10,6 +10,7 @@ import NavLinkB from "react-bootstrap/NavLink";
 import { Bell } from "react-bootstrap-icons";
 // assets
 import Logo from "assets/img/Logo.svg";
+import toggle from "assets/img/toggle.svg";
 // react-scroll
 import { Link } from "react-scroll";
 
@@ -31,11 +32,13 @@ function Navigation(props) {
           <Navbar.Brand href={props.auth.isAuthenticated ? "/dashboard" : "/"}>
             <img
               src={Logo}
-              className="d-inline-block align-top"
+              className="img-fluid d-inline-block align-top logo-img "
               alt="Tomati.app"
             />
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0">
+            <img src={toggle} />
+          </Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto" style={{ fontSize: "smaller" }}>
               {props.auth.isAuthenticated ? (

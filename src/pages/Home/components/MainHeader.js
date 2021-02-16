@@ -42,10 +42,10 @@ export default function MainHeader() {
                   <Button
                     size="md"
                     variant="danger"
-                    className="rounded-pill px-4 py-2 mt-2 mt-md-0"
+                    className="rounded-pill px-4 py-2 mt-md-2 mt-md-0"
                   >
                     Try Tomati &nbsp;
-                    <ArrowRight />
+                    <ArrowRight className="ml-5 ml-md-0" />
                   </Button>
                 </Link>
                 <br className="d-block d-md-none" />
@@ -54,7 +54,7 @@ export default function MainHeader() {
                   <Button
                     size="md"
                     variant="secondary"
-                    className="rounded-pill px-4 py-2 mt-2 mt-md-0"
+                    className="rounded-pill px-5 py-2 mt-2 mt-md-0"
                   >
                     <span className="text-muted">How it Works</span>
                   </Button>

@@ -48,7 +48,7 @@ const Footer = () => {
                       <small style={{ color: "#C3CAD8" }}>Contact Us</small>
                     </p>
                   </div>
-                  <div className="col-12 mt-4 mt-md-4 text-center text-md-left">
+                  <div className="col-12 mt-md-4 text-center text-md-left">
                     <ul style={{ padding: 0 }}>
                       <li style={ListStyle}>
                         <a

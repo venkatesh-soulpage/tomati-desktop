@@ -17,7 +17,7 @@ function MainSection() {
       className="h-100"
     >
       <Card.Body>
-        <div className="container text-center mt-4 ">
+        <div className="container text-center mt-4 px-4 ">
           <h3 className="w-75 mb-5 p-2 mx-auto section-header">
             Get 10 premium QR table tags for free when you upgrade to our growth
             plan
