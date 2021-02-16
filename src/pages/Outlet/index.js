@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+// redux
 import { userOutlets } from "_actions/outlet";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
+// react bootstrap
 import { Modal, Button } from "react-bootstrap";
+// bootstrap icons
 import { GeoAltFill } from "react-bootstrap-icons";
+//local component
 import Success from "assets/img/Success.svg";
 
 const Index = (props) => {
@@ -172,10 +176,7 @@ const Index = (props) => {
                 },
               }}
             >
-              <Button
-                className="btn btn-primary mt-3"
-                style={{ borderRadius: "30px", width: "140px", height: "54px" }}
-              >
+              <Button className="btn btn-primary mt-3 rounded-pill px-4 py-2">
                 Continue
               </Button>
             </Link>

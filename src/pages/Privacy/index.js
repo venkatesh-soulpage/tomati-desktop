@@ -389,7 +389,9 @@ const index = () => {
                     please visit the Google Privacy Terms web page:
                     https://policies.google.com/privacy?hl=en We also encourage
                     you to review the Google's policy for safeguarding your
-                    data: https://support.google.com/analytics/answer/6004245.
+                    data: https://support.google.com
+                    <br />
+                    /analytics/answer/6004245.
                     <br />
                     Mixpanel
                     <br />
@@ -465,12 +467,14 @@ const index = () => {
                     Facebook remarketing service is provided by Facebook Inc.
                     <br />
                     You can learn more about interest-based advertising from
-                    Facebook by visiting this page:
-                    https://www.facebook.com/help/164968693837950
+                    Facebook by visiting this page: https://www.facebook.com/
+                    <br />
+                    help/164968693837950
                     <br />
                     To opt-out from Facebook's interest-based ads, follow these
-                    instructions from Facebook:
-                    https://www.facebook.com/help/568137493302217
+                    instructions from Facebook: https://www.facebook.com
+                    <br />
+                    /help/568137493302217
                     <br />
                     Facebook adheres to the Self-Regulatory Principles for
                     Online Behavioural Advertising established by the Digital
@@ -485,7 +489,9 @@ const index = () => {
                     <br />
                     For more information on the privacy practices of Facebook,
                     please visit Facebook's Data Policy:
-                    https://www.facebook.com/privacy/explanation
+                    https://www.facebook.com
+                    <br />
+                    /privacy/explanation
                   </p>
                 </div>
                 <div className="col-12">
@@ -510,7 +516,9 @@ const index = () => {
                     PayPal or Braintree:
                     <br />
                     Their Privacy Policy can be viewed at
-                    https://www.paypal.com/webapps/mpp/ua/privacy-full
+                    https://www.paypal.com/webapps/
+                    <br />
+                    mpp/ua/privacy-full
                     <br />
                     Apple Store In-App Payments:
                     <br />
@@ -522,7 +530,9 @@ const index = () => {
                     <br />
                     Their Privacy Policy can be viewed at:
                     https://policies.google.com/privacy?hl=en&gl=us /
-                    https://payments.google.com/payments/apissecure/u/0/get_legal_document?ldo=0&ldt=privacynotice&ldl=en
+                    https://payments.google.com/payments/
+                    <br />
+                    apissecure/u/0/get_legal_document?ldo=0&ldt=privacynotice&ldl=en
                     <br />
                     Stripe:
                     <br />

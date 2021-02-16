@@ -1,12 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 // Bootstrap imports
 import { Button, Card, CardDeck } from "react-bootstrap";
 // bootstrap-icons
 import { ArrowRight } from "react-bootstrap-icons";
+// image assets
 import Background from "assets/img/Background.svg";
 import Group1 from "assets/img/Group1.svg";
-import { Link } from "react-router-dom";
-import { Link as ScrollLink } from "react-scroll";
+
 export default function MainHeader() {
   return (
     <>
@@ -40,18 +42,19 @@ export default function MainHeader() {
                   <Button
                     size="md"
                     variant="danger"
-                    className="rounded-pill px-4 py-2"
+                    className="rounded-pill px-4 py-2 mt-2 mt-md-0"
                   >
                     Try Tomati &nbsp;
                     <ArrowRight />
                   </Button>
                 </Link>
+                <br className="d-block d-md-none" />
                 &nbsp;
                 <ScrollLink smooth={true} duration={1000} to="works">
                   <Button
                     size="md"
                     variant="secondary"
-                    className="rounded-pill px-4 py-2"
+                    className="rounded-pill px-4 py-2 mt-2 mt-md-0"
                   >
                     <span className="text-muted">How it Works</span>
                   </Button>

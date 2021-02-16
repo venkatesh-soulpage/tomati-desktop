@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import EventDetails from "./components/EventDeatails";
-import CreateMenu from "./components/CreateMenu";
-import EventSchedule from "./components/EventSchedule";
-import { Card, Form } from "react-bootstrap";
-import Papa from "papaparse";
-import _ from "lodash";
+// redux
 import { addEvent } from "_actions/event";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
+// local components
+import EventDetails from "./components/EventDeatails";
+import CreateMenu from "./components/CreateMenu";
+import EventSchedule from "./components/EventSchedule";
+// react icons
+import { Card, Form } from "react-bootstrap";
+// lodash
+import _ from "lodash";
 
 const Index = (props) => {
   const [tempMenu, setMenu] = useState(null);

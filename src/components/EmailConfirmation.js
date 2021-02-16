@@ -85,7 +85,7 @@ function EmailConfirmation({
         </Form.Label>
       </Form.Group>
 
-      <Form.Group className="d-flex justify-content-between">
+      <Form.Group className="d-flex mt-5 mt-md-0 justify-content-between">
         <img
           className="mt-3"
           style={{ height: "54px", cursor: "pointer" }}

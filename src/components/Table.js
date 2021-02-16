@@ -180,11 +180,11 @@ const Table = ({ period, setPeriod }) => {
 
               <div
                 className="col-12 d-flex flex-column justify-content-center mt-1 align-items-center text-white"
-                style={{ height: "136px" }}
+                style={{ height: "90px" }}
               >
                 <Link to="/register" style={{ textDecoration: "none" }}>
                   <Button
-                    className="mt-2 rounded-pill px-4 d-flex flex-column align-items-center "
+                    className="mt-2 rounded-pill px-4 d-flex py-0 flex-column align-items-center "
                     variant="light"
                     onClick={() => {}}
                   >
@@ -274,12 +274,12 @@ const Table = ({ period, setPeriod }) => {
 
               <div
                 className="col-12 d-flex flex-column justify-content-center mt-1 align-items-center text-white"
-                style={{ height: "136px" }}
+                style={{ height: "90px" }}
               >
                 <Link to="/register" style={{ textDecoration: "none" }}>
                   {" "}
                   <Button
-                    className="mt-2 rounded-pill px-4 d-flex flex-column align-items-center"
+                    className="mt-2 rounded-pill px-4 py-0 d-flex flex-column align-items-center"
                     variant="dark"
                     onClick={() => {}}
                   >
@@ -364,12 +364,12 @@ const Table = ({ period, setPeriod }) => {
 
               <div
                 className="col-12 d-flex flex-column justify-content-center mt-4 align-items-center text-white"
-                style={{ height: "136px" }}
+                style={{ height: "90px" }}
               >
                 <Link to="/register" style={{ textDecoration: "none" }}>
                   {" "}
                   <Button
-                    className="mt-2 rounded-pill px-4 d-flex flex-column align-items-center"
+                    className="mt-2 rounded-pill px-4 py-0 d-flex flex-column align-items-center"
                     variant="light"
                     onClick={() => {}}
                   >

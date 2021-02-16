@@ -1,4 +1,5 @@
 import React from "react";
+// image assets
 import Icondashboard from "assets/img/Icondashboard.svg";
 import Iconoutlet from "assets/img/Iconoutlet.svg";
 import Iconwallet from "assets/img/Iconwallet.svg";
