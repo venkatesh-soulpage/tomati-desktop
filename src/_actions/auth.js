@@ -99,6 +99,64 @@ export function getPlansError(error) {
     payload: error,
   };
 }
+
+/**
+ * get discount
+ * @param {*}
+ */
+export function postDiscountValue(postData) {
+  return function (dispatch) {
+    return AuthService.getDiscount(postData)
+      .then((responseData) => {
+        dispatch(getDiscountValueSuccess(responseData));
+        return responseData;
+      })
+      .catch((errorData) => {
+        dispatch(getDiscountValueError(errorData));
+      });
+  };
+}
+export function getDiscountValueSuccess(responseData) {
+  return {
+    type: ActionTypes.GET_DISCOUNT_VALUE_SUCCESS,
+    payload: responseData,
+  };
+}
+export function getDiscountValueError(error) {
+  return {
+    type: ActionTypes.GET_DISCOUNT_VALUE_ERROR,
+    payload: error,
+  };
+}
+
+/**
+ * make payment
+ * @param {*}
+ */
+export function makePaymentRequest(postData) {
+  return function (dispatch) {
+    return AuthService.makePayment(postData)
+      .then((responseData) => {
+        dispatch(makePaymentSuccess(responseData));
+        return responseData;
+      })
+      .catch((errorData) => {
+        dispatch(makePaymentError(errorData));
+      });
+  };
+}
+export function makePaymentSuccess(responseData) {
+  return {
+    type: ActionTypes.MAKE_PAYMENT_SUCCESS,
+    payload: responseData,
+  };
+}
+export function makePaymentError(error) {
+  return {
+    type: ActionTypes.MAKE_PAYMENT_ERROR,
+    payload: error,
+  };
+}
 /**
  * User Registration Failed Response
  * @param {*} error
@@ -119,6 +177,7 @@ export function handleRegisterError(error) {
  */
 export function userLogin(postData) {
   return function (dispatch) {
+    dispatch(loginRequest());
     return AuthService.postLoginDetails(postData)
       .then((responseData) => {
         console.log(responseData);
@@ -140,6 +199,15 @@ export function userLogin(postData) {
       .catch((errorData) => {
         dispatch(handleLoginError(errorData));
       });
+  };
+}
+/**
+ * Login Request
+ * @param {*}
+ */
+export function loginRequest() {
+  return {
+    type: ActionTypes.HANDLE_LOGIN_REQUEST,
   };
 }
 /**
@@ -412,11 +480,12 @@ export function receiveForgotPasswordError(error) {
  * @param {*} data
  */
 export function resetPassword(data) {
+  console.log(data);
   return function (dispatch) {
     return AuthService.resetPassword(data)
       .then((responseData) => {
         dispatch(receiveResetPassword(responseData));
-        history.push("/forgot-password/success");
+        history.push("/login");
       })
       .catch((errorData) => {
         dispatch(receiveResetPasswordError(errorData));

@@ -7,7 +7,6 @@ import Success from "../assets/img/Success.svg";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 
-
 function LocationDetails({
   values,
   handleChange,
@@ -163,13 +162,12 @@ function LocationDetails({
         show={modal}
         onHide={handleCloseup}
         style={{
-          position: "absolute",
-          // left: "50%",
-          top: "25%",
-          // transform: 'translate(-50%, -50%)',
+          marginTop: "50%",
+          borderRadius: "18px",
         }}
+        className="p-2"
       >
-        <Modal.Header closeButton></Modal.Header>
+        <Modal.Header className="border-0" closeButton></Modal.Header>
         <Modal.Body>
           <div className="text-center">
             <p
@@ -185,7 +183,7 @@ function LocationDetails({
             <p
               className="mt-3"
               style={{
-                fontSize: "15px",
+                fontSize: "12px",
                 fontFamily: "Poppins",
                 fontWeight: "400",
               }}
@@ -216,15 +214,14 @@ function LocationDetails({
               </Form.Control>
             </Form.Group>
             {/* <Link to={{ pathname: "/order-summary", state: { values } }}> */}
-            <Button
+            <button
               onClick={() => {
                 handleCloseup();
               }}
-              className="btn btn-primary mt-3"
-              style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+              className="btn btn-danger mt-3 rounded-pill px-3"
             >
               Submit
-            </Button>
+            </button>
             {/* </Link> */}
           </div>
         </Modal.Body>

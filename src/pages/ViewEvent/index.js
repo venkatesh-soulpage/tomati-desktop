@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+// redux
 import {
   getEvent,
   addEventMenu,
@@ -7,12 +7,19 @@ import {
   updateEvent,
 } from "_actions/event";
 import { connect } from "react-redux";
+//react router
 import { withRouter, Link, Switch, Route } from "react-router-dom";
+// react bootstrap
 import { Modal, Button, Card, Form } from "react-bootstrap";
+// papaparse
 import Papa from "papaparse";
+// lodash
 import _ from "lodash";
+// bootstrap icons
 import { Camera } from "react-bootstrap-icons";
+// image assets
 import IconQR from "assets/img/IconQR.svg";
+import UploadCover from "assets/img/UploadCover.svg";
 
 import QR from "./QR";
 import About from "./About";
@@ -156,7 +163,7 @@ function Index(props) {
                   className="btn btn-danger rounded-pill"
                   onClick={() => setAddmenu(true)}
                 >
-                  Upload Menu
+                  Update Menu
                 </button>
               </div>
             </div>
@@ -231,12 +238,15 @@ function Index(props) {
           marginTop: "15%",
         }}
       >
-        <Modal.Header className="border-0" closeButton></Modal.Header>
-        <Modal.Body>
-          <div className="text-center">
+        <Modal.Header className="border-0 pb-0" closeButton></Modal.Header>
+        <Modal.Body className="pt-0" style={{ height: "320px" }}>
+          <div className="text-left">
+            <h5 className="mb-5" style={{ fontSize: "24px" }}>
+              Menu Upload
+            </h5>
             <Form.Group>
               <Form.File
-                id="coverImage"
+                id="menu"
                 accept=".csv"
                 label="Custom file input"
                 custom
@@ -250,19 +260,33 @@ function Index(props) {
                   });
                 }}
               />
-              <Card className="p-4">
-                <label for="coverImage">
-                  <h6>Select a Menu</h6>
+              <Card
+                style={{ border: " 1px dashed", cursor: "pointer" }}
+                className="p-2 d-flex pt-4"
+              >
+                <label for="menu" style={{ cursor: "pointer" }}>
+                  <h6>
+                    <img src={UploadCover} alt="icon" className="mx-4" />
+                    {menu ? (
+                      <span>{menu[0].name}</span>
+                    ) : (
+                      <span>Upload Menu</span>
+                    )}
+                  </h6>
                 </label>
               </Card>
+              <h6 className="mt-2" style={{ color: "#989CA4" }}>
+                Only CSV Files
+              </h6>
             </Form.Group>
-
+          </div>
+          <div className="text-right">
             <Button
-              className="btn btn-primary mt-3"
+              className="btn btn-primary mt-3 text"
               style={{ borderRadius: "30px", width: "140px", height: "54px" }}
               onClick={handleMenu}
             >
-              Upload Menu
+              Upload
             </Button>
           </div>
         </Modal.Body>

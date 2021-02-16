@@ -5,11 +5,50 @@
   position: relative;
 }
 
-.primary-text-color {
-  color: #2c3a56;
+@media only screen and (max-width: 768px) {
+  .primary-text-color {
+    color: #2c3a56;
+    font-size: 24px;
+  }
+  .hero-text-secondary {
+    font-size: 12px;
+  }
+  .faq-text {
+    font-size: 12px;
+  }
+  .faq-header {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .section-header {
+    font-size: 16px;
+  }
+  .section-card-header {
+    font-size: 18px;
+  }
+  .table-text-secondary {
+    font-size: 14px;
+    font-weight: 500;
+  }
 }
-.hero-text-secondary {
-  font-size: 20px;
+
+@media only screen and (min-width: 768px) {
+  .hero-text-secondary {
+    font-size: 20px;
+  }
+  .faq-text {
+    font-size: 20px;
+  }
+  .faq-header {
+    font-size: 36px;
+    font-weight: 500;
+  }
+  .section-header {
+    font-size: 32px;
+  }
+  .section-card-header {
+    font-size: 24px;
+  }
 }
 
 .how-it-works-section {
@@ -26,4 +65,34 @@
 .custom-font {
   font-size: 15px;
   line-height: 1.4;
+}
+
+.zoom {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.zoom img {
+  transition: transform 0.5s ease;
+  height: 400px;
+}
+
+.zoom:hover img {
+  -ms-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.faq-style {
+  border: 1px solid #c3cad8;
+  border-radius: 12px;
+  background: #fff;
+  color: #2c3a56;
+  margin-top: 32px;
+}
+
+.modal-content {
+  border-radius: 1.3rem !important;
 }

@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
+// redux
 import { userOutlets } from "_actions/outlet";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
+// react bootstrap
 import { Modal, Button } from "react-bootstrap";
+// bootstrap icons
+import { GeoAltFill } from "react-bootstrap-icons";
+//local component
 import Success from "assets/img/Success.svg";
 
 const Index = (props) => {
@@ -45,7 +50,9 @@ const Index = (props) => {
           <h4 className="lead m-0">Total Outlets: {outlet?.outlets.length}</h4>
         </div>
         <div className=" mr-3">
-          <button className="btn btn-dark btn-sm">Premium/monthly</button>
+          <button className="btn btn-dark btn-sm">
+            {auth?.user?.plan[0]?.plan}
+          </button>
         </div>
         <div className="">
           <Link
@@ -106,13 +113,16 @@ const Index = (props) => {
           return (
             <div
               key={id}
-              className="card px-4 py-3 mt-3"
+              className="card px-4 py-4 mt-3"
               style={{ borderRadius: 6 }}
             >
               <div className="d-flex align-items-center">
                 <div>
                   <h6 className="m-0 font-weight-bold">{outlet.name}</h6>
-                  <p className="m-0 text-dark">{outlet.address}</p>
+                  <p className="m-0 mt-2 text-dark">
+                    <GeoAltFill className="mr-2" />
+                    {outlet.address}
+                  </p>
                 </div>
                 <div className="ml-auto mr-3">
                   {/* <Link to="/dashboard/viewoutlet"> */}
@@ -123,7 +133,7 @@ const Index = (props) => {
                         state: outlet.id,
                       });
                     }}
-                    className="btn btn-danger"
+                    className="btn btn-danger w-100"
                   >
                     View
                   </button>
@@ -166,10 +176,7 @@ const Index = (props) => {
                 },
               }}
             >
-              <Button
-                className="btn btn-primary mt-3"
-                style={{ borderRadius: "30px", width: "140px", height: "54px" }}
-              >
+              <Button className="btn btn-primary mt-3 rounded-pill px-4 py-2">
                 Continue
               </Button>
             </Link>

@@ -1,24 +1,12 @@
 import React, { useState } from "react";
+// components
 import Table from "components/Table";
-import { Button } from "react-bootstrap";
+// react router
+import { Link } from "react-router-dom";
 
 const Features = () => {
   const [details, setDetails] = useState({ type: "Outlet", plan: null });
   const [period, setPeriod] = useState("monthly");
-
-  const HeadingStyle = {
-    fontSize: "36px",
-    fontWeight: "semibold",
-    lineHeight: "52px",
-    color: "#2C3A56",
-    marginTop: "72px",
-  };
-
-  const ToggleStyle = {
-    border: "1px solid #C3CAD8",
-    borderRadius: "36px",
-    marginTop: "54px",
-  };
 
   const ToggleStyle2 = {
     border: "1px solid #C3CAD8",
@@ -27,7 +15,7 @@ const Features = () => {
   };
 
   const SmallTable = () => (
-    <div className="row">
+    <div className="row mt-4">
       <div
         className="container"
         style={{
@@ -38,103 +26,99 @@ const Features = () => {
       >
         <div className="row">
           <div className="col-12">
-            <h3 className="text-center">Starter</h3>
+            <h3 className="text-center primary-text-color">Starter</h3>
           </div>
         </div>
         <div className="row">
-          <div className="col-5 mx-auto mb-3">
-            <Button
+          <div className="col-5 mx-auto mb-3 text-center">
+            <button
               style={{ background: "#00886C", color: "#fff", borderRadius: 20 }}
               block
             >
               Free
-            </Button>
+            </button>
           </div>
         </div>
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
           <div className="col-10 mx-auto">
-            <h4 className="text-center font-weight-normal">
-              We convert your hard copy menu to digital
+            <h4 className="text-center  table-text-secondary">
+              Complimentary menu setup assistance
             </h4>
           </div>
         </div>
         <div className="row">
           <div className="col-7 mx-auto mb-3">
-            <Button
-              style={{ background: "#2C3A56", color: "#fff", borderRadius: 20 }}
-              block
-            >
-              Self Managed
-            </Button>
+            <button className="btn-dark rounded-pill px-2" block>
+              easy self setup
+            </button>
           </div>
         </div>
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
           <div className="col-10 mb-3 mx-auto">
-            {details.type === "Outlet" ? (
-              <h4 className="text-center font-weight-normal">
-                Premium QR Menu Table Tags
-              </h4>
-            ) : (
-              <h4 className="text-center font-weight-normal">
-                Number of events (per month){" "}
-              </h4>
-            )}
+            <h4 className="text-center table-text-secondary">
+              Number of outlets
+            </h4>
           </div>
         </div>
         <div className="row">
-          {details.type === "Outlet" ? (
-            <div className="col-10 mx-auto mb-3">
-              <Button
-                style={{
-                  background: "#2C3A56",
-                  color: "#fff",
-                  borderRadius: 20,
-                }}
-                block
-              >
-                Downloadable Tags
-              </Button>
-            </div>
-          ) : (
-            <div className="col-3 mx-auto mb-3">
-              <Button
-                style={{
-                  background: "#2C3A56",
-                  color: "#fff",
-                  borderRadius: 20,
-                }}
-                block
-              >
-                5
-              </Button>
-            </div>
-          )}
+          <div className="col-10 mx-auto mb-3 text-center">
+            <button className="btn-dark rounded-pill px-3">1</button>
+          </div>
         </div>
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
+          <div className="col-10 mb-3 mx-auto">
+            <h4 className="text-center table-text-secondary">
+              Number of events
+            </h4>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-10 mx-auto mb-3 text-center">
+            <button className="btn-dark rounded-pill px-3">4 per Month</button>
+          </div>
+        </div>
+
+        <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
+        <div className="row">
           <div className="col-10 mx-auto">
-            <h4 className="text-center font-weight-normal">
-              Accept contactless payments (Unlike your bank we remit instantly +
-              no pos network issues){" "}
+            <h4 className="text-center table-text-secondary">
+              Collect contactless payments( instant remitance)
             </h4>
           </div>
         </div>
         <div className="row">
           <div className="col-3 mx-auto mb-3">
-            <Button
-              style={{ background: "#2C3A56", color: "#fff", borderRadius: 20 }}
-              block
-            >
+            <button className="btn-dark rounded-pill px-3" block>
               2%
-            </Button>
+            </button>
           </div>
         </div>
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
           <div className="col-10 mx-auto">
-            <h4 className="text-center font-weight-normal">
+            <h4 className="text-center table-text-secondary">Free Users</h4>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-10 mx-auto mb-3 text-center">
+            {period === "monthly" ? (
+              <button className="btn-dark rounded-pill px-3">
+                5 Free Seats
+              </button>
+            ) : (
+              <button className="btn-dark rounded-pill px-3">
+                10 Free Seats
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
+        <div className="row">
+          <div className="col-10 mx-auto">
+            <h4 className="text-center table-text-secondary">
               Monthly Subscription
             </h4>
           </div>
@@ -145,13 +129,12 @@ const Features = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-10 mx-auto mb-3">
-            <Button
-              style={{ background: "#E0475B", color: "#fff", borderRadius: 20 }}
-              block
-            >
-              Choose Plan
-            </Button>
+          <div className="col-10 mx-auto mb-3 text-center">
+            <Link to="register">
+              <button className="btn-danger rounded-pill px-3" block>
+                Choose Plan
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -166,24 +149,27 @@ const Features = () => {
       >
         <div className="row">
           <div className="col-12">
-            <h3 className="text-center">Growth</h3>
+            <h3 className="text-center primary-text-color text-white">
+              Growth
+            </h3>
           </div>
         </div>
         <div className="row">
-          <div className="col-9  mx-auto mb-3">
-            <Button
-              style={{ background: "#E0475B", color: "#fff", borderRadius: 20 }}
+          <div className="col-9  mx-auto mb-3 text-center">
+            <button
+              className="rounded-pill px-3"
+              style={{ background: "#c83f51" }}
               block
             >
               Most Popular
-            </Button>
+            </button>
           </div>
         </div>
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
           <div className="col-10 mx-auto mb-3">
-            <h4 className="text-center font-weight-normal">
-              We convert your hard copy menu to digital
+            <h4 className="text-center table-text-secondary">
+              Complimentary menu setup assistance
             </h4>
           </div>
         </div>
@@ -191,86 +177,90 @@ const Features = () => {
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
           <div className="col-10 mx-auto">
-            {details.type === "Outlet" ? (
-              <h4 className="text-center font-weight-normal">
-                Premium QR Menu Table Tags
-              </h4>
-            ) : (
-              <h4 className="text-center font-weight-normal">
-                Number of events (per month){" "}
-              </h4>
-            )}
-          </div>
-        </div>
-        <div className="row">
-          {details.type === "Outlet" ? (
-            <div className="col-8 mx-auto mb-3">
-              <Button
-                style={{
-                  background: "#2C3A56",
-                  color: "#fff",
-                  borderRadius: 20,
-                }}
-                block
-              >
-                10 Free Tags
-              </Button>
-            </div>
-          ) : (
-            <div className="col-3 mx-auto mb-3">
-              <Button
-                style={{
-                  background: "#2C3A56",
-                  color: "#fff",
-                  borderRadius: 20,
-                }}
-                block
-              >
-                10
-              </Button>
-            </div>
-          )}
-        </div>
-        <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
-        <div className="row">
-          <div className="col-10 mx-auto">
-            <h4 className="text-center font-weight-normal">
-              Accept contactless payments (Unlike your bank we remit instantly +
-              no pos network issues){" "}
+            <h4 className="text-center table-text-secondary">
+              Number of Outlets
             </h4>
           </div>
         </div>
         <div className="row">
-          <div className="col-4 mx-auto mb-3">
-            <Button
-              style={{ background: "#2C3A56", color: "#fff", borderRadius: 20 }}
-              block
-            >
-              1.5 %
-            </Button>
+          <div className="col-8 mx-auto mb-3 text-center">
+            <button className="btn-dark rounded-pill px-3" block>
+              3
+            </button>
+          </div>
+        </div>
+        <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
+        <div className="row">
+          <div className="col-10 mb-3 mx-auto">
+            <h4 className="text-center table-text-secondary">
+              Number of events
+            </h4>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-10 mx-auto mb-3 text-center">
+            <button className="btn-dark rounded-pill px-3">8 per Month</button>
+          </div>
+        </div>
+
+        <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
+        <div className="row">
+          <div className="col-10 mx-auto">
+            <h4 className="text-center table-text-secondary">
+              Collect contactless payments( instant remitance)
+            </h4>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-3 mx-auto mb-3">
+            <button className="btn-dark rounded-pill px-3" block>
+              1.5%
+            </button>
           </div>
         </div>
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
           <div className="col-10 mx-auto">
-            <h4 className="text-center font-weight-normal">
+            <h4 className="text-center table-text-secondary">Free Users</h4>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-10 mx-auto mb-3 text-center">
+            {period === "monthly" ? (
+              <button className="btn-dark rounded-pill px-3">
+                15 Free Seats
+              </button>
+            ) : (
+              <button className="btn-dark rounded-pill px-3">
+                35 Free Seats
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
+        <div className="row">
+          <div className="col-10 mx-auto">
+            <h4 className="text-center font-weight-normal table-text-secondary">
               Monthly Subscription
             </h4>
           </div>
         </div>
         <div className="row">
-          <div className="col-10 mx-auto">
-            <h3 className="text-center ">₦19,999</h3>
+          <div className="col-10 mx-auto text-center">
+            {period === "monthly" ? (
+              <h3 className="text-center ">$39</h3>
+            ) : (
+              <h3 className="text-center ">$374</h3>
+            )}
           </div>
         </div>
         <div className="row">
-          <div className="col-10 mx-auto mb-3">
-            <Button
-              style={{ background: "#2C3A56", color: "#fff", borderRadius: 20 }}
-              block
-            >
-              Choose Plan
-            </Button>
+          <div className="col-10 mx-auto mb-3 text-center">
+            <Link to="register">
+              <button className="btn-dark rounded-pill px-3" block>
+                Choose Plan
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -284,118 +274,115 @@ const Features = () => {
       >
         <div className="row">
           <div className="col-12 mb-3">
-            <h3 className="text-center">Premium</h3>
+            <h3 className="text-center primary-text-color mt-3">Premium</h3>
           </div>
         </div>
 
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
-          <div className="col-10 mb-4 mx-auto">
-            <h4 className="text-center font-weight-normal">
-              We convert your hard copy menu to digital
+          <div className="col-10 mx-auto">
+            <h4 className="text-center  table-text-secondary">
+              Complimentary menu setup assistance
             </h4>
           </div>
         </div>
 
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
-          <div className="col-10 mx-auto">
-            {details.type === "Outlet" ? (
-              <h4 className="text-center font-weight-normal">
-                Premium QR Menu Table Tags
-              </h4>
-            ) : (
-              <h4 className="text-center font-weight-normal">
-                Number of events (per month){" "}
-              </h4>
-            )}
+          <div className="col-10 mb-3 mx-auto">
+            <h4 className="text-center table-text-secondary">
+              Number of outlets
+            </h4>
           </div>
         </div>
         <div className="row">
-          {details.type === "Outlet" ? (
-            <div className="col-7 mx-auto mb-3">
-              <Button
-                style={{
-                  background: "#2C3A56",
-                  color: "#fff",
-                  borderRadius: 20,
-                }}
-                block
-              >
-                20 free Tags
-              </Button>
-            </div>
-          ) : (
-            <div className="col-7 mx-auto mb-3">
-              <Button
-                style={{
-                  background: "#2C3A56",
-                  color: "#fff",
-                  borderRadius: 20,
-                }}
-                block
-              >
-                custom
-              </Button>
-            </div>
-          )}
+          <div className="col-10 mx-auto mb-3 text-center">
+            <button className="btn-dark rounded-pill px-3">10</button>
+          </div>
         </div>
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
+          <div className="col-10 mb-3 mx-auto">
+            <h4 className="text-center table-text-secondary">
+              Number of events
+            </h4>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-10 mx-auto mb-3 text-center">
+            <button className="btn-dark rounded-pill px-3">12 per Month</button>
+          </div>
+        </div>
+
+        <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
+        <div className="row">
           <div className="col-10 mx-auto">
-            <h4 className="text-center font-weight-normal">
-              Accept contactless payments (Unlike your bank we remit instantly +
-              no pos network issues){" "}
+            <h4 className="text-center table-text-secondary">
+              Collect contactless payments( instant remitance)
             </h4>
           </div>
         </div>
         <div className="row">
           <div className="col-3 mx-auto mb-3">
-            <Button
-              style={{ background: "#2C3A56", color: "#fff", borderRadius: 20 }}
-              block
-            >
-              1 %
-            </Button>
+            <button className="btn-dark rounded-pill px-3" block>
+              1%
+            </button>
           </div>
         </div>
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
-          <div className="col-10 mb-3 mx-auto">
-            <h4 className="text-center font-weight-normal">
-              Remove tomati.app branding
+          <div className="col-10 mx-auto">
+            <h4 className="text-center table-text-secondary">Free Users</h4>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-10 mx-auto mb-3 text-center">
+            {period === "monthly" ? (
+              <button className="btn-dark rounded-pill px-3">
+                50 Free Seats
+              </button>
+            ) : (
+              <button className="btn-dark rounded-pill px-3">
+                50 Free Seats
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
+        <div className="row">
+          <div className="col-10 mx-auto">
+            <h4 className="text-center table-text-secondary">
+              Monthly Subscription
             </h4>
           </div>
         </div>
-        <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
-          <div className="col-10 mb-3 mx-auto">
-            <h4 className="text-center font-weight-normal">
-              Support for menu content changes
-            </h4>
+          <div className="col-10 mx-auto">
+            {period === "monthly" ? (
+              <h3 className="text-center ">$79</h3>
+            ) : (
+              <h3 className="text-center ">$758</h3>
+            )}
           </div>
         </div>
-        <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
-
         <div className="row">
-          <div className="col-10 mx-auto mb-3">
-            <Button
-              style={{ background: "#E0475B", color: "#fff", borderRadius: 20 }}
-              block
-            >
-              Contact Sales
-            </Button>
+          <div className="col-10 mx-auto mb-3 text-center">
+            <Link to="register">
+              <button className="btn-dark rounded-pill px-3" block>
+                Choose Plan
+              </button>
+            </Link>
           </div>
         </div>
       </div>
     </div>
   );
   const Toggle2 = () => (
-    <div className="row mb-1">
+    <div className="row">
       <div className="col-md-6 mx-auto" style={ToggleStyle2}>
         <div className="row">
           <div
-            className="col-6 p-3 text-center"
+            className="col-6 py-2 py-md-3 text-center"
             onClick={() => setPeriod("monthly")}
             style={
               period === "monthly"
@@ -415,11 +402,13 @@ const Features = () => {
                   }
             }
           >
-            <h5 className="font-weight-normal">Monthly</h5>
+            <h5 className="font-weight-normal m-0 hero-text-secondary">
+              Monthly
+            </h5>
           </div>
 
           <div
-            className="col-6 p-3 text-center"
+            className="col-6 py-2 py-md-3 text-center "
             style={
               period === "yearly"
                 ? {
@@ -439,24 +428,24 @@ const Features = () => {
             onClick={() => setPeriod("yearly")}
           >
             {" "}
-            <h5 className="font-weight-normal">Yearly</h5>
+            <h5 className="font-weight-normal m-0 hero-text-secondary">
+              Yearly
+            </h5>
           </div>
         </div>
       </div>
     </div>
   );
   return (
-    <div className="row mt-5 bg-white pb-5 mx-0" id="features">
-      <div className="col-10 offset-1 pb-1">
-        <h3
-          className="container pt-5 pb-1 m-auto text-center"
-          style={HeadingStyle}
-        >
+    <div className="row bg-white pb-5 mx-0" id="features">
+      <div className="col-10 offset-1 pb-1 pt-5">
+        <h3 className="container pt-5 pb-0 m-auto text-center faq-header">
           Our Plans
         </h3>
         <Toggle2 />
-
-        <Table period={period} setPeriod={setPeriod} />
+        <div className="d-none d-md-block ">
+          <Table period={period} setPeriod={setPeriod} />
+        </div>
 
         <div className="d-block d-lg-none">
           <SmallTable />

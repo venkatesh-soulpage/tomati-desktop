@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
+// redux
 import { connect } from "react-redux";
-import { getUser, updateUser } from "_actions/auth";
-import { useFormik } from "formik";
+import { updateUser } from "_actions/auth";
+// react bootstrap
+import { Form, InputGroup } from "react-bootstrap";
+// bootstrap icons
 import { CameraFill } from "react-bootstrap-icons";
 // Router
 import { withRouter, Link } from "react-router-dom";
+
 const Index = (props) => {
   const [show, setShow] = useState(false);
 
@@ -16,6 +19,8 @@ const Index = (props) => {
     current_password: undefined,
     new_password: undefined,
     profile_img: undefined,
+    hidden: false,
+    hidden2: false,
   });
 
   useEffect(() => {
@@ -53,18 +58,33 @@ const Index = (props) => {
       reader.onerror = (e) => reject(e);
     });
 
+  function handlePasswordToggle(event) {
+    event.preventDefault();
+    setValues({ ...values, hidden: !values.hidden });
+  }
+  function handlePasswordToggle2(event) {
+    event.preventDefault();
+    setValues({ ...values, hidden2: !values.hidden2 });
+  }
+
   if (!user) {
     return <div>loading</div>;
   }
   console.log(user);
   return (
     <div className="pt-0 pr-3 pl-4 pb-3">
-      <h4 className="text-start form-legend pb-5" style={{ fontSize: "26px" }}>
+      <h4 className="text-start form-legend pb-2" style={{ fontSize: "26px" }}>
         Settings
       </h4>
       <div className="card bg-white border p-5 mt-2">
-        <div className="d-flex align-items-center">
-          <div>
+        <h6
+          className="text-start form-legend pb-4"
+          style={{ fontSize: "16px" }}
+        >
+          Profile Details
+        </h6>
+        <div className="d-flex align-items-top">
+          <div className="w-75 mr-4 mb-2">
             <Form>
               <Form.Group>
                 <Form.Control
@@ -73,6 +93,7 @@ const Index = (props) => {
                   type="text"
                   onChange={handleChange("first_name")}
                   value={values.first_name || user.first_name}
+                  className="mb-3 h-100"
                 />
               </Form.Group>
               <Form.Group>
@@ -82,6 +103,7 @@ const Index = (props) => {
                   onChange={handleChange("last_name")}
                   value={values.last_name || user.last_name}
                   required
+                  className="mb-3 h-100"
                 />
               </Form.Group>
               <Form.Group>
@@ -91,11 +113,12 @@ const Index = (props) => {
                   value={values.email || user.email}
                   onChange={handleChange("email")}
                   required
+                  className="mb-3 h-100"
                 />
               </Form.Group>
               <Form.Group>
                 <button
-                  className="btn btn-danger mt-2"
+                  className="btn w-25 btn-danger mt-5"
                   onClick={handleUpdateUser}
                 >
                   Save
@@ -103,16 +126,17 @@ const Index = (props) => {
               </Form.Group>{" "}
             </Form>
           </div>
-          <div className="ml-auto border p-4">
-            <h4 className="text-dark">Profile Picture</h4>
+          <div className="ml-auto w-50 h-75 border p-4">
+            <h4 className="text-dark" style={{ fontSize: "16px" }}>
+              Profile Picture
+            </h4>
             <img
-              className="rounded-circle mr-5 ml-3"
+              className="rounded-circle mr-4 "
               src={user.profile_img}
               height={50}
               width={50}
             />
-
-            <button className="btn btn-outline-dark ml-5 mr-5">
+            <button className="btn h-75 btn-outline-dark">
               <label for="profileImage">
                 <CameraFill className="mr-3" />
                 {"  "} Add New
@@ -130,7 +154,7 @@ const Index = (props) => {
                   const url = await fileToBase64(e.target.files[0]);
                   props.dispatch(
                     updateUser({
-                      profile_img: { name, data: url },
+                      profile_image: { name, data: url },
                     })
                   );
                 }}
@@ -139,31 +163,75 @@ const Index = (props) => {
             </Form.Group>
           </div>
         </div>
-        <div className="d-flex align-items-center border-top" />
+        <div className="d-flex align-items-center border-top mt-4" />
         <div className="">
-          <h4 className="text-dark mt-3">Password</h4>
+          <h4 className="text-dark mt-5" style={{ fontSize: "16px" }}>
+            Password
+          </h4>
           {show ? (
             <div>
               <Form.Group>
-                <Form.Control
-                  type="password"
-                  placeholder="Old Password"
-                  onChange={handleChange("old_password")}
-                  required
-                  style={{ width: "50%" }}
-                />
+                <InputGroup style={{ width: "50%" }}>
+                  <Form.Control
+                    type={values.hidden ? "text" : "password"}
+                    placeholder="Current Password"
+                    value={values.old_password}
+                    onChange={handleChange("old_password")}
+                    required
+                    style={{ width: "50%", borderRight: "none" }}
+                  />
+                  <div className="input-group-append">
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "60px",
+                        border: "1px solid #ced4da",
+                        borderTopRightRadius: "5px",
+                        borderBottomRightRadius: "5px",
+                        backgroundColor: "transparent",
+                        cursor: "pointer",
+                      }}
+                      onClick={handlePasswordToggle}
+                    >
+                      <small>{values.hidden ? "Hide" : "Show"}</small>
+                    </div>
+                  </div>
+                </InputGroup>
               </Form.Group>
               <Form.Group>
-                <Form.Control
-                  type="password"
-                  placeholder="New Password"
-                  onChange={handleChange("new_password")}
-                  required
-                  style={{ width: "50%" }}
-                />
+                <InputGroup style={{ width: "50%" }}>
+                  <Form.Control
+                    type={values.hidden2 ? "text" : "password"}
+                    placeholder="New Password"
+                    value={values.new_password}
+                    onChange={handleChange("new_password")}
+                    required
+                    style={{ width: "50%", borderRight: "none" }}
+                  />
+                  <div className="input-group-append">
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "60px",
+                        border: "1px solid #ced4da",
+                        borderTopRightRadius: "5px",
+                        borderBottomRightRadius: "5px",
+                        backgroundColor: "transparent",
+                        cursor: "pointer",
+                      }}
+                      onClick={handlePasswordToggle2}
+                    >
+                      <small>{values.hidden2 ? "Hide" : "Show"}</small>
+                    </div>
+                  </div>
+                </InputGroup>
               </Form.Group>
               <button
-                className="btn btn-danger mt-2"
+                className="btn btn-danger mt-4"
                 onClick={handlePasswordUpate}
               >
                 Save
@@ -171,7 +239,7 @@ const Index = (props) => {
             </div>
           ) : (
             <button
-              className="btn btn-danger mt-2"
+              className="btn btn-danger mt-4"
               onClick={() => setShow(true)}
             >
               Change Password

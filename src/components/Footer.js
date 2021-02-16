@@ -29,10 +29,10 @@ const Footer = () => {
             <div className="row">
               <div className="col-md-4">
                 <div className="row">
-                  <div className="col-md-8 col-12 ">
+                  <div className="col-md-8 col-12 text-center text-md-left ">
                     <img src={Logo2} alt="logo" className="img-fluid" />
                   </div>
-                  <div className="col-12 mt-4 ">
+                  <div className="col-12 mt-4 text-center text-md-left ">
                     <p>
                       <small style={{ color: "#C3CAD8" }}>
                         Tomati.app is a ZontLabs OÜ product.{" "}
@@ -43,12 +43,12 @@ const Footer = () => {
               </div>
               <div className="col-md-2">
                 <div className="row">
-                  <div className="col-12  mt-4 mt-md-0">
+                  <div className="col-12  mt-4 mt-md-0 text-center text-md-left">
                     <p>
                       <small style={{ color: "#C3CAD8" }}>Contact Us</small>
                     </p>
                   </div>
-                  <div className="col-12 mt-4 mt-md-4">
+                  <div className="col-12 mt-md-4 text-center text-md-left">
                     <ul style={{ padding: 0 }}>
                       <li style={ListStyle}>
                         <a
@@ -75,7 +75,7 @@ const Footer = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-2">
+              <div className="col-md-2 text-center text-md-left">
                 <div className="row">
                   <div className="col-12  mt-4 mt-md-0">
                     <p>
@@ -94,7 +94,7 @@ const Footer = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-2">
+              <div className="col-md-2 text-center text-md-left">
                 <div className="row">
                   <div className="col-12 mt-3 mt-md-0">
                     <p>
@@ -117,14 +117,14 @@ const Footer = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-2">
+              <div className="col-md-2 text-center text-md-left">
                 <div className="row">
                   <div className="col-12  mt-3 mt-md-0">
                     <p>
                       <small style={{ color: "#C3CAD8" }}>Address</small>
                     </p>
                   </div>
-                  <div className="col-10  mt-1 mt-md-0">
+                  <div className="col-12  mt-1 mt-md-0">
                     <p>
                       <small className="text-white">
                         Ahtri 12, 10151 Talinn, Estonia
@@ -139,7 +139,7 @@ const Footer = () => {
             className="col-8 mx-auto mt-5 mb-2"
             style={{ borderTop: "1px solid #C3CAD8" }}
           />
-          <div className="col-8 mx-auto mt-3 pb-4">
+          <div className="col-md-8 mx-auto mt-3 pb-4 text-center text-md-left">
             <div className="row">
               <div className="col-12 text-md-left mt-1 mt-md-0">
                 <p>
@@ -165,7 +165,7 @@ const Footer = () => {
                   </li>
                 </ul>
               </div>
-              <div className="col-md-6 col-12 text-right mt-1 mt-md-0">
+              <div className="col-md-6 col-12 text-md-right text-center mt-1 mt-md-0">
                 <p style={{ color: "#C3CAD8" }}>
                   Copyright © 2021 ZontLabs OÜ. All rights reserved.{" "}
                 </p>

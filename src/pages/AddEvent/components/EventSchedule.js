@@ -3,6 +3,7 @@ import { Form, Button, Card } from "react-bootstrap";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import moment from "moment";
+import Back from "assets/img/Back.svg";
 
 const EventSchedule = ({
   handleStep,
@@ -10,6 +11,7 @@ const EventSchedule = ({
   handleChange,
   setValues,
   handleFile,
+  handleStepPrev,
 }) => {
   let inputProps = {
     placeholder: "Start Time",
@@ -59,17 +61,26 @@ const EventSchedule = ({
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="commnents"
+          placeholder="Comments"
           value={values.comments}
           onChange={handleChange("comments")}
           required
         />
       </Form.Group>
-      <Form.Group className="d-flex justify-content-end">
+      <Form.Group className="d-flex justify-content-between">
+        <img
+          className="mt-3"
+          style={{ height: "54px", cursor: "pointer" }}
+          src={Back}
+          alt="icon"
+          onClick={() => {
+            handleStepPrev("step", 1);
+          }}
+        />
         <Button
           onClick={handleStep}
           form="register-form"
-          className="btn btn-primary mt-3"
+          className="btn btn-primary mt-3 rounded-pill px-4"
           style={{ borderRadius: "20px" }}
         >
           Continue
