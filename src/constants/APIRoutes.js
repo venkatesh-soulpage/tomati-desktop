@@ -11,6 +11,7 @@ export const FORGOT_PASSWORD = "/api/auth/tomati-forgot";
 export const RESET_PASSWORD = "/api/auth/reset";
 export const VERIFY_CREDENTIALS = "/api/auth/verify-credentials";
 export const GET_USER = "/api/accounts/me";
+export const MAKE_PAYMENT = "/api/payment";
 export const UPDATE_USER = "/api/auth/reset-profile";
 // Application Routes
 export const APPLICATION_CREATE = "/api/v1/application/create";

@@ -25,6 +25,8 @@ var initialState = {
   plansError: null,
   discountVal: null,
   discountValError: null,
+  makePaymentSuccess: null,
+  makePaymentError: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -108,6 +110,16 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         discountValError: action.payload,
+      };
+    case ActionTypes.MAKE_PAYMENT_SUCCESS:
+      return {
+        ...state,
+        makePaymentSuccess: action.payload,
+      };
+    case ActionTypes.MAKE_PAYMENT_ERROR:
+      return {
+        ...state,
+        makePaymentError: action.payload,
       };
     case ActionTypes.HANDLE_REGISTER_ERROR:
       return {
