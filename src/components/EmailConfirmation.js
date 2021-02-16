@@ -13,16 +13,17 @@ function EmailConfirmation({
     <>
       <Form.Group>
         <Form.Label style={{ fontSize: "15px", fontFamily: "Poppins" }}>
-          We've sent you a six-digit confirmation code to
-        </Form.Label>
-        <Form.Label
-          style={{ fontSize: "15px", fontWeight: "600", fontFamily: "Poppins" }}
-        >
-          &nbsp; {values.email}.
-        </Form.Label>
-        <Form.Label style={{ fontSize: "15px", fontFamily: "Poppins" }}>
+          We've sent you a six-digit confirmation code to <b>{values.email}</b>{" "}
           Please enter it below to confirm your email address.
         </Form.Label>
+        {/* <Form.Label
+          style={{ fontSize: "15px", fontWeight: "600", fontFamily: "Poppins" }}
+        >
+          &nbsp; .
+        </Form.Label>
+        <Form.Label style={{ fontSize: "15px", fontFamily: "Poppins" }}>
+          
+        </Form.Label> */}
       </Form.Group>
       <Form.Group>
         <Form.Control

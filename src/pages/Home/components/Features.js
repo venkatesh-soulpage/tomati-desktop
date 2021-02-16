@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-//bootstrap
-import { button } from "react-bootstrap";
 // components
 import Table from "components/Table";
+// react router
+import { Link } from "react-router-dom";
 
 const Features = () => {
   const [details, setDetails] = useState({ type: "Outlet", plan: null });
@@ -49,7 +49,7 @@ const Features = () => {
         </div>
         <div className="row">
           <div className="col-7 mx-auto mb-3">
-            <button className="btn-dark rounded-pill" block>
+            <button className="btn-dark rounded-pill px-2" block>
               easy self setup
             </button>
           </div>
@@ -57,23 +57,27 @@ const Features = () => {
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
           <div className="col-10 mb-3 mx-auto">
-            <h4 className="text-center table-text-secondary">No of outlets</h4>
+            <h4 className="text-center table-text-secondary">
+              Number of outlets
+            </h4>
           </div>
         </div>
         <div className="row">
           <div className="col-10 mx-auto mb-3 text-center">
-            <button className="btn-dark rounded-pill">1</button>
+            <button className="btn-dark rounded-pill px-3">1</button>
           </div>
         </div>
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
           <div className="col-10 mb-3 mx-auto">
-            <h4 className="text-center table-text-secondary">No of events</h4>
+            <h4 className="text-center table-text-secondary">
+              Number of events
+            </h4>
           </div>
         </div>
         <div className="row">
           <div className="col-10 mx-auto mb-3 text-center">
-            <button className="btn-dark rounded-pill">4 per Month</button>
+            <button className="btn-dark rounded-pill px-3">4 per Month</button>
           </div>
         </div>
 
@@ -87,7 +91,7 @@ const Features = () => {
         </div>
         <div className="row">
           <div className="col-3 mx-auto mb-3">
-            <button className="btn-dark rounded-pill" block>
+            <button className="btn-dark rounded-pill px-3" block>
               2%
             </button>
           </div>
@@ -101,9 +105,13 @@ const Features = () => {
         <div className="row">
           <div className="col-10 mx-auto mb-3 text-center">
             {period === "monthly" ? (
-              <button className="btn-dark rounded-pill">5 Free Seats</button>
+              <button className="btn-dark rounded-pill px-3">
+                5 Free Seats
+              </button>
             ) : (
-              <button className="btn-dark rounded-pill">10 Free Seats</button>
+              <button className="btn-dark rounded-pill px-3">
+                10 Free Seats
+              </button>
             )}
           </div>
         </div>
@@ -122,9 +130,11 @@ const Features = () => {
         </div>
         <div className="row">
           <div className="col-10 mx-auto mb-3 text-center">
-            <button className="btn-danger rounded-pill" block>
-              Choose Plan
-            </button>
+            <Link to="register">
+              <button className="btn-danger rounded-pill px-3" block>
+                Choose Plan
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -147,7 +157,7 @@ const Features = () => {
         <div className="row">
           <div className="col-9  mx-auto mb-3 text-center">
             <button
-              className="rounded-pill"
+              className="rounded-pill px-3"
               style={{ background: "#c83f51" }}
               block
             >
@@ -174,7 +184,7 @@ const Features = () => {
         </div>
         <div className="row">
           <div className="col-8 mx-auto mb-3 text-center">
-            <button className="btn-dark rounded-pill" block>
+            <button className="btn-dark rounded-pill px-3" block>
               3
             </button>
           </div>
@@ -182,12 +192,14 @@ const Features = () => {
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
           <div className="col-10 mb-3 mx-auto">
-            <h4 className="text-center table-text-secondary">No of events</h4>
+            <h4 className="text-center table-text-secondary">
+              Number of events
+            </h4>
           </div>
         </div>
         <div className="row">
           <div className="col-10 mx-auto mb-3 text-center">
-            <button className="btn-dark rounded-pill">8 per Month</button>
+            <button className="btn-dark rounded-pill px-3">8 per Month</button>
           </div>
         </div>
 
@@ -201,7 +213,7 @@ const Features = () => {
         </div>
         <div className="row">
           <div className="col-3 mx-auto mb-3">
-            <button className="btn-dark rounded-pill" block>
+            <button className="btn-dark rounded-pill px-3" block>
               1.5%
             </button>
           </div>
@@ -215,9 +227,13 @@ const Features = () => {
         <div className="row">
           <div className="col-10 mx-auto mb-3 text-center">
             {period === "monthly" ? (
-              <button className="btn-dark rounded-pill">15 Free Seats</button>
+              <button className="btn-dark rounded-pill px-3">
+                15 Free Seats
+              </button>
             ) : (
-              <button className="btn-dark rounded-pill">35 Free Seats</button>
+              <button className="btn-dark rounded-pill px-3">
+                35 Free Seats
+              </button>
             )}
           </div>
         </div>
@@ -231,14 +247,20 @@ const Features = () => {
         </div>
         <div className="row">
           <div className="col-10 mx-auto text-center">
-            <h3 className="text-center ">$39</h3>
+            {period === "monthly" ? (
+              <h3 className="text-center ">$39</h3>
+            ) : (
+              <h3 className="text-center ">$374</h3>
+            )}
           </div>
         </div>
         <div className="row">
           <div className="col-10 mx-auto mb-3 text-center">
-            <button className="btn-dark rounded-pill" block>
-              Choose Plan
-            </button>
+            <Link to="register">
+              <button className="btn-dark rounded-pill px-3" block>
+                Choose Plan
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -268,23 +290,27 @@ const Features = () => {
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
           <div className="col-10 mb-3 mx-auto">
-            <h4 className="text-center table-text-secondary">No of outlets</h4>
+            <h4 className="text-center table-text-secondary">
+              Number of outlets
+            </h4>
           </div>
         </div>
         <div className="row">
           <div className="col-10 mx-auto mb-3 text-center">
-            <button className="btn-dark rounded-pill">10</button>
+            <button className="btn-dark rounded-pill px-3">10</button>
           </div>
         </div>
         <div className="row mb-4" style={{ borderTop: "1px solid #C3CAD8" }} />
         <div className="row">
           <div className="col-10 mb-3 mx-auto">
-            <h4 className="text-center table-text-secondary">No of events</h4>
+            <h4 className="text-center table-text-secondary">
+              Number of events
+            </h4>
           </div>
         </div>
         <div className="row">
           <div className="col-10 mx-auto mb-3 text-center">
-            <button className="btn-dark rounded-pill">12 per Month</button>
+            <button className="btn-dark rounded-pill px-3">12 per Month</button>
           </div>
         </div>
 
@@ -298,7 +324,7 @@ const Features = () => {
         </div>
         <div className="row">
           <div className="col-3 mx-auto mb-3">
-            <button className="btn-dark rounded-pill" block>
+            <button className="btn-dark rounded-pill px-3" block>
               1%
             </button>
           </div>
@@ -312,9 +338,13 @@ const Features = () => {
         <div className="row">
           <div className="col-10 mx-auto mb-3 text-center">
             {period === "monthly" ? (
-              <button className="btn-dark rounded-pill">50 Free Seats</button>
+              <button className="btn-dark rounded-pill px-3">
+                50 Free Seats
+              </button>
             ) : (
-              <button className="btn-dark rounded-pill">50 Free Seats</button>
+              <button className="btn-dark rounded-pill px-3">
+                50 Free Seats
+              </button>
             )}
           </div>
         </div>
@@ -328,14 +358,20 @@ const Features = () => {
         </div>
         <div className="row">
           <div className="col-10 mx-auto">
-            <h3 className="text-center font-weight-normal">$ 79</h3>
+            {period === "monthly" ? (
+              <h3 className="text-center ">$79</h3>
+            ) : (
+              <h3 className="text-center ">$758</h3>
+            )}
           </div>
         </div>
         <div className="row">
           <div className="col-10 mx-auto mb-3 text-center">
-            <button className="btn-danger rounded-pill" block>
-              Choose Plan
-            </button>
+            <Link to="register">
+              <button className="btn-dark rounded-pill px-3" block>
+                Choose Plan
+              </button>
+            </Link>
           </div>
         </div>
       </div>
