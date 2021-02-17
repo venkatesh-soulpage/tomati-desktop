@@ -5,6 +5,8 @@ import {
   userLogin,
   getPlansRequest,
   getLocationRegister,
+  updateUser,
+  // chargeBeeRequest,
   postDiscountValue,
   resetMessage,
   makePaymentRequest,
@@ -38,6 +40,7 @@ function Index(props) {
     password,
     state,
     city,
+    is_notifications_permited,
   } = props.location.state.values;
 
   React.useEffect(function () {
@@ -60,7 +63,6 @@ function Index(props) {
     active_plan && setActivePlan(active_plan[0]);
     setUserValues({});
   };
-
   const handleOutlet = (action) => (event) => {
     if (action === "plus") {
       if ("outletaddons" in userValues) {
@@ -226,90 +228,78 @@ function Index(props) {
   let total = subTotal + tax;
   const handlePayment = () => {
     console.log("handlepayment\n ");
-    props
-      .dispatch(
-        userRegistration({
-          full_name: full_name,
-          company_name: company_name,
-          email: email,
-          password_hash: password,
-          plan_id: activePlan?.id,
-          location_id: location,
-
-          state: selected_state && selected_state[0].name,
-          city: city,
-          street: address,
-          no_of_outlets:
-            "outletaddons" in userValues
-              ? userValues?.outletaddons
-              : activePlan?.outlet_limit,
-          no_of_qrcodes:
-            "qraddons" in userValues
-              ? userValues?.qraddons
-              : activePlan?.qr_tags_limit,
-        })
-      )
-      .then((response) => {
-        if (props?.auth?.registerError !== null) {
-          console.log("User exists");
-        } else {
+    const inputs = {
+      location_id: location,
+      full_name: full_name,
+      company_name: company_name,
+      email: email,
+      password_hash: password,
+      plan_id: activePlan?.id,
+      transaction_id: 1,
+      is_notifications_permited: is_notifications_permited,
+      state: selected_state && selected_state[0].name,
+      city: city,
+      street: address,
+      no_of_outlets:
+        "outletaddons" in userValues
+          ? userValues?.outletaddons
+          : activePlan?.outlet_limit,
+      no_of_qrcodes:
+        "qraddons" in userValues
+          ? userValues?.qraddons
+          : activePlan?.qr_tags_limit,
+      no_of_users:
+        "useraddons" in userValues
+          ? userValues?.useraddons
+          : activePlan?.user_limit,
+      no_of_events:
+        "eventaddons" in userValues
+          ? userValues?.eventaddons
+          : activePlan?.event_limit,
+    };
+    if (props?.auth?.user === null) {
+      props
+        .dispatch(userRegistration(inputs))
+        .then((response) => {
           setHide(false);
           setShow(true);
           console.log("response for payment\n", response);
-        }
-      })
-      .catch((error) => {
-        console.log("error\n", error);
-      });
-    // if (props?.auth?.user === null || props?.auth?.userData === {}) {
-    // } else {
-    //   // update user
-    //   console.log("update user");
-    // }
-    // if (total > 0) {
-    //   props
-    //     .dispatch(
-    //       makePaymentRequest({
-    //         full_name: full_name,
-    //         last_name: company_name,
-    //         email: email,
-    //         plan: "growth",
-    //         address: address,
-    //         state: selected_state && selected_state[0].name,
-    //         city: city,
-    //       })
-    //     )
-    //     .then((response) => {
-    //       console.log("response for payment\n", response);
-    //     });
-    // }
-  };
-  const urlEncode = function (data) {
-    var str = [];
-    for (var p in data) {
-      if (
-        data.hasOwnProperty(p) &&
-        !(data[p] == undefined || data[p] == null)
-      ) {
-        str.push(
-          encodeURIComponent(p) +
-            "=" +
-            (data[p] ? encodeURIComponent(data[p]) : "")
-        );
-      }
+        })
+        .catch((error) => {
+          console.log("error\n", error);
+        });
+    } else {
+      console.log("Update user in accounts table");
+      props.dispatch(updateUser(inputs));
     }
-    return str.join("&");
   };
+
   const handleCheckout = () => {
     window.Chargebee.init({
       site: "tomati-test",
     }).openCheckout({
       hostedPage() {
         return axios
-          .post(
-            "http://localhost:3000/api/payment",
-            urlEncode({ plan: "growth" })
-          )
+          .post("http://localhost:3000/api/payment", {
+            plan: activePlan?.chargebee_plan_id,
+            addons: [
+              {
+                id: "additional-outlets-",
+                unit_price: 2500,
+                quantity: 1,
+              },
+              {
+                id: "additional-events-",
+                unit_price: 2500,
+                quantity: 1,
+              },
+              {
+                id: "cbdemo_additionaluser",
+                unit_price: 1000,
+                quantity: 1,
+              },
+            ],
+          })
           .then((response) => {
             console.log("RESPONSE\n", response);
             return response.data;
@@ -319,7 +309,7 @@ function Index(props) {
         console.log(hostedPageId);
       },
       close() {
-        // handlePayment();
+        handlePayment();
         console.log("checkout new closed");
       },
       step(step) {
@@ -328,21 +318,22 @@ function Index(props) {
     });
   };
   const handleFinish = () => {
-    if (radio === "Card") {
-      // handleCheckout();
-      handlePayment();
-    } else {
-      handlePayment();
-    }
+    // if (radio === "Card") {
+    handleCheckout();
+    // handlePayment();
+    // } else {
+    // handlePayment();
+    // }
   };
   const handlePay = () => {
     if (radio === "Card") {
-      handleCheckout();
+      handleCheckout(activePlan);
     } else {
       setHide(true);
     }
   };
   console.log("props\n", props);
+  // console.log("props activePlan\n", activePlan);
   return (
     <div className="container mt-5 mb-5 pt-5">
       <div className="row">

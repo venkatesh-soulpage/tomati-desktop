@@ -514,6 +514,24 @@ export function updateUser(data) {
   };
 }
 /**
+ * FOr ChargeBee Information
+ * @param {*} data
+ */
+// export function chargeBeeRequest(data) {
+//   return function (dispatch) {
+//     return AuthService.chargeBee(data).then((responseData) => {
+//       console.log(responseData, "ChareBee Updated");
+//       return responseData;
+//       // history.push("/dashboard/settings");
+//       // dispatch(receiveResetPassword(responseData));
+//       // history.push("/forgot-password/success");
+//     });
+//     // .catch((errorData) => {
+//     //   // dispatch(receiveResetPasswordError(errorData));
+//     // });
+//   };
+// }
+/**
  * When reset password is successful
  * @param {*} data
  */

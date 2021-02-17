@@ -34,6 +34,7 @@ function Register(props) {
     location: "",
     address: "",
     state: "",
+    is_notifications_permited: false,
   });
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
@@ -156,6 +157,7 @@ function Register(props) {
                   handleChange={handleChange}
                   handleEmailCheck={handleEmailCheck}
                   props={props}
+                  setValues={setValues}
                 />
               </Form>
               <div className="w-100 d-md-none mx-auto mt-4 text-center">
