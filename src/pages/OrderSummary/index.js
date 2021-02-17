@@ -302,7 +302,7 @@ function Index(props) {
   };
   const handleCheckout = () => {
     window.Chargebee.init({
-      site: "soulpageit-test",
+      site: "tomati-test",
     }).openCheckout({
       hostedPage() {
         return axios

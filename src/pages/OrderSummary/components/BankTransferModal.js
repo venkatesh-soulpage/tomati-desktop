@@ -87,9 +87,9 @@ function BankTransferModal({ props, hide, setHide, handlePayment, radio }) {
                   color: "#fff",
                 }}
                 block
-                onClick={
-                  //
-                }
+                // onClick={
+                //   //
+                // }
               >
                 Confirm transfer
               </Button>
