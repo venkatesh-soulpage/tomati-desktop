@@ -70,24 +70,21 @@ function LogIn(props) {
   function handleAlertDismiss() {
     props.dispatch(clearLoginError());
   }
-  console.log(props);
-  console.log("LOADING\n", props.auth.isFetching);
-  console.log(props.auth.loginError);
   return (
     <div className="min-height mt-5">
       <div className="container-fluid h-100">
         <div className="row h-100 login d-flex justify-content-center">
-          <div className="col-md-4 w-100 p-0 ">
-            <h2 className="text-dark d-none d-md-block mb-0 text-center mb-4">
-              Login
-            </h2>
-            {props.auth.isFetching ? (
-              <div class="d-flex justify-content-center">
-                <div class="spinner-border text-secondary" role="status">
-                  <span class="sr-only">Loading...</span>
-                </div>
+          {props.auth.isFetching ? (
+            <div class="d-flex justify-content-center align-items-center">
+              <div class="spinner-border text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
               </div>
-            ) : (
+            </div>
+          ) : (
+            <div className="col-md-4 w-100 p-0 ">
+              <h2 className="text-dark d-none d-md-block mb-0 text-center mb-4">
+                Login
+              </h2>
               <Card className="p-md-5 pb-md-3 p-2 login-card card-border">
                 <h2 className="text-dark d-blocl d-md-none mb-0 text-center mb-4">
                   Login
@@ -158,8 +155,8 @@ function LogIn(props) {
                   </Form.Group>
                 </Form>
               </Card>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

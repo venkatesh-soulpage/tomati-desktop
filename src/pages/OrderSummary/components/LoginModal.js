@@ -2,7 +2,6 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Success from "assets/img/Success.svg";
 function LoginModal({ show, setShow, handleLoginData }) {
-  console.log(show);
   return (
     <div>
       <Modal

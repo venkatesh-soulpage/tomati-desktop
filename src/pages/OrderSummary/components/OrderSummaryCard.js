@@ -11,8 +11,8 @@ function OrderSummaryCard({
   handlePayment,
   radio,
   setRadio,
-  //   hide,
-  //   handleLoginData,
+  handlePay,
+  handleFinish,
 }) {
   const {
     address,
@@ -154,7 +154,7 @@ function OrderSummaryCard({
                 <button
                   type="button"
                   onClick={() => {
-                    setHide(true);
+                    handlePay();
                   }}
                   className="btn btn-danger btn-lg rounded-pill mt-3 px-5"
                 >
@@ -164,7 +164,7 @@ function OrderSummaryCard({
                 <button
                   type="button"
                   onClick={() => {
-                    handlePayment();
+                    handleFinish();
                   }}
                   className="btn btn-danger btn-lg rounded-pill mt-3 px-5"
                 >
