@@ -280,7 +280,7 @@ function Index(props) {
     }).openCheckout({
       hostedPage() {
         return axios
-          .post("http://localhost:3000/api/payment", {
+          .post("https://tomati-api.herokuapp.com/api/payment", {
             plan: activePlan?.chargebee_plan_id,
             addons: [
               {
