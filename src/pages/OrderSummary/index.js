@@ -1,11 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import PasswordTextField from "components/PasswordTextField";
-import { Dash, Plus, CheckCircle } from "react-bootstrap-icons";
-import Success from "assets/img/Success.svg";
 import {
   userRegistration,
   userLogin,
@@ -23,6 +17,9 @@ import OrderSummaryCard from "./components/OrderSummaryCard";
 import YourOrderCard from "./components/YourOrderCard";
 import BankTransferModal from "./components/BankTransferModal";
 import LoginModal from "./components/LoginModal";
+import axios from "axios";
+axios.defaults.headers.post["Content-Type"] =
+  "application/x-www-form-urlencoded";
 
 function Index(props) {
   const [error, setError] = React.useState(false);
@@ -31,7 +28,6 @@ function Index(props) {
   const [hide, setHide] = React.useState(false);
   const [show, setShow] = React.useState(false);
   const [radio, setRadio] = React.useState("Card");
-  console.log("radio\n", radio);
   const [discountValue, setDiscountValue] = React.useState(undefined);
   const {
     address,
@@ -229,24 +225,7 @@ function Index(props) {
   tax = parseFloat(tax.toFixed(2));
   let total = subTotal + tax;
   const handlePayment = () => {
-    console.log("payment uservalues\n ", userValues);
-    // if (total > 0) {
-    //   props
-    //     .dispatch(
-    //       makePaymentRequest({
-    //         full_name: full_name,
-    //         last_name: company_name,
-    //         email: email,
-    //         plan: "growth",
-    //         address: address,
-    //         state: selected_state && selected_state[0].name,
-    //         city: city,
-    //       })
-    //     )
-    //     .then((response) => {
-    //       console.log("response for payment\n", response);
-    //     });
-    // }
+    console.log("handlepayment\n ");
     props
       .dispatch(
         userRegistration({
@@ -271,13 +250,97 @@ function Index(props) {
         })
       )
       .then((response) => {
-        setHide(false);
-        setShow(true);
-        console.log("response for payment\n", response);
+        if (props?.auth?.registerError !== null) {
+          console.log("User exists");
+        } else {
+          setHide(false);
+          setShow(true);
+          console.log("response for payment\n", response);
+        }
       })
       .catch((error) => {
         console.log("error\n", error);
       });
+    // if (props?.auth?.user === null || props?.auth?.userData === {}) {
+    // } else {
+    //   // update user
+    //   console.log("update user");
+    // }
+    // if (total > 0) {
+    //   props
+    //     .dispatch(
+    //       makePaymentRequest({
+    //         full_name: full_name,
+    //         last_name: company_name,
+    //         email: email,
+    //         plan: "growth",
+    //         address: address,
+    //         state: selected_state && selected_state[0].name,
+    //         city: city,
+    //       })
+    //     )
+    //     .then((response) => {
+    //       console.log("response for payment\n", response);
+    //     });
+    // }
+  };
+  const urlEncode = function (data) {
+    var str = [];
+    for (var p in data) {
+      if (
+        data.hasOwnProperty(p) &&
+        !(data[p] == undefined || data[p] == null)
+      ) {
+        str.push(
+          encodeURIComponent(p) +
+            "=" +
+            (data[p] ? encodeURIComponent(data[p]) : "")
+        );
+      }
+    }
+    return str.join("&");
+  };
+  const handleCheckout = () => {
+    window.Chargebee.init({
+      site: "soulpageit-test",
+    }).openCheckout({
+      hostedPage() {
+        return axios
+          .post(
+            "http://localhost:3000/api/payment",
+            urlEncode({ plan: "growth" })
+          )
+          .then((response) => {
+            console.log("RESPONSE\n", response);
+            return response.data;
+          });
+      },
+      success(hostedPageId) {
+        console.log(hostedPageId);
+      },
+      close() {
+        // handlePayment();
+        console.log("checkout new closed");
+      },
+      step(step) {
+        console.log("checkout", step);
+      },
+    });
+  };
+  const handleFinish = () => {
+    if (radio === "Card") {
+      // handleCheckout();
+      handlePayment();
+    } else {
+      handlePayment();
+    }
+  };
+  const handlePay = () => {
+    if (radio === "Card") {
+      handleCheckout();
+    } else {
+      setHide(true);
+    }
   };
   console.log("props\n", props);
   return (
@@ -293,6 +356,8 @@ function Index(props) {
             handlePayment={handlePayment}
             radio={radio}
             setRadio={setRadio}
+            handlePay={handlePay}
+            handleFinish={handleFinish}
           />
         </div>
         <div className="col-md-4">

@@ -1,55 +1,8 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
-axios.defaults.headers.post["Content-Type"] =
-  "application/x-www-form-urlencoded";
 
 function BankTransferModal({ props, hide, setHide, handlePayment, radio }) {
-  const urlEncode = function (data) {
-    var str = [];
-    for (var p in data) {
-      if (
-        data.hasOwnProperty(p) &&
-        !(data[p] == undefined || data[p] == null)
-      ) {
-        str.push(
-          encodeURIComponent(p) +
-            "=" +
-            (data[p] ? encodeURIComponent(data[p]) : "")
-        );
-      }
-    }
-    return str.join("&");
-  };
-
-  const handleCheckout = () => {
-    window.Chargebee.init({
-      site: "soulpageit-test",
-    }).openCheckout({
-      hostedPage() {
-        return axios
-          .post(
-            "http://localhost:3000/api/payment",
-            urlEncode({ plan: "growth" })
-          )
-          .then((response) => {
-            console.log("RESPONSE\n", response);
-            return response.data;
-          });
-      },
-      success(hostedPageId) {
-        console.log(hostedPageId);
-      },
-      close() {
-        handlePayment();
-        console.log("checkout new closed");
-      },
-      step(step) {
-        console.log("checkout", step);
-      },
-    });
-  };
   const createId = (length) => {
     let result = "";
     const characters =
@@ -134,19 +87,9 @@ function BankTransferModal({ props, hide, setHide, handlePayment, radio }) {
                   color: "#fff",
                 }}
                 block
-                // onClick={() => {
-                //   // handlePayment();
-
-                //   setHide(false);
-                // }}
-                onClick={() => {
-                  if (radio === "Card") {
-                    handleCheckout();
-                  } else {
-                    handlePayment();
-                    setHide(false);
-                  }
-                }}
+                onClick={
+                  //
+                }
               >
                 Confirm transfer
               </Button>
