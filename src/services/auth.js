@@ -2,6 +2,20 @@ import axios from "axios";
 import "utils/axios_configuration";
 import * as APIRoutes from "constants/APIRoutes";
 
+const urlEncode = function (data) {
+  var str = [];
+  for (var p in data) {
+    if (data.hasOwnProperty(p) && !(data[p] == undefined || data[p] == null)) {
+      str.push(
+        encodeURIComponent(p) +
+          "=" +
+          (data[p] ? encodeURIComponent(data[p]) : "")
+      );
+    }
+  }
+  return str.join("&");
+};
+
 // TODO: axios default configurations
 
 class AuthAPI {
@@ -148,6 +162,37 @@ class AuthAPI {
         throw error.response.data;
       });
   }
+  // static chargeBee(data) {
+  //   console.log(data);
+  //   return axios
+  //     .post(
+  //       "http://localhost:3000/api/payment",
+  //       {
+  //         plan: "tomati-growth",
+  //         addons: [
+  //           {
+  //             id: "additional-outlets-",
+  //             unit_price: 2500,
+  //             quantity: 1,
+  //           },
+  //           {
+  //             id: "additional-events-",
+  //             unit_price: 2500,
+  //             quantity: 1,
+  //           },
+  //           {
+  //             id: "cbdemo_additionaluser",
+  //             unit_price: 1000,
+  //             quantity: 1,
+  //           },
+  //         ],
+  //       }
+  //     )
+  //     .then((response) => {
+  //       console.log("RESPONSE\n", response);
+  //       return response.data;
+  //     });
+  // }
 }
 
 export default AuthAPI;

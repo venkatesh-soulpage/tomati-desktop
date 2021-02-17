@@ -90,6 +90,7 @@ function BankTransferModal({ props, hide, setHide, handlePayment, radio }) {
                 // onClick={
                 //   //
                 // }
+                onClick={handlePayment}
               >
                 Confirm transfer
               </Button>

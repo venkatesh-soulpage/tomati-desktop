@@ -3,7 +3,14 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import PasswordTextField from "components/PasswordTextField";
 import { Link } from "react-router-dom";
-function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
+
+function PersonalDetails({
+  values,
+  handleChange,
+  handleEmailCheck,
+  props,
+  setValues,
+}) {
   const [error, setError] = useState(false);
   const [message, setMessage] = useState("");
   const strongRegex = new RegExp(
@@ -130,6 +137,13 @@ function PersonalDetails({ values, handleChange, handleEmailCheck, props }) {
         <Form.Check
           type="checkbox"
           label="I agree to receive Tomati news and updates."
+          checked={values.is_notifications_permited}
+          onChange={() =>
+            setValues({
+              ...values,
+              is_notifications_permited: !values.is_notifications_permited,
+            })
+          }
         />
       </Form.Group>
 

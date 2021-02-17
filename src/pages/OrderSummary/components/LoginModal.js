@@ -9,6 +9,8 @@ function LoginModal({ show, setShow, handleLoginData }) {
         show={show}
         onHide={() => setShow(false)}
         className="mt-5"
+        backdrop="static"
+        keyboard={false}
       >
         {" "}
         <Modal.Header>
