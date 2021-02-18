@@ -39,8 +39,8 @@ function ResetPasswordForm(props) {
     };
     if (values.password === values.re_password) {
       console.log(data, "DATA");
-    } else {
       props.dispatch(resetPassword(data));
+    } else {
     }
   }
 
