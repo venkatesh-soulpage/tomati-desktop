@@ -485,7 +485,7 @@ export function resetPassword(data) {
     return AuthService.resetPassword(data)
       .then((responseData) => {
         dispatch(receiveResetPassword(responseData));
-        history.push("/login");
+        history.push("/");
       })
       .catch((errorData) => {
         dispatch(receiveResetPasswordError(errorData));

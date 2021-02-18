@@ -69,7 +69,7 @@ function ForgotPasswordForm(props) {
             <div className="d-flex">
               <Link
                 className="btn btn-link"
-                to="/login"
+                to="/"
                 style={{ color: "#e0475b" }}
               >
                 Back to Login
