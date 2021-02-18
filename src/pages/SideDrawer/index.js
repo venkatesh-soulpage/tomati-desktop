@@ -73,7 +73,7 @@ const Index = (props) => {
           <NavLink
             disabled
             className=" drawer-link"
-            to="#"
+            to="/"
             onClick={() => props.dispatch(userSignOut())}
           >
             <img className="mr-3" src={Iconpower} alt="icon" /> Logout

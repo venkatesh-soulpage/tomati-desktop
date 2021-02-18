@@ -7,12 +7,10 @@ import { connect } from "react-redux";
 // Importing redux actions
 import { handleIsUserAuthenticated } from "_actions/auth";
 // Local Components
-import Home from "pages/Home";
 import OrderSummary from "pages/OrderSummary";
 // import Dashboard from "pages/Dashboard";
 import Page404 from "pages/static/Page404";
 // Auth Components
-import Register from "pages/auth/Register";
 import ResetPassword from "pages/auth/ResetPassword";
 
 import LogIn from "pages/auth/LogIn";
@@ -53,14 +51,7 @@ function App(props) {
       <Navbar />
 
       <Switch>
-        <Route path="/" name="home" exact component={Home} />
-        <AuthRoute
-          path="/register"
-          name="register"
-          exact
-          component={Register}
-        />
-        <AuthRoute path="/login" name="login" exact component={LogIn} />
+        <AuthRoute path="/" name="login" exact component={LogIn} />
         <AuthRoute
           path="/forgot-password"
           name="forgot-password"

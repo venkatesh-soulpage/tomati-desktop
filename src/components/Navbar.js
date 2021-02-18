@@ -64,7 +64,7 @@ function Navigation(props) {
                 </Nav>
               ) : (
                 <Nav>
-                  <Nav.Link
+                  {/* <Nav.Link
                     className="px-3 text-dark"
                     as={NavLink}
                     exact
@@ -129,7 +129,7 @@ function Navigation(props) {
                     style={{ color: "inherit", cursor: "pointer" }}
                   >
                     Register
-                  </Nav.Link>
+                  </Nav.Link> */}
                 </Nav>
               )}
             </Nav>
