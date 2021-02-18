@@ -1,0 +1,115 @@
+// /* =============================================================== */
+// /* Containers */
+// /* =============================================================== */
+// .section {
+//   padding: 60px 0px;
+// }
+// .full-height-page {
+//   height: 100vh;
+//   min-height: 768px;
+// }
+// .hero-unit {
+//   background: $light-blue-background;
+//   min-height: 720px;
+// }
+// .hero-unit img {
+//   object-fit: cover;
+// }
+// /* =============================================================== */
+// /* Panels */
+// /* =============================================================== */
+// .panel {
+//   background-color: $white-color;
+//   padding: 20px;
+//   border: 1px solid #eeeeee;
+//   box-shadow: 2px 4px 12px 2px rgba(0, 0, 0, 0.24);
+//   margin-bottom: 20px;
+// }
+// .paperDropzone {
+//   background-color: $light-background;
+//   border: 1px solid $border-color;
+//   padding: 20px;
+// }
+// .paper {
+//   background: $white-color;
+//   padding: 40px;
+//   margin-bottom: 10px;
+//   box-sizing: border-box;
+// }
+// @media (max-width: 576px) {
+//   .paper {
+//     padding: 40px 10px;
+//   }
+// }
+// /* =============================================================== */
+// /* Effects */
+// /* =============================================================== */
+// .elevated {
+//   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+// }
+// /* =============================================================== */
+// /* Wrappers */
+// /* =============================================================== */
+// .rdt_TableHeader {
+//   display: none;
+// }
+// .a-step-container {
+//   padding: 20px;
+// }
+// .app-container {
+//   height: auto;
+// }
+
+// .application-wrapper {
+//   min-height: 100vh;
+// }
+
+// .step-progress-bar {
+//   display: flex;
+// }
+// .step-navigator {
+//   padding: 3px;
+// }
+// /* =============================================================== */
+// /* Footer */
+// /* =============================================================== */
+// .footer {
+//   background: $dark-background;
+//   padding: 40px 0px;
+//   color: $light-color;
+// }
+
+.dashboard-grid-wrapper {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "dashboard-header dashboard-header"
+    "dashboard-left-sidebar dashboard-main"
+    "dashboard-left-sidebar dashboard-main";
+  height: 100vh;
+  overflow: hidden;
+}
+.dashboard-grid-header {
+  grid-area: dashboard-header;
+  box-sizing: border-box;
+}
+
+.dashboard-left-sidebar {
+  grid-area: dashboard-left-sidebar;
+  box-sizing: border-box;
+  background: white;
+}
+
+.dashboard-grid-main {
+  grid-area: dashboard-main;
+  box-sizing: border-box;
+  background: #f7f9fa;
+  overflow-y: auto;
+}
+
+.sidebar-sticky {
+  border-top: 20px solid #e0475c;
+  background-color: #2c3b56;
+  height: 100%;
+}

@@ -1,0 +1,62 @@
+@media only screen and (max-width: 768px) {
+  .register-card {
+    width: 100% !important;
+    height: 100%;
+  }
+  .login-card {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .club-images {
+    width: 80px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin: 5px 120px;
+    filter: grayscale(100%);
+  }
+  .background-home {
+    margin-top: -62%;
+  }
+  .curve-border {
+    border: 0;
+    border-top-left-radius: 40% 3%;
+    margin-top: -116%;
+    border-top-right-radius: 40% 3%;
+  }
+  .register-container {
+    height: 100%;
+  }
+  .logo-img {
+    height: 25px;
+  }
+  .image-container {
+    overflow-x: scroll;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .register-card {
+    width: 50% !important;
+    height: 100%;
+  }
+  .login {
+    align-items: center;
+  }
+  .club-images {
+    width: 80px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin: 5px 15px;
+    filter: grayscale(100%);
+  }
+  .curve-border {
+    border: 0;
+    border-top-left-radius: 30% 5%;
+    border-top-right-radius: 30% 5%;
+  }
+}

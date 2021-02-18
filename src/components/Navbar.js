@@ -1,0 +1,147 @@
+import React from "react";
+// Router
+import { NavLink, useLocation } from "react-router-dom";
+// Redux
+import { connect } from "react-redux";
+import { userSignOut } from "_actions/auth";
+// Bootstrap imports
+import { Navbar, Nav, Dropdown, NavItem, Container } from "react-bootstrap";
+import NavLinkB from "react-bootstrap/NavLink";
+import { Bell } from "react-bootstrap-icons";
+// assets
+import Logo from "assets/img/Logo.svg";
+import toggle from "assets/img/toggle.svg";
+// react-scroll
+import { Link } from "react-scroll";
+
+function Navigation(props) {
+  // User SignOut
+  function handleSignOut(event) {
+    props.dispatch(userSignOut());
+  }
+
+  const location = useLocation();
+
+  return (
+    <div
+      className="fixed-top bg-white border-bottom"
+      style={{ zIndex: "999999999" }}
+    >
+      <Container>
+        <Navbar expand="md">
+          <Navbar.Brand href={props.auth.isAuthenticated ? "/dashboard" : "/"}>
+            <img
+              src={Logo}
+              className="img-fluid d-inline-block align-top logo-img "
+              alt="Tomati.app"
+            />
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0">
+            <img src={toggle} />
+          </Navbar.Toggle>
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ml-auto" style={{ fontSize: "smaller" }}>
+              {props.auth.isAuthenticated ? (
+                <Nav>
+                  <Nav.Link
+                    as={NavLink}
+                    to="/dashboard"
+                    activeClassName="navlink-selected"
+                  >
+                    <Bell />
+                  </Nav.Link>
+                  <Nav.Link
+                    as={NavLink}
+                    to="/dashboard"
+                    activeClassName="navlink-selected"
+                  >
+                    <img
+                      className="rounded-circle img-fluid ml-2"
+                      height="50px"
+                      width="50px"
+                    />
+                  </Nav.Link>
+                </Nav>
+              ) : (
+                <Nav>
+                  {/* <Nav.Link
+                    className="px-3 text-dark"
+                    as={NavLink}
+                    exact
+                    to="/"
+                    activeClassName="active-nav-text"
+                    style={{ color: "inherit", cursor: "pointer" }}
+                  >
+                    Home
+                  </Nav.Link>
+                  {location.pathname === "/" && (
+                    <>
+                      <Link
+                        className="nav-link px-3 text-dark"
+                        smooth={true}
+                        duration={1000}
+                        to="works"
+                        activeClass="active-nav-text"
+                        style={{ color: "inherit", cursor: "pointer" }}
+                      >
+                        How it works
+                      </Link>
+
+                      <Link
+                        className="nav-link px-3 text-dark"
+                        smooth={true}
+                        duration={1000}
+                        to="features"
+                        activeClass="active-nav-text"
+                        style={{ color: "inherit", cursor: "pointer" }}
+                      >
+                        Features
+                      </Link>
+
+                      <Link
+                        className="nav-link px-3 text-dark"
+                        smooth={true}
+                        duration={1000}
+                        to="faq"
+                        activeClass="active-nav-text"
+                        style={{ color: "inherit", cursor: "pointer" }}
+                      >
+                        FAQ
+                      </Link>
+                    </>
+                  )}
+                  <Nav.Link
+                    className="px-3 text-dark mr-3"
+                    as={NavLink}
+                    exact
+                    to="/login"
+                    activeClassName="active-nav-text"
+                    style={{ color: "inherit", cursor: "pointer" }}
+                  >
+                    Login
+                  </Nav.Link>
+                  <Nav.Link
+                    as={NavLink}
+                    exact
+                    to="/register"
+                    className="register-button px-4 text-dark"
+                    activeClassName="active-nav-text"
+                    style={{ color: "inherit", cursor: "pointer" }}
+                  >
+                    Register
+                  </Nav.Link> */}
+                </Nav>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      </Container>
+    </div>
+  );
+}
+
+function mapStateToProps(state) {
+  return { auth: state.auth };
+}
+
+export default connect(mapStateToProps)(Navigation);
