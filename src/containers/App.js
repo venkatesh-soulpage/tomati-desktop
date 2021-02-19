@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { handleIsUserAuthenticated } from "_actions/auth";
 // Local Components
 import OrderSummary from "pages/OrderSummary";
+import OrderSummaryPurchaseAddons from "pages/OrderSummaryPurchaseAddons";
 // import Dashboard from "pages/Dashboard";
 import Page404 from "pages/static/Page404";
 // Auth Components
@@ -15,6 +16,8 @@ import ResetPassword from "pages/auth/ResetPassword";
 
 import LogIn from "pages/auth/LogIn";
 import ForgotPassword from "pages/auth/ForgotPassword";
+import Register from "pages/auth/Register";
+
 // import ForgotPassword from "pages/auth/ForgotPassword";
 
 // Layouts
@@ -58,6 +61,12 @@ function App(props) {
           exact
           component={ForgotPassword}
         />
+        <AuthRoute
+          path="/collborator/signup"
+          name="register"
+          exact
+          component={Register}
+        />
 
         {/* <AuthRoute
               path="/forgot-password/"
@@ -76,6 +85,11 @@ function App(props) {
         <Route exact path="/reset" component={ResetPassword} />
         <PrivateRoute path="/dashboard" component={DashboardPage} />
         <Route exact path="/order-summary" component={OrderSummary} />
+        <Route
+          exact
+          path="/order-summary/purchase-addones"
+          component={OrderSummaryPurchaseAddons}
+        />
 
         <Route component={Page404} />
       </Switch>

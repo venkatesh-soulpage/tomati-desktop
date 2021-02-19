@@ -226,7 +226,7 @@ function Index(props) {
               style={{ borderRadius: "30px", width: "140px", height: "54px" }}
               onClick={handleCollaborator}
             >
-              Save
+              Send
             </Button>
           </div>
         </Modal.Body>

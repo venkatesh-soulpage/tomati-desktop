@@ -73,3 +73,5 @@ export const GET_SINGLE_OUTLET = "GET_SINGLE_OUTLET";
 export const RECEIVE_USER_EVENTS = "RECEIVE_USER_EVENTS";
 export const ADD_EVENT = "ADD_EVENT";
 export const GET_SINGLE_EVENT = "GET_SINGLE_EVENT";
+
+export const TOMATI_DESKTOP_URL = "https://tomati-desktop.vercel.app/";

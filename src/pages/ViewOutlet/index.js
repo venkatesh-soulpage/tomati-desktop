@@ -78,8 +78,7 @@ function Index(props) {
         className="border"
         style={{
           height: "300px",
-          background:
-            "url(https://s-ec.bstatic.com/images/hotel/max1024x768/438/43853845.jpg)",
+          background: `url(https://s-ec.bstatic.com/images/hotel/max1024x768/438/43853845.jpg)`,
           backgroundSize: "cover",
         }}
       >
@@ -223,7 +222,7 @@ function Index(props) {
               style={{ borderRadius: "30px", width: "140px", height: "54px" }}
               onClick={handleCollaborator}
             >
-              Save
+              Send
             </Button>
           </div>
         </Modal.Body>

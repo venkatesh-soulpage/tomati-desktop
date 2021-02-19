@@ -114,10 +114,7 @@ const Index = (props) => {
             </button>
           </div>
           <div className="ml-auto mr-3">
-            <select class="form-control" onChange={handleSortByDate}>
-              <option>Sort By</option>
-              {/* <option value="date">By Date</option> */}
-            </select>
+            <button className="btn btn-dark rounded-pill">+ Addons</button>
           </div>
           <div>
             <input
