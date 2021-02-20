@@ -131,7 +131,7 @@ const Index = (props) => {
               Profile Picture
             </h4>
             <img
-              className="rounded-circle mr-4 "
+              className="rounded-circle mr-2 "
               src={user.profile_img}
               height={50}
               width={50}

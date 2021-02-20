@@ -13,6 +13,7 @@ export const VERIFY_CREDENTIALS = "/api/auth/verify-credentials";
 export const GET_USER = "/api/accounts/me";
 export const MAKE_PAYMENT = "/api/payment";
 export const UPDATE_USER = "/api/auth/reset-profile";
+export const GET_SUBSCRIPTION_ID = "/api/payment/retrive-subscription";
 // Application Routes
 export const APPLICATION_CREATE = "/api/v1/application/create";
 export const APPLICATION_LIST = "/api/v1/application";
@@ -39,3 +40,8 @@ export const ADD_EVENT_COLLABORATOR = "/api/auth/invite-collaborator";
 // s3 routes
 export const AWS_S3_STATIC_URL =
   "https://ivy-lender-bucket.s3.ca-central-1.amazonaws.com/static";
+
+export const TOMATI_DESKTOP_URL = "https://tomati-desktop.vercel.app/";
+export const HERULO_PAYMENT_URL =
+  "https://tomati-api.herokuapp.com/api/payment";
+export const LOCAL_PAYMENT_URL = "http://localhost:3000/api/payment";

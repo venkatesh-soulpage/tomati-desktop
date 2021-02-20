@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Success from "assets/img/Success.svg";
+import { TOMATI_DESKTOP_URL } from "constants/APIRoutes";
 function LoginModal({ show, setShow, handleLoginData }) {
   return (
     <div>
@@ -8,12 +9,13 @@ function LoginModal({ show, setShow, handleLoginData }) {
         size="xs"
         show={show}
         onHide={() => setShow(false)}
-        className="mt-5"
+        // className="mt-5"
         backdrop="static"
         keyboard={false}
+        style={{ marginTop: "15%" }}
       >
         {" "}
-        <Modal.Header>
+        <Modal.Header className="border-0">
           <Modal.Title />
         </Modal.Header>
         <Modal.Body style={{ overflow: "hidden" }}>
@@ -26,23 +28,25 @@ function LoginModal({ show, setShow, handleLoginData }) {
             </div>
             <div classsName="col-12 mt-3 text-center">
               <p className="text-center">
-                Now sit back and relax while we get your account set up.
+                Please Login to Tomati Desktop to manage your account.
               </p>
             </div>
             <div className="col-12 mt-3 text-center">
-              <button
-                className="btn btn-light mt-3"
-                style={{
-                  borderRadius: "30px",
-                  width: "140px",
-                  height: "54px",
-                  border: "0.5px solid black",
-                  // backgroundColor: "transparent",
-                }}
-                onClick={handleLoginData}
-              >
-                Login
-              </button>
+              <a target="_blank" href={TOMATI_DESKTOP_URL}>
+                <button
+                  className="btn btn-light mt-3"
+                  style={{
+                    borderRadius: "30px",
+                    width: "140px",
+                    height: "54px",
+                    border: "0.5px solid black",
+                    // backgroundColor: "transparent",
+                  }}
+                  // onClick={handleLoginData}
+                >
+                  Login
+                </button>
+              </a>
             </div>
           </div>
         </Modal.Body>

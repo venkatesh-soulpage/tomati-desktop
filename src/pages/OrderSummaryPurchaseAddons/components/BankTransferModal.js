@@ -86,7 +86,7 @@ function BankTransferModal({
                 // onClick={
                 //   //
                 // }
-                onClick={handlePayment}
+                onClick={() => handlePayment(transaction_id)}
               >
                 Confirm transfer
               </Button>

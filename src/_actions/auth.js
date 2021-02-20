@@ -186,6 +186,7 @@ export function userLogin(postData) {
         if (responseData.token) {
           dispatch(setAuthTokenInSession("token", responseData.token));
           dispatch(handleIsUserAuthenticated(true));
+          history.push("/dashboard/outlet");
         } else {
           var errorData = {
             status: "ERROR",
@@ -531,6 +532,30 @@ export function updateUser(data) {
 //     // });
 //   };
 // }
+
+/* ================================================================== */
+/* Get Subscription ID */
+/* ================================================================== */
+/**
+ * FOr Updating User Information
+ * @param {*} data
+ */
+export function getSubscriptionId(data) {
+  return function (dispatch) {
+    return AuthService.getSubscriptionId(data)
+      .then((responseData) => {
+        console.log(responseData, "Subs Id");
+        return responseData;
+
+        // dispatch(receiveResetPassword(responseData));
+        // history.push("/forgot-password/success");
+      })
+      .catch((errorData) => {
+        console.log(errorData, "Subs Id");
+        // dispatch(receiveResetPasswordError(errorData));
+      });
+  };
+}
 /**
  * When reset password is successful
  * @param {*} data

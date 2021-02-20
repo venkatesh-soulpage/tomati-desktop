@@ -75,14 +75,16 @@ function Index(props) {
       reader.onerror = (e) => reject(e);
     });
 
+  let cover = event?.cover_image;
+  console.log(cover);
+
   return (
     <div className="p-3">
       <div
         className="border"
         style={{
           height: "300px",
-          background:
-            "url(https://s-ec.bstatic.com/images/hotel/max1024x768/438/43853845.jpg)",
+          background: `url('${cover}')`,
           backgroundSize: "cover",
         }}
       >

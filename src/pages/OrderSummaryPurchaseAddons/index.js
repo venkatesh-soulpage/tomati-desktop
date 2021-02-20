@@ -11,6 +11,7 @@ import {
   resetMessage,
   makePaymentRequest,
   getUser,
+  getSubscriptionId,
 } from "_actions/auth";
 import _, { values } from "lodash";
 
@@ -79,12 +80,15 @@ function Index(props) {
         });
       } else {
         setUserValues((values) => {
-          return { ...values, outletaddons: activePlan.outlet_limit + 1 };
+          return {
+            ...values,
+            outletaddons: props?.auth?.user?.no_of_outlets + 1,
+          };
         });
       }
     } else {
       if ("outletaddons" in userValues) {
-        if (userValues.outletaddons > activePlan.outlet_limit) {
+        if (userValues.outletaddons > props?.auth?.user?.no_of_outlets) {
           setUserValues((values) => {
             return {
               ...values,
@@ -103,12 +107,12 @@ function Index(props) {
         });
       } else {
         setUserValues((values) => {
-          return { ...values, qraddons: activePlan.qr_tags_limit + 1 };
+          return { ...values, qraddons: props?.auth?.user?.no_of_qrcodes + 1 };
         });
       }
     } else {
       if ("qraddons" in userValues) {
-        if (userValues.qraddons > activePlan.qr_tags_limit) {
+        if (userValues.qraddons > props?.auth?.user?.no_of_qrcodes) {
           setUserValues((values) => {
             return {
               ...values,
@@ -128,12 +132,12 @@ function Index(props) {
         });
       } else {
         setUserValues((values) => {
-          return { ...values, useraddons: activePlan.user_limit + 1 };
+          return { ...values, useraddons: props?.auth?.user?.no_of_users + 1 };
         });
       }
     } else {
       if ("useraddons" in userValues) {
-        if (userValues.useraddons > activePlan.user_limit) {
+        if (userValues.useraddons > props?.auth?.user?.no_of_users) {
           setUserValues((values) => {
             return {
               ...values,
@@ -152,12 +156,15 @@ function Index(props) {
         });
       } else {
         setUserValues((values) => {
-          return { ...values, eventaddons: activePlan.event_limit + 1 };
+          return {
+            ...values,
+            eventaddons: props?.auth?.user?.no_of_events + 1,
+          };
         });
       }
     } else {
       if ("eventaddons" in userValues) {
-        if (userValues.eventaddons > activePlan.event_limit) {
+        if (userValues.eventaddons > props?.auth?.user?.no_of_events) {
           setUserValues((values) => {
             return {
               ...values,
@@ -200,22 +207,30 @@ function Index(props) {
   let outletPrice = 0;
   if ("outletaddons" in userValues) {
     const { outlet_addon_price, outlet_limit } = activePlan;
-    outletPrice = outlet_addon_price * (userValues.outletaddons - outlet_limit);
+    outletPrice =
+      outlet_addon_price *
+      (userValues.outletaddons - props?.auth?.user?.no_of_outlets);
   }
   let qrPrice = 0;
   if ("qraddons" in userValues) {
     const { qr_tags_addon_price, qr_tags_limit } = activePlan;
-    qrPrice = qr_tags_addon_price * (userValues.qraddons - qr_tags_limit);
+    qrPrice =
+      qr_tags_addon_price *
+      (userValues.qraddons - props?.auth?.user?.no_of_qrcodes);
   }
   let userPrice = 0;
   if ("useraddons" in userValues) {
     const { user_addon_price, user_limit } = activePlan;
-    userPrice = user_addon_price * (userValues.useraddons - user_limit);
+    userPrice =
+      user_addon_price *
+      (userValues.useraddons - props?.auth?.user?.no_of_users);
   }
   let eventPrice = 0;
   if ("eventaddons" in userValues) {
     const { event_addon_price, event_limit } = activePlan;
-    eventPrice = event_addon_price * (userValues.eventaddons - event_limit);
+    eventPrice =
+      event_addon_price *
+      (userValues.eventaddons - props?.auth?.user?.no_of_events);
   }
   let discount_value = 0;
   let subTotal =
@@ -264,7 +279,7 @@ function Index(props) {
     return result;
   };
   let transaction_id = createId(13);
-  const handlePayment = () => {
+  const handlePayment = (transaction_id) => {
     const inputs = {
       location_id: location,
       full_name: full_name,
@@ -338,39 +353,29 @@ function Index(props) {
     }
     let URL = "";
     if (process.env.NODE_ENV === "production") {
-      URL = "https://tomati-api.herokuapp.com/api/payment";
+      URL = "https://tomati-api.herokuapp.com/api/payment/update-subsciption";
     } else {
-      URL = "http://localhost:3000/api/payment";
+      URL = "http://localhost:3000/api/payment/update-subsciption";
     }
     console.log(activePlan);
-    window.Chargebee.init({
-      site: "tomati-test",
-    }).openCheckout({
-      hostedPage() {
+    props
+      .dispatch(
+        getSubscriptionId({ hostedPageId: props?.auth?.user?.transaction_id })
+      )
+      .then((res) => {
+        console.log(res);
         return axios
           .post(URL, {
-            plan: plan?.chargebee_plan_id,
+            plan_id: plan?.chargebee_plan_id,
             addons: addonArray,
-            customer: {
-              id: transaction_id,
-            },
+            subscription_id: res.hosted_page.content.subscription.id,
           })
           .then((response) => {
+            console.log(response);
+            handlePayment(props?.auth?.user?.transaction_id);
             return response.data;
           });
-      },
-      success(hostedPageId) {
-        handlePayment();
-        console.log(hostedPageId);
-      },
-      // close() {
-      //   // handlePayment();
-      //   console.log("checkout new closed");
-      // },
-      step(step) {
-        console.log("checkout", step);
-      },
-    });
+      });
   };
   const handleFinish = () => {
     handleCheckout();

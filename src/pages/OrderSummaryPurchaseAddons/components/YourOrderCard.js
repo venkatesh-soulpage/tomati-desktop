@@ -35,17 +35,19 @@ function YourOrderCard({
   const no_of_outlets =
     "outletaddons" in userValues
       ? userValues?.outletaddons
-      : activePlan?.outlet_limit;
+      : props?.auth?.user?.no_of_outlets;
   const no_of_qrs =
-    "qraddons" in userValues ? userValues?.qraddons : activePlan?.qr_tags_limit;
+    "qraddons" in userValues
+      ? userValues?.qraddons
+      : props?.auth?.user?.no_of_qrcodes;
   const no_of_users =
     "useraddons" in userValues
       ? userValues?.useraddons
-      : activePlan?.user_limit;
+      : props?.auth?.user?.no_of_users;
   const no_of_events =
     "eventaddons" in userValues
       ? userValues?.eventaddons
-      : activePlan?.event_limit;
+      : props?.auth?.user?.no_of_events;
 
   return (
     <div>
@@ -54,7 +56,7 @@ function YourOrderCard({
 
         <p>Plan</p>
 
-        <select onChange={handleActivePlan} className="form-control pl-3">
+        <select className="form-control pl-3">
           {/* <option value="">Select Plan</option> */}
           {props?.auth?.plans?.map((plan) => {
             if (plan.id === plan_id) {
@@ -71,28 +73,28 @@ function YourOrderCard({
             description={
               "A location that requires a separate menu and/or QR Code"
             }
-            no_of_items={props?.auth?.user?.no_of_outlets}
+            no_of_items={no_of_outlets}
             handleChange={handleOutlet}
             price={outletPrice}
           />
           <PriceComponent
             header={"QR Menu Tags?"}
             description={""}
-            no_of_items={props?.auth?.user?.no_of_qrcodes}
+            no_of_items={no_of_qrs}
             handleChange={handleQr}
             price={qrPrice}
           />
           <PriceComponent
             header={"Number of Users"}
             description={""}
-            no_of_items={props?.auth?.user?.no_of_users}
+            no_of_items={no_of_users}
             handleChange={handleUsers}
             price={userPrice}
           />
           <PriceComponent
             header={"Number of Events"}
             description={""}
-            no_of_items={props?.auth?.user?.no_of_events}
+            no_of_items={no_of_events}
             handleChange={handleEvent}
             price={eventPrice}
           />

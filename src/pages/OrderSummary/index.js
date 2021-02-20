@@ -2,14 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   userRegistration,
-  userLogin,
   getPlansRequest,
   getLocationRegister,
   updateUser,
-  // chargeBeeRequest,
-  postDiscountValue,
-  resetMessage,
-  makePaymentRequest,
 } from "_actions/auth";
 import _, { values } from "lodash";
 
@@ -19,12 +14,12 @@ import OrderSummaryCard from "./components/OrderSummaryCard";
 import YourOrderCard from "./components/YourOrderCard";
 import BankTransferModal from "./components/BankTransferModal";
 import LoginModal from "./components/LoginModal";
+import { LOCAL_PAYMENT_URL, HERULO_PAYMENT_URL } from "constants/APIRoutes";
 import axios from "axios";
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
 
 function Index(props) {
-  const [error, setError] = React.useState(false);
   const [activePlan, setActivePlan] = React.useState(null);
   const [userValues, setUserValues] = React.useState({});
   const [hide, setHide] = React.useState(false);
@@ -160,34 +155,14 @@ function Index(props) {
       }
     }
   };
-  const handleLoginData = () => {
-    const { email, password } = props.location.state.values;
-    console.log(email, "EAMIL FROM HANDLE LOGIN");
-    console.log(password, "PASSWORD FROM HANDLE LOGIN");
-    var postData = {
-      email: email,
-      password: password,
-    };
-    props
-      .dispatch(userLogin(postData))
-      .then((userData) => {
-        console.log(userData, "USER DATA FROM SUCESS MESSAGE");
-        props.history.push("/dashboard");
-      })
-      .catch((error) => {
-        console.log(error, "ERROR FROM AXIOS");
-      });
-  };
+
   if (!props.auth.locations) {
     return <>Loading...</>;
   }
 
   const country = _.filter(props.auth.locations, ["id", parseInt(location)]);
 
-  const selected_state =
-    country.length > 0 &&
-    _.filter(country[0].childrens, ["id", parseInt(state)]) &&
-    state;
+  const selected_state = state;
 
   let outletPrice = 0;
   if ("outletaddons" in userValues) {
@@ -227,8 +202,36 @@ function Index(props) {
   let tax = subTotal * 0.075;
   tax = parseFloat(tax.toFixed(2));
   let total = subTotal + tax;
-  const handlePayment = () => {
-    console.log("handlepayment\n ");
+  let no_of_outlets =
+    "outletaddons" in userValues
+      ? userValues?.outletaddons
+      : activePlan?.outlet_limit;
+
+  let no_of_qrcodes =
+    "qraddons" in userValues ? userValues?.qraddons : activePlan?.qr_tags_limit;
+
+  let no_of_users =
+    "useraddons" in userValues
+      ? userValues?.useraddons
+      : activePlan?.user_limit;
+
+  let no_of_events =
+    "eventaddons" in userValues
+      ? userValues?.eventaddons
+      : activePlan?.event_limit;
+  const createId = (length) => {
+    let result = "";
+    const characters =
+      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    const charactersLength = characters.length;
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+  let transaction_id = createId(13);
+  const handlePayment = (transaction_id) => {
     const inputs = {
       location_id: location,
       full_name: full_name,
@@ -236,27 +239,15 @@ function Index(props) {
       email: email,
       password_hash: password,
       plan_id: activePlan?.id,
-      transaction_id: 1,
+      transaction_id: transaction_id,
       is_notifications_permited: is_notifications_permited,
       state: selected_state && selected_state[0].name,
       city: city,
       street: address,
-      no_of_outlets:
-        "outletaddons" in userValues
-          ? userValues?.outletaddons
-          : activePlan?.outlet_limit,
-      no_of_qrcodes:
-        "qraddons" in userValues
-          ? userValues?.qraddons
-          : activePlan?.qr_tags_limit,
-      no_of_users:
-        "useraddons" in userValues
-          ? userValues?.useraddons
-          : activePlan?.user_limit,
-      no_of_events:
-        "eventaddons" in userValues
-          ? userValues?.eventaddons
-          : activePlan?.event_limit,
+      no_of_outlets: no_of_outlets,
+      no_of_qrcodes: no_of_qrcodes,
+      no_of_users: no_of_users,
+      no_of_events: no_of_events,
     };
     if (props?.auth?.user === null) {
       props
@@ -264,53 +255,81 @@ function Index(props) {
         .then((response) => {
           setHide(false);
           setShow(true);
-          console.log("response for payment\n", response);
         })
         .catch((error) => {
           console.log("error\n", error);
         });
     } else {
-      console.log("Update user in accounts table");
       props.dispatch(updateUser(inputs));
     }
   };
-
   const handleCheckout = () => {
+    let outletQuantity = no_of_outlets - activePlan?.outlet_limit;
+    let eventQuantity = no_of_events - activePlan?.event_limit;
+    let userQuantity = no_of_users - activePlan?.user_limit;
+    let qrQuantity = no_of_qrcodes - activePlan?.qr_tags_limit;
+    let coupon = [discountValue];
+    const addonArray = [];
+    if (outletQuantity !== 0) {
+      let outletObject = {
+        id: activePlan?.chargebee_outlets_addon_id,
+        unit_price: parseFloat(activePlan?.outlet_addon_price) * 100,
+        quantity: outletQuantity,
+      };
+      addonArray.push(outletObject);
+    }
+    if (eventQuantity !== 0) {
+      let eventObject = {
+        id: activePlan?.chargebee_events_addon_id,
+        unit_price: parseFloat(activePlan?.event_addon_price) * 100,
+        quantity: eventQuantity,
+      };
+      addonArray.push(eventObject);
+    }
+    if (userQuantity !== 0) {
+      let userObject = {
+        id: activePlan?.chargebee_collaborators_addon_id,
+        unit_price: parseFloat(activePlan?.user_addon_price) * 100,
+        quantity: userQuantity,
+      };
+      addonArray.push(userObject);
+    }
+    if (qrQuantity !== 0) {
+      let qrObject = {
+        id: activePlan?.chargebee_qr_addon_id,
+        unit_price: parseFloat(activePlan?.qr_tags_addon_price) * 100,
+        quantity: qrQuantity,
+      };
+      addonArray.push(qrObject);
+    }
+    let URL = "";
+    if (process.env.NODE_ENV === "production") {
+      URL = HERULO_PAYMENT_URL;
+    } else {
+      URL = LOCAL_PAYMENT_URL;
+    }
     window.Chargebee.init({
       site: "tomati-test",
     }).openCheckout({
       hostedPage() {
         return axios
-          .post("http://localhost:3000/api/payment", {
+          .post(URL, {
             plan: activePlan?.chargebee_plan_id,
-            addons: [
-              {
-                id: activePlan?.chargebee_outlets_addon_id,
-                unit_price: parseFloat(activePlan?.outlet_addon_price) * 100,
-                quantity: 1,
-              },
-              {
-                id: activePlan?.chargebee_events_addon_id,
-                unit_price: parseFloat(activePlan?.event_addon_price) * 100,
-                quantity: 1,
-              },
-              {
-                id: activePlan?.chargebee_collaborators_addon_id,
-                unit_price: parseFloat(activePlan?.user_addon_price) * 100,
-                quantity: 1,
-              },
-            ],
+            addons: addonArray,
+            customer: {
+              email: email,
+            },
+            coupon,
           })
           .then((response) => {
-            console.log("RESPONSE\n", response);
             return response.data;
           });
       },
       success(hostedPageId) {
+        handlePayment(hostedPageId);
         console.log(hostedPageId);
       },
       close() {
-        handlePayment();
         console.log("checkout new closed");
       },
       step(step) {
@@ -319,12 +338,7 @@ function Index(props) {
     });
   };
   const handleFinish = () => {
-    // if (radio === "Card") {
     handleCheckout();
-    // handlePayment();
-    // } else {
-    // handlePayment();
-    // }
   };
   const handlePay = () => {
     if (radio === "Card") {
@@ -333,12 +347,10 @@ function Index(props) {
       setHide(true);
     }
   };
-  console.log("props\n", props);
-  // console.log("props activePlan\n", activePlan);
   return (
     <div className="container mt-5 mb-5 pt-5">
-      <div className="row">
-        <div className="col-md-8">
+      <div className="d-flex row ">
+        <div className="col-md-8 order-2 order-md-1 mt-3 mt-md-0">
           <OrderSummaryCard
             props={props}
             country={country}
@@ -352,7 +364,7 @@ function Index(props) {
             handleFinish={handleFinish}
           />
         </div>
-        <div className="col-md-4">
+        <div className="col-md-4 order-1 order-md-2">
           <YourOrderCard
             props={props}
             activePlan={activePlan}
@@ -382,15 +394,10 @@ function Index(props) {
           setHide={setHide}
           handlePayment={handlePayment}
           radio={radio}
+          transaction_id={transaction_id}
         />
       ) : null}
-      {show ? (
-        <LoginModal
-          show={show}
-          setShow={setShow}
-          handleLoginData={handleLoginData}
-        />
-      ) : null}
+      {show ? <LoginModal show={show} setShow={setShow} /> : null}
     </div>
   );
 }

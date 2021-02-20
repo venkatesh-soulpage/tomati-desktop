@@ -2,18 +2,14 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-function BankTransferModal({ props, hide, setHide, handlePayment, radio }) {
-  const createId = (length) => {
-    let result = "";
-    const characters =
-      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    const charactersLength = characters.length;
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  };
+function BankTransferModal({
+  props,
+  hide,
+  setHide,
+  handlePayment,
+  radio,
+  transaction_id,
+}) {
   return (
     <div>
       <Modal
@@ -44,7 +40,7 @@ function BankTransferModal({ props, hide, setHide, handlePayment, radio }) {
               }}
             >
               <p style={{ color: "#8B7E0D", padding: "5px", margin: 0 }}>
-                {createId(6)}
+                {transaction_id}
               </p>
             </div>
             <div className="col-12 mt-2">
@@ -87,10 +83,9 @@ function BankTransferModal({ props, hide, setHide, handlePayment, radio }) {
                   color: "#fff",
                 }}
                 block
-                // onClick={
-                //   //
-                // }
-                onClick={handlePayment}
+                onClick={() => {
+                  handlePayment(transaction_id);
+                }}
               >
                 Confirm transfer
               </Button>
