@@ -83,9 +83,10 @@ function BankTransferModal({
                   color: "#fff",
                 }}
                 block
-                onClick={() => {
-                  handlePayment(transaction_id);
-                }}
+                // onClick={
+                //   //
+                // }
+                onClick={() => handlePayment(transaction_id)}
               >
                 Confirm transfer
               </Button>

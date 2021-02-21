@@ -2,9 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import {
   userRegistration,
+  userLogin,
   getPlansRequest,
   getLocationRegister,
   updateUser,
+  chargeBeeRequest,
+  postDiscountValue,
+  resetMessage,
+  makePaymentRequest,
+  getUser,
+  getSubscriptionId,
 } from "_actions/auth";
 import _, { values } from "lodash";
 
@@ -14,12 +21,12 @@ import OrderSummaryCard from "./components/OrderSummaryCard";
 import YourOrderCard from "./components/YourOrderCard";
 import BankTransferModal from "./components/BankTransferModal";
 import LoginModal from "./components/LoginModal";
-import { LOCAL_PAYMENT_URL, HERULO_PAYMENT_URL } from "constants/APIRoutes";
 import axios from "axios";
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
 
 function Index(props) {
+  const [error, setError] = React.useState(false);
   const [activePlan, setActivePlan] = React.useState(null);
   const [userValues, setUserValues] = React.useState({});
   const [hide, setHide] = React.useState(false);
@@ -36,18 +43,24 @@ function Index(props) {
     state,
     city,
     is_notifications_permited,
+    plan_id,
+    plan,
   } = props.location.state.values;
+
+  console.log(plan);
+  console.log(props);
 
   React.useEffect(function () {
     window.scroll(0, 0);
     props.dispatch(getPlansRequest());
     props.dispatch(getLocationRegister());
+    props.dispatch(getUser());
   }, []);
   React.useEffect(
     function () {
-      if (props.auth.plans?.length > 0) setActivePlan(props.auth.plans[0]);
+      if (plan) setActivePlan(plan);
     },
-    [props.auth.plans]
+    [plan]
   );
 
   const handleActivePlan = (e) => {
@@ -56,6 +69,7 @@ function Index(props) {
       parseInt(e.target.value),
     ]);
     active_plan && setActivePlan(active_plan[0]);
+
     setUserValues({});
   };
   const handleOutlet = (action) => (event) => {
@@ -66,12 +80,15 @@ function Index(props) {
         });
       } else {
         setUserValues((values) => {
-          return { ...values, outletaddons: activePlan.outlet_limit + 1 };
+          return {
+            ...values,
+            outletaddons: props?.auth?.user?.no_of_outlets + 1,
+          };
         });
       }
     } else {
       if ("outletaddons" in userValues) {
-        if (userValues.outletaddons > activePlan.outlet_limit) {
+        if (userValues.outletaddons > props?.auth?.user?.no_of_outlets) {
           setUserValues((values) => {
             return {
               ...values,
@@ -90,12 +107,12 @@ function Index(props) {
         });
       } else {
         setUserValues((values) => {
-          return { ...values, qraddons: activePlan.qr_tags_limit + 1 };
+          return { ...values, qraddons: props?.auth?.user?.no_of_qrcodes + 1 };
         });
       }
     } else {
       if ("qraddons" in userValues) {
-        if (userValues.qraddons > activePlan.qr_tags_limit) {
+        if (userValues.qraddons > props?.auth?.user?.no_of_qrcodes) {
           setUserValues((values) => {
             return {
               ...values,
@@ -115,12 +132,12 @@ function Index(props) {
         });
       } else {
         setUserValues((values) => {
-          return { ...values, useraddons: activePlan.user_limit + 1 };
+          return { ...values, useraddons: props?.auth?.user?.no_of_users + 1 };
         });
       }
     } else {
       if ("useraddons" in userValues) {
-        if (userValues.useraddons > activePlan.user_limit) {
+        if (userValues.useraddons > props?.auth?.user?.no_of_users) {
           setUserValues((values) => {
             return {
               ...values,
@@ -139,12 +156,15 @@ function Index(props) {
         });
       } else {
         setUserValues((values) => {
-          return { ...values, eventaddons: activePlan.event_limit + 1 };
+          return {
+            ...values,
+            eventaddons: props?.auth?.user?.no_of_events + 1,
+          };
         });
       }
     } else {
       if ("eventaddons" in userValues) {
-        if (userValues.eventaddons > activePlan.event_limit) {
+        if (userValues.eventaddons > props?.auth?.user?.no_of_events) {
           setUserValues((values) => {
             return {
               ...values,
@@ -155,34 +175,62 @@ function Index(props) {
       }
     }
   };
-
+  // const handleLoginData = () => {
+  //   const { email, password } = props.location.state.values;
+  //   console.log(email, "EAMIL FROM HANDLE LOGIN");
+  //   console.log(password, "PASSWORD FROM HANDLE LOGIN");
+  //   var postData = {
+  //     email: email,
+  //     password: password,
+  //   };
+  //   props
+  //     .dispatch(userLogin(postData))
+  //     .then((userData) => {
+  //       console.log(userData, "USER DATA FROM SUCESS MESSAGE");
+  //       props.history.push("/dashboard");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error, "ERROR FROM AXIOS");
+  //     });
+  // };
   if (!props.auth.locations) {
     return <>Loading...</>;
   }
 
   const country = _.filter(props.auth.locations, ["id", parseInt(location)]);
 
-  const selected_state = state;
+  const selected_state =
+    country.length > 0 &&
+    _.filter(country[0].childrens, ["id", parseInt(state)]) &&
+    state;
 
   let outletPrice = 0;
   if ("outletaddons" in userValues) {
     const { outlet_addon_price, outlet_limit } = activePlan;
-    outletPrice = outlet_addon_price * (userValues.outletaddons - outlet_limit);
+    outletPrice =
+      outlet_addon_price *
+      (userValues.outletaddons - props?.auth?.user?.no_of_outlets);
   }
   let qrPrice = 0;
   if ("qraddons" in userValues) {
     const { qr_tags_addon_price, qr_tags_limit } = activePlan;
-    qrPrice = qr_tags_addon_price * (userValues.qraddons - qr_tags_limit);
+    qrPrice =
+      qr_tags_addon_price *
+      (userValues.qraddons - props?.auth?.user?.no_of_qrcodes);
   }
   let userPrice = 0;
   if ("useraddons" in userValues) {
     const { user_addon_price, user_limit } = activePlan;
-    userPrice = user_addon_price * (userValues.useraddons - user_limit);
+    userPrice =
+      user_addon_price *
+      (userValues.useraddons - props?.auth?.user?.no_of_users);
   }
   let eventPrice = 0;
   if ("eventaddons" in userValues) {
     const { event_addon_price, event_limit } = activePlan;
-    eventPrice = event_addon_price * (userValues.eventaddons - event_limit);
+    eventPrice =
+      event_addon_price *
+      (userValues.eventaddons - props?.auth?.user?.no_of_events);
   }
   let discount_value = 0;
   let subTotal =
@@ -263,79 +311,71 @@ function Index(props) {
       props.dispatch(updateUser(inputs));
     }
   };
+
   const handleCheckout = () => {
     let outletQuantity = no_of_outlets - activePlan?.outlet_limit;
     let eventQuantity = no_of_events - activePlan?.event_limit;
     let userQuantity = no_of_users - activePlan?.user_limit;
     let qrQuantity = no_of_qrcodes - activePlan?.qr_tags_limit;
-    let coupon = [discountValue];
+
     const addonArray = [];
     if (outletQuantity !== 0) {
       let outletObject = {
-        id: activePlan?.chargebee_outlets_addon_id,
-        unit_price: parseFloat(activePlan?.outlet_addon_price) * 100,
+        id: "additional-outlets-",
+        unit_price: 2500,
         quantity: outletQuantity,
       };
       addonArray.push(outletObject);
     }
     if (eventQuantity !== 0) {
       let eventObject = {
-        id: activePlan?.chargebee_events_addon_id,
-        unit_price: parseFloat(activePlan?.event_addon_price) * 100,
+        id: "additional-events-",
+        unit_price: 2500,
         quantity: eventQuantity,
       };
       addonArray.push(eventObject);
     }
     if (userQuantity !== 0) {
       let userObject = {
-        id: activePlan?.chargebee_collaborators_addon_id,
-        unit_price: parseFloat(activePlan?.user_addon_price) * 100,
+        id: "cbdemo_additionaluser",
+        unit_price: 1000,
         quantity: userQuantity,
       };
       addonArray.push(userObject);
     }
     if (qrQuantity !== 0) {
       let qrObject = {
-        id: activePlan?.chargebee_qr_addon_id,
-        unit_price: parseFloat(activePlan?.qr_tags_addon_price) * 100,
+        id: "qr-menu-tags",
+        unit_price: 700,
         quantity: qrQuantity,
       };
       addonArray.push(qrObject);
     }
     let URL = "";
     if (process.env.NODE_ENV === "production") {
-      URL = HERULO_PAYMENT_URL;
+      URL = "https://tomati-api.herokuapp.com/api/payment/update-subsciption";
     } else {
-      URL = LOCAL_PAYMENT_URL;
+      URL = "http://localhost:3000/api/payment/update-subsciption";
     }
-    window.Chargebee.init({
-      site: "tomati-test",
-    }).openCheckout({
-      hostedPage() {
+    console.log(activePlan);
+    props
+      .dispatch(
+        getSubscriptionId({ hostedPageId: props?.auth?.user?.transaction_id })
+      )
+      .then((res) => {
+        console.log(res);
         return axios
           .post(URL, {
-            plan: activePlan?.chargebee_plan_id,
+            plan_id: plan?.chargebee_plan_id,
             addons: addonArray,
-            customer: {
-              email: email,
-            },
-            coupon,
+            subscription_id: res.hosted_page.content.subscription.id,
           })
           .then((response) => {
+            console.log(response);
+            handlePayment(props?.auth?.user?.transaction_id);
             return response.data;
           });
-      },
-      success(hostedPageId) {
-        handlePayment(hostedPageId);
-        console.log(hostedPageId);
-      },
-      close() {
-        console.log("checkout new closed");
-      },
-      step(step) {
-        console.log("checkout", step);
-      },
-    });
+      });
   };
   const handleFinish = () => {
     handleCheckout();
@@ -384,6 +424,7 @@ function Index(props) {
             subTotal={subTotal}
             tax={tax}
             total={total}
+            plan_id={plan_id}
           />
         </div>
       </div>
@@ -397,7 +438,13 @@ function Index(props) {
           transaction_id={transaction_id}
         />
       ) : null}
-      {show ? <LoginModal show={show} setShow={setShow} /> : null}
+      {show ? (
+        <LoginModal
+          show={show}
+          setShow={setShow}
+          // handleLoginData={handleLoginData}
+        />
+      ) : null}
     </div>
   );
 }

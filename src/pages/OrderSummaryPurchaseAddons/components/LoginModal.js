@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Success from "assets/img/Success.svg";
-import { TOMATI_DESKTOP_URL } from "constants/APIRoutes";
+import { TOMATI_DESKTOP_URL } from "constants/ActionTypes";
 function LoginModal({ show, setShow, handleLoginData }) {
   return (
     <div>

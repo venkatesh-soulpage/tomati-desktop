@@ -57,11 +57,16 @@ function LogIn(props) {
       .dispatch(userLogin(postData))
       .then((userData) => {
         if (userData.email_verified_at === null) {
+          console.log("hittin");
+
           props.history.push("/verify-email");
         } else if (userData.sms_verified_at === null) {
+          console.log("hittin");
+
           props.history.push("/verify-phone");
         } else if (sessionStorage.getItem("token")) {
-          props.history.push("/dashboard");
+          console.log("hittin");
+          props.history.push("/dashboard/outlet");
         }
       })
       .catch((error) => {});

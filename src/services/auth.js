@@ -162,6 +162,17 @@ class AuthAPI {
         throw error.response.data;
       });
   }
+  static getSubscriptionId(data) {
+    return axios
+      .post(APIRoutes.GET_SUBSCRIPTION_ID, data)
+      .then((response) => {
+        console.log(response);
+        return response.data;
+      })
+      .catch((error) => {
+        throw error.response.data;
+      });
+  }
   // static chargeBee(data) {
   //   console.log(data);
   //   return axios

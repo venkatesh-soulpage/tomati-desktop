@@ -63,7 +63,10 @@ const Index = (props) => {
                   company_name: auth?.user?.last_name,
                   email: auth?.user?.email,
                   full_name: auth?.user?.first_name,
-                  location: auth?.user?.location,
+                  location: auth?.user?.location?.id,
+                  state: auth?.user?.state,
+                  city: auth?.user?.city,
+                  address: auth?.user?.street,
                 },
               },
             }}
@@ -87,10 +90,28 @@ const Index = (props) => {
             </button>
           </div>
           <div className="ml-auto mr-3">
-            <select class="form-control">
-              <option>Sort By</option>
-            </select>
+            <Link
+              to={{
+                pathname: "/order-summary/purchase-addones",
+                state: {
+                  values: {
+                    company_name: auth?.user?.last_name,
+                    email: auth?.user?.email,
+                    full_name: auth?.user?.first_name,
+                    location: auth?.user?.location?.id,
+                    state: auth?.user?.state,
+                    city: auth?.user?.city,
+                    address: auth?.user?.street,
+                    plan: auth?.user?.plan[0],
+                    plan_id: auth?.user?.plan_id,
+                  },
+                },
+              }}
+            >
+              <button className="btn btn-dark rounded-pill">+ Addons</button>
+            </Link>
           </div>
+
           <div>
             <input
               class="form-control"
