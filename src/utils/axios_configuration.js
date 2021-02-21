@@ -1,7 +1,10 @@
 import axios from "axios";
+import { AWS_API_URL, HEROKU_API_URL } from "constants/APIRoutes";
 
-if (process.env.NODE_ENV === "production") {
-  axios.defaults.baseURL = "https://tomati-api.herokuapp.com";
+if (process.env.REACT_APP_VERCEL) {
+  axios.defaults.baseURL = HEROKU_API_URL;
+} else if (process.env.REACT_APP_AWS) {
+  axios.defaults.baseURL = AWS_API_URL;
 } else {
   axios.defaults.baseURL = "http://127.0.0.1:3000";
 }

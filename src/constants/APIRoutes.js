@@ -1,3 +1,14 @@
+//AWS
+export const AWS_DESKTOP_URL = "https://desktop.tomati.app";
+export const AWS_APP_URL = "https://tomati.app";
+export const AWS_WALLET_URL = "https://mobile.tomati.app";
+export const AWS_API_URL = "https://api.tomati.app";
+//VERCEL
+export const VERCEL_DESKTOP_URL = "https://tomati-desktop.vercel.app";
+export const HEROKU_API_URL = "https://tomati-api.herokuapp.com";
+
+export const LOCAL_DESKTOP_URL = "http://localhost:3002";
+
 // Auth Routes
 export const CLIENT_LOGIN = "/api/auth/login";
 export const CLIENT_REGISTER = "/api/auth/user-signup";
@@ -14,6 +25,8 @@ export const GET_USER = "/api/accounts/me";
 export const MAKE_PAYMENT = "/api/payment";
 export const UPDATE_USER = "/api/auth/reset-profile";
 export const GET_SUBSCRIPTION_ID = "/api/payment/retrive-subscription";
+export const INVITE_COLLABORATOR_EVENT = "/api/auth/outlet-event";
+export const INVITE_COLLABORATOR_VENUE = "/api/auth/outlet-venue";
 // Application Routes
 export const APPLICATION_CREATE = "/api/v1/application/create";
 export const APPLICATION_LIST = "/api/v1/application";

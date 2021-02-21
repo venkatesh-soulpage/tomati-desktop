@@ -119,6 +119,7 @@ function LogIn(props) {
                         value={values.email}
                         onChange={handleChange("email")}
                         placeholder="Enter email"
+                        required
                       />
                     </InputGroup>
                   </Form.Group>
@@ -136,6 +137,7 @@ function LogIn(props) {
                         onChange={handleChange("password")}
                         placeholder="Password"
                         type={values.hidden ? "password" : "text"}
+                        required
                       />
                       <div className="input-group-append">
                         <div

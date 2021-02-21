@@ -3,6 +3,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import PasswordTextField from "components/PasswordTextField";
 import { Link } from "react-router-dom";
+import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
+import moment from "moment";
 
 function PersonalDetails({
   values,
@@ -31,26 +34,12 @@ function PersonalDetails({
     }
   };
 
+  let inputProps = {
+    placeholder: "Date of Birth",
+  };
+
   return (
     <>
-      <Form.Group>
-        <Form.Control
-          type="text"
-          placeholder="FullName"
-          value={values.full_name}
-          onChange={handleChange("full_name")}
-          required
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Control
-          type="text"
-          placeholder="Company Name"
-          value={values.company_name}
-          onChange={handleChange("company_name")}
-          required
-        />
-      </Form.Group>
       <Form.Group>
         <Form.Control
           type="email"
@@ -63,22 +52,44 @@ function PersonalDetails({
           }}
           required
         />
-        <Form.Text>
-          {props.auth.verifySuccess === "This Email is available" ? (
-            <small style={{ color: "#4BB543" }}>
-              {props.auth.verifySuccess}
-            </small>
-          ) : props.auth.verifySuccess === "Enter valid Email" ? (
-            <small style={{ color: "#E0475B" }}>
-              {props.auth.verifySuccess}
-            </small>
-          ) : (
-            props.auth.verifyError && (
-              <small style={{ color: "#E0475B" }}>Email is already taken</small>
-            )
-          )}
-        </Form.Text>
       </Form.Group>
+      <Form.Group>
+        <Form.Control
+          type="text"
+          placeholder="FullName"
+          value={values.first_name}
+          onChange={handleChange("first_name")}
+          required
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Control
+          type="text"
+          placeholder="Last Name"
+          value={values.last_name}
+          onChange={handleChange("last_name")}
+          required
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Control
+          type="text"
+          placeholder="Phone Number"
+          value={values.phone_number}
+          onChange={handleChange("phone_number")}
+          required
+        />
+      </Form.Group>
+      <Form.Group>
+        <Datetime
+          inputProps={inputProps}
+          value={values.date_of_birth}
+          onChange={(e) =>
+            setValues({ ...values, date_of_birth: moment(e).format() })
+          }
+        />
+      </Form.Group>
+      <Form.Group></Form.Group>
       <Form.Group>
         <PasswordTextField
           value={values.password}
@@ -100,47 +111,13 @@ function PersonalDetails({
           </span>
         ) : null}
       </Form.Group>
-      <Form.Group className="d-flex mt-3 mt-md-0">
-        <Form.Check className="mt-0" type="checkbox" required />
-        <Form.Text>
-          <p className="m-0">
-            I agree to Tomati{" "}
-            <Link
-              style={{ color: "#E0475B" }}
-              to="/termspolicy"
-              target="_blank"
-            >
-              <u>
-                <b>Terms</b>
-              </u>
-            </Link>{" "}
-            and{" "}
-            <Link
-              style={{ color: "#E0475B" }}
-              to="/privacypolicy"
-              target="_blank"
-            >
-              <u>
-                <b>Privacy Policy</b>
-              </u>
-            </Link>
-            .
-          </p>
-        </Form.Text>
-      </Form.Group>
-      <Form.Group>
-        <Form.Check
-          type="checkbox"
-          label="I agree to receive Tomati news and updates."
-          checked={values.is_notifications_permited}
-          onChange={() =>
-            setValues({
-              ...values,
-              is_notifications_permited: !values.is_notifications_permited,
-            })
-          }
-        />
-      </Form.Group>
+      <PasswordTextField
+        value={values.confirm}
+        onChange={handleChange("confirm")}
+        placeholder="Confirm Password"
+        required
+        onBlur={analyze}
+      />
 
       <Form.Group className="d-flex justify-content-end mt-5">
         <Button
