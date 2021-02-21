@@ -26,6 +26,31 @@ export function userRegistration(postData) {
       });
   };
 }
+
+/* ================================================================== */
+/* Collaborator Signup */
+/* ================================================================== */
+/**
+ * Collaborator Signup
+
+ * @param {*} postData
+ */
+export function collaboratorSignup(postData) {
+  return function (dispatch) {
+    // console.log("action\n", postData);
+
+    return AuthService.collaboratorSignup(postData)
+      .then((responseData) => {
+        console.log(responseData);
+        // history.push("/");
+        return responseData;
+      })
+      .catch((errorData) => {
+        console.log(errorData);
+        dispatch(handleRegisterError(errorData));
+      });
+  };
+}
 /**
  * Email Otp
  * On registration is success - User Details

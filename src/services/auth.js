@@ -173,6 +173,24 @@ class AuthAPI {
         throw error.response.data;
       });
   }
+  static collaboratorSignup(data) {
+    console.log(data);
+    let URL;
+    if (data.outlet_event) {
+      URL = `${APIRoutes.INVITE_COLLABORATOR_EVENT}/${data.outlet_event}/waiter-signup`;
+    } else if (data.outlet_venue) {
+      URL = `${APIRoutes.INVITE_COLLABORATOR_VENUE}/${data.outlet_venue}/waiter-signup`;
+    }
+    return axios
+      .post(URL, data)
+      .then((response) => {
+        console.log(response);
+        return response.data;
+      })
+      .catch((error) => {
+        throw error.response.data;
+      });
+  }
   // static chargeBee(data) {
   //   console.log(data);
   //   return axios
