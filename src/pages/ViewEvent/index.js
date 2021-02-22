@@ -20,14 +20,17 @@ import { Camera } from "react-bootstrap-icons";
 // image assets
 import IconQR from "assets/img/IconQR.svg";
 import UploadCover from "assets/img/UploadCover.svg";
-
+//local components
 import QR from "./QR";
 import About from "./About";
+import CustomModal from "components/CustomModal";
 
 function Index(props) {
   const [addMenu, setAddmenu] = useState(false);
   const [addCollaborator, setCollaborator] = useState(false);
   const [menu, setMenu] = useState(null);
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
   const [collaboratorDetail, setCollaboratorDetail] = useState({
     owner_email: "",
     display_name: "",
@@ -49,7 +52,12 @@ function Index(props) {
   };
 
   const handleMenu = () => {
-    props.dispatch(addEventMenu(event.id, menu));
+    props.dispatch(addEventMenu(event.id, menu)).then((res) => {
+      console.log(res);
+      setAddmenu(false);
+      setMessage(res.Message);
+      setShow(true);
+    });
   };
 
   const handleChange = (name) => (e) => {
@@ -185,6 +193,11 @@ function Index(props) {
           </Switch>
         </div>
       </div>
+      <CustomModal
+        show={show}
+        message={message}
+        onHide={() => setShow(false)}
+      />
       <Modal
         show={addCollaborator}
         onHide={() => setCollaborator(false)}

@@ -3,11 +3,14 @@ import { Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getOutlet, updateOutlet } from "_actions/outlet";
+import CustomModal from "components/CustomModal";
 
 const About = (props) => {
   useEffect(() => {
     getOutlet(props.location.state);
   }, []);
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
 
   const { outlet } = props.outlet;
   const [values, setValues] = useState({
@@ -27,7 +30,10 @@ const About = (props) => {
 
   const handleUpdate = () => {
     console.log(values);
-    props.dispatch(updateOutlet(props.location.state, values));
+    props.dispatch(updateOutlet(props.location.state, values)).then((res) => {
+      setMessage(res);
+      setShow(true);
+    });
   };
   return (
     <div className="card bg-white border p-5 mt-2">
@@ -87,6 +93,11 @@ const About = (props) => {
           </button>
         </div>
       </div>
+      <CustomModal
+        show={show}
+        message={message}
+        onHide={() => setShow(false)}
+      />
     </div>
   );
 };
