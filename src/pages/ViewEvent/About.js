@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getEvent, updateEvent } from "_actions/event";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import moment from "moment";
+import CustomModal from "components/CustomModal";
 
 const About = (props) => {
   useEffect(() => {
     getEvent(props.location.state);
   }, []);
+
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
 
   const { event } = props.event;
   const [values, setValues] = useState({
@@ -30,7 +34,11 @@ const About = (props) => {
 
   const handleUpdate = () => {
     console.log(values);
-    props.dispatch(updateEvent(props.location.state, values));
+    props.dispatch(updateEvent(props.location.state, values)).then((res) => {
+      console.log(res, "from update event");
+      setMessage(res);
+      setShow(true);
+    });
   };
   let inputProps = {
     placeholder: "Start Time",
@@ -119,6 +127,12 @@ const About = (props) => {
           </button>
         </div>
       </div>
+      <CustomModal
+        show={show}
+        message={message}
+        onHide={() => setShow(false)}
+      />
+      ;
     </div>
   );
 };

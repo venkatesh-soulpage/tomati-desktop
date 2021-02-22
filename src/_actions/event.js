@@ -2,6 +2,7 @@
 import axios from "axios";
 import * as ActionTypes from "constants/ActionTypes";
 import * as APIRoutes from "constants/APIRoutes";
+import EventService from "services/event";
 import history from "utils/history";
 
 /* ================================================================== */
@@ -45,16 +46,14 @@ export function addEvent(data) {
 
 export function addEventMenu(id, menu) {
   return function (dispatch) {
-    axios
-      .post(`${APIRoutes.ADD_EVENT_REQUEST}/${id}/menu`, menu)
+    // axios
+    //   .post(`${APIRoutes.ADD_EVENT_REQUEST}/${id}/menu`, menu)
+    return EventService.addEventMenu(id, menu)
       .then((responseData) => {
-        history.push("/dashboard/event");
-        // dispatch(addEventMenu(responseData.data.Event.id, data.menu));
         return responseData;
       })
       .catch((errorData) => {
         console.log(errorData);
-        // dispatch(handleRegisterError(errorData));
       });
   };
 }
@@ -78,17 +77,14 @@ export function getEvent(id) {
 
 export function updateEvent(id, data) {
   return function (dispatch) {
-    axios
-      .put(`${APIRoutes.GET_EVENT}/${id}`, data)
+    return EventService.updateEvent(id, data)
       .then((responseData) => {
         console.log(responseData);
-        history.push("/dashboard/event");
-        // dispatch(postUpdatedOutlet(responseData.data));
-        // return responseData;
+        return responseData;
+        // history.push("/dashboard/event");
       })
       .catch((errorData) => {
         console.log(errorData);
-        // dispatch(handleRegisterError(errorData));
       });
   };
 }

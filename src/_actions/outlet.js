@@ -2,6 +2,7 @@
 import axios from "axios";
 import * as ActionTypes from "constants/ActionTypes";
 import * as APIRoutes from "constants/APIRoutes";
+import OutletService from "services/outlet";
 import history from "utils/history";
 
 /* ================================================================== */
@@ -67,20 +68,14 @@ export function addOutlet(data) {
 export function addOutletMenu(id, menu) {
   console.log(id, menu, "Add Menu");
   return function (dispatch) {
-    axios
-      .post(`${APIRoutes.ADD_OUTLET_REQUEST}/${id}/menu`, menu)
+    // axios
+    //   .post(`${APIRoutes.ADD_EVENT_REQUEST}/${id}/menu`, menu)
+    return OutletService.addOutletMenu(id, menu)
       .then((responseData) => {
-        console.log(responseData);
-        history.push("/dashboard/outlet");
-        if (responseData.data === "VenueMenu Created Successfully") {
-          dispatch(addOutletResponse(responseData.data, true));
-        } else {
-          // return responseData;
-        }
+        return responseData;
       })
       .catch((errorData) => {
-        console.log(errorData.response);
-        // dispatch(handleRegisterError(errorData));
+        console.log(errorData);
       });
   };
 }
@@ -88,16 +83,14 @@ export function addOutletMenu(id, menu) {
 export function updateOutlet(id, data) {
   console.log(data, id, "update Outlet");
   return function (dispatch) {
-    axios
-      .put(`${APIRoutes.GET_OUTLET}/${id}`, data)
+    return OutletService.updateOutlet(id, data)
       .then((responseData) => {
-        history.push("/dashboard/outlet");
-        // dispatch(postUpdatedOutlet(responseData.data, true));
-        // return responseData;
+        console.log(responseData);
+        return responseData;
+        // history.push("/dashboard/event");
       })
       .catch((errorData) => {
         console.log(errorData);
-        // dispatch(handleRegisterError(errorData));
       });
   };
 }

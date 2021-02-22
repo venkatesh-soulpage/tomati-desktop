@@ -1,7 +1,10 @@
 import React from "react";
 // react bootstrap
-
+import Success from "assets/img/Success.svg";
+// react bootstrap
 import { Modal, Button } from "react-bootstrap";
+//react router
+import { Link } from "react-router-dom";
 
 function CustomModal(props) {
   return (
@@ -19,12 +22,10 @@ function CustomModal(props) {
           </Modal.Title> */}
         </Modal.Header>
         <Modal.Body className="bg-white mt-0 pt-0 pb-5 text-center">
-          <h4>Centered Modal</h4>
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
-          </p>
+          <div className="col-12 text-center mt-4">
+            <img className="img-fluid mt-3" src={Success} alt="icon" />
+          </div>
+          <p>{props.message}</p>
           <Button
             variant="outline-secondary rounded-pill px-4 py-2"
             onClick={props.onHide}
