@@ -8,6 +8,7 @@ import { Link, useLocation } from "react-router-dom";
 
 // local components
 import PasswordTextField from "components/PasswordTextField";
+import CustomModal from "components/CustomModal";
 
 import { Card, Button, Form } from "react-bootstrap";
 
@@ -17,6 +18,10 @@ function ResetPasswordForm(props) {
     password: "",
     re_password: "",
   });
+  const [show, setShow] = React.useState(false);
+  const [error, setError] = React.useState(false);
+  const [message, setMessage] = React.useState("");
+  const [message1, setMessage1] = React.useState("");
 
   const [alert, setAlert] = React.useState({
     variant: "warning",
@@ -39,10 +44,33 @@ function ResetPasswordForm(props) {
     };
     if (values.password === values.re_password) {
       console.log(data, "DATA");
-      props.dispatch(resetPassword(data));
+      props.dispatch(resetPassword(data)).then((res) => {
+        setMessage(res);
+        setShow(true);
+      });
     } else {
+      setMessage("password does not match");
+      setShow(true);
     }
   }
+
+  const strongRegex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+  );
+
+  const analyze = (e) => {
+    const val = e.target.value;
+    console.log(val);
+    if (strongRegex.test(val)) {
+      setError(true);
+      setMessage1("Strong Password");
+    } else {
+      setError(true);
+      setMessage1(
+        "Your password must be at-least 8 characters with uppercase, lowercase, number & special characters"
+      );
+    }
+  };
 
   const handleChange = (name) => (event) => {
     setValues({ ...values, [name]: event.target.value });
@@ -64,8 +92,30 @@ function ResetPasswordForm(props) {
                     onChange={handleChange("password")}
                     placeholder="New Password"
                     autoComplete="off"
+                    onBlur={analyze}
                   />
+                  {error ? (
+                    <span
+                      style={
+                        message1 ===
+                        "Your password must be at-least 8 characters with uppercase, lowercase, number & special characters"
+                          ? {
+                              color: "#cc3300",
+                              marginTop: "2px",
+                              fontSize: "11px",
+                            }
+                          : {
+                              color: "#4BB543",
+                              marginTop: "2px",
+                              fontSize: "11px",
+                            }
+                      }
+                    >
+                      {message1}
+                    </span>
+                  ) : null}
                 </Form.Group>
+
                 <Form.Group>
                   <Form.Control
                     type="password"
@@ -93,7 +143,7 @@ function ResetPasswordForm(props) {
                   </Form.Group>
                 </div>
                 <div className="text-muted">
-                  <Link className="btn btn-link" to="/login">
+                  <Link className="btn btn-link" to="/">
                     Login as a different user
                   </Link>
                 </div>
@@ -102,6 +152,11 @@ function ResetPasswordForm(props) {
           </div>
         </div>
       </div>
+      <CustomModal
+        show={show}
+        onHide={() => setShow(false)}
+        message={message}
+      />
     </div>
   );
 }

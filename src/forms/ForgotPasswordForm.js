@@ -19,7 +19,9 @@ function ForgotPasswordForm(props) {
     var postData = {
       email: values.email,
     };
-    props.dispatch(forgetPassword(postData));
+    props.dispatch(forgetPassword(postData)).then((res) => {
+      console.log(res);
+    });
   }
 
   return (

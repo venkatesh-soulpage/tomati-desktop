@@ -55,6 +55,7 @@ export function addOutlet(data) {
         console.log(responseData);
 
         dispatch(addOutletMenu(responseData.data.Venue.id, data.menu));
+        history.push("/dashboard/outlet");
         // return responseData;
       })
       .catch((errorData) => {
