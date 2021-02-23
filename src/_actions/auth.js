@@ -447,10 +447,12 @@ export function forgetPassword(postData) {
       .then((responseData) => {
         dispatch(receiveForgotPasswordToken(responseData));
         dispatch(forgotPasswordToggle(true));
+        return responseData;
       })
       .catch((errorData) => {
         dispatch(receiveForgotPasswordError(errorData));
         dispatch(forgotPasswordToggle(false));
+        return errorData;
       });
   };
 }
@@ -511,10 +513,11 @@ export function resetPassword(data) {
     return AuthService.resetPassword(data)
       .then((responseData) => {
         dispatch(receiveResetPassword(responseData));
-        history.push("/");
+        return responseData;
       })
       .catch((errorData) => {
         dispatch(receiveResetPasswordError(errorData));
+        return errorData;
       });
   };
 }

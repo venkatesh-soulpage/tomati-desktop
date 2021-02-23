@@ -34,7 +34,8 @@ export function addEvent(data) {
     axios
       .post(APIRoutes.ADD_EVENT_REQUEST, data)
       .then((responseData) => {
-        return dispatch(addEventMenu(responseData.data.Event.id, data.menu));
+        dispatch(addEventMenu(responseData.data.Event.id, data.menu));
+        history.push("/dashboard/event");
       })
       .catch((errorData) => {
         console.log(errorData);
