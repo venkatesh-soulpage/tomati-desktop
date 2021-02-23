@@ -13,13 +13,9 @@ import OrderSummaryPurchaseAddons from "pages/OrderSummaryPurchaseAddons";
 import Page404 from "pages/static/Page404";
 // Auth Components
 import ResetPassword from "pages/auth/ResetPassword";
-
 import LogIn from "pages/auth/LogIn";
 import ForgotPassword from "pages/auth/ForgotPassword";
 import Register from "pages/auth/Register";
-
-// import ForgotPassword from "pages/auth/ForgotPassword";
-
 // Layouts
 import Navbar from "components/Navbar";
 import Footer from "components/Footer";
@@ -29,8 +25,6 @@ import AuthRoute from "containers/AuthRoute";
 import Terms from "pages/Terms";
 import Privacy from "pages/Privacy";
 import DashboardPage from "pages/dashboard/DashboardPage";
-// import PrivateRoute from "./PrivateRoute";
-// import ResetPasswordSuccess from "pages/static/ResetPasswordSuccess";
 
 function App(props) {
   /**
@@ -68,17 +62,6 @@ function App(props) {
           component={Register}
         />
 
-        {/* <AuthRoute
-              path="/forgot-password/"
-              exact
-              component={ForgotPassword}
-            /> */}
-        {/* <Route
-              path="/forgot-password/success"
-              exact
-              component={ResetPasswordSuccess}
-            /> */}
-        {/* <PrivateRoute path="/dashboard/" exact component={Dashboard} /> */}
         <Route exact path="/termspolicy" component={Terms} />
         <Route exact path="/privacypolicy" component={Privacy} />
 

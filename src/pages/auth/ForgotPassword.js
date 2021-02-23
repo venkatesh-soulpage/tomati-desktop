@@ -7,7 +7,6 @@ import { withRouter } from "react-router-dom";
 import { forgotPasswordToggle, receiveResetPassword } from "_actions/auth";
 // local component
 import ForgotPasswordForm from "forms/ForgotPasswordForm";
-import ResetPasswordForm from "forms/ResetPasswordForm";
 
 function ForgetPassword(props) {
   React.useEffect(() => {
