@@ -40,6 +40,9 @@ export const GET_EVENT = "/api/outletevents";
 export const ADD_EVENT_REQUEST = "/api/outletevents";
 export const ADD_EVENT_COLLABORATOR = "/api/auth/invite-collaborator";
 
+//Payment Update
+export const UPDATE_PAYMENT_URL = "/api/payment/update-subsciption";
+
 // s3 routes
 export const AWS_S3_STATIC_URL =
   "https://ivy-lender-bucket.s3.ca-central-1.amazonaws.com/static";
