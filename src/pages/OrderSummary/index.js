@@ -10,7 +10,6 @@ import {
 } from "_actions/auth";
 import AuthAPI from "services/auth";
 import _, { values } from "lodash";
-
 // Router imports
 import { Redirect, withRouter } from "react-router-dom";
 import OrderSummaryCard from "./components/OrderSummaryCard";
@@ -204,23 +203,6 @@ function Index(props) {
   let tax = subTotal * 0.075;
   tax = parseFloat(tax.toFixed(2));
   let total = subTotal + tax;
-  // let no_of_outlets =
-  //   "outletaddons" in userValues
-  //     ? userValues?.outletaddons
-  //     : activePlan?.outlet_limit;
-
-  // let no_of_qrcodes =
-  //   "qraddons" in userValues ? userValues?.qraddons : activePlan?.qr_tags_limit;
-
-  // let no_of_users =
-  //   "useraddons" in userValues
-  //     ? userValues?.useraddons
-  //     : activePlan?.user_limit;
-
-  // let no_of_events =
-  //   "eventaddons" in userValues
-  //     ? userValues?.eventaddons
-  //     : activePlan?.event_limit;
 
   const handlePayment = (transaction_id) => {
     const inputs = {
@@ -235,10 +217,6 @@ function Index(props) {
       state: selected_state && selected_state[0].name,
       city: city,
       street: address,
-      // no_of_outlets: no_of_outlets,
-      // no_of_qrcodes: no_of_qrcodes,
-      // no_of_users: no_of_users,
-      // no_of_events: no_of_events,
     };
     if (props?.auth?.user === null) {
       props
@@ -246,58 +224,19 @@ function Index(props) {
         .then((response) => {
           setShow(true);
         })
-        .catch((error) => {
-          console.log("error\n", error);
-        });
+        .catch((error) => {});
     } else {
       props.dispatch(updateUser(inputs));
     }
   };
   const handleCheckout = () => {
-    // let outletQuantity = no_of_outlets - activePlan?.outlet_limit;
-    // let eventQuantity = no_of_events - activePlan?.event_limit;
-    // let userQuantity = no_of_users - activePlan?.user_limit;
-    // let qrQuantity = no_of_qrcodes - activePlan?.qr_tags_limit;
     let coupon = [discountValue];
-    // const addonArray = [];
-    // if (outletQuantity !== 0) {
-    //   let outletObject = {
-    //     id: activePlan?.chargebee_outlets_addon_id,
-    //     unit_price: parseFloat(activePlan?.outlet_addon_price) * 100,
-    //     quantity: outletQuantity,
-    //   };
-    //   addonArray.push(outletObject);
-    // }
-    // if (eventQuantity !== 0) {
-    //   let eventObject = {
-    //     id: activePlan?.chargebee_events_addon_id,
-    //     unit_price: parseFloat(activePlan?.event_addon_price) * 100,
-    //     quantity: eventQuantity,
-    //   };
-    //   addonArray.push(eventObject);
-    // }
-    // if (userQuantity !== 0) {
-    //   let userObject = {
-    //     id: activePlan?.chargebee_collaborators_addon_id,
-    //     unit_price: parseFloat(activePlan?.user_addon_price) * 100,
-    //     quantity: userQuantity,
-    //   };
-    //   addonArray.push(userObject);
-    // }
-    // if (qrQuantity !== 0) {
-    //   let qrObject = {
-    //     id: activePlan?.chargebee_qr_addon_id,
-    //     unit_price: parseFloat(activePlan?.qr_tags_addon_price) * 100,
-    //     quantity: qrQuantity,
-    //   };
-    //   addonArray.push(qrObject);
-    // }
+
     props
       .dispatch(
         getSubscriptionId({ hostedPageId: props?.auth?.user?.transaction_id })
       )
       .then((res) => {
-        console.log(res);
         return AuthAPI.UpdatePayment({
           plan_id: activePlan?.chargebee_plan_id,
           subscription_id: res.hosted_page.content.subscription.id,
@@ -313,7 +252,6 @@ function Index(props) {
   const handlePay = () => {
     handleCheckout(activePlan);
   };
-  console.log(props);
   return (
     <div className="container mt-5 mb-5 pt-5">
       <div className="d-flex row ">
