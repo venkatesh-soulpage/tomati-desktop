@@ -1,15 +1,7 @@
 import React from "react";
-import { Dash, Plus, CheckCircle } from "react-bootstrap-icons";
 import Form from "react-bootstrap/Form";
-import {
-  // userRegistration,
-  // userLogin,
-  // getPlansRequest,
-  // getLocationRegister,
-  postDiscountValue,
-  resetMessage,
-} from "_actions/auth";
-import _, { values } from "lodash";
+import { postDiscountValue, resetMessage } from "_actions/auth";
+import _ from "lodash";
 import PriceComponent from "./PriceComponent";
 function YourOrderCard({
   props,
@@ -123,7 +115,7 @@ function YourOrderCard({
               <p style={{ fontSize: "14px", fontWeight: "400", margin: 0 }}>
                 Discount value applied
               </p>
-              <p style={{ fontSize: "14px", margin: 0 }}>₦ {discount_value}</p>
+              <p style={{ fontSize: "14px", margin: 0 }}>$ {discount_value}</p>
             </Form.Group>
           ) : props?.auth?.discountValError ? (
             <Form.Group

@@ -36,14 +36,14 @@ function PriceComponent({
               style={{ borderRight: "1px solid #C3CAD8" }}
             >
               <Dash
-                onClick={handleChange("minus")}
+                // onClick={handleChange("minus")}
                 style={{ cursor: "pointer" }}
               />
             </div>
 
             <div className="col-3 p-2 text-center">
               <Plus
-                onClick={handleChange("plus")}
+                // onClick={handleChange("plus")}
                 style={{ cursor: "pointer" }}
               />
             </div>

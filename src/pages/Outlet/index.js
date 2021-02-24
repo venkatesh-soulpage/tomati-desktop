@@ -115,7 +115,7 @@ const Index = (props) => {
 
           <div>
             <input
-              class="form-control"
+              className="form-control"
               type="text"
               placeholder="Filter by search"
               value={search}
@@ -125,10 +125,6 @@ const Index = (props) => {
         </div>
       </div>
 
-      {/* warning */}
-      {/* <div class="alert alert-warning mt-3 mb-3" role="alert">
-        A simple warning alert—check it out!
-      </div> */}
       {/* show outlets */}
       {filteredOutlets &&
         filteredOutlets.map((outlet, id) => {

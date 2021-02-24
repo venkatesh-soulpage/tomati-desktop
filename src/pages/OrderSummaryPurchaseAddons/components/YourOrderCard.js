@@ -13,8 +13,6 @@ import _, { values } from "lodash";
 import PriceComponent from "./PriceComponent";
 function YourOrderCard({
   props,
-  activePlan,
-  handleActivePlan,
   userValues,
   handleOutlet,
   outletPrice,
@@ -125,7 +123,7 @@ function YourOrderCard({
               <p style={{ fontSize: "14px", fontWeight: "400", margin: 0 }}>
                 Discount value applied
               </p>
-              <p style={{ fontSize: "14px", margin: 0 }}>₦ {discount_value}</p>
+              <p style={{ fontSize: "14px", margin: 0 }}>$ {discount_value}</p>
             </Form.Group>
           ) : props?.auth?.discountValError ? (
             <Form.Group
