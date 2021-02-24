@@ -1,15 +1,7 @@
 import React from "react";
-import { Dash, Plus, CheckCircle } from "react-bootstrap-icons";
 import Form from "react-bootstrap/Form";
-import {
-  // userRegistration,
-  // userLogin,
-  // getPlansRequest,
-  // getLocationRegister,
-  postDiscountValue,
-  resetMessage,
-} from "_actions/auth";
-import _, { values } from "lodash";
+import { postDiscountValue, resetMessage } from "_actions/auth";
+import _ from "lodash";
 import PriceComponent from "./PriceComponent";
 function YourOrderCard({
   props,
@@ -30,6 +22,7 @@ function YourOrderCard({
   subTotal,
   tax,
   total,
+  plan_id,
 }) {
   const no_of_outlets =
     "outletaddons" in userValues
@@ -55,9 +48,11 @@ function YourOrderCard({
 
         <select onChange={handleActivePlan} className="form-control pl-3">
           {/* <option value="">Select Plan</option> */}
-          {props?.auth?.plans?.map((plan) => (
-            <option value={plan.id}>{plan.plan}</option>
-          ))}
+          {props?.auth?.plans?.map((plan) => {
+            if (plan.id !== plan_id) {
+              return <option value={plan.id}>{plan.plan}</option>;
+            }
+          })}
         </select>
 
         <hr />
@@ -120,7 +115,7 @@ function YourOrderCard({
               <p style={{ fontSize: "14px", fontWeight: "400", margin: 0 }}>
                 Discount value applied
               </p>
-              <p style={{ fontSize: "14px", margin: 0 }}>₦ {discount_value}</p>
+              <p style={{ fontSize: "14px", margin: 0 }}>$ {discount_value}</p>
             </Form.Group>
           ) : props?.auth?.discountValError ? (
             <Form.Group

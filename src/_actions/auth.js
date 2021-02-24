@@ -569,6 +569,7 @@ export function updateUser(data) {
  * @param {*} data
  */
 export function getSubscriptionId(data) {
+  console.log(data);
   return function (dispatch) {
     return AuthService.getSubscriptionId(data)
       .then((responseData) => {

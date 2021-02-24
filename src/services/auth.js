@@ -191,6 +191,16 @@ class AuthAPI {
         throw error.response.data;
       });
   }
+  static UpdatePayment(postData) {
+    return axios
+      .post(APIRoutes.UPDATE_PAYMENT_URL, postData)
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+        throw error.response.data;
+      });
+  }
   // static chargeBee(data) {
   //   console.log(data);
   //   return axios
