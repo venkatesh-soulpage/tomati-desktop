@@ -94,6 +94,7 @@ const Index = (props) => {
                   state: auth?.user?.state,
                   city: auth?.user?.city,
                   address: auth?.user?.street,
+                  plan_id: auth?.user?.plan_id,
                 },
               },
             }}

@@ -11,6 +11,7 @@ import { withRouter, Link } from "react-router-dom";
 
 const Index = (props) => {
   const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
 
   const [values, setValues] = React.useState({
     email: undefined,
@@ -22,6 +23,24 @@ const Index = (props) => {
     hidden: false,
     hidden2: false,
   });
+
+  const [error, setError] = useState(false);
+  const strongRegex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+  );
+
+  const analyze = (e) => {
+    const val = e.target.value;
+    if (strongRegex.test(e.target.value)) {
+      setError(true);
+      setMessage("Strong Password");
+    } else {
+      setError(true);
+      setMessage(
+        "Your password must be at-least 8 characters with uppercase, lowercase, number & special characters"
+      );
+    }
+  };
 
   useEffect(() => {
     if (props.auth.user) {
@@ -46,7 +65,12 @@ const Index = (props) => {
   const handlePasswordUpate = (e) => {
     e.preventDefault();
     const { current_password, new_password } = values;
-    props.dispatch(updateUser({ current_password, new_password }));
+    console.log(values);
+    props
+      .dispatch(updateUser({ current_password, new_password }))
+      .then((res) => {
+        console.log(res);
+      });
     setShow(false);
   };
 
@@ -175,8 +199,8 @@ const Index = (props) => {
                   <Form.Control
                     type={values.hidden ? "text" : "password"}
                     placeholder="Current Password"
-                    value={values.old_password}
-                    onChange={handleChange("old_password")}
+                    value={values.current_password}
+                    onChange={handleChange("current_password")}
                     required
                     style={{ width: "50%", borderRight: "none" }}
                   />
@@ -209,6 +233,7 @@ const Index = (props) => {
                     onChange={handleChange("new_password")}
                     required
                     style={{ width: "50%", borderRight: "none" }}
+                    onBlur={analyze}
                   />
                   <div className="input-group-append">
                     <div
@@ -229,6 +254,26 @@ const Index = (props) => {
                     </div>
                   </div>
                 </InputGroup>
+                {error ? (
+                  <span
+                    style={
+                      message ===
+                      "Your password must be at-least 8 characters with uppercase, lowercase, number & special characters"
+                        ? {
+                            color: "#cc3300",
+                            marginTop: "2px",
+                            fontSize: "11px",
+                          }
+                        : {
+                            color: "#4BB543",
+                            marginTop: "2px",
+                            fontSize: "11px",
+                          }
+                    }
+                  >
+                    {message}
+                  </span>
+                ) : null}
               </Form.Group>
               <button
                 className="btn btn-danger mt-4"

@@ -12,6 +12,7 @@
     "babel-plugin-transform-remove-console": "^6.9.4",
     "bootstrap": "^4.6",
     "formik": "^2.2.6",
+    "jspdf": "^2.3.0",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "node-sass": "^4.12.0",

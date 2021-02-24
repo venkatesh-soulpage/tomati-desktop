@@ -1,4 +1,5 @@
 import React from "react";
+import { downloadQr } from "utils/helper";
 
 const QR = ({ event }) => {
   return (
@@ -10,6 +11,7 @@ const QR = ({ event }) => {
             src={event && event.menu_link}
             height="204px"
             width="204px"
+            id="menu-qr"
           />
         </div>
         <div className="mr-auto">
@@ -17,7 +19,10 @@ const QR = ({ event }) => {
           <p className="text-dark font-weight-light">
             {event && event.description}
           </p>
-          <button className="btn btn-danger mr-3 rounded-pill">
+          <button
+            className="btn btn-danger mr-3 rounded-pill"
+            onClick={() => downloadQr(event.name)}
+          >
             Download QR Code
           </button>
           <button className="btn btn-outline-dark rounded-pill ">

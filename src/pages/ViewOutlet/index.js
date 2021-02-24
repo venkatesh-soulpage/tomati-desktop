@@ -86,11 +86,10 @@ function Index(props) {
   return (
     <div className="p-3">
       <div
-        className="border"
+        className="border background"
         style={{
           height: "300px",
           background: `url('${cover}')`,
-          backgroundSize: "cover",
         }}
       >
         <div className="row h-100 justify-content-center">
