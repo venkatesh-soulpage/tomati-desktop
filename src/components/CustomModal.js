@@ -26,12 +26,20 @@ function CustomModal(props) {
             <img className="img-fluid mt-3" src={Success} alt="icon" />
           </div>
           <p>{props.message}</p>
-          <Button
-            variant="outline-secondary rounded-pill px-4 py-2"
-            onClick={props.onHide}
-          >
-            Close
-          </Button>
+          {props.type === "forgot" ? (
+            <Link to="/">
+              <Button variant="outline-secondary rounded-pill px-4 py-2">
+                Login
+              </Button>
+            </Link>
+          ) : (
+            <Button
+              variant="outline-secondary rounded-pill px-4 py-2"
+              onClick={props.onHide}
+            >
+              Close
+            </Button>
+          )}
         </Modal.Body>
         {/* <Modal.Footer className="text-center">
           <Button onClick={props.onHide}>Close</Button>
