@@ -12,7 +12,6 @@ import _, { values } from "lodash";
 import { Redirect, withRouter } from "react-router-dom";
 import OrderSummaryCard from "./components/OrderSummaryCard";
 import YourOrderCard from "./components/YourOrderCard";
-import BankTransferModal from "./components/BankTransferModal";
 import LoginModal from "./components/LoginModal";
 import { LOCAL_PAYMENT_URL, HERULO_PAYMENT_URL } from "constants/APIRoutes";
 import axios from "axios";
@@ -22,9 +21,7 @@ axios.defaults.headers.post["Content-Type"] =
 function Index(props) {
   const [activePlan, setActivePlan] = React.useState(null);
   const [userValues, setUserValues] = React.useState({});
-  const [hide, setHide] = React.useState(false);
   const [show, setShow] = React.useState(false);
-  const [radio, setRadio] = React.useState("Card");
   const [discountValue, setDiscountValue] = React.useState(undefined);
   const {
     address,
@@ -36,6 +33,7 @@ function Index(props) {
     state,
     city,
     is_notifications_permited,
+    plan_id,
   } = props.location.state.values;
 
   React.useEffect(function () {
@@ -219,18 +217,7 @@ function Index(props) {
     "eventaddons" in userValues
       ? userValues?.eventaddons
       : activePlan?.event_limit;
-  const createId = (length) => {
-    let result = "";
-    const characters =
-      "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    const charactersLength = characters.length;
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  };
-  let transaction_id = createId(13);
+
   const handlePayment = (transaction_id) => {
     const inputs = {
       location_id: location,
@@ -253,7 +240,6 @@ function Index(props) {
       props
         .dispatch(userRegistration(inputs))
         .then((response) => {
-          setHide(false);
           setShow(true);
         })
         .catch((error) => {
@@ -341,11 +327,7 @@ function Index(props) {
     handleCheckout();
   };
   const handlePay = () => {
-    if (radio === "Card") {
-      handleCheckout(activePlan);
-    } else {
-      setHide(true);
-    }
+    handleCheckout(activePlan);
   };
   return (
     <div className="container mt-5 mb-5 pt-5">
@@ -356,10 +338,6 @@ function Index(props) {
             country={country}
             selected_state={selected_state}
             total={total}
-            setHide={setHide}
-            handlePayment={handlePayment}
-            radio={radio}
-            setRadio={setRadio}
             handlePay={handlePay}
             handleFinish={handleFinish}
           />
@@ -384,19 +362,11 @@ function Index(props) {
             subTotal={subTotal}
             tax={tax}
             total={total}
+            plan_id={plan_id}
           />
         </div>
       </div>
-      {hide ? (
-        <BankTransferModal
-          props={props}
-          hide={hide}
-          setHide={setHide}
-          handlePayment={handlePayment}
-          radio={radio}
-          transaction_id={transaction_id}
-        />
-      ) : null}
+
       {show ? <LoginModal show={show} setShow={setShow} /> : null}
     </div>
   );

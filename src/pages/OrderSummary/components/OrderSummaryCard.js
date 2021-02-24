@@ -1,16 +1,10 @@
 import React from "react";
-import BankTransferModal from "./BankTransferModal";
-import LoginModal from "./LoginModal";
 
 function OrderSummaryCard({
   props,
   country,
   selected_state,
   total,
-  setHide,
-  handlePayment,
-  radio,
-  setRadio,
   handlePay,
   handleFinish,
 }) {
@@ -116,38 +110,7 @@ function OrderSummaryCard({
 
         <div>
           <div className="container p-3 pb-5">
-            <div>
-              <p className="text-dark">Payment Options</p>
-              <div class="radio">
-                <label>
-                  <input
-                    type="radio"
-                    name="optradio"
-                    value="Card"
-                    onChange={(e) => {
-                      setRadio(e.target.value);
-                    }}
-                    checked={radio === "Card"}
-                  />
-                  &nbsp; Credit/Debit Card
-                </label>
-              </div>
-              <hr className="m-0 mb-3" />
-              <div class="radio">
-                <label>
-                  <input
-                    type="radio"
-                    name="optradio"
-                    value="Bank"
-                    onChange={(e) => {
-                      setRadio(e.target.value);
-                    }}
-                    checked={radio === "Bank"}
-                  />
-                  &nbsp; Bank Transfer - for customers in Nigeria
-                </label>
-              </div>
-
+            <div className=" pt-5 mt-5">
               {total > 0 ? (
                 <button
                   type="button"

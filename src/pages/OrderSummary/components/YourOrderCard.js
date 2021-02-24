@@ -30,6 +30,7 @@ function YourOrderCard({
   subTotal,
   tax,
   total,
+  plan_id,
 }) {
   const no_of_outlets =
     "outletaddons" in userValues
@@ -55,9 +56,11 @@ function YourOrderCard({
 
         <select onChange={handleActivePlan} className="form-control pl-3">
           {/* <option value="">Select Plan</option> */}
-          {props?.auth?.plans?.map((plan) => (
-            <option value={plan.id}>{plan.plan}</option>
-          ))}
+          {props?.auth?.plans?.map((plan) => {
+            if (plan.id !== plan_id) {
+              return <option value={plan.id}>{plan.plan}</option>;
+            }
+          })}
         </select>
 
         <hr />
