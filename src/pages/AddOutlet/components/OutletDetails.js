@@ -75,7 +75,7 @@ const OutletDetails = ({
               {values.cover_image ? (
                 <span>{values.cover_image[0].name}</span>
               ) : (
-                <span>Upload Event Cover photo</span>
+                <span>Upload Outlet Cover photo</span>
               )}
             </h6>
           </label>
