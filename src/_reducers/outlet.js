@@ -10,7 +10,6 @@ var initialState = {
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case ActionTypes.RECEIVE_USER_OUTLETS:
-      console.log(action.payload);
       return {
         ...state,
         outlets: action.payload,
@@ -18,19 +17,31 @@ export default function authReducer(state = initialState, action) {
         message: null,
       };
     case ActionTypes.GET_SINGLE_OUTLET:
-      console.log(action.payload);
       return {
         ...state,
         outlet: action.payload,
       };
     case ActionTypes.OUTLET_RESPONSE:
-      console.log(action.payload, "res from reducer");
       return {
         ...state,
         message: action.payload.message,
         success: action.payload.res,
       };
-
+    case ActionTypes.INIVTE_COLLAB_RESPONSE:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case ActionTypes.ADD_MENU_RESPONSE:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case ActionTypes.UPDATE_OUTLET_RESPONSE:
+      return {
+        ...state,
+        message: action.payload,
+      };
     default:
       return state;
   }

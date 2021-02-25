@@ -10,7 +10,6 @@ var initialState = {
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case ActionTypes.RECEIVE_USER_EVENTS:
-      console.log(action.payload);
       return {
         ...state,
         events: action.payload,
@@ -19,6 +18,21 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         event: action.payload,
+      };
+    case ActionTypes.INIVTE_COLLAB_RESPONSE:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case ActionTypes.ADD_MENU_RESPONSE:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case ActionTypes.UPDATE_EVENT_RESPONSE:
+      return {
+        ...state,
+        message: action.payload,
       };
 
     default:
