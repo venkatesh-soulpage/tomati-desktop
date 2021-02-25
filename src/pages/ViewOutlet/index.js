@@ -19,6 +19,7 @@ import { Camera } from "react-bootstrap-icons";
 // image assets
 import IconQR from "assets/img/IconQR.svg";
 import UploadCover from "assets/img/UploadCover.svg";
+import Success from "assets/img/Success.svg";
 // local component
 import QR from "./QR";
 import About from "./About";
@@ -41,7 +42,6 @@ function Index(props) {
     props.dispatch(getOutlet(props.location.state));
   }, []);
   const { outlet } = props.outlet;
-  console.log(menu);
 
   const uploadFile = (data) => {
     const { data: csv_data } = data;
@@ -70,7 +70,10 @@ function Index(props) {
     props.dispatch(
       inviteCollaborator({ ...collaboratorDetail, outlet_venue: outlet.id })
     );
+    setShow(true);
+    setCollaborator(false);
   };
+  console.log(props.outlet);
 
   const fileToBase64 = async (file) =>
     new Promise((resolve, reject) => {
@@ -81,7 +84,6 @@ function Index(props) {
     });
 
   let cover = outlet?.cover_image;
-  console.log(cover);
 
   return (
     <div className="p-3">
@@ -191,8 +193,17 @@ function Index(props) {
       </div>
       <CustomModal
         show={show}
-        message={message}
+        message={props.outlet.message}
         onHide={() => setShow(false)}
+        statusicon={Success}
+        button={
+          <Button
+            className="btn btn-primary mt-3 rounded-pill px-4 py-2"
+            onClick={() => setShow(false)}
+          >
+            Close
+          </Button>
+        }
       />
       <Modal
         show={addCollaborator}

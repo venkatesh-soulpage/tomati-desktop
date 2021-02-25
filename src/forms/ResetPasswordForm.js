@@ -9,6 +9,7 @@ import { Link, useLocation } from "react-router-dom";
 // local components
 import PasswordTextField from "components/PasswordTextField";
 import CustomModal from "components/CustomModal";
+import Success from "assets/img/Success.svg";
 
 import { Card, Button, Form } from "react-bootstrap";
 
@@ -20,7 +21,7 @@ function ResetPasswordForm(props) {
   });
   const [show, setShow] = React.useState(false);
   const [error, setError] = React.useState(false);
-  const [message, setMessage] = React.useState("");
+  const [message, setMessage] = React.useState(null);
   const [message1, setMessage1] = React.useState("");
 
   const [alert, setAlert] = React.useState({
@@ -44,10 +45,9 @@ function ResetPasswordForm(props) {
     };
     if (values.password === values.re_password) {
       console.log(data, "DATA");
-      props.dispatch(resetPassword(data)).then((res) => {
-        setMessage(res);
-        setShow(true);
-      });
+      props.dispatch(resetPassword(data));
+      setMessage(props.auth.resetPasswordError);
+      setShow(true);
     } else {
       setMessage("password does not match");
       setShow(true);
@@ -155,7 +155,24 @@ function ResetPasswordForm(props) {
       <CustomModal
         show={show}
         onHide={() => setShow(false)}
-        message={message}
+        message={props.auth.resetPasswordError || message}
+        statusicon={Success}
+        button={
+          props.auth.resetPasswordError === "Password updated!" ? (
+            <Link to="/">
+              <button className="btn btn-primary mt-3 rounded-pill px-4 py-2">
+                Login
+              </button>
+            </Link>
+          ) : (
+            <button
+              className="btn btn-primary mt-3 rounded-pill px-4 py-2"
+              onClick={() => setShow(false)}
+            >
+              Try again
+            </button>
+          )
+        }
       />
     </div>
   );

@@ -512,10 +512,13 @@ export function resetPassword(data) {
   return function (dispatch) {
     return AuthService.resetPassword(data)
       .then((responseData) => {
+        console.log(responseData);
         dispatch(receiveResetPassword(responseData));
         return responseData;
       })
       .catch((errorData) => {
+        console.log(errorData);
+
         dispatch(receiveResetPasswordError(errorData));
         return errorData;
       });
@@ -533,11 +536,14 @@ export function updateUser(data) {
     return AuthService.updateUser(data)
       .then((responseData) => {
         console.log(responseData, "User Updated");
-        history.push("/dashboard/settings");
-        // dispatch(receiveResetPassword(responseData));
+        dispatch(updateUserReponse(responseData));
+
+        // history.push("/dashboard/settings");
         // history.push("/forgot-password/success");
       })
       .catch((errorData) => {
+        dispatch(updateUserReponse(errorData));
+
         // dispatch(receiveResetPasswordError(errorData));
       });
   };
@@ -624,5 +630,16 @@ export function setUserData(data) {
   return {
     type: ActionTypes.SET_USER_DATA,
     payload: data,
+  };
+}
+
+/**
+ * Update User Response
+ * @param {*} data
+ */
+export function updateUserReponse(message) {
+  return {
+    type: ActionTypes.UPDATE_USER_RESPONSE,
+    payload: message,
   };
 }

@@ -20,6 +20,7 @@ import { Camera } from "react-bootstrap-icons";
 // image assets
 import IconQR from "assets/img/IconQR.svg";
 import UploadCover from "assets/img/UploadCover.svg";
+import Success from "assets/img/Success.svg";
 //local components
 import QR from "./QR";
 import About from "./About";
@@ -52,12 +53,9 @@ function Index(props) {
   };
 
   const handleMenu = () => {
-    props.dispatch(addEventMenu(event.id, menu)).then((res) => {
-      console.log(res);
-      setAddmenu(false);
-      setMessage(res.Message);
-      setShow(true);
-    });
+    props.dispatch(addEventMenu(event.id, menu));
+    setAddmenu(false);
+    setShow(true);
   };
 
   const handleChange = (name) => (e) => {
@@ -73,6 +71,8 @@ function Index(props) {
     props.dispatch(
       inviteCollaborator({ ...collaboratorDetail, outlet_event: event.id })
     );
+    setCollaborator(false);
+    setShow(true);
   };
 
   const fileToBase64 = async (file) =>
@@ -194,8 +194,17 @@ function Index(props) {
       </div>
       <CustomModal
         show={show}
-        message={message}
+        message={props.event.message}
         onHide={() => setShow(false)}
+        statusicon={Success}
+        button={
+          <Button
+            className="btn btn-primary mt-3 rounded-pill px-4 py-2"
+            onClick={() => setShow(false)}
+          >
+            Close
+          </Button>
+        }
       />
       <Modal
         show={addCollaborator}

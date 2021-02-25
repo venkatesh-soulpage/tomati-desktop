@@ -30,7 +30,21 @@ export default function authReducer(state = initialState, action) {
         message: action.payload.message,
         success: action.payload.res,
       };
-
+    case ActionTypes.INIVTE_COLLAB_RESPONSE:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case ActionTypes.ADD_MENU_RESPONSE:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case ActionTypes.UPDATE_OUTLET_RESPONSE:
+      return {
+        ...state,
+        message: action.payload,
+      };
     default:
       return state;
   }

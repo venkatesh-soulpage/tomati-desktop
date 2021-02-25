@@ -51,6 +51,8 @@ export function addEventMenu(id, menu) {
     //   .post(`${APIRoutes.ADD_EVENT_REQUEST}/${id}/menu`, menu)
     return EventService.addEventMenu(id, menu)
       .then((responseData) => {
+        console.log(responseData);
+        dispatch(addMenuResponse(responseData.Message));
         return responseData;
       })
       .catch((errorData) => {
@@ -96,12 +98,14 @@ export function inviteCollaborator(data) {
       .post(APIRoutes.ADD_EVENT_COLLABORATOR, data)
       .then((responseData) => {
         console.log(responseData);
-        history.push("/dashboard/event");
+        dispatch(inviteCollaboratorResponse(responseData.data));
         // dispatch(postUpdatedOutlet(responseData.data, true));
         return responseData;
       })
       .catch((errorData) => {
         console.log(errorData);
+        dispatch(inviteCollaboratorResponse(errorData.response.data));
+
         // dispatch(handleRegisterError(errorData));
       });
   };
@@ -120,5 +124,19 @@ export function getSingleEvent(data) {
   return {
     type: ActionTypes.GET_SINGLE_EVENT,
     payload: data,
+  };
+}
+
+export function addMenuResponse(message) {
+  return {
+    type: ActionTypes.ADD_MENU_RESPONSE,
+    payload: message,
+  };
+}
+
+export function inviteCollaboratorResponse(message) {
+  return {
+    type: ActionTypes.INIVTE_COLLAB_RESPONSE,
+    payload: message,
   };
 }

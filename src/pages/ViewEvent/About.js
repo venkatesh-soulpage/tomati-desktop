@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Modal } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getEvent, updateEvent } from "_actions/event";
@@ -7,6 +7,7 @@ import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import moment from "moment";
 import CustomModal from "components/CustomModal";
+import Success from "assets/img/Success.svg";
 
 const About = (props) => {
   useEffect(() => {
@@ -131,6 +132,15 @@ const About = (props) => {
         show={show}
         message={message}
         onHide={() => setShow(false)}
+        statusicon={Success}
+        button={
+          <Button
+            className="btn btn-primary mt-3 rounded-pill px-4 py-2"
+            onClick={() => setShow(false)}
+          >
+            Close
+          </Button>
+        }
       />
       ;
     </div>

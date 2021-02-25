@@ -73,6 +73,8 @@ export function addOutletMenu(id, menu) {
     //   .post(`${APIRoutes.ADD_EVENT_REQUEST}/${id}/menu`, menu)
     return OutletService.addOutletMenu(id, menu)
       .then((responseData) => {
+        console.log(responseData);
+        dispatch(addMenuResponse(responseData));
         return responseData;
       })
       .catch((errorData) => {
@@ -102,12 +104,12 @@ export function inviteCollaborator(data) {
       .post(APIRoutes.ADD_OUTLET_COLLABORATOR, data)
       .then((responseData) => {
         console.log(responseData);
-        history.push("/dashboard/outlet");
-        // dispatch(postUpdatedOutlet(responseData.data, true));
+        dispatch(inviteCollaboratorResponse(responseData.data));
         return responseData;
       })
       .catch((errorData) => {
-        console.log(errorData);
+        console.log(errorData.response);
+        dispatch(inviteCollaboratorResponse(errorData.response.data));
         // dispatch(handleRegisterError(errorData));
       });
   };
@@ -124,6 +126,20 @@ export function getSingleOutlet(data) {
   return {
     type: ActionTypes.GET_SINGLE_OUTLET,
     payload: data,
+  };
+}
+
+export function addMenuResponse(message) {
+  return {
+    type: ActionTypes.ADD_MENU_RESPONSE,
+    payload: message,
+  };
+}
+
+export function inviteCollaboratorResponse(message) {
+  return {
+    type: ActionTypes.INIVTE_COLLAB_RESPONSE,
+    payload: message,
   };
 }
 

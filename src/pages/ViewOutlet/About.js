@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getOutlet, updateOutlet } from "_actions/outlet";
+import Success from "assets/img/Success.svg";
 import CustomModal from "components/CustomModal";
 
 const About = (props) => {
@@ -97,6 +98,7 @@ const About = (props) => {
         show={show}
         message={message}
         onHide={() => setShow(false)}
+        statusicon={Success}
       />
     </div>
   );

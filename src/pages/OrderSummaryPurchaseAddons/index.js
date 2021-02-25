@@ -11,16 +11,19 @@ import {
 import _ from "lodash";
 
 // Router imports
-import { withRouter } from "react-router-dom";
+import { withRouter, Link as RouteLink } from "react-router-dom";
 import OrderSummaryCard from "./components/OrderSummaryCard";
 import YourOrderCard from "./components/YourOrderCard";
 import LoginModal from "./components/LoginModal";
+import CustomModal from "components/CustomModal";
 import AuthAPI from "services/auth";
+import Success from "assets/img/Success.svg";
 
 function Index(props) {
   const [activePlan, setActivePlan] = React.useState(null);
   const [userValues, setUserValues] = React.useState({});
   const [show, setShow] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
   const [discountValue, setDiscountValue] = React.useState(undefined);
   const {
     address,
@@ -307,6 +310,7 @@ function Index(props) {
           return response.data;
         });
       });
+    setSuccess(true);
   };
   const handleFinish = () => {
     handleCheckout();
@@ -349,6 +353,29 @@ function Index(props) {
           />
         </div>
       </div>
+      <CustomModal
+        show={success}
+        onHide={() => setSuccess(false)}
+        statusicon={Success}
+        message="You plan is updated successfully !"
+        button={
+          <RouteLink to="/">
+            <button
+              className="btn btn-light mt-3"
+              style={{
+                borderRadius: "30px",
+                width: "140px",
+                height: "54px",
+                border: "0.5px solid black",
+                // backgroundColor: "transparent",
+              }}
+              // onClick={handleLoginData}
+            >
+              Home
+            </button>
+          </RouteLink>
+        }
+      />
       {show ? <LoginModal show={show} setShow={setShow} /> : null}
     </div>
   );

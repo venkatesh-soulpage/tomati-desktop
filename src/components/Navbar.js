@@ -3,7 +3,7 @@ import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
-import { userSignOut } from "_actions/auth";
+import { userSignOut, getUser } from "_actions/auth";
 // Bootstrap imports
 import { Navbar, Nav, Dropdown, NavItem, Container } from "react-bootstrap";
 import NavLinkB from "react-bootstrap/NavLink";
@@ -42,13 +42,13 @@ function Navigation(props) {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto" style={{ fontSize: "smaller" }}>
               {props.auth.isAuthenticated ? (
-                <Nav>
+                <Nav className="d-flex align-items-center">
                   <Nav.Link
                     as={NavLink}
                     to="/dashboard"
                     activeClassName="navlink-selected"
                   >
-                    <Bell />
+                    <Bell style={{ fontSize: "32px" }} />
                   </Nav.Link>
                   <Nav.Link
                     as={NavLink}
@@ -59,8 +59,10 @@ function Navigation(props) {
                       className="rounded-circle img-fluid ml-2"
                       height="50px"
                       width="50px"
+                      src={props?.auth?.user?.profile_img}
                     />
                   </Nav.Link>
+                  <p className="p-0 m-0">{props?.auth?.user?.first_name}</p>
                 </Nav>
               ) : (
                 <Nav>
