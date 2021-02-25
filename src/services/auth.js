@@ -93,7 +93,7 @@ class AuthAPI {
   }
   static getDiscount(postData) {
     return axios
-      .post(APIRoutes.GET_DISCOUNT, postData)
+      .post(APIRoutes.GET_DISCOUNT, { couponId: postData })
       .then(function (response) {
         return response.data;
       })

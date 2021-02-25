@@ -133,11 +133,19 @@ export function postDiscountValue(postData) {
   return function (dispatch) {
     return AuthService.getDiscount(postData)
       .then((responseData) => {
-        dispatch(getDiscountValueSuccess(responseData));
-        return responseData;
+        if (responseData.status === "active") {
+          dispatch(
+            getDiscountValueSuccess({
+              discount_value: responseData.discount_percentage,
+            })
+          );
+          return responseData;
+        } else {
+          dispatch(getDiscountValueError(responseData.status));
+        }
       })
       .catch((errorData) => {
-        dispatch(getDiscountValueError(errorData));
+        dispatch(getDiscountValueError("Enter valid coupon"));
       });
   };
 }
@@ -299,6 +307,16 @@ export function verify(postData) {
 export function resetMessage() {
   return {
     type: ActionTypes.RESET_MESSAGE,
+    payload: null,
+  };
+}
+/**
+ * Discount Reset Response
+ * @param {*}
+ */
+export function resetDiscountMessage() {
+  return {
+    type: ActionTypes.RESET_DISCOUNT_MESSAGE,
     payload: null,
   };
 }

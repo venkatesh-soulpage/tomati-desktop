@@ -7,7 +7,7 @@ import {
   // getPlansRequest,
   // getLocationRegister,
   postDiscountValue,
-  resetMessage,
+  resetDiscountMessage,
 } from "_actions/auth";
 import _, { values } from "lodash";
 import PriceComponent from "./PriceComponent";
@@ -99,21 +99,35 @@ function YourOrderCard({
         </div>
 
         <div className=" pt-1  border-bottom">
-          <Form.Group>
+          <Form.Group
+            className="d-flex justify-content-between"
+            style={{ border: "1px solid #C3CAD8" }}
+          >
             <Form.Control
               type="text"
-              placeholder="Discount code                        Optional"
+              placeholder="Discount code(Optional)"
               value={discountValue}
+              className="border-0"
               onChange={(e) => {
                 setDiscountValue(e.target.value);
+                props.dispatch(resetDiscountMessage());
               }}
               onBlur={() => {
-                props.dispatch(
-                  postDiscountValue({ discount_code: discountValue })
-                );
-                props.dispatch(resetMessage());
+                props.dispatch(resetDiscountMessage());
               }}
             />
+            <button
+              type="button"
+              onClick={() => {
+                props.dispatch(postDiscountValue(discountValue));
+              }}
+              className="btn"
+              style={{
+                backgroundColor: "transparent",
+              }}
+            >
+              Apply
+            </button>
           </Form.Group>
           {props.auth.discountVal ? (
             <Form.Group
@@ -131,7 +145,7 @@ function YourOrderCard({
               style={{ background: "#F5F6F9" }}
             >
               <p style={{ fontSize: "14px", color: "#E0475B", margin: 0 }}>
-                Invalid Discount Code
+                {props?.auth?.discountValError}
               </p>
             </Form.Group>
           ) : null}
