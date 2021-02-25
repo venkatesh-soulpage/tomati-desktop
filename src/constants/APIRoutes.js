@@ -1,8 +1,10 @@
 //AWS
 export const AWS_DESKTOP_URL = "https://desktop.tomati.app";
-export const AWS_APP_URL = "https://tomati.app";
-export const AWS_WALLET_URL = "https://mobile.tomati.app";
 export const AWS_API_URL = "https://api.tomati.app";
+//AWS-staging
+export const AWS_STAGING_DESKTOP_URL = "https://staging-desktop.tomati.app";
+export const AWS_STAGING_API_URL = "https://staging-api.tomati.app";
+
 //VERCEL
 export const VERCEL_DESKTOP_URL = "https://tomati-desktop.vercel.app";
 export const HEROKU_API_URL = "https://tomati-api.herokuapp.com";
