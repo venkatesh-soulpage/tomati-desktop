@@ -14,8 +14,6 @@ import history from "utils/history";
  */
 export function userRegistration(postData) {
   return function (dispatch) {
-    // console.log("action\n", postData);
-
     return AuthService.postSignUpDetails(postData)
       .then((responseData) => {
         dispatch(receiveUserData(responseData));
@@ -37,16 +35,12 @@ export function userRegistration(postData) {
  */
 export function collaboratorSignup(postData) {
   return function (dispatch) {
-    // console.log("action\n", postData);
-
     return AuthService.collaboratorSignup(postData)
       .then((responseData) => {
-        console.log(responseData);
         // history.push("/");
         return responseData;
       })
       .catch((errorData) => {
-        console.log(errorData);
         dispatch(handleRegisterError(errorData));
       });
   };
@@ -205,7 +199,6 @@ export function userLogin(postData) {
     dispatch(loginRequest());
     return AuthService.postLoginDetails(postData)
       .then((responseData) => {
-        console.log(responseData);
         dispatch(handleLoginSuccess(responseData));
         dispatch(receiveUserData(responseData));
         if (responseData.token) {
@@ -273,15 +266,11 @@ export function verify(postData) {
   return function (dispatch) {
     return AuthService.verifyCredentails(postData)
       .then((responseData) => {
-        console.log("REsponse\n", responseData);
-        console.log("REsponse\n", postData);
         if (
           new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(postData)
         ) {
-          console.log("REsponse if\n", responseData);
           dispatch(handleEmailSuccess(responseData.Message));
         } else {
-          console.log("REsponse else\n", responseData);
           dispatch(handleEmailSuccess("Enter valid Email"));
         }
         return responseData;
@@ -317,14 +306,12 @@ export function handleEmailSuccess(Message) {
  * @param {*} error
  */
 export function handleEmailError(error) {
-  console.log("handle error\n", error);
   return {
     type: ActionTypes.HANDLE_EMAIL_ERROR,
     payload: error,
   };
 }
 export function handleEmailCodeError(error) {
-  console.log("handle error\n", error);
   return {
     type: ActionTypes.HANDLE_EMAIL_CODE_ERROR,
     payload: error,
@@ -468,15 +455,10 @@ export function getUser() {
   return function (dispatch) {
     return AuthService.getUser()
       .then((responseData) => {
-        // console.log(responseData);
         dispatch(setUserData(responseData));
-        // dispatch(forgotPasswordToggle(true));
       })
       .catch((errorData) => {
         console.log(errorData.response);
-
-        // dispatch(receiveForgotPasswordError(errorData));
-        // dispatch(forgotPasswordToggle(false));
       });
   };
 }
@@ -508,7 +490,6 @@ export function receiveForgotPasswordError(error) {
  * @param {*} data
  */
 export function resetPassword(data) {
-  console.log(data);
   return function (dispatch) {
     return AuthService.resetPassword(data)
       .then((responseData) => {
@@ -532,12 +513,14 @@ export function updateUser(data) {
   return function (dispatch) {
     return AuthService.updateUser(data)
       .then((responseData) => {
-        console.log(responseData, "User Updated");
-        history.push("/dashboard/settings");
-        // dispatch(receiveResetPassword(responseData));
+        dispatch(updateUserReponse(responseData));
+
+        // history.push("/dashboard/settings");
         // history.push("/forgot-password/success");
       })
       .catch((errorData) => {
+        dispatch(updateUserReponse(errorData));
+
         // dispatch(receiveResetPasswordError(errorData));
       });
   };
@@ -569,18 +552,15 @@ export function updateUser(data) {
  * @param {*} data
  */
 export function getSubscriptionId(data) {
-  console.log(data);
   return function (dispatch) {
     return AuthService.getSubscriptionId(data)
       .then((responseData) => {
-        console.log(responseData, "Subs Id");
         return responseData;
 
         // dispatch(receiveResetPassword(responseData));
         // history.push("/forgot-password/success");
       })
       .catch((errorData) => {
-        console.log(errorData, "Subs Id");
         // dispatch(receiveResetPasswordError(errorData));
       });
   };
@@ -624,5 +604,16 @@ export function setUserData(data) {
   return {
     type: ActionTypes.SET_USER_DATA,
     payload: data,
+  };
+}
+
+/**
+ * Update User Response
+ * @param {*} data
+ */
+export function updateUserReponse(message) {
+  return {
+    type: ActionTypes.UPDATE_USER_RESPONSE,
+    payload: message,
   };
 }

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 //redux
 import { connect } from "react-redux";
+import { Button } from "react-bootstrap";
 //router
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 //auth
 import { forgotPasswordToggle, receiveResetPassword } from "_actions/auth";
 // local component
 import ForgotPasswordForm from "forms/ForgotPasswordForm";
 import CustomModal from "components/CustomModal";
+import Success from "assets/img/Success.svg";
 
 function ForgetPassword(props) {
   const [show, setShow] = useState(true);
@@ -15,7 +17,7 @@ function ForgetPassword(props) {
   React.useEffect(() => {
     props.dispatch(forgotPasswordToggle(false));
     props.dispatch(receiveResetPassword({}));
-    setMessage("Reset Password Email has been sent to your registered E-mail");
+    setMessage("Reset Password Email has been sent to your registered  E-mail");
     setShow(true);
   }, []);
 
@@ -30,7 +32,18 @@ function ForgetPassword(props) {
             show={show}
             onHide={() => setShow(false)}
             message={message}
-            type="forgot"
+            statusicon={Success}
+            button={
+              <Link to="/">
+                {" "}
+                <Button
+                  className="btn btn-primary mt-3 rounded-pill px-4 py-2"
+                  onClick={() => setShow(false)}
+                >
+                  Login
+                </Button>
+              </Link>
+            }
           />
         </div>
       ) : (

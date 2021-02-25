@@ -3,14 +3,17 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { updateUser } from "_actions/auth";
 // react bootstrap
-import { Form, InputGroup } from "react-bootstrap";
+import { Form, InputGroup, Button } from "react-bootstrap";
 // bootstrap icons
 import { CameraFill } from "react-bootstrap-icons";
 // Router
 import { withRouter, Link } from "react-router-dom";
+import CustomModal from "components/CustomModal";
+import Success from "assets/img/Success.svg";
 
 const Index = (props) => {
   const [show, setShow] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
 
   const [values, setValues] = React.useState({
@@ -19,7 +22,7 @@ const Index = (props) => {
     last_name: undefined,
     current_password: undefined,
     new_password: undefined,
-    profile_img: undefined,
+    profile_image: undefined,
     hidden: false,
     hidden2: false,
   });
@@ -55,23 +58,38 @@ const Index = (props) => {
   };
 
   const { user } = props.auth;
-
-  const handleUpdateUser = (e) => {
+  console.log(values.profile_image);
+  const handleUpdateUser = async (e) => {
     e.preventDefault();
-    const { first_name, last_name } = values;
-    props.dispatch(updateUser({ first_name, last_name }));
+    const { first_name, last_name, profile_image } = values;
+    if (profile_image) {
+      const url = await fileToBase64(profile_image);
+      props.dispatch(
+        updateUser({
+          first_name,
+          last_name,
+          profile_image: { name: profile_image.name, data: url },
+        })
+      );
+      setSuccess(true);
+    } else {
+      props.dispatch(
+        updateUser({
+          first_name,
+          last_name,
+        })
+      );
+      setSuccess(true);
+    }
   };
 
   const handlePasswordUpate = (e) => {
     e.preventDefault();
     const { current_password, new_password } = values;
     console.log(values);
-    props
-      .dispatch(updateUser({ current_password, new_password }))
-      .then((res) => {
-        console.log(res);
-      });
+    props.dispatch(updateUser({ current_password, new_password }));
     setShow(false);
+    setSuccess(true);
   };
 
   const fileToBase64 = async (file) =>
@@ -173,15 +191,9 @@ const Index = (props) => {
                 className="d-none"
                 // placeholder={user && user.email}
 
-                onChange={async (e) => {
-                  const name = e.target.files[0].name;
-                  const url = await fileToBase64(e.target.files[0]);
-                  props.dispatch(
-                    updateUser({
-                      profile_image: { name, data: url },
-                    })
-                  );
-                }}
+                onChange={(e) =>
+                  setValues({ ...values, profile_image: e.target.files[0] })
+                }
                 required
               />
             </Form.Group>
@@ -292,6 +304,19 @@ const Index = (props) => {
           )}
         </div>
       </div>
+      <CustomModal
+        show={success}
+        message={props.auth.message}
+        statusicon={Success}
+        button={
+          <Button
+            className="btn btn-primary mt-3 rounded-pill px-4 py-2"
+            onClick={() => setSuccess(false)}
+          >
+            Close
+          </Button>
+        }
+      />
     </div>
   );
 };

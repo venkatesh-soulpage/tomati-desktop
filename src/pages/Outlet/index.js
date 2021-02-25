@@ -9,6 +9,7 @@ import { Modal, Button } from "react-bootstrap";
 import { GeoAltFill } from "react-bootstrap-icons";
 //local component
 import Success from "assets/img/Success.svg";
+import CustomModal from "components/CustomModal";
 
 const Index = (props) => {
   const [error, setError] = useState(false);
@@ -161,46 +162,36 @@ const Index = (props) => {
             </div>
           );
         })}
-      <Modal
+      <CustomModal
         show={error}
         onHide={() => setError(false)}
-        style={{ marginTop: "15%" }}
-      >
-        {" "}
-        <Modal.Header className="border-0" closeButton></Modal.Header>
-        <Modal.Body>
-          <div className="text-center">
-            <img className="img-fluid mt-3" src={Success} alt="icon" />
-            <p
-              className="mt-3"
-              style={{
-                fontSize: "16px",
-                fontFamily: "Poppins",
-                fontWeight: "600",
-              }}
-            >
-              Please Upgrade Your Plan !
-            </p>
-            <Link
-              to={{
-                pathname: "/order-summary",
-                state: {
-                  values: {
-                    company_name: auth?.user?.last_name,
-                    email: auth?.user?.email,
-                    full_name: auth?.user?.first_name,
-                    location: auth?.user?.location,
-                  },
+        message="Please Upgrade Your Plan !"
+        statusicon={Success}
+        button={
+          <Link
+            to={{
+              pathname: "/order-summary",
+              state: {
+                values: {
+                  company_name: auth?.user?.last_name,
+                  email: auth?.user?.email,
+                  full_name: auth?.user?.first_name,
+                  location: auth?.user?.location?.id,
+                  state: auth?.user?.state,
+                  city: auth?.user?.city,
+                  address: auth?.user?.street,
+                  plan: auth?.user?.plan[0],
+                  plan_id: auth?.user?.plan_id,
                 },
-              }}
-            >
-              <Button className="btn btn-primary mt-3 rounded-pill px-4 py-2">
-                Continue
-              </Button>
-            </Link>
-          </div>
-        </Modal.Body>
-      </Modal>
+              },
+            }}
+          >
+            <Button className="btn btn-primary mt-3 rounded-pill px-4 py-2">
+              Continue
+            </Button>
+          </Link>
+        }
+      />
     </div>
   );
 };
