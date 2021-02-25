@@ -23,7 +23,6 @@ export function userEvents() {
         return responseData;
       })
       .catch((errorData) => {
-        console.log(errorData);
         // dispatch(handleRegisterError(errorData));
       });
   };
@@ -38,7 +37,6 @@ export function addEvent(data) {
         history.push("/dashboard/event");
       })
       .catch((errorData) => {
-        console.log(errorData);
         return errorData;
         // dispatch(handleRegisterError(errorData));
       });
@@ -51,13 +49,10 @@ export function addEventMenu(id, menu) {
     //   .post(`${APIRoutes.ADD_EVENT_REQUEST}/${id}/menu`, menu)
     return EventService.addEventMenu(id, menu)
       .then((responseData) => {
-        console.log(responseData);
         dispatch(addMenuResponse(responseData.Message));
         return responseData;
       })
-      .catch((errorData) => {
-        console.log(errorData);
-      });
+      .catch((errorData) => {});
   };
 }
 
@@ -66,13 +61,10 @@ export function getEvent(id) {
     axios
       .get(`${APIRoutes.GET_EVENT}/${id}`)
       .then((responseData) => {
-        console.log(responseData);
-
         dispatch(getSingleEvent(responseData.data));
         // return responseData;
       })
       .catch((errorData) => {
-        console.log(errorData);
         // dispatch(handleRegisterError(errorData));
       });
   };
@@ -82,13 +74,10 @@ export function updateEvent(id, data) {
   return function (dispatch) {
     return EventService.updateEvent(id, data)
       .then((responseData) => {
-        console.log(responseData);
         return responseData;
         // history.push("/dashboard/event");
       })
-      .catch((errorData) => {
-        console.log(errorData);
-      });
+      .catch((errorData) => {});
   };
 }
 
@@ -97,13 +86,11 @@ export function inviteCollaborator(data) {
     axios
       .post(APIRoutes.ADD_EVENT_COLLABORATOR, data)
       .then((responseData) => {
-        console.log(responseData);
         dispatch(inviteCollaboratorResponse(responseData.data));
         // dispatch(postUpdatedOutlet(responseData.data, true));
         return responseData;
       })
       .catch((errorData) => {
-        console.log(errorData);
         dispatch(inviteCollaboratorResponse(errorData.response.data));
 
         // dispatch(handleRegisterError(errorData));
@@ -112,7 +99,6 @@ export function inviteCollaborator(data) {
 }
 
 export function receiveUserEvents(data) {
-  console.log(data);
   return {
     type: ActionTypes.RECEIVE_USER_EVENTS,
     payload: data,
@@ -120,7 +106,6 @@ export function receiveUserEvents(data) {
 }
 
 export function getSingleEvent(data) {
-  console.log(data);
   return {
     type: ActionTypes.GET_SINGLE_EVENT,
     payload: data,

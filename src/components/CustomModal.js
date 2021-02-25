@@ -7,7 +7,6 @@ import { Modal, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function CustomModal(props) {
-  console.log(props);
   return (
     <>
       <Modal
@@ -24,20 +23,6 @@ function CustomModal(props) {
           </div>
           <p className="mt-3 w-75 text-center">{props.message}</p>
           {props.button}
-          {/* {props.type === "forgot" ? (
-            <Link to="/">
-              <Button variant="outline-secondary rounded-pill px-4 py-2">
-                Login
-              </Button>
-            </Link>
-          ) : (
-            <Button
-              variant="outline-secondary rounded-pill px-4 py-2"
-              onClick={props.onHide}
-            >
-              Close
-            </Button>
-          )} */}
         </Modal.Body>
       </Modal>
     </>

@@ -35,7 +35,6 @@ function ResetPasswordForm(props) {
   const query = useQuery();
   function onFormSubmit(event) {
     event.preventDefault();
-    console.log("hitted", values);
     const email = query.get("email");
     const token = query.get("token");
     var data = {
@@ -44,7 +43,6 @@ function ResetPasswordForm(props) {
       password: values.password,
     };
     if (values.password === values.re_password) {
-      console.log(data, "DATA");
       props.dispatch(resetPassword(data));
       setMessage(props.auth.resetPasswordError);
       setShow(true);
@@ -60,7 +58,6 @@ function ResetPasswordForm(props) {
 
   const analyze = (e) => {
     const val = e.target.value;
-    console.log(val);
     if (strongRegex.test(val)) {
       setError(true);
       setMessage1("Strong Password");

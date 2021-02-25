@@ -318,7 +318,6 @@ function Index(props) {
   const handlePay = () => {
     handleCheckout(activePlan);
   };
-  console.log(props);
   return (
     <div className="container mt-5 mb-5 pt-5">
       <div className="d-flex row ">
