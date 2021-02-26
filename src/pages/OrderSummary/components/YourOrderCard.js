@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import { postDiscountValue, resetMessage } from "_actions/auth";
+import { postDiscountValue, resetDiscountMessage } from "_actions/auth";
 import _ from "lodash";
 import PriceComponent from "./PriceComponent";
 function YourOrderCard({
@@ -123,22 +123,37 @@ function YourOrderCard({
         </div>
 
         <div className=" pt-1  border-bottom">
-          <Form.Group>
+          <Form.Group
+            className="d-flex justify-content-between"
+            style={{ border: "1px solid #C3CAD8" }}
+          >
             <Form.Control
               type="text"
-              placeholder="Discount code                        Optional"
+              placeholder="Discount code(Optional)"
               value={discountValue}
+              className="border-0"
               onChange={(e) => {
                 setDiscountValue(e.target.value);
+                props.dispatch(resetDiscountMessage());
               }}
               onBlur={() => {
-                props.dispatch(
-                  postDiscountValue({ discount_code: discountValue })
-                );
-                props.dispatch(resetMessage());
+                props.dispatch(resetDiscountMessage());
               }}
             />
+            <button
+              type="button"
+              onClick={() => {
+                props.dispatch(postDiscountValue(discountValue));
+              }}
+              className="btn"
+              style={{
+                backgroundColor: "transparent",
+              }}
+            >
+              Apply
+            </button>
           </Form.Group>
+
           {props.auth.discountVal ? (
             <Form.Group
               className="d-flex flex-row justify-content-between align-text-center my-3 "

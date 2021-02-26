@@ -7,6 +7,7 @@ import {
   updateUser,
   getSubscriptionId,
   getUser,
+  resetDiscountMessage,
 } from "_actions/auth";
 import AuthAPI from "services/auth";
 import _, { values } from "lodash";
@@ -167,7 +168,9 @@ function Index(props) {
 
   const country = _.filter(props.auth.locations, ["id", parseInt(location)]);
 
-  const selected_state = state;
+  const selected_state =
+    country.length > 0 &&
+    _.filter(country[0].childrens, ["id", parseInt(state)]);
 
   let outletPrice = 0;
   if ("outletaddons" in userValues) {
@@ -208,6 +211,31 @@ function Index(props) {
   tax = parseFloat(tax.toFixed(2));
   let total = subTotal + tax;
 
+  const no_of_outlets =
+    "outletaddons" in userValues
+      ? userValues?.outletaddons
+      : activePlan?.outlet_limit;
+  const no_of_qrs =
+    "qraddons" in userValues ? userValues?.qraddons : activePlan?.qr_tags_limit;
+  const no_of_users =
+    "useraddons" in userValues
+      ? userValues?.useraddons
+      : activePlan?.user_limit;
+  const no_of_events =
+    "eventaddons" in userValues
+      ? userValues?.eventaddons
+      : activePlan?.event_limit;
+
+  let prevOutlets =
+    props?.auth?.user?.no_of_outlets - props?.auth?.user?.plan[0]?.outlet_limit;
+  let prevQrs =
+    props?.auth?.user?.no_of_qrcodes -
+    props?.auth?.user?.plan[0]?.qr_tags_limit;
+  let prevUsers =
+    props?.auth?.user?.no_of_users - props?.auth?.user?.plan[0]?.user_limit;
+  let prevEvents =
+    props?.auth?.user?.no_of_events - props?.auth?.user?.plan[0]?.event_limit;
+
   const handlePayment = (transaction_id) => {
     const inputs = {
       location_id: location,
@@ -218,23 +246,63 @@ function Index(props) {
       plan_id: activePlan?.id,
       transaction_id: transaction_id,
       is_notifications_permited: is_notifications_permited,
-      state: selected_state && selected_state[0].name,
+      state: state,
       city: city,
       street: address,
+      no_of_outlets: no_of_outlets + prevOutlets,
+      no_of_qrcodes: no_of_qrs + prevQrs,
+      no_of_users: no_of_users + prevUsers,
+      no_of_events: no_of_events + prevEvents,
     };
-    if (props?.auth?.user === null) {
-      props
-        .dispatch(userRegistration(inputs))
-        .then((response) => {
-          setShow(true);
-        })
-        .catch((error) => {});
-    } else {
+    if (props?.auth?.user !== null) {
+      props.dispatch(resetDiscountMessage());
       props.dispatch(updateUser(inputs));
     }
   };
+
   const handleCheckout = () => {
-    let coupon = [discountValue];
+    let addonOutlet = no_of_outlets - activePlan?.outlet_limit;
+    let addonEvent = no_of_events - activePlan?.event_limit;
+    let addonUser = no_of_users - activePlan?.user_limit;
+    let addonQr = no_of_qrs - activePlan?.qr_tags_limit;
+    let coupon = null;
+    if (props.auth.discountVal) {
+      coupon = [discountValue];
+    }
+    console.log(coupon);
+    const addonArray = [];
+    if (addonOutlet !== 0) {
+      let outletObject = {
+        id: activePlan?.chargebee_outlets_addon_id,
+        unit_price: parseFloat(activePlan?.outlet_addon_price) * 100,
+        quantity: addonOutlet,
+      };
+      addonArray.push(outletObject);
+    }
+    if (addonEvent !== 0) {
+      let eventObject = {
+        id: activePlan?.chargebee_events_addon_id,
+        unit_price: parseFloat(activePlan?.event_addon_price) * 100,
+        quantity: addonEvent,
+      };
+      addonArray.push(eventObject);
+    }
+    if (addonUser !== 0) {
+      let userObject = {
+        id: activePlan?.chargebee_collaborators_addon_id,
+        unit_price: parseFloat(activePlan?.user_addon_price) * 100,
+        quantity: addonUser,
+      };
+      addonArray.push(userObject);
+    }
+    if (addonQr !== 0) {
+      let qrObject = {
+        id: activePlan?.chargebee_qr_addon_id,
+        unit_price: parseFloat(activePlan?.qr_tags_addon_price) * 100,
+        quantity: addonQr,
+      };
+      addonArray.push(qrObject);
+    }
 
     props
       .dispatch(
@@ -243,7 +311,9 @@ function Index(props) {
       .then((res) => {
         return AuthAPI.UpdatePayment({
           plan_id: activePlan?.chargebee_plan_id,
+          addons: addonArray,
           subscription_id: res.hosted_page.content.subscription.id,
+          coupon,
         }).then((response) => {
           handlePayment(props?.auth?.user?.transaction_id);
           return response.data;
@@ -257,6 +327,12 @@ function Index(props) {
   const handlePay = () => {
     handleCheckout(activePlan);
   };
+  console.log(props);
+  // console.log(activePlan);
+  console.log(prevOutlets);
+  console.log(props?.auth?.user?.no_of_outlets);
+  console.log(props?.auth?.user?.plan[0]?.outlet_limit);
+  console.log(no_of_outlets, no_of_qrs, no_of_users, no_of_events);
   return (
     <div className="container mt-5 mb-5 pt-5">
       <div className="d-flex row ">

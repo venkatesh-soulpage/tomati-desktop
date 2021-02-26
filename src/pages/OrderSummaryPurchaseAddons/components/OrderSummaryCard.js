@@ -2,7 +2,14 @@ import React from "react";
 import BankTransferModal from "./BankTransferModal";
 import LoginModal from "./LoginModal";
 
-function OrderSummaryCard({ props, country, total, handlePay, handleFinish }) {
+function OrderSummaryCard({
+  props,
+  country,
+  selected_state,
+  total,
+  handlePay,
+  handleFinish,
+}) {
   const {
     address,
     company_name,
@@ -81,7 +88,7 @@ function OrderSummaryCard({ props, country, total, handlePay, handleFinish }) {
               </div>
               <div className="col-8 mt-3">
                 {" "}
-                <h6 className="font-weight-normal">{state}</h6>
+                <h6 className="font-weight-normal">{selected_state[0].name}</h6>
               </div>
               <div className="col-4 mt-3">
                 <h6 className="font-weight-normal">City:</h6>
