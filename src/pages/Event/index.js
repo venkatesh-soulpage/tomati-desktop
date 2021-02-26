@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 // react bootstrap
 import { Modal, Button } from "react-bootstrap";
-import Success from "assets/img/Success.svg";
+import Error from "assets/img/Error.svg";
 import CustomModal from "components/CustomModal";
 // moment
 import moment from "moment";
@@ -197,7 +197,7 @@ const Index = (props) => {
         show={error}
         onHide={() => setError(false)}
         message={message}
-        statusicon={Success}
+        statusicon={Error}
         button={
           message ===
           "You account is inactive, Please contact admin." ? null : (

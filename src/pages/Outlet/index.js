@@ -9,6 +9,7 @@ import { Modal, Button } from "react-bootstrap";
 import { GeoAltFill } from "react-bootstrap-icons";
 //local component
 import Success from "assets/img/Success.svg";
+import Error from "assets/img/Error.svg";
 import CustomModal from "components/CustomModal";
 
 const Index = (props) => {
@@ -173,7 +174,7 @@ const Index = (props) => {
         show={error}
         onHide={() => setError(false)}
         message={message}
-        statusicon={Success}
+        statusicon={Error}
         button={
           message ===
           "You account is inactive, Please contact admin." ? null : (

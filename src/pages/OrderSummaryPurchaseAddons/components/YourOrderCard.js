@@ -57,36 +57,38 @@ function YourOrderCard({
         <select className="form-control pl-3">
           {/* <option value="">Select Plan</option> */}
           {props?.auth?.plans?.map((plan, key) => {
-            if (plan.plan === "starter") {
-              return (
-                <option key={key} value={plan.id}>
-                  Starter - Free Forever
-                </option>
-              );
-            } else if (plan.plan === "growth-monthly") {
-              return (
-                <option key={key} value={plan.id}>
-                  Growth-30 days
-                </option>
-              );
-            } else if (plan.plan === "premium-monthly") {
-              return (
-                <option key={key} value={plan.id}>
-                  Premium-30 days
-                </option>
-              );
-            } else if (plan.plan === "growth-yearly") {
-              return (
-                <option key={key} value={plan.id}>
-                  Growth-365 days
-                </option>
-              );
-            } else if (plan.plan === "premium-yearly") {
-              return (
-                <option key={key} value={plan.id}>
-                  Premium-365 days
-                </option>
-              );
+            if (plan.id === plan_id) {
+              if (plan.plan === "starter") {
+                return (
+                  <option key={key} value={plan.id}>
+                    Starter - Free Forever
+                  </option>
+                );
+              } else if (plan.plan === "growth-monthly") {
+                return (
+                  <option key={key} value={plan.id}>
+                    Growth-30 days
+                  </option>
+                );
+              } else if (plan.plan === "premium-monthly") {
+                return (
+                  <option key={key} value={plan.id}>
+                    Premium-30 days
+                  </option>
+                );
+              } else if (plan.plan === "growth-yearly") {
+                return (
+                  <option key={key} value={plan.id}>
+                    Growth-365 days
+                  </option>
+                );
+              } else if (plan.plan === "premium-yearly") {
+                return (
+                  <option key={key} value={plan.id}>
+                    Premium-365 days
+                  </option>
+                );
+              }
             }
           })}
         </select>
