@@ -15,6 +15,8 @@ import { GeoAltFill } from "react-bootstrap-icons";
 const Index = (props) => {
   const [search, setSearch] = useState("");
   const [error, setError] = useState(false);
+  const [message, setMessage] = useState("");
+
   var date = new Date();
   var currentMonth = date.getMonth();
 
@@ -39,7 +41,13 @@ const Index = (props) => {
       }
     });
 
-    if (auth.user.plan[0].event_limit === eventsPerMonth.length) {
+    if (!auth.user.is_subscription_active) {
+      setMessage("You account is inactive, Please contact admin.");
+      setError(true);
+    } else if (auth.user.plan[0].event_limit === eventsPerMonth.length) {
+      setMessage(
+        "You have 0 events left on your plan. To add new events upgrade your plan here."
+      );
       setError(true);
     } else {
       props.history.push("/dashboard/addevent");
@@ -91,8 +99,8 @@ const Index = (props) => {
                   company_name: auth?.user?.last_name,
                   email: auth?.user?.email,
                   full_name: auth?.user?.first_name,
-                  location: auth?.user?.location?.id,
-                  state: auth?.user?.state,
+                  location: auth?.user?.location_id,
+                  state: auth?.user?.state_id,
                   city: auth?.user?.city,
                   address: auth?.user?.street,
                   plan_id: auth?.user?.plan_id,
@@ -127,8 +135,8 @@ const Index = (props) => {
                     company_name: auth?.user?.last_name,
                     email: auth?.user?.email,
                     full_name: auth?.user?.first_name,
-                    location: auth?.user?.location?.id,
-                    state: auth?.user?.state,
+                    location: auth?.user?.location_id,
+                    state: auth?.user?.state_id,
                     city: auth?.user?.city,
                     address: auth?.user?.street,
                     plan: auth?.user?.plan[0],
@@ -188,31 +196,34 @@ const Index = (props) => {
       <CustomModal
         show={error}
         onHide={() => setError(false)}
-        message="Please Upgrade Your Plan !"
+        message={message}
         statusicon={Success}
         button={
-          <Link
-            to={{
-              pathname: "/order-summary",
-              state: {
-                values: {
-                  company_name: auth?.user?.last_name,
-                  email: auth?.user?.email,
-                  full_name: auth?.user?.first_name,
-                  location: auth?.user?.location?.id,
-                  state: auth?.user?.state,
-                  city: auth?.user?.city,
-                  address: auth?.user?.street,
-                  plan: auth?.user?.plan[0],
-                  plan_id: auth?.user?.plan_id,
+          message ===
+          "You account is inactive, Please contact admin." ? null : (
+            <Link
+              to={{
+                pathname: "/order-summary",
+                state: {
+                  values: {
+                    company_name: auth?.user?.last_name,
+                    email: auth?.user?.email,
+                    full_name: auth?.user?.first_name,
+                    location: auth?.user?.location_id,
+                    state: auth?.user?.state_id,
+                    city: auth?.user?.city,
+                    address: auth?.user?.street,
+                    plan: auth?.user?.plan[0],
+                    plan_id: auth?.user?.plan_id,
+                  },
                 },
-              },
-            }}
-          >
-            <Button className="btn btn-primary mt-3 rounded-pill px-4 py-2">
-              Continue
-            </Button>
-          </Link>
+              }}
+            >
+              <Button className="btn btn-primary mt-3 rounded-pill px-4 py-2">
+                Upgrade
+              </Button>
+            </Link>
+          )
         }
       />
     </div>

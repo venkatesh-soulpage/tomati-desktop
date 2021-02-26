@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { addEvent } from "_actions/event";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
+import { getLocationRegister } from "_actions/auth";
 // local components
 import EventDetails from "./components/EventDeatails";
 import CreateMenu from "./components/CreateMenu";
@@ -37,6 +38,10 @@ const Index = (props) => {
   });
   const { step } = values;
 
+  useEffect(() => {
+    props.dispatch(getLocationRegister());
+  }, []);
+
   const fileToBase64 = async (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -55,7 +60,8 @@ const Index = (props) => {
     setValues((values) => ({ ...values, [name]: value }));
   };
 
-  const handleStep = (values) => {
+  const handleStep = (e) => {
+    e.preventDefault();
     setValues((values) => ({ ...values, step: values.step + 1 }));
   };
 
@@ -119,25 +125,13 @@ const Index = (props) => {
               <div style={HeaderText} className="text-start form-legend pb-5">
                 Event Details
               </div>
-              <Form
-                id="register-form"
-                // onLoad={() => props.handleRegisterError(null)}
-                autoComplete="off"
-              >
-                {/* <AlertMessage
-              variant="danger"
-              error={props.auth.registerError}
-              onDismiss={() => {
-                props.handleRegisterError(null);
-              }}
-            ></AlertMessage> */}
+              <Form id="register-form" autoComplete="off" onSubmit={handleStep}>
                 <EventDetails
                   values={values}
                   setValues={setValues}
                   handleChange={handleChange}
                   handleFile={handleFile}
                   handleStep={handleStep}
-                  // handleSignUpData={handleSignUpData}
                 />
               </Form>
             </>
@@ -146,24 +140,12 @@ const Index = (props) => {
               <div style={HeaderText} className="text-start form-legend pb-5">
                 Event Scedule
               </div>
-              <Form
-                id="email-form"
-                onSubmit={handleCreateOutlet}
-                // onLoad={() => props.handleRegisterError(null)}
-                autoComplete="off"
-              >
-                {/* <AlertMessage
-              variant="danger"
-              error={props.auth.registerError}
-              onDismiss={() => {
-                props.handleRegisterError(null);
-              }}
-            ></AlertMessage> */}
+              <Form id="email-form" onSubmit={handleStep} autoComplete="off">
                 <EventSchedule
                   values={values}
                   handleChange={handleChange}
-                  setValues={setValues}
                   handleStep={handleStep}
+                  setValues={setValues}
                   handleCreateOutlet={handleCreateOutlet}
                   handleStepPrev={handleStepPrev}
                 />
@@ -175,18 +157,10 @@ const Index = (props) => {
                 Upload Menu
               </div>
               <Form
-                id="email-form"
+                id="menu-form"
                 onSubmit={handleCreateOutlet}
-                // onLoad={() => props.handleRegisterError(null)}
                 autoComplete="off"
               >
-                {/* <AlertMessage
-              variant="danger"
-              error={props.auth.registerError}
-              onDismiss={() => {
-                props.handleRegisterError(null);
-              }}
-            ></AlertMessage> */}
                 <CreateMenu
                   values={values}
                   handleChange={handleChange}
@@ -194,6 +168,7 @@ const Index = (props) => {
                   handleStep={handleStep}
                   handleCreateOutlet={handleCreateOutlet}
                   handleStepPrev={handleStepPrev}
+                  props={props}
                 />
               </Form>
             </>
@@ -205,7 +180,7 @@ const Index = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { event: state.event };
+  return { event: state.event, auth: state.auth };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

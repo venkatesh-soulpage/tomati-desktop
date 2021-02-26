@@ -56,9 +56,37 @@ function YourOrderCard({
 
         <select className="form-control pl-3">
           {/* <option value="">Select Plan</option> */}
-          {props?.auth?.plans?.map((plan) => {
-            if (plan.id === plan_id) {
-              return <option value={plan.id}>{plan.plan}</option>;
+          {props?.auth?.plans?.map((plan, key) => {
+            if (plan.plan === "starter") {
+              return (
+                <option key={key} value={plan.id}>
+                  Starter - Free Forever
+                </option>
+              );
+            } else if (plan.plan === "growth-monthly") {
+              return (
+                <option key={key} value={plan.id}>
+                  Growth-30 days
+                </option>
+              );
+            } else if (plan.plan === "premium-monthly") {
+              return (
+                <option key={key} value={plan.id}>
+                  Premium-30 days
+                </option>
+              );
+            } else if (plan.plan === "growth-yearly") {
+              return (
+                <option key={key} value={plan.id}>
+                  Growth-365 days
+                </option>
+              );
+            } else if (plan.plan === "premium-yearly") {
+              return (
+                <option key={key} value={plan.id}>
+                  Premium-365 days
+                </option>
+              );
             }
           })}
         </select>
@@ -69,7 +97,7 @@ function YourOrderCard({
           <PriceComponent
             header={"Number of outlets"}
             description={
-              "A location that requires a separate menu and/or QR Code"
+              "An outlet is a restaurant or bar in a fixed location that requires its own unique QR code."
             }
             no_of_items={no_of_outlets}
             handleChange={handleOutlet}
@@ -77,21 +105,25 @@ function YourOrderCard({
           />
           <PriceComponent
             header={"QR Menu Tags?"}
-            description={""}
+            description={
+              "Premium waterproof self-adhesive QR codes for your tables. "
+            }
             no_of_items={no_of_qrs}
             handleChange={handleQr}
             price={qrPrice}
           />
           <PriceComponent
             header={"Number of Users"}
-            description={""}
+            description={
+              "buy extra seats for collaborators here including waiters, cashiers and floor managers"
+            }
             no_of_items={no_of_users}
             handleChange={handleUsers}
             price={userPrice}
           />
           <PriceComponent
             header={"Number of Events"}
-            description={""}
+            description={"An event is a restaurant or bar with an expiry date"}
             no_of_items={no_of_events}
             handleChange={handleEvent}
             price={eventPrice}

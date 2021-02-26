@@ -164,8 +164,7 @@ function Index(props) {
 
   const selected_state =
     country.length > 0 &&
-    _.filter(country[0].childrens, ["id", parseInt(state)]) &&
-    state;
+    _.filter(country[0].childrens, ["id", parseInt(state)]);
 
   let outletPrice = 0;
   if ("outletaddons" in userValues) {
