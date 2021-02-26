@@ -53,7 +53,7 @@ function Index(props) {
     props.dispatch(addOutletMenu(outlet.id, menu)).then((res) => {
       console.log(res);
       setAddmenu(false);
-      setMessage("Menu Updates Succesfull! ");
+      setMessage("Menu Updated Succesfully! ");
       setShow(true);
     });
   };
