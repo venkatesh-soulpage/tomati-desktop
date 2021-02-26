@@ -53,3 +53,7 @@ export const TOMATI_DESKTOP_URL = "https://tomati-desktop.vercel.app/";
 export const HERULO_PAYMENT_URL =
   "https://tomati-api.herokuapp.com/api/payment";
 export const LOCAL_PAYMENT_URL = "http://localhost:3000/api/payment";
+
+//Image URL
+export const QR_CODE_IMAGE =
+  "https://www.google.com/url?q=https://tomati.s3.af-south-1.amazonaws.com/CardBackground.jpg&sa=D&source=hangouts&ust=1614413766251000&usg=AFQjCNHe1XFubNRv16CNjnCMpDAqWk1rig";
