@@ -170,9 +170,14 @@ function Index(props) {
   let outletPrice = 0;
   if ("outletaddons" in userValues) {
     const { outlet_addon_price } = activePlan;
-    outletPrice =
-      outlet_addon_price *
-      (userValues.outletaddons - props?.auth?.user?.no_of_outlets);
+    activePlan.subscription_type === "yearly"
+      ? (outletPrice =
+          outlet_addon_price *
+          (userValues.outletaddons - props?.auth?.user?.no_of_outlets) *
+          12)
+      : (outletPrice =
+          outlet_addon_price *
+          (userValues.outletaddons - props?.auth?.user?.no_of_outlets));
   }
   let qrPrice = 0;
   if ("qraddons" in userValues) {
@@ -184,16 +189,26 @@ function Index(props) {
   let userPrice = 0;
   if ("useraddons" in userValues) {
     const { user_addon_price } = activePlan;
-    userPrice =
-      user_addon_price *
-      (userValues.useraddons - props?.auth?.user?.no_of_users);
+    activePlan.subscription_type === "yearly"
+      ? (userPrice =
+          user_addon_price *
+          (userValues.useraddons - props?.auth?.user?.no_of_users) *
+          12)
+      : (userPrice =
+          user_addon_price *
+          (userValues.useraddons - props?.auth?.user?.no_of_users));
   }
   let eventPrice = 0;
   if ("eventaddons" in userValues) {
     const { event_addon_price } = activePlan;
-    eventPrice =
-      event_addon_price *
-      (userValues.eventaddons - props?.auth?.user?.no_of_events);
+    activePlan.subscription_type === "yearly"
+      ? (eventPrice =
+          event_addon_price *
+          (userValues.eventaddons - props?.auth?.user?.no_of_events) *
+          12)
+      : (eventPrice =
+          event_addon_price *
+          (userValues.eventaddons - props?.auth?.user?.no_of_events));
   }
   let discount_value = 0;
   let subTotal = outletPrice + qrPrice + userPrice + eventPrice;
