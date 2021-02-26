@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 // redux
 import { connect } from "react-redux";
 import { addOutlet } from "_actions/outlet";
+import { getLocationRegister } from "_actions/auth";
+
 // react router
 import { withRouter, Link } from "react-router-dom";
 // local components
@@ -32,6 +34,10 @@ const Index = (props) => {
   });
   const { step } = values;
 
+  useEffect(() => {
+    props.dispatch(getLocationRegister());
+  }, []);
+
   const fileToBase64 = async (file) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -50,7 +56,8 @@ const Index = (props) => {
     setValues((values) => ({ ...values, [name]: value }));
   };
 
-  const handleStep = (values) => {
+  const handleStep = (e) => {
+    e.preventDefault();
     setValues((values) => ({ ...values, step: values.step + 1 }));
   };
 
@@ -120,23 +127,15 @@ const Index = (props) => {
                   </div>
                   <Form
                     id="register-form"
-                    // onLoad={() => props.handleRegisterError(null)}
+                    onSubmit={handleStep}
                     autoComplete="off"
                   >
-                    {/* <AlertMessage
-              variant="danger"
-              error={props.auth.registerError}
-              onDismiss={() => {
-                props.handleRegisterError(null);
-              }}
-            ></AlertMessage> */}
                     <OutletDetails
                       values={values}
                       setValues={setValues}
                       handleChange={handleChange}
                       handleFile={handleFile}
                       handleStep={handleStep}
-                      // handleSignUpData={handleSignUpData}
                     />
                   </Form>
                 </>
@@ -151,16 +150,8 @@ const Index = (props) => {
                   <Form
                     id="email-form"
                     onSubmit={handleCreateOutlet}
-                    // onLoad={() => props.handleRegisterError(null)}
                     autoComplete="off"
                   >
-                    {/* <AlertMessage
-              variant="danger"
-              error={props.auth.registerError}
-              onDismiss={() => {
-                props.handleRegisterError(null);
-              }}
-            ></AlertMessage> */}
                     <CreateMenu
                       values={values}
                       handleChange={handleChange}
@@ -182,7 +173,7 @@ const Index = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { outlet: state.outlet };
+  return { outlet: state.outlet, auth: state.auth };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

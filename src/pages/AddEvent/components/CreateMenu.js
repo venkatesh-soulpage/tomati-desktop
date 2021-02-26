@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import Papa from "papaparse";
 import _ from "lodash";
@@ -11,7 +11,22 @@ const CreateMenu = ({
   handleCreateOutlet,
   setValues,
   handleStepPrev,
+  props,
 }) => {
+  const [menuName, setMenuName] = useState(null);
+
+  const arr =
+    props.auth.locations &&
+    props.auth.locations.filter((location) => {
+      return location.id === 7;
+    });
+  const arr2 =
+    props.auth.locations &&
+    props.auth.locations.filter((location) => {
+      return location.id !== 7;
+    });
+  const newLocations = arr && arr.concat(arr2);
+
   const uploadFile = (data) => {
     const { data: csv_data } = data;
     setValues({ ...values, menu: _.reject(csv_data, { name: "" }) });
@@ -27,18 +42,20 @@ const CreateMenu = ({
           required
         >
           <option>Select Location</option>
-          <option value={7}>Nigeria</option>
-          <option disabled>Angola (Coming Soon)</option>
-          <option disabled>Brazil (Coming Soon)</option>
-          <option disabled>Colombia (Coming Soon)</option>
-          <option disabled>France (Coming Soon)</option>
-          <option disabled>Ghana (Coming Soon)</option>
-          <option disabled>Kenya (Coming Soon)</option>
-          <option disabled>Poland (Coming Soon)</option>
-          <option disabled>South Africa (Coming Soon)</option>
-          <option disabled>Spain (Coming Soon)</option>
-          <option disabled>United Arab Emirates (Coming Soon)</option>
-          <option disabled>United Kingdom (Coming Soon)</option>
+          {_.map(newLocations, function (location) {
+            return (
+              <option
+                key={location.id}
+                value={location.id}
+                disabled={location.id !== 7}
+                onClick={() => {
+                  setValues({ ...values, location });
+                }}
+              >
+                {location.name} {location.id !== 7 && "(Coming Soon)"}
+              </option>
+            );
+          })}
         </Form.Control>
       </Form.Group>
       <Form.Group>
@@ -49,6 +66,8 @@ const CreateMenu = ({
           custom
           className="d-none"
           onChange={(e) => {
+            setMenuName(e.target.files[0].name);
+
             Papa.parse(e.target.files[0], {
               complete: uploadFile,
               header: true,
@@ -64,11 +83,7 @@ const CreateMenu = ({
           <label for="menu" style={{ cursor: "pointer" }}>
             <h6>
               <img src={UploadCover} alt="icon" className="mx-4" />
-              {values.menu ? (
-                <span>{values.menu[0].name}</span>
-              ) : (
-                <span>Upload Menu</span>
-              )}
+              {values.menu ? <span>{menuName}</span> : <span>Upload Menu</span>}
             </h6>
           </label>
         </Card>

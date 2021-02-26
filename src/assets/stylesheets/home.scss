@@ -100,3 +100,9 @@
 .background {
   background-size: cover !important;
 }
+
+.form-control:focus {
+  outline: 0 !important;
+  box-shadow: none;
+  border: 1px solid #ced4da;
+}

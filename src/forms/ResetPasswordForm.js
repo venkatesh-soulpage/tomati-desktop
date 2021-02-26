@@ -10,6 +10,7 @@ import { Link, useLocation } from "react-router-dom";
 import PasswordTextField from "components/PasswordTextField";
 import CustomModal from "components/CustomModal";
 import Success from "assets/img/Success.svg";
+import Error from "assets/img/Error.svg";
 
 import { Card, Button, Form } from "react-bootstrap";
 
@@ -153,7 +154,11 @@ function ResetPasswordForm(props) {
         show={show}
         onHide={() => setShow(false)}
         message={props.auth.resetPasswordError || message}
-        statusicon={Success}
+        statusicon={
+          props.auth.resetPasswordError === "Password updated!"
+            ? Success
+            : Error
+        }
         button={
           props.auth.resetPasswordError === "Password updated!" ? (
             <Link to="/">

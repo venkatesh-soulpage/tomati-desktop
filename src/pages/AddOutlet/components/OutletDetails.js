@@ -110,7 +110,7 @@ const OutletDetails = ({
       </Form.Group>
       <Form.Group className="d-flex justify-content-end">
         <Button
-          onClick={handleStep}
+          type="submit"
           form="register-form"
           className="btn btn-primary mt-3 rounded-pill px-4 py-3"
           style={{ borderRadius: "20px" }}

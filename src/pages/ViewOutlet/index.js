@@ -27,6 +27,7 @@ import CustomModal from "components/CustomModal";
 
 function Index(props) {
   const [addMenu, setAddmenu] = useState(false);
+  const [menuName, setMenuName] = useState(null);
   const [addCollaborator, setCollaborator] = useState(false);
   const [menu, setMenu] = useState(null);
   const [show, setShow] = useState(false);
@@ -102,7 +103,10 @@ function Index(props) {
               width="150"
             />
             <label for="logoImage">
-              <Camera style={{ color: "#fff" }} />
+              <Camera
+                style={{ color: "#fff" }}
+                style={{ marginTop: "120px", cursor: "pointer" }}
+              />
             </label>
 
             <Form.Group>
@@ -274,6 +278,7 @@ function Index(props) {
                 custom
                 className="d-none"
                 onChange={(e) => {
+                  setMenuName(e.target.files[0].name);
                   Papa.parse(e.target.files[0], {
                     complete: uploadFile,
                     header: true,
@@ -289,11 +294,7 @@ function Index(props) {
                 <label for="menu" style={{ cursor: "pointer" }}>
                   <h6>
                     <img src={UploadCover} alt="icon" className="mx-4" />
-                    {menu ? (
-                      <span>{menu[0].name}</span>
-                    ) : (
-                      <span>Upload Menu</span>
-                    )}
+                    {menu ? <span>{menuName}</span> : <span>Upload Menu</span>}
                   </h6>
                 </label>
               </Card>

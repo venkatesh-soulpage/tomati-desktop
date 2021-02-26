@@ -78,8 +78,8 @@ const EventSchedule = ({
           }}
         />
         <Button
-          onClick={handleStep}
-          form="register-form"
+          type="submit"
+          form="email-form"
           className="btn btn-primary mt-3 rounded-pill px-4"
           style={{ borderRadius: "20px" }}
         >
