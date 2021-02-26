@@ -25,9 +25,7 @@ const EventSchedule = ({
         <Datetime
           inputProps={inputProps}
           value={values.start_time}
-          onChange={(e) =>
-            setValues({ ...values, start_time: moment(e).format() })
-          }
+          onChange={(e) => setValues({ ...values, start_time: moment(e) })}
         />
       </Form.Group>
       <Form.Group>
@@ -35,9 +33,7 @@ const EventSchedule = ({
           inputProps={inputProps2}
           //   onChange={handleChange("end_time")}
           value={values.end_time}
-          onChange={(e) =>
-            setValues({ ...values, end_time: moment(e).format() })
-          }
+          onChange={(e) => setValues({ ...values, end_time: moment(e) })}
         />
       </Form.Group>
       <Form.Group>

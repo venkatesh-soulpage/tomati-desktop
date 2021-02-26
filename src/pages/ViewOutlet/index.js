@@ -51,9 +51,8 @@ function Index(props) {
 
   const handleMenu = () => {
     props.dispatch(addOutletMenu(outlet.id, menu)).then((res) => {
-      console.log(res);
       setAddmenu(false);
-      setMessage("Menu Updates Succesfull! ");
+      setMessage("Menu Updated Succesfully! ");
       setShow(true);
     });
   };
@@ -72,6 +71,8 @@ function Index(props) {
       inviteCollaborator({ ...collaboratorDetail, outlet_venue: outlet.id })
     );
     setShow(true);
+    setMessage("Invite Succesfull! ");
+
     setCollaborator(false);
   };
   console.log(props.outlet);
@@ -100,7 +101,8 @@ function Index(props) {
             <img
               className="img-fluid rounded-circle"
               src={outlet && outlet.logo_img}
-              width="150"
+              width="150px"
+              height="150px"
             />
             <label for="logoImage">
               <Camera
@@ -197,7 +199,7 @@ function Index(props) {
       </div>
       <CustomModal
         show={show}
-        message={props.outlet.message}
+        message={message}
         onHide={() => setShow(false)}
         statusicon={Success}
         button={

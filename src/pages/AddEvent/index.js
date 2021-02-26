@@ -35,6 +35,7 @@ const Index = (props) => {
     custom_message: null,
     logo_img: null,
     step: 1,
+    qr_isActive: true,
   });
   const { step } = values;
 
@@ -87,6 +88,7 @@ const Index = (props) => {
       comments,
       expected_guests,
       expected_hourly_guests,
+      qr_isActive,
     } = values;
 
     const url = await fileToBase64(cover_image[0]);
@@ -107,6 +109,7 @@ const Index = (props) => {
         comments,
         expected_guests,
         expected_hourly_guests,
+        qr_isActive,
       })
     );
   };
