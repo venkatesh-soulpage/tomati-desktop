@@ -3,6 +3,8 @@ import Form from "react-bootstrap/Form";
 import { postDiscountValue, resetDiscountMessage } from "_actions/auth";
 import _ from "lodash";
 import PriceComponent from "./PriceComponent";
+import { QR_CODE_IMAGE } from "constants/APIRoutes";
+
 function YourOrderCard({
   props,
   activePlan,
@@ -98,7 +100,12 @@ function YourOrderCard({
           <PriceComponent
             header={"QR Menu Tags"}
             description={
-              "Premium waterproof self-adhesive QR codes for your tables. "
+              <div>
+                Premium waterproof self-adhesive QR codes for your tables.
+                <a target="_blank" href={QR_CODE_IMAGE}>
+                  See Image
+                </a>
+              </div>
             }
             no_of_items={no_of_qrs}
             handleChange={handleQr}
@@ -145,7 +152,7 @@ function YourOrderCard({
               onClick={() => {
                 props.dispatch(postDiscountValue(discountValue));
               }}
-              className="btn"
+              className="btn border-left"
               style={{
                 backgroundColor: "transparent",
               }}
