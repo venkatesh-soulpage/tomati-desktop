@@ -18,23 +18,15 @@ const QR = ({ event }) => {
         <div className="mr-auto">
           <h4 className="text-dark">{event?.name}</h4>
           <p className="text-dark font-weight-light">{event?.description}</p>
-          {event?.qr_isActive ? (
-            <button
-              className="btn btn-danger mr-3 rounded-pill"
-              onClick={() => downloadQr(event.name)}
-            >
-              Download QR Code
-            </button>
-          ) : (
-            <button
-              disabled
-              className="btn btn-danger mr-3 rounded-pill"
-              onClick={() => downloadQr(event.name)}
-              style={{ cursor: "not-allowed" }}
-            >
-              Download QR Code
-            </button>
-          )}
+
+          <button
+            disabled={!event?.qr_isActive}
+            className="btn btn-danger mr-3 rounded-pill"
+            onClick={() => downloadQr(event.name)}
+            style={{ cursor: "not-allowed" }}
+          >
+            Download QR Code
+          </button>
 
           <button className="btn btn-outline-dark rounded-pill ">
             Order Menu tags
