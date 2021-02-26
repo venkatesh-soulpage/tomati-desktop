@@ -88,7 +88,7 @@ function OrderSummaryCard({
               </div>
               <div className="col-8 mt-3">
                 {" "}
-                <h6 className="font-weight-normal">{selected_state}</h6>
+                <h6 className="font-weight-normal">{selected_state[0].name}</h6>
               </div>
               <div className="col-4 mt-3">
                 <h6 className="font-weight-normal">City:</h6>

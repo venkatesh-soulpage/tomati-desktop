@@ -7,6 +7,7 @@ import {
   updateUser,
   getUser,
   getSubscriptionId,
+  resetDiscountMessage,
 } from "_actions/auth";
 import _ from "lodash";
 
@@ -164,8 +165,7 @@ function Index(props) {
 
   const selected_state =
     country.length > 0 &&
-    _.filter(country[0].childrens, ["id", parseInt(state)]) &&
-    state;
+    _.filter(country[0].childrens, ["id", parseInt(state)]);
 
   let outletPrice = 0;
   if ("outletaddons" in userValues) {
@@ -196,12 +196,7 @@ function Index(props) {
       (userValues.eventaddons - props?.auth?.user?.no_of_events);
   }
   let discount_value = 0;
-  let subTotal =
-    parseFloat(activePlan?.price) +
-    outletPrice +
-    qrPrice +
-    userPrice +
-    eventPrice;
+  let subTotal = outletPrice + qrPrice + userPrice + eventPrice;
 
   if (props.auth.discountVal) {
     discount_value =
@@ -244,7 +239,7 @@ function Index(props) {
       plan_id: activePlan?.id,
       transaction_id: transaction_id,
       is_notifications_permited: is_notifications_permited,
-      state: selected_state && selected_state[0].name,
+      state: state,
       city: city,
       street: address,
       no_of_outlets: no_of_outlets,
@@ -253,6 +248,7 @@ function Index(props) {
       no_of_events: no_of_events,
     };
     if (props?.auth?.user !== null) {
+      props.dispatch(resetDiscountMessage());
       props.dispatch(updateUser(inputs));
     }
   };
@@ -262,6 +258,11 @@ function Index(props) {
     let eventQuantity = no_of_events - activePlan?.event_limit;
     let userQuantity = no_of_users - activePlan?.user_limit;
     let qrQuantity = no_of_qrs - props?.auth?.user?.no_of_qrcodes;
+    let coupon = null;
+    if (props.auth.discountVal) {
+      coupon = [discountValue];
+    }
+    console.log(coupon);
     const addonArray = [];
     if (outletQuantity !== 0) {
       let outletObject = {
@@ -305,6 +306,7 @@ function Index(props) {
           plan_id: plan?.chargebee_plan_id,
           addons: addonArray,
           subscription_id: res.hosted_page.content.subscription.id,
+          coupon,
         }).then((response) => {
           handlePayment(props?.auth?.user?.transaction_id);
           return response.data;
@@ -325,6 +327,7 @@ function Index(props) {
           <OrderSummaryCard
             props={props}
             country={country}
+            selected_state={selected_state}
             total={total}
             handlePay={handlePay}
             handleFinish={handleFinish}

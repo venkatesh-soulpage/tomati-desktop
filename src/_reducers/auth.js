@@ -82,6 +82,12 @@ export default function authReducer(state = initialState, action) {
         discountVal: action.payload,
         discountValError: action.payload,
       };
+    case ActionTypes.RESET_DISCOUNT_MESSAGE:
+      return {
+        ...state,
+        discountVal: action.payload,
+        discountValError: action.payload,
+      };
     case ActionTypes.GET_LOCATION_SUCCESS:
       return {
         ...state,
