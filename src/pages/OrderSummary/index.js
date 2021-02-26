@@ -175,7 +175,11 @@ function Index(props) {
   let outletPrice = 0;
   if ("outletaddons" in userValues) {
     const { outlet_addon_price, outlet_limit } = activePlan;
-    outletPrice = outlet_addon_price * (userValues.outletaddons - outlet_limit);
+    activePlan.subscription_type === "yearly"
+      ? (outletPrice =
+          outlet_addon_price * (userValues.outletaddons - outlet_limit) * 12)
+      : (outletPrice =
+          outlet_addon_price * (userValues.outletaddons - outlet_limit));
   }
   let qrPrice = 0;
   if ("qraddons" in userValues) {
@@ -185,12 +189,19 @@ function Index(props) {
   let userPrice = 0;
   if ("useraddons" in userValues) {
     const { user_addon_price, user_limit } = activePlan;
-    userPrice = user_addon_price * (userValues.useraddons - user_limit);
+    activePlan.subscription_type === "yearly"
+      ? (userPrice =
+          user_addon_price * (userValues.useraddons - user_limit) * 12)
+      : (userPrice = user_addon_price * (userValues.useraddons - user_limit));
   }
   let eventPrice = 0;
   if ("eventaddons" in userValues) {
     const { event_addon_price, event_limit } = activePlan;
-    eventPrice = event_addon_price * (userValues.eventaddons - event_limit);
+    activePlan.subscription_type === "yearly"
+      ? (eventPrice =
+          event_addon_price * (userValues.eventaddons - event_limit) * 12)
+      : (eventPrice =
+          event_addon_price * (userValues.eventaddons - event_limit));
   }
   let discount_value = 0;
   let subTotal =
@@ -269,7 +280,6 @@ function Index(props) {
     if (props.auth.discountVal) {
       coupon = [discountValue];
     }
-    console.log(coupon);
     const addonArray = [];
     if (addonOutlet !== 0) {
       let outletObject = {
@@ -327,12 +337,6 @@ function Index(props) {
   const handlePay = () => {
     handleCheckout(activePlan);
   };
-  console.log(props);
-  // console.log(activePlan);
-  console.log(prevOutlets);
-  console.log(props?.auth?.user?.no_of_outlets);
-  console.log(props?.auth?.user?.plan[0]?.outlet_limit);
-  console.log(no_of_outlets, no_of_qrs, no_of_users, no_of_events);
   return (
     <div className="container mt-5 mb-5 pt-5">
       <div className="d-flex row ">
