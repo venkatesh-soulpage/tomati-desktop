@@ -49,6 +49,8 @@ export function addEventMenu(id, menu) {
     //   .post(`${APIRoutes.ADD_EVENT_REQUEST}/${id}/menu`, menu)
     return EventService.addEventMenu(id, menu)
       .then((responseData) => {
+        console.log("menu", responseData);
+
         dispatch(addMenuResponse(responseData.Message));
         return responseData;
       })

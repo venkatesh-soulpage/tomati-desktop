@@ -16,7 +16,6 @@ const Index = (props) => {
   const [error, setError] = useState(false);
   const [search, setSearch] = useState("");
   const [message, setMessage] = useState("");
-  console.log(props);
   useEffect(() => {
     props.dispatch(userOutlets());
   }, []);
@@ -30,13 +29,17 @@ const Index = (props) => {
       return outlet.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
 
-  console.log(filteredOutlets);
-
   const handleAddoutlet = () => {
-    console.log(auth.user.plan.outlet_limit);
-
-    if (!auth.user.is_subscription_active) {
-      setMessage("You account is inactive, Please contact admin.");
+    if (!auth?.user?.is_subscription_active) {
+      setMessage(
+        <div>
+          Your account is inactive, this might be a billing issue. Please
+          contact{" "}
+          <a target="_blank" href="mailto:support@tomati.app">
+            support@tomati.app
+          </a>
+        </div>
+      );
       setError(true);
     } else if (auth.user.plan[0].outlet_limit === outlet.outlets.length) {
       setMessage(
@@ -176,8 +179,7 @@ const Index = (props) => {
         message={message}
         statusicon={Error}
         button={
-          message ===
-          "You account is inactive, Please contact admin." ? null : (
+          !auth?.user?.is_subscription_active ? null : (
             <Link
               to={{
                 pathname: "/order-summary",

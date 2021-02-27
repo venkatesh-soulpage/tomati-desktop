@@ -8,13 +8,17 @@ import { getLocationRegister } from "_actions/auth";
 import EventDetails from "./components/EventDeatails";
 import CreateMenu from "./components/CreateMenu";
 import EventSchedule from "./components/EventSchedule";
+import CustomModal from "components/CustomModal";
+
 // react icons
 import { Card, Form } from "react-bootstrap";
 // lodash
 import _ from "lodash";
+import Error from "assets/img/Error.svg";
 
 const Index = (props) => {
-  const [tempMenu, setMenu] = useState(null);
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState("");
   const [values, setValues] = useState({
     name: null,
     phone_number: null,
@@ -91,27 +95,44 @@ const Index = (props) => {
       qr_isActive,
     } = values;
 
-    const url = await fileToBase64(cover_image[0]);
-    const url2 = await fileToBase64(logo_img[0]);
+    if (
+      !name ||
+      !cover_image ||
+      !logo_img ||
+      !menu ||
+      !location_id ||
+      !phone_number ||
+      !description ||
+      !address ||
+      !start_time ||
+      !end_time ||
+      !comments
+    ) {
+      setError(true);
+      setMessage("Please Fill all Fields");
+    } else {
+      const url = await fileToBase64(cover_image[0]);
+      const url2 = await fileToBase64(logo_img[0]);
 
-    props.dispatch(
-      addEvent({
-        name,
-        phone_number,
-        address,
-        location_id,
-        description,
-        cover_image: { name: cover_image[0].name, data: url },
-        logo_img: { name: logo_img[0].name, data: url2 },
-        menu,
-        start_time,
-        end_time,
-        comments,
-        expected_guests,
-        expected_hourly_guests,
-        qr_isActive,
-      })
-    );
+      props.dispatch(
+        addEvent({
+          name,
+          phone_number,
+          address,
+          location_id: location_id.id,
+          description,
+          cover_image: { name: cover_image[0].name, data: url },
+          logo_img: { name: logo_img[0].name, data: url2 },
+          menu,
+          start_time,
+          end_time,
+          comments,
+          expected_guests,
+          expected_hourly_guests,
+          qr_isActive,
+        })
+      );
+    }
   };
 
   const HeaderText = {
@@ -178,6 +199,12 @@ const Index = (props) => {
           ) : null}
         </Card>
       </div>
+      <CustomModal
+        show={error}
+        onHide={() => setError(false)}
+        message={message}
+        statusicon={Error}
+      />
     </div>
   );
 };

@@ -42,7 +42,15 @@ const Index = (props) => {
     });
 
     if (!auth.user.is_subscription_active) {
-      setMessage("You account is inactive, Please contact admin.");
+      setMessage(
+        <div>
+          Your account is inactive, this might be a billing issue. Please
+          contact{" "}
+          <a target="_blank" href="mailto:support@tomati.app">
+            support@tomati.app
+          </a>
+        </div>
+      );
       setError(true);
     } else if (auth.user.plan[0].event_limit === eventsPerMonth.length) {
       setMessage(
@@ -199,8 +207,7 @@ const Index = (props) => {
         message={message}
         statusicon={Error}
         button={
-          message ===
-          "You account is inactive, Please contact admin." ? null : (
+          !auth?.user?.is_subscription_active ? null : (
             <Link
               to={{
                 pathname: "/order-summary",

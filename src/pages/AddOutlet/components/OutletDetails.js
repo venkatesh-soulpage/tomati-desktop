@@ -24,7 +24,7 @@ const OutletDetails = ({
       </Form.Group>
       <Form.Group>
         <Form.Control
-          type="text"
+          type="number"
           placeholder="Phone Number"
           value={values.phone_number}
           onChange={handleChange("phone_number")}

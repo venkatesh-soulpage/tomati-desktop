@@ -113,3 +113,12 @@
   background-color: #2c3b56;
   height: 100%;
 }
+
+.dashboard-grid-main::-webkit-scrollbar {
+  display: none;
+}
+
+.dashboard-grid-main {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

@@ -437,6 +437,7 @@ export function userSignOut() {
     sessionStorage.clear();
     dispatch(handleIsUserAuthenticated(false));
     history.push("/");
+    history.go();
   };
 }
 /* ================================================================== */
