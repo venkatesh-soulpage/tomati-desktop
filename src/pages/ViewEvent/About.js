@@ -98,7 +98,7 @@ const About = (props) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <label>Start Time</label>
+          {/* <label>Start Time</label>
           <Form.Group>
             <Datetime
               inputProps={inputProps}
@@ -119,7 +119,7 @@ const About = (props) => {
                 setValues({ ...values, end_time: moment(e).format() })
               }
             />
-          </Form.Group>
+          </Form.Group> */}
           <button
             className="btn btn-danger rounded-pill"
             onClick={handleUpdate}
@@ -142,7 +142,6 @@ const About = (props) => {
           </Button>
         }
       />
-      ;
     </div>
   );
 };

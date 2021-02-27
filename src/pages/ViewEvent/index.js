@@ -39,7 +39,6 @@ function Index(props) {
     custom_message: "",
     outlet_event: null,
   });
-  console.log(props);
 
   const { state } = props.location;
   const { event } = props.event;
@@ -56,6 +55,8 @@ function Index(props) {
   const handleMenu = () => {
     props.dispatch(addEventMenu(event.id, menu));
     setAddmenu(false);
+    setMessage("Menu Updated Succesfully! ");
+
     setShow(true);
   };
 
@@ -73,6 +74,8 @@ function Index(props) {
       inviteCollaborator({ ...collaboratorDetail, outlet_event: event.id })
     );
     setCollaborator(false);
+    setMessage("Invite Successfull!");
+
     setShow(true);
   };
 
@@ -101,7 +104,8 @@ function Index(props) {
             <img
               className="img-fluid rounded-circle"
               src={event && event.logo_img}
-              width="150"
+              width="150px"
+              height="150px"
             />
             <label for="logoImage">
               <Camera
@@ -198,7 +202,7 @@ function Index(props) {
       </div>
       <CustomModal
         show={show}
-        message={props.event.message}
+        message={message}
         onHide={() => setShow(false)}
         statusicon={Success}
         button={
