@@ -88,7 +88,6 @@ function Index(props) {
     });
 
   let cover = event?.cover_image;
-  console.log(cover);
 
   return (
     <div className="p-3">

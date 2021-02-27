@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // redux
 import { connect } from "react-redux";
-import { updateUser } from "_actions/auth";
+import { updateUser, getUser } from "_actions/auth";
 // react bootstrap
 import { Form, InputGroup, Button } from "react-bootstrap";
 // bootstrap icons
@@ -71,6 +71,7 @@ const Index = (props) => {
           profile_image: { name: profile_image.name, data: url },
         })
       );
+      props.dispatch(getUser());
       setSuccess(true);
     } else {
       props.dispatch(
@@ -79,6 +80,7 @@ const Index = (props) => {
           last_name,
         })
       );
+      props.dispatch(getUser());
       setSuccess(true);
     }
   };

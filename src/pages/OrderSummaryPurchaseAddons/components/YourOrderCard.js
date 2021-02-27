@@ -1,6 +1,5 @@
-import React from "react";
-import { Dash, Plus, CheckCircle } from "react-bootstrap-icons";
-import Form from "react-bootstrap/Form";
+import React, { useState } from "react";
+import { Form, Modal } from "react-bootstrap";
 import {
   // userRegistration,
   // userLogin,
@@ -32,6 +31,7 @@ function YourOrderCard({
   total,
   plan_id,
 }) {
+  const [show, setShow] = useState(false);
   const no_of_outlets =
     "outletaddons" in userValues
       ? userValues?.outletaddons
@@ -111,9 +111,12 @@ function YourOrderCard({
             header={"QR Menu Tags?"}
             description={
               <div>
-                Premium waterproof self-adhesive QR codes for your tables.
-                <a target="_blank" href={QR_CODE_IMAGE}>
-                  See Image
+                Premium waterproof self-adhesive QR codes for your tables.{" "}
+                <a
+                  style={{ color: "#0645AD", cursor: "pointer" }}
+                  onClick={() => setShow(true)}
+                >
+                  see image
                 </a>
               </div>
             }
@@ -234,6 +237,15 @@ function YourOrderCard({
           </h6>
         </div>
       </div>
+      <Modal centered show={show} onHide={() => setShow(false)}>
+        <Modal.Body className="p-0 m-n1">
+          <img
+            className="img-fluid"
+            src={QR_CODE_IMAGE}
+            style={{ borderRadius: "20px" }}
+          />
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

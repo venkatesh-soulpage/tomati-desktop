@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Button, Card, Dropdown } from "react-bootstrap";
 import Papa from "papaparse";
 import _ from "lodash";
 import UploadCover from "assets/img/UploadCover.svg";
@@ -34,29 +34,28 @@ const CreateMenu = ({
   return (
     <div>
       <Form.Group>
-        <Form.Control
-          as="select"
-          placeholder="Location"
-          value={values.location}
-          onChange={handleChange("location_id")}
-          required
-        >
-          <option>Select Location</option>
-          {_.map(newLocations, function (location) {
-            return (
-              <option
-                key={location.id}
-                value={location.id}
-                disabled={location.id !== 7}
-                onClick={() => {
-                  setValues({ ...values, location });
-                }}
-              >
-                {location.name} {location.id !== 7 && "(Coming Soon)"}
-              </option>
-            );
-          })}
-        </Form.Control>
+        <Dropdown>
+          <Dropdown.Toggle className="custom-dropdown text-left d-flex justify-content-between align-items-center btn">
+            {values.location_id ? values.location_id.name : "Select Location"}
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu style={{ width: "100%" }}>
+            {_.map(newLocations, function (location) {
+              return (
+                <Dropdown.Item
+                  key={location.id}
+                  value={location.id}
+                  disabled={location.id !== 7}
+                  onClick={() => {
+                    setValues({ ...values, location_id: location });
+                  }}
+                >
+                  {location.name} {location.id !== 7 && "(Coming Soon)"}
+                </Dropdown.Item>
+              );
+            })}
+          </Dropdown.Menu>
+        </Dropdown>
       </Form.Group>
       <Form.Group>
         <Form.File

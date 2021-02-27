@@ -38,7 +38,7 @@ const EventSchedule = ({
       </Form.Group>
       <Form.Group>
         <Form.Control
-          type="text"
+          type="number"
           placeholder="Expected Number of Guests"
           value={values.expected_guests}
           onChange={handleChange("expected_guests")}
@@ -47,7 +47,7 @@ const EventSchedule = ({
       </Form.Group>
       <Form.Group>
         <Form.Control
-          type="text"
+          type="number"
           placeholder="Expected Number of Hourly Guests"
           value={values.expected_hourly_guests}
           onChange={handleChange("expected_hourly_guests")}

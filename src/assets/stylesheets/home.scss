@@ -106,3 +106,28 @@
   box-shadow: none;
   border: 1px solid #ced4da;
 }
+
+.custom-dropdown {
+  width: 100%;
+  background: white !important;
+  color: grey;
+  border: 1px solid #ced4da !important;
+}
+
+.custom-dropdown {
+  color: #000 !important;
+}
+
+.custom-dropdown:focus {
+  color: #000 !important;
+}
+
+.custom-dropdown:hover {
+  color: #000 !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

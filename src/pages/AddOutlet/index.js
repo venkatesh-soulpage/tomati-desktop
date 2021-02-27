@@ -9,15 +9,17 @@ import { withRouter, Link } from "react-router-dom";
 // local components
 import OutletDetails from "./components/OutletDetails";
 import CreateMenu from "./components/CreateMenu";
+import CustomModal from "components/CustomModal";
 // react bootstrap
 import { Card, Form, Button } from "react-bootstrap";
 // lodash
 import _ from "lodash";
-
-import CustomModal from "components/CustomModal";
+//image assets
+import Error from "assets/img/Error.svg";
 
 const Index = (props) => {
-  const [tempMenu, setMenu] = useState(null);
+  const [error, setError] = useState(false);
+  const [message, setMessage] = useState("");
   const [values, setValues] = useState({
     name: "",
     cover_image: null,
@@ -74,30 +76,41 @@ const Index = (props) => {
       cover_image,
       logo_img,
       menu,
-      plan,
       location_id,
       phone_number,
-      latitude,
-      longitude,
       description,
       address,
     } = values;
 
-    const url = await fileToBase64(cover_image[0]);
-    const url2 = await fileToBase64(logo_img[0]);
+    if (
+      !name ||
+      !cover_image ||
+      !logo_img ||
+      !menu ||
+      !location_id ||
+      !phone_number ||
+      !description ||
+      !address
+    ) {
+      setError(true);
+      setMessage("Please Fill all Fields");
+    } else {
+      const url = await fileToBase64(cover_image[0]);
+      const url2 = await fileToBase64(logo_img[0]);
 
-    props.dispatch(
-      addOutlet({
-        name,
-        phone_number,
-        address,
-        location_id,
-        description,
-        cover_image: { name: cover_image[0].name, data: url },
-        logo_img: { name: logo_img[0].name, data: url2 },
-        menu,
-      })
-    );
+      props.dispatch(
+        addOutlet({
+          name,
+          phone_number,
+          address,
+          location_id: location_id.id,
+          description,
+          cover_image: { name: cover_image[0].name, data: url },
+          logo_img: { name: logo_img[0].name, data: url2 },
+          menu,
+        })
+      );
+    }
   };
 
   const HeaderText = {
@@ -168,6 +181,12 @@ const Index = (props) => {
           </div>
         </div>
       </div>
+      <CustomModal
+        show={error}
+        onHide={() => setError(false)}
+        message={message}
+        statusicon={Error}
+      />
     </div>
   );
 };
