@@ -66,12 +66,8 @@ function ForgotPasswordForm(props) {
               </InputGroup>
             </Form.Group>
 
-            <div className="d-flex">
-              <Link
-                className="btn btn-link"
-                to="/"
-                style={{ color: "#e0475b" }}
-              >
+            <div className="d-flex align-items-center">
+              <Link className="red-link" to="/">
                 Back to Login
               </Link>
               <Button

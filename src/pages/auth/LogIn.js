@@ -149,8 +149,8 @@ function LogIn(props) {
                       </div>
                     </InputGroup>
                   </Form.Group>
-                  <Form.Group className="d-flex justify-content-between mt-4">
-                    <Link className="red-link" to="/forgot-password">
+                  <Form.Group className="d-flex justify-content-between align-items-center mt-4">
+                    <Link className=" red-link" to="/forgot-password">
                       Forgot Password?
                     </Link>
                     <Button
