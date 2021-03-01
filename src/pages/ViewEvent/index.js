@@ -101,12 +101,12 @@ function Index(props) {
         <div className="row h-100 justify-content-center">
           <div className="col-md-4 text-center align-self-center">
             <img
-              className="img-fluid rounded-circle"
-              src={event && event.logo_img}
+              className="rounded-circle"
+              src={event?.logo_img}
               width="150px"
               height="150px"
             />
-            <label for="logoImage">
+            <label htmlFor="logoImage">
               <Camera
                 style={{ color: "#fff" }}
                 style={{ marginTop: "120px", cursor: "pointer" }}
@@ -119,7 +119,7 @@ function Index(props) {
                 type="file"
                 className="d-none"
                 onChange={async (e) => {
-                  const name = e.target.files[0];
+                  const name = e.target.files[0].name;
                   const url = await fileToBase64(e.target.files[0]);
                   props.dispatch(
                     updateEvent(event.id, { logo_img: { name, data: url } })

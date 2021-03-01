@@ -75,8 +75,8 @@ export function updateOutlet(id, data) {
   return function (dispatch) {
     return OutletService.updateOutlet(id, data)
       .then((responseData) => {
+        dispatch(getOutlet(id));
         return responseData;
-        // history.push("/dashboard/event");
       })
       .catch((errorData) => {});
   };
