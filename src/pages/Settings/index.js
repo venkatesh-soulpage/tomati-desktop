@@ -9,12 +9,15 @@ import { CameraFill } from "react-bootstrap-icons";
 // Router
 import { withRouter, Link } from "react-router-dom";
 import CustomModal from "components/CustomModal";
+//image assets
 import Success from "assets/img/Success.svg";
+import User from "assets/img/User.jpg";
 
 const Index = (props) => {
   const [show, setShow] = useState(false);
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
+  const [temp, setTemp] = useState(User);
 
   const [values, setValues] = React.useState({
     email: undefined,
@@ -26,6 +29,8 @@ const Index = (props) => {
     hidden: false,
     hidden2: false,
   });
+
+  console.log(values);
 
   const [error, setError] = useState(false);
   const strongRegex = new RegExp(
@@ -111,6 +116,11 @@ const Index = (props) => {
     setValues({ ...values, hidden2: !values.hidden2 });
   }
 
+  const handleImg = (e) => {
+    setValues({ ...values, profile_image: e.target.files[0] });
+    setTemp(URL.createObjectURL(e.target.files[0]));
+  };
+
   if (!user) {
     return <div>loading</div>;
   }
@@ -176,12 +186,12 @@ const Index = (props) => {
             </h4>
             <img
               className="rounded-circle mr-2 "
-              src={user.profile_img}
+              src={temp || user.profile_img}
               height={50}
               width={50}
             />
             <button className="btn h-75 btn-outline-dark">
-              <label for="profileImage">
+              <label for="profileImage" style={{ cursor: "pointer" }}>
                 <CameraFill className="mr-3" />
                 {"  "} Add New
               </label>
@@ -193,9 +203,7 @@ const Index = (props) => {
                 className="d-none"
                 // placeholder={user && user.email}
 
-                onChange={(e) =>
-                  setValues({ ...values, profile_image: e.target.files[0] })
-                }
+                onChange={handleImg}
                 required
               />
             </Form.Group>

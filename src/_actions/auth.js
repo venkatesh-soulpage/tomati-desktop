@@ -510,6 +510,7 @@ export function receiveForgotPasswordError(error) {
  */
 export function resetPassword(data) {
   return function (dispatch) {
+    dispatch(resetResponse());
     return AuthService.resetPassword(data)
       .then((responseData) => {
         dispatch(receiveResetPassword(responseData));
@@ -602,6 +603,15 @@ export function receiveResetPasswordError(error) {
   return {
     type: ActionTypes.RESET_PASSWORD_ERROR,
     payload: error,
+  };
+}
+/**
+ * When reset password receives and failed response.
+ * @param {*} error
+ */
+export function resetResponse() {
+  return {
+    type: ActionTypes.RESET_PASSWORD_RESPONSE,
   };
 }
 /**
