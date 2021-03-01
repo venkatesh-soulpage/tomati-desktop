@@ -76,6 +76,7 @@ export function updateEvent(id, data) {
   return function (dispatch) {
     return EventService.updateEvent(id, data)
       .then((responseData) => {
+        dispatch(getEvent(id));
         return responseData;
         // history.push("/dashboard/event");
       })

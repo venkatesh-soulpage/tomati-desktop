@@ -17,7 +17,7 @@ function ForgetPassword(props) {
   React.useEffect(() => {
     props.dispatch(forgotPasswordToggle(false));
     props.dispatch(receiveResetPassword({}));
-    setMessage("Reset Password Email has been sent to your registered  E-mail");
+    setMessage("Reset Password email has been sent to your registered  email");
     setShow(true);
   }, []);
 

@@ -158,7 +158,7 @@ const Index = (props) => {
           </div>
           <div>
             <input
-              class="form-control"
+              className="form-control"
               type="text"
               placeholder="Filter by search"
               value={search}

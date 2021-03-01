@@ -34,6 +34,7 @@ export function getOutlet(id) {
       .get(`${APIRoutes.GET_OUTLET}/${id}`)
       .then((responseData) => {
         dispatch(getSingleOutlet(responseData.data));
+
         // return responseData;
       })
       .catch((errorData) => {
@@ -75,8 +76,8 @@ export function updateOutlet(id, data) {
   return function (dispatch) {
     return OutletService.updateOutlet(id, data)
       .then((responseData) => {
+        dispatch(getOutlet(id));
         return responseData;
-        // history.push("/dashboard/event");
       })
       .catch((errorData) => {});
   };

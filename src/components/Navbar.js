@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // Router
 import { NavLink, useLocation } from "react-router-dom";
 // Redux
@@ -11,6 +11,7 @@ import { Bell } from "react-bootstrap-icons";
 // assets
 import Logo from "assets/img/Logo.svg";
 import toggle from "assets/img/toggle.svg";
+import User from "assets/img/User.jpg";
 // react-scroll
 import { Link } from "react-scroll";
 
@@ -56,84 +57,15 @@ function Navigation(props) {
                     activeClassName="navlink-selected"
                   >
                     <img
-                      className="rounded-circle img-fluid ml-2"
+                      className="rounded-circle"
                       height="50px"
                       width="50px"
-                      src={props?.auth?.user?.profile_img}
+                      src={props?.auth?.user?.profile_img || User}
                     />
                   </Nav.Link>
                   <p className="p-0 m-0">{props?.auth?.user?.first_name}</p>
                 </Nav>
-              ) : (
-                <Nav>
-                  {/* <Nav.Link
-                    className="px-3 text-dark"
-                    as={NavLink}
-                    exact
-                    to="/"
-                    activeClassName="active-nav-text"
-                    style={{ color: "inherit", cursor: "pointer" }}
-                  >
-                    Home
-                  </Nav.Link>
-                  {location.pathname === "/" && (
-                    <>
-                      <Link
-                        className="nav-link px-3 text-dark"
-                        smooth={true}
-                        duration={1000}
-                        to="works"
-                        activeClass="active-nav-text"
-                        style={{ color: "inherit", cursor: "pointer" }}
-                      >
-                        How it works
-                      </Link>
-
-                      <Link
-                        className="nav-link px-3 text-dark"
-                        smooth={true}
-                        duration={1000}
-                        to="features"
-                        activeClass="active-nav-text"
-                        style={{ color: "inherit", cursor: "pointer" }}
-                      >
-                        Features
-                      </Link>
-
-                      <Link
-                        className="nav-link px-3 text-dark"
-                        smooth={true}
-                        duration={1000}
-                        to="faq"
-                        activeClass="active-nav-text"
-                        style={{ color: "inherit", cursor: "pointer" }}
-                      >
-                        FAQ
-                      </Link>
-                    </>
-                  )}
-                  <Nav.Link
-                    className="px-3 text-dark mr-3"
-                    as={NavLink}
-                    exact
-                    to="/login"
-                    activeClassName="active-nav-text"
-                    style={{ color: "inherit", cursor: "pointer" }}
-                  >
-                    Login
-                  </Nav.Link>
-                  <Nav.Link
-                    as={NavLink}
-                    exact
-                    to="/register"
-                    className="register-button px-4 text-dark"
-                    activeClassName="active-nav-text"
-                    style={{ color: "inherit", cursor: "pointer" }}
-                  >
-                    Register
-                  </Nav.Link> */}
-                </Nav>
-              )}
+              ) : null}
             </Nav>
           </Navbar.Collapse>
         </Navbar>

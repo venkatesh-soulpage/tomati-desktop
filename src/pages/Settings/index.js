@@ -9,12 +9,15 @@ import { CameraFill } from "react-bootstrap-icons";
 // Router
 import { withRouter, Link } from "react-router-dom";
 import CustomModal from "components/CustomModal";
+//image assets
 import Success from "assets/img/Success.svg";
+import User from "assets/img/User.jpg";
 
 const Index = (props) => {
   const [show, setShow] = useState(false);
   const [success, setSuccess] = useState(false);
   const [message, setMessage] = useState("");
+  const [temp, setTemp] = useState(User);
 
   const [values, setValues] = React.useState({
     email: undefined,
@@ -26,6 +29,8 @@ const Index = (props) => {
     hidden: false,
     hidden2: false,
   });
+
+  console.log(values);
 
   const [error, setError] = useState(false);
   const strongRegex = new RegExp(
@@ -49,6 +54,9 @@ const Index = (props) => {
     if (props.order.user) {
       const { first_name, last_name, email, profile_img } = props.order.user;
       setValues({ first_name, last_name, email, profile_img });
+      if (profile_img) {
+        setTemp(profile_img);
+      }
     }
   }, [props.order.user]);
 
@@ -71,7 +79,6 @@ const Index = (props) => {
           profile_image: { name: profile_image.name, data: url },
         })
       );
-      props.dispatch(getUser());
       setSuccess(true);
     } else {
       props.dispatch(
@@ -80,9 +87,9 @@ const Index = (props) => {
           last_name,
         })
       );
-      props.dispatch(getUser());
       setSuccess(true);
     }
+    props.dispatch(getUser());
   };
 
   const handlePasswordUpate = (e) => {
@@ -111,10 +118,14 @@ const Index = (props) => {
     setValues({ ...values, hidden2: !values.hidden2 });
   }
 
+  const handleImg = (e) => {
+    setValues({ ...values, profile_image: e.target.files[0] });
+    setTemp(URL.createObjectURL(e.target.files[0]));
+  };
+
   if (!user) {
     return <div>loading</div>;
   }
-  console.log(user);
   return (
     <div className="pt-0 pr-3 pl-4 pb-3">
       <h4 className="text-start form-legend pb-2" style={{ fontSize: "26px" }}>
@@ -174,18 +185,24 @@ const Index = (props) => {
             <h4 className="text-dark" style={{ fontSize: "16px" }}>
               Profile Picture
             </h4>
-            <img
-              className="rounded-circle mr-2 "
-              src={user.profile_img}
-              height={50}
-              width={50}
-            />
-            <button className="btn h-75 btn-outline-dark">
-              <label for="profileImage">
-                <CameraFill className="mr-3" />
-                {"  "} Add New
-              </label>
-            </button>
+            <div className="d-flex justify-content-between align-items-center">
+              <img
+                className="rounded-circle"
+                src={temp}
+                height="50px"
+                width="50px"
+              />
+              <button className="btn h-75 btn-outline-dark">
+                <label
+                  htmlFor="profileImage"
+                  style={{ cursor: "pointer", margin: 0 }}
+                  className="d-flex align-items-center"
+                >
+                  <CameraFill className="mr-3" />
+                  Add New
+                </label>
+              </button>
+            </div>
             <Form.Group>
               <Form.File
                 type="file"
@@ -193,9 +210,7 @@ const Index = (props) => {
                 className="d-none"
                 // placeholder={user && user.email}
 
-                onChange={(e) =>
-                  setValues({ ...values, profile_image: e.target.files[0] })
-                }
+                onChange={handleImg}
                 required
               />
             </Form.Group>

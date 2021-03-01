@@ -9,6 +9,7 @@ import { Link, useLocation } from "react-router-dom";
 // local components
 import PasswordTextField from "components/PasswordTextField";
 import CustomModal from "components/CustomModal";
+import AlertMessage from "components/AlertMessage";
 import Success from "assets/img/Success.svg";
 import Error from "assets/img/Error.svg";
 
@@ -22,6 +23,7 @@ function ResetPasswordForm(props) {
   });
   const [show, setShow] = React.useState(false);
   const [error, setError] = React.useState(false);
+  const [error2, setError2] = React.useState(false);
   const [message, setMessage] = React.useState(null);
   const [message1, setMessage1] = React.useState("");
 
@@ -45,11 +47,9 @@ function ResetPasswordForm(props) {
     };
     if (values.password === values.re_password) {
       props.dispatch(resetPassword(data));
-      setMessage(props.auth.resetPasswordError);
       setShow(true);
     } else {
-      setMessage("password does not match");
-      setShow(true);
+      setError2(true);
     }
   }
 
@@ -59,6 +59,7 @@ function ResetPasswordForm(props) {
 
   const analyze = (e) => {
     const val = e.target.value;
+
     if (strongRegex.test(val)) {
       setError(true);
       setMessage1("Strong Password");
@@ -71,6 +72,7 @@ function ResetPasswordForm(props) {
   };
 
   const handleChange = (name) => (event) => {
+    setError2(false);
     setValues({ ...values, [name]: event.target.value });
   };
 
@@ -82,6 +84,15 @@ function ResetPasswordForm(props) {
             <h2 className="text-dark mb-0 text-center mb-4">Update Password</h2>
             <Card className="p-5 pb-3" style={{ borderRadius: "15px" }}>
               <Form>
+                <AlertMessage
+                  variant="danger"
+                  error={
+                    error2 && {
+                      message: "Password does not Match",
+                    }
+                  }
+                  onDismiss={() => setError2(false)}
+                />
                 <Form.Group>
                   <Form.Label>New Password</Form.Label>
                   <PasswordTextField
@@ -115,11 +126,13 @@ function ResetPasswordForm(props) {
                 </Form.Group>
 
                 <Form.Group>
-                  <Form.Control
-                    type="password"
+                  <PasswordTextField
+                    name="password"
                     value={values.re_password}
                     onChange={handleChange("re_password")}
                     placeholder="Confirm New Password"
+                    autoComplete="off"
+                    onBlur={() => setError2(false)}
                   />
                 </Form.Group>
                 <div className="text-right">
@@ -131,17 +144,15 @@ function ResetPasswordForm(props) {
                     >
                       Update
                     </Button>{" "}
-                    <Button
-                      type="submit"
-                      variant="light"
-                      className="rounded-pill"
-                    >
-                      Cancel
-                    </Button>
+                    <Link to="/">
+                      <Button variant="light" className="rounded-pill">
+                        Cancel
+                      </Button>
+                    </Link>
                   </Form.Group>
                 </div>
                 <div className="text-muted">
-                  <Link className="btn btn-link" to="/">
+                  <Link className="red-link" to="/">
                     Login as a different user
                   </Link>
                 </div>
@@ -153,26 +164,24 @@ function ResetPasswordForm(props) {
       <CustomModal
         show={show}
         onHide={() => setShow(false)}
-        message={props.auth.resetPasswordError || message}
-        statusicon={
-          props.auth.resetPasswordError === "Password updated!"
-            ? Success
-            : Error
+        message={
+          props.auth.resetPasswordSuccess || props.auth.resetPasswordError
         }
+        statusicon={props.auth.resetPasswordError ? Error : Success}
         button={
-          props.auth.resetPasswordError === "Password updated!" ? (
-            <Link to="/">
-              <button className="btn btn-primary mt-3 rounded-pill px-4 py-2">
-                Login
-              </button>
-            </Link>
-          ) : (
+          props.auth.resetPasswordError ? (
             <button
               className="btn btn-primary mt-3 rounded-pill px-4 py-2"
               onClick={() => setShow(false)}
             >
               Try again
             </button>
+          ) : (
+            <Link to="/">
+              <button className="btn btn-primary mt-3 rounded-pill px-4 py-2">
+                Login
+              </button>
+            </Link>
           )
         }
       />
