@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 // redux
 import { connect } from "react-redux";
-import { addOutlet } from "_actions/outlet";
-import { getLocationRegister } from "_actions/auth";
+import { addOutlet } from "_actions";
+import { getLocationRegister } from "_actions";
 
 // react router
 import { withRouter, Link } from "react-router-dom";
@@ -192,7 +192,7 @@ const Index = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { outlet: state.outlet, auth: state.auth };
+  return { outlet: state.outlet, auth: state.auth, order: state.order };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

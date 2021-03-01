@@ -10,24 +10,14 @@ var initialState = {
   loginSuccess: {},
   loginError: null,
   registerError: null,
-  resetPassword: {},
   resetPasswordError: null,
   forgotPasswordToken: {},
   forgotPasswordError: {},
   forgotPasswordToggle: false,
   verifySuccess: null,
   verifyError: null,
-  verifyEmailCodeError: null,
-  locations: null,
-  locationsError: null,
-  user: null,
-  plans: null,
-  plansError: null,
-  discountVal: null,
-  discountValError: null,
   makePaymentSuccess: null,
   makePaymentError: null,
-  message: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -79,44 +69,6 @@ export default function authReducer(state = initialState, action) {
         ...state,
         verifySuccess: action.payload,
         verifyError: action.payload,
-        discountVal: action.payload,
-        discountValError: action.payload,
-      };
-    case ActionTypes.RESET_DISCOUNT_MESSAGE:
-      return {
-        ...state,
-        discountVal: action.payload,
-        discountValError: action.payload,
-      };
-    case ActionTypes.GET_LOCATION_SUCCESS:
-      return {
-        ...state,
-        locations: action.payload,
-      };
-    case ActionTypes.GET_LOCATION_ERROR:
-      return {
-        ...state,
-        locationsError: action.payload,
-      };
-    case ActionTypes.GET_PLANS_SUCCESS:
-      return {
-        ...state,
-        plans: action.payload,
-      };
-    case ActionTypes.GET_PLANS_ERROR:
-      return {
-        ...state,
-        plansError: action.payload,
-      };
-    case ActionTypes.GET_DISCOUNT_VALUE_SUCCESS:
-      return {
-        ...state,
-        discountVal: action.payload,
-      };
-    case ActionTypes.GET_DISCOUNT_VALUE_ERROR:
-      return {
-        ...state,
-        discountValError: action.payload,
       };
     case ActionTypes.MAKE_PAYMENT_SUCCESS:
       return {
@@ -172,16 +124,6 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         forgotPasswordToggle: action.payload,
-      };
-    case ActionTypes.SET_USER_DATA:
-      return {
-        ...state,
-        user: action.payload,
-      };
-    case ActionTypes.UPDATE_USER_RESPONSE:
-      return {
-        ...state,
-        message: action.payload,
       };
     default:
       return state;

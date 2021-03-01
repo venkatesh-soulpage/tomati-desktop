@@ -1,14 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  userRegistration,
   getPlansRequest,
   getLocationRegister,
   updateUser,
   getSubscriptionId,
   getUser,
   resetDiscountMessage,
-} from "_actions/auth";
+} from "_actions";
 import AuthAPI from "services/auth";
 import _, { values } from "lodash";
 // Router imports
@@ -51,13 +50,13 @@ function Index(props) {
   }, []);
   React.useEffect(
     function () {
-      if (props.auth.plans?.length > 0) setActivePlan(props.auth.plans[0]);
+      if (props.order.plans?.length > 0) setActivePlan(props.order.plans[0]);
     },
-    [props.auth.plans]
+    [props.order.plans]
   );
 
   const handleActivePlan = (e) => {
-    const active_plan = _.filter(props.auth.plans, [
+    const active_plan = _.filter(props.order.plans, [
       "id",
       parseInt(e.target.value),
     ]);
@@ -162,11 +161,11 @@ function Index(props) {
     }
   };
 
-  if (!props.auth.locations) {
+  if (!props.order.locations) {
     return <>Loading...</>;
   }
-
-  const country = _.filter(props.auth.locations, ["id", parseInt(location)]);
+  console.log(props);
+  const country = _.filter(props.order.locations, ["id", parseInt(location)]);
 
   const selected_state =
     country.length > 0 &&
@@ -211,12 +210,12 @@ function Index(props) {
     userPrice +
     eventPrice;
 
-  if (props.auth.discountVal) {
+  if (props.order.discountVal) {
     discount_value =
-      parseInt(props.auth.discountVal?.discount_value) * subTotal * 0.01;
+      parseInt(props.order.discountVal?.discount_value) * subTotal * 0.01;
     discount_value = discount_value.toFixed(2);
     subTotal -=
-      parseInt(props.auth.discountVal?.discount_value) * subTotal * 0.01;
+      parseInt(props.order.discountVal?.discount_value) * subTotal * 0.01;
   }
   let tax = subTotal * 0.075;
   tax = parseFloat(tax.toFixed(2));
@@ -238,14 +237,15 @@ function Index(props) {
       : activePlan?.event_limit;
 
   let prevOutlets =
-    props?.auth?.user?.no_of_outlets - props?.auth?.user?.plan[0]?.outlet_limit;
+    props?.order?.user?.no_of_outlets -
+    props?.order?.user?.plan[0]?.outlet_limit;
   let prevQrs =
-    props?.auth?.user?.no_of_qrcodes -
-    props?.auth?.user?.plan[0]?.qr_tags_limit;
+    props?.order?.user?.no_of_qrcodes -
+    props?.order?.user?.plan[0]?.qr_tags_limit;
   let prevUsers =
-    props?.auth?.user?.no_of_users - props?.auth?.user?.plan[0]?.user_limit;
+    props?.order?.user?.no_of_users - props?.order?.user?.plan[0]?.user_limit;
   let prevEvents =
-    props?.auth?.user?.no_of_events - props?.auth?.user?.plan[0]?.event_limit;
+    props?.order?.user?.no_of_events - props?.order?.user?.plan[0]?.event_limit;
 
   const handlePayment = (transaction_id) => {
     const inputs = {
@@ -265,7 +265,7 @@ function Index(props) {
       no_of_users: no_of_users + prevUsers,
       no_of_events: no_of_events + prevEvents,
     };
-    if (props?.auth?.user !== null) {
+    if (props?.order?.user !== null) {
       props.dispatch(resetDiscountMessage());
       props.dispatch(updateUser(inputs));
     }
@@ -277,7 +277,7 @@ function Index(props) {
     let addonUser = no_of_users - activePlan?.user_limit;
     let addonQr = no_of_qrs - activePlan?.qr_tags_limit;
     let coupon = null;
-    if (props.auth.discountVal) {
+    if (props.order.discountVal) {
       coupon = [discountValue];
     }
     const addonArray = [];
@@ -316,7 +316,7 @@ function Index(props) {
 
     props
       .dispatch(
-        getSubscriptionId({ hostedPageId: props?.auth?.user?.transaction_id })
+        getSubscriptionId({ hostedPageId: props?.order?.user?.transaction_id })
       )
       .then((res) => {
         return AuthAPI.UpdatePayment({
@@ -325,7 +325,7 @@ function Index(props) {
           subscription_id: res.hosted_page.content.subscription.id,
           coupon,
         }).then((response) => {
-          handlePayment(props?.auth?.user?.transaction_id);
+          handlePayment(props?.order?.user?.transaction_id);
           return response.data;
         });
       });
@@ -404,7 +404,7 @@ function Index(props) {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { auth: state.auth, order: state.order };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

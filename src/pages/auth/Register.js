@@ -6,7 +6,7 @@ import {
   verify,
   resetMessage,
   collaboratorSignup,
-} from "_actions/auth";
+} from "_actions";
 // Router imports
 import { withRouter, useLocation, Link } from "react-router-dom";
 // Bootstrap Imports
@@ -85,7 +85,6 @@ function Register(props) {
             <Form
               id="register-form"
               onSubmit={handleSignUpData}
-              // onLoad={() => props.handleRegisterError(null)}
               autoComplete="off"
             >
               <AlertMessage
@@ -116,7 +115,6 @@ function Register(props) {
         size="xs"
         show={show}
         onHide={() => setShow(false)}
-        // className="mt-5"
         backdrop="static"
         keyboard={false}
         style={{ marginTop: "15%" }}
@@ -142,9 +140,7 @@ function Register(props) {
                     width: "140px",
                     height: "54px",
                     border: "0.5px solid black",
-                    // backgroundColor: "transparent",
                   }}
-                  // onClick={handleLoginData}
                 >
                   Login
                 </button>

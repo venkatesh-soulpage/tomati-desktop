@@ -33,9 +33,7 @@ function App(props) {
    */
   React.useEffect(() => {
     if (sessionStorage.getItem("token")) {
-      // props.dispatch(validateAuthToken());
       props.dispatch(handleIsUserAuthenticated(true));
-      // props.dispatch(resetApplicationStep());
     } else {
       props.dispatch(handleIsUserAuthenticated(false));
     }

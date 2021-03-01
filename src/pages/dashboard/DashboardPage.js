@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 // redux
 import { connect } from "react-redux";
-import { getUser } from "_actions/auth";
+import { getUser } from "_actions";
 // react-router
 import { Route, Switch } from "react-router-dom";
 // local components
@@ -80,7 +80,7 @@ function DashboardPage(props) {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { auth: state.auth, order: state.order };
 }
 
 export default withRouter(connect(mapStateToProps)(DashboardPage));

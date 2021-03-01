@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import { Form, Modal } from "react-bootstrap";
-import {
-  // userRegistration,
-  // userLogin,
-  // getPlansRequest,
-  // getLocationRegister,
-  postDiscountValue,
-  resetDiscountMessage,
-} from "_actions/auth";
+import { postDiscountValue, resetDiscountMessage } from "_actions";
 import _, { values } from "lodash";
 import PriceComponent from "./PriceComponent";
 import { QR_CODE_IMAGE } from "constants/APIRoutes";
@@ -35,19 +28,19 @@ function YourOrderCard({
   const no_of_outlets =
     "outletaddons" in userValues
       ? userValues?.outletaddons
-      : props?.auth?.user?.no_of_outlets;
+      : props?.order?.user?.no_of_outlets;
   const no_of_qrs =
     "qraddons" in userValues
       ? userValues?.qraddons
-      : props?.auth?.user?.no_of_qrcodes;
+      : props?.order?.user?.no_of_qrcodes;
   const no_of_users =
     "useraddons" in userValues
       ? userValues?.useraddons
-      : props?.auth?.user?.no_of_users;
+      : props?.order?.user?.no_of_users;
   const no_of_events =
     "eventaddons" in userValues
       ? userValues?.eventaddons
-      : props?.auth?.user?.no_of_events;
+      : props?.order?.user?.no_of_events;
 
   return (
     <div>
@@ -58,7 +51,7 @@ function YourOrderCard({
 
         <select className="form-control pl-3">
           {/* <option value="">Select Plan</option> */}
-          {props?.auth?.plans?.map((plan, key) => {
+          {props?.order?.plans?.map((plan, key) => {
             if (plan.id === plan_id) {
               if (plan.plan === "starter") {
                 return (
@@ -173,7 +166,7 @@ function YourOrderCard({
               Apply
             </button>
           </Form.Group>
-          {props.auth.discountVal ? (
+          {props.order.discountVal ? (
             <Form.Group
               className="d-flex flex-row justify-content-between align-text-center my-3 "
               style={{ background: "#F5F6F9" }}
@@ -183,13 +176,13 @@ function YourOrderCard({
               </p>
               <p style={{ fontSize: "14px", margin: 0 }}>$ {discount_value}</p>
             </Form.Group>
-          ) : props?.auth?.discountValError ? (
+          ) : props?.order?.discountValError ? (
             <Form.Group
               className="d-flex flex-row justify-content-between align-items-center my-3"
               style={{ background: "#F5F6F9" }}
             >
               <p style={{ fontSize: "14px", color: "#E0475B", margin: 0 }}>
-                {props?.auth?.discountValError}
+                {props?.order?.discountValError}
               </p>
             </Form.Group>
           ) : null}

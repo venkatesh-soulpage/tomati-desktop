@@ -16,13 +16,13 @@ const CreateMenu = ({
   const [menuName, setMenuName] = useState(null);
 
   const arr =
-    props.auth.locations &&
-    props.auth.locations.filter((location) => {
+    props.order.locations &&
+    props.order.locations.filter((location) => {
       return location.id === 7;
     });
   const arr2 =
-    props.auth.locations &&
-    props.auth.locations.filter((location) => {
+    props.order.locations &&
+    props.order.locations.filter((location) => {
       return location.id !== 7;
     });
   const newLocations = arr && arr.concat(arr2);

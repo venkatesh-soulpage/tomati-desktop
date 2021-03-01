@@ -67,37 +67,37 @@ class AuthAPI {
     }
   }
 
-  static async getLocations() {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.get(APIRoutes.GET_LOCATIONS);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
+  // static async getLocations() {
+  //   try {
+  //     // fetch data from a url endpoint
+  //     const response = await axios.get(APIRoutes.GET_LOCATIONS);
+  //     return response.data;
+  //   } catch (error) {
+  //     throw error.response.data;
+  //   }
+  // }
 
-  static async getPlans() {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.get(APIRoutes.GET_PLANS);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
+  // static async getPlans() {
+  //   try {
+  //     // fetch data from a url endpoint
+  //     const response = await axios.get(APIRoutes.GET_PLANS);
+  //     return response.data;
+  //   } catch (error) {
+  //     throw error.response.data;
+  //   }
+  // }
 
-  static async getDiscount(postData) {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.post(APIRoutes.GET_DISCOUNT, {
-        couponId: postData,
-      });
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
+  // static async getDiscount(postData) {
+  //   try {
+  //     // fetch data from a url endpoint
+  //     const response = await axios.post(APIRoutes.GET_DISCOUNT, {
+  //       couponId: postData,
+  //     });
+  //     return response.data;
+  //   } catch (error) {
+  //     throw error.response.data;
+  //   }
+  // }
 
   static async makePayment(postData) {
     try {
@@ -139,35 +139,35 @@ class AuthAPI {
     }
   }
 
-  static async getUser() {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.get(APIRoutes.GET_USER);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
+  // static async getUser() {
+  //   try {
+  //     // fetch data from a url endpoint
+  //     const response = await axios.get(APIRoutes.GET_USER);
+  //     return response.data;
+  //   } catch (error) {
+  //     throw error.response.data;
+  //   }
+  // }
 
-  static async updateUser(data) {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.post(APIRoutes.UPDATE_USER, data);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
+  // static async updateUser(data) {
+  //   try {
+  //     // fetch data from a url endpoint
+  //     const response = await axios.post(APIRoutes.UPDATE_USER, data);
+  //     return response.data;
+  //   } catch (error) {
+  //     throw error.response.data;
+  //   }
+  // }
 
-  static async getSubscriptionId(data) {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.post(APIRoutes.GET_SUBSCRIPTION_ID, data);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
+  // static async getSubscriptionId(data) {
+  //   try {
+  //     // fetch data from a url endpoint
+  //     const response = await axios.post(APIRoutes.GET_SUBSCRIPTION_ID, data);
+  //     return response.data;
+  //   } catch (error) {
+  //     throw error.response.data;
+  //   }
+  // }
 
   static async collaboratorSignup(data) {
     try {

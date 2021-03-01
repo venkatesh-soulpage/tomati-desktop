@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Modal } from "react-bootstrap";
-import { postDiscountValue, resetDiscountMessage } from "_actions/auth";
+import { postDiscountValue, resetDiscountMessage } from "_actions";
 import _ from "lodash";
 import PriceComponent from "./PriceComponent";
 import { QR_CODE_IMAGE } from "constants/APIRoutes";
@@ -51,7 +51,7 @@ function YourOrderCard({
 
         <select onChange={handleActivePlan} className="form-control pl-3">
           {/* <option value="">Select Plan</option> */}
-          {props?.auth?.plans?.map((plan, key) => {
+          {props?.order?.plans?.map((plan, key) => {
             if (plan.plan === "starter") {
               return (
                 <option key={key} value={plan.id}>
@@ -165,7 +165,7 @@ function YourOrderCard({
             </button>
           </Form.Group>
 
-          {props.auth.discountVal ? (
+          {props.order.discountVal ? (
             <Form.Group
               className="d-flex flex-row justify-content-between align-text-center my-3 "
               style={{ background: "#F5F6F9" }}
@@ -175,7 +175,7 @@ function YourOrderCard({
               </p>
               <p style={{ fontSize: "14px", margin: 0 }}>$ {discount_value}</p>
             </Form.Group>
-          ) : props?.auth?.discountValError ? (
+          ) : props?.order?.discountValError ? (
             <Form.Group
               className="d-flex flex-row justify-content-between align-items-center my-3"
               style={{ background: "#F5F6F9" }}

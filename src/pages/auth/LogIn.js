@@ -6,7 +6,7 @@ import {
   handleLoginError,
   receiveUserData,
   clearLoginError,
-} from "_actions/auth";
+} from "_actions";
 // Router
 import { withRouter, Link } from "react-router-dom";
 // Bootstrap Components

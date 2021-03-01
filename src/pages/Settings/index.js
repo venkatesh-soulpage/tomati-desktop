@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // redux
 import { connect } from "react-redux";
-import { updateUser, getUser } from "_actions/auth";
+import { updateUser, getUser } from "_actions";
 // react bootstrap
 import { Form, InputGroup, Button } from "react-bootstrap";
 // bootstrap icons
@@ -46,18 +46,18 @@ const Index = (props) => {
   };
 
   useEffect(() => {
-    if (props.auth.user) {
-      const { first_name, last_name, email, profile_img } = props.auth.user;
+    if (props.order.user) {
+      const { first_name, last_name, email, profile_img } = props.order.user;
       setValues({ first_name, last_name, email, profile_img });
     }
-  }, [props.auth.user]);
+  }, [props.order.user]);
 
   const handleChange = (name) => (event) => {
     const value = event.target.value;
     setValues((values) => ({ ...values, [name]: value }));
   };
 
-  const { user } = props.auth;
+  const { user } = props.order;
   console.log(values.profile_image);
   const handleUpdateUser = async (e) => {
     e.preventDefault();
@@ -308,7 +308,7 @@ const Index = (props) => {
       </div>
       <CustomModal
         show={success}
-        message={props.auth.message}
+        message={props.order.message}
         statusicon={Success}
         button={
           <Button
@@ -323,6 +323,6 @@ const Index = (props) => {
   );
 };
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { auth: state.auth, order: state.order };
 }
 export default withRouter(connect(mapStateToProps)(Index));

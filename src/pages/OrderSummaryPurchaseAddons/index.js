@@ -1,14 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  userRegistration,
   getPlansRequest,
   getLocationRegister,
   updateUser,
   getUser,
   getSubscriptionId,
   resetDiscountMessage,
-} from "_actions/auth";
+} from "_actions";
 import _ from "lodash";
 
 // Router imports
@@ -63,13 +62,13 @@ function Index(props) {
         setUserValues((values) => {
           return {
             ...values,
-            outletaddons: props?.auth?.user?.no_of_outlets + 1,
+            outletaddons: props?.order?.user?.no_of_outlets + 1,
           };
         });
       }
     } else {
       if ("outletaddons" in userValues) {
-        if (userValues.outletaddons > props?.auth?.user?.no_of_outlets) {
+        if (userValues.outletaddons > props?.order?.user?.no_of_outlets) {
           setUserValues((values) => {
             return {
               ...values,
@@ -88,12 +87,12 @@ function Index(props) {
         });
       } else {
         setUserValues((values) => {
-          return { ...values, qraddons: props?.auth?.user?.no_of_qrcodes + 1 };
+          return { ...values, qraddons: props?.order?.user?.no_of_qrcodes + 1 };
         });
       }
     } else {
       if ("qraddons" in userValues) {
-        if (userValues.qraddons > props?.auth?.user?.no_of_qrcodes) {
+        if (userValues.qraddons > props?.order?.user?.no_of_qrcodes) {
           setUserValues((values) => {
             return {
               ...values,
@@ -113,12 +112,12 @@ function Index(props) {
         });
       } else {
         setUserValues((values) => {
-          return { ...values, useraddons: props?.auth?.user?.no_of_users + 1 };
+          return { ...values, useraddons: props?.order?.user?.no_of_users + 1 };
         });
       }
     } else {
       if ("useraddons" in userValues) {
-        if (userValues.useraddons > props?.auth?.user?.no_of_users) {
+        if (userValues.useraddons > props?.order?.user?.no_of_users) {
           setUserValues((values) => {
             return {
               ...values,
@@ -139,13 +138,13 @@ function Index(props) {
         setUserValues((values) => {
           return {
             ...values,
-            eventaddons: props?.auth?.user?.no_of_events + 1,
+            eventaddons: props?.order?.user?.no_of_events + 1,
           };
         });
       }
     } else {
       if ("eventaddons" in userValues) {
-        if (userValues.eventaddons > props?.auth?.user?.no_of_events) {
+        if (userValues.eventaddons > props?.order?.user?.no_of_events) {
           setUserValues((values) => {
             return {
               ...values,
@@ -157,11 +156,11 @@ function Index(props) {
     }
   };
 
-  if (!props.auth.locations) {
+  if (!props.order.locations) {
     return <>Loading...</>;
   }
 
-  const country = _.filter(props.auth.locations, ["id", parseInt(location)]);
+  const country = _.filter(props.order.locations, ["id", parseInt(location)]);
 
   const selected_state =
     country.length > 0 &&
@@ -173,18 +172,18 @@ function Index(props) {
     activePlan.subscription_type === "yearly"
       ? (outletPrice =
           outlet_addon_price *
-          (userValues.outletaddons - props?.auth?.user?.no_of_outlets) *
+          (userValues.outletaddons - props?.order?.user?.no_of_outlets) *
           12)
       : (outletPrice =
           outlet_addon_price *
-          (userValues.outletaddons - props?.auth?.user?.no_of_outlets));
+          (userValues.outletaddons - props?.order?.user?.no_of_outlets));
   }
   let qrPrice = 0;
   if ("qraddons" in userValues) {
     const { qr_tags_addon_price } = activePlan;
     qrPrice =
       qr_tags_addon_price *
-      (userValues.qraddons - props?.auth?.user?.no_of_qrcodes);
+      (userValues.qraddons - props?.order?.user?.no_of_qrcodes);
   }
   let userPrice = 0;
   if ("useraddons" in userValues) {
@@ -192,11 +191,11 @@ function Index(props) {
     activePlan.subscription_type === "yearly"
       ? (userPrice =
           user_addon_price *
-          (userValues.useraddons - props?.auth?.user?.no_of_users) *
+          (userValues.useraddons - props?.order?.user?.no_of_users) *
           12)
       : (userPrice =
           user_addon_price *
-          (userValues.useraddons - props?.auth?.user?.no_of_users));
+          (userValues.useraddons - props?.order?.user?.no_of_users));
   }
   let eventPrice = 0;
   if ("eventaddons" in userValues) {
@@ -204,21 +203,21 @@ function Index(props) {
     activePlan.subscription_type === "yearly"
       ? (eventPrice =
           event_addon_price *
-          (userValues.eventaddons - props?.auth?.user?.no_of_events) *
+          (userValues.eventaddons - props?.order?.user?.no_of_events) *
           12)
       : (eventPrice =
           event_addon_price *
-          (userValues.eventaddons - props?.auth?.user?.no_of_events));
+          (userValues.eventaddons - props?.order?.user?.no_of_events));
   }
   let discount_value = 0;
   let subTotal = outletPrice + qrPrice + userPrice + eventPrice;
 
-  if (props.auth.discountVal) {
+  if (props.order.discountVal) {
     discount_value =
-      parseInt(props.auth.discountVal?.discount_value) * subTotal * 0.01;
+      parseInt(props.order.discountVal?.discount_value) * subTotal * 0.01;
     discount_value = discount_value.toFixed(2);
     subTotal -=
-      parseInt(props.auth.discountVal?.discount_value) * subTotal * 0.01;
+      parseInt(props.order.discountVal?.discount_value) * subTotal * 0.01;
   }
 
   subTotal = parseFloat(subTotal.toFixed(2));
@@ -230,19 +229,19 @@ function Index(props) {
   const no_of_outlets =
     "outletaddons" in userValues
       ? userValues?.outletaddons
-      : props?.auth?.user?.no_of_outlets;
+      : props?.order?.user?.no_of_outlets;
   const no_of_qrs =
     "qraddons" in userValues
       ? userValues?.qraddons
-      : props?.auth?.user?.no_of_qrcodes;
+      : props?.order?.user?.no_of_qrcodes;
   const no_of_users =
     "useraddons" in userValues
       ? userValues?.useraddons
-      : props?.auth?.user?.no_of_users;
+      : props?.order?.user?.no_of_users;
   const no_of_events =
     "eventaddons" in userValues
       ? userValues?.eventaddons
-      : props?.auth?.user?.no_of_events;
+      : props?.order?.user?.no_of_events;
 
   const handlePayment = (transaction_id) => {
     const inputs = {
@@ -262,7 +261,7 @@ function Index(props) {
       no_of_users: no_of_users,
       no_of_events: no_of_events,
     };
-    if (props?.auth?.user !== null) {
+    if (props?.order?.user !== null) {
       props.dispatch(resetDiscountMessage());
       props.dispatch(updateUser(inputs));
     }
@@ -272,9 +271,9 @@ function Index(props) {
     let outletQuantity = no_of_outlets - activePlan?.outlet_limit;
     let eventQuantity = no_of_events - activePlan?.event_limit;
     let userQuantity = no_of_users - activePlan?.user_limit;
-    let qrQuantity = no_of_qrs - props?.auth?.user?.no_of_qrcodes;
+    let qrQuantity = no_of_qrs - props?.order?.user?.no_of_qrcodes;
     let coupon = null;
-    if (props.auth.discountVal) {
+    if (props.order.discountVal) {
       coupon = [discountValue];
     }
     console.log(coupon);
@@ -314,7 +313,7 @@ function Index(props) {
 
     props
       .dispatch(
-        getSubscriptionId({ hostedPageId: props?.auth?.user?.transaction_id })
+        getSubscriptionId({ hostedPageId: props?.order?.user?.transaction_id })
       )
       .then((res) => {
         return AuthAPI.UpdatePayment({
@@ -323,7 +322,7 @@ function Index(props) {
           subscription_id: res.hosted_page.content.subscription.id,
           coupon,
         }).then((response) => {
-          handlePayment(props?.auth?.user?.transaction_id);
+          handlePayment(props?.order?.user?.transaction_id);
           return response.data;
         });
       });
@@ -399,7 +398,7 @@ function Index(props) {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { auth: state.auth, order: state.order };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

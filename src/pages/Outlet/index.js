@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // redux
-import { userOutlets } from "_actions/outlet";
+import { userOutlets } from "_actions";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 // react bootstrap
@@ -20,7 +20,7 @@ const Index = (props) => {
     props.dispatch(userOutlets());
   }, []);
 
-  const { outlet, auth } = props;
+  const { outlet, order } = props;
 
   let filteredOutlets =
     outlet &&
@@ -30,7 +30,7 @@ const Index = (props) => {
     });
 
   const handleAddoutlet = () => {
-    if (!auth?.user?.is_subscription_active) {
+    if (!order?.user?.is_subscription_active) {
       setMessage(
         <div>
           Your account is inactive, this might be a billing issue. Please
@@ -41,7 +41,7 @@ const Index = (props) => {
         </div>
       );
       setError(true);
-    } else if (auth.user.plan[0].outlet_limit === outlet.outlets.length) {
+    } else if (order.user.plan[0].outlet_limit === outlet.outlets.length) {
       setMessage(
         "You have 0 outlets left on your plan. To add new outlets upgrade your plan here."
       );
@@ -50,7 +50,7 @@ const Index = (props) => {
       props.history.push("/dashboard/addoutlet");
     }
   };
-
+  console.log(order?.user?.plan[0]?.plan);
   return (
     <div className="pt-0 pr-3 pl-4 pb-3">
       {/* stats */}
@@ -63,7 +63,7 @@ const Index = (props) => {
         </div>
         <div className=" mr-3">
           <button className="btn btn-dark btn-sm">
-            {auth?.user?.plan[0]?.plan}
+            {order?.user?.plan[0]?.plan}
           </button>
         </div>
         <div className="">
@@ -72,14 +72,14 @@ const Index = (props) => {
               pathname: "/order-summary",
               state: {
                 values: {
-                  company_name: auth?.user?.last_name,
-                  email: auth?.user?.email,
-                  full_name: auth?.user?.first_name,
-                  location: auth?.user?.location_id,
-                  state: auth?.user?.state_id,
-                  city: auth?.user?.city,
-                  address: auth?.user?.street,
-                  plan_id: auth?.user?.plan_id,
+                  company_name: order?.user?.last_name,
+                  email: order?.user?.email,
+                  full_name: order?.user?.first_name,
+                  location: order?.user?.location_id,
+                  state: order?.user?.state_id,
+                  city: order?.user?.city,
+                  address: order?.user?.street,
+                  plan_id: order?.user?.plan_id,
                 },
               },
             }}
@@ -108,15 +108,15 @@ const Index = (props) => {
                 pathname: "/order-summary/purchase-addones",
                 state: {
                   values: {
-                    company_name: auth?.user?.last_name,
-                    email: auth?.user?.email,
-                    full_name: auth?.user?.first_name,
-                    location: auth?.user?.location_id,
-                    state: auth?.user?.state_id,
-                    city: auth?.user?.city,
-                    address: auth?.user?.street,
-                    plan: auth?.user?.plan[0],
-                    plan_id: auth?.user?.plan_id,
+                    company_name: order?.user?.last_name,
+                    email: order?.user?.email,
+                    full_name: order?.user?.first_name,
+                    location: order?.user?.location_id,
+                    state: order?.user?.state_id,
+                    city: order?.user?.city,
+                    address: order?.user?.street,
+                    plan: order?.user?.plan[0],
+                    plan_id: order?.user?.plan_id,
                   },
                 },
               }}
@@ -179,21 +179,21 @@ const Index = (props) => {
         message={message}
         statusicon={Error}
         button={
-          !auth?.user?.is_subscription_active ? null : (
+          !order?.user?.is_subscription_active ? null : (
             <Link
               to={{
                 pathname: "/order-summary",
                 state: {
                   values: {
-                    company_name: auth?.user?.last_name,
-                    email: auth?.user?.email,
-                    full_name: auth?.user?.first_name,
-                    location: auth?.user?.location_id,
-                    state: auth?.user?.state_id,
-                    city: auth?.user?.city,
-                    address: auth?.user?.street,
-                    plan: auth?.user?.plan[0],
-                    plan_id: auth?.user?.plan_id,
+                    company_name: order?.user?.last_name,
+                    email: order?.user?.email,
+                    full_name: order?.user?.first_name,
+                    location: order?.user?.location_id,
+                    state: order?.user?.state_id,
+                    city: order?.user?.city,
+                    address: order?.user?.street,
+                    plan: order?.user?.plan[0],
+                    plan_id: order?.user?.plan_id,
                   },
                 },
               }}
@@ -210,7 +210,7 @@ const Index = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { outlet: state.outlet, auth: state.auth };
+  return { outlet: state.outlet, auth: state.auth, order: state.order };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

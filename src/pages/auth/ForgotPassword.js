@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 //router
 import { withRouter, Link } from "react-router-dom";
 //auth
-import { forgotPasswordToggle, receiveResetPassword } from "_actions/auth";
+import { forgotPasswordToggle, receiveResetPassword } from "_actions";
 // local component
 import ForgotPasswordForm from "forms/ForgotPasswordForm";
 import CustomModal from "components/CustomModal";
