@@ -1,0 +1,27 @@
+.card-border {
+  border-radius: 16px;
+}
+
+.show-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  border: 1px solid #ced4da;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.border-right-none {
+  border-right: none;
+}
+
+.red-link {
+  color: #e0475b;
+}
+
+.red-link:hover {
+  color: #e0475b;
+}
