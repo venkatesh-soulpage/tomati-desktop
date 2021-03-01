@@ -194,7 +194,7 @@ const Index = (props) => {
               />
               <button className="btn h-75 btn-outline-dark">
                 <label
-                  for="profileImage"
+                  htmlFor="profileImage"
                   style={{ cursor: "pointer", margin: 0 }}
                   className="d-flex align-items-center"
                 >
