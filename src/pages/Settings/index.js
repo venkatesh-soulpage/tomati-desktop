@@ -54,6 +54,9 @@ const Index = (props) => {
     if (props.auth.user) {
       const { first_name, last_name, email, profile_img } = props.auth.user;
       setValues({ first_name, last_name, email, profile_img });
+      if (profile_img) {
+        setTemp(profile_img);
+      }
     }
   }, [props.auth.user]);
 
@@ -76,7 +79,6 @@ const Index = (props) => {
           profile_image: { name: profile_image.name, data: url },
         })
       );
-      props.dispatch(getUser());
       setSuccess(true);
     } else {
       props.dispatch(
@@ -85,9 +87,9 @@ const Index = (props) => {
           last_name,
         })
       );
-      props.dispatch(getUser());
       setSuccess(true);
     }
+    props.dispatch(getUser());
   };
 
   const handlePasswordUpate = (e) => {
@@ -124,7 +126,6 @@ const Index = (props) => {
   if (!user) {
     return <div>loading</div>;
   }
-  console.log(user);
   return (
     <div className="pt-0 pr-3 pl-4 pb-3">
       <h4 className="text-start form-legend pb-2" style={{ fontSize: "26px" }}>
@@ -184,18 +185,24 @@ const Index = (props) => {
             <h4 className="text-dark" style={{ fontSize: "16px" }}>
               Profile Picture
             </h4>
-            <img
-              className="rounded-circle mr-2 "
-              src={temp || user.profile_img}
-              height={50}
-              width={50}
-            />
-            <button className="btn h-75 btn-outline-dark">
-              <label for="profileImage" style={{ cursor: "pointer" }}>
-                <CameraFill className="mr-3" />
-                {"  "} Add New
-              </label>
-            </button>
+            <div className="d-flex justify-content-between align-items-center">
+              <img
+                className="rounded-circle"
+                src={temp}
+                height="50px"
+                width="50px"
+              />
+              <button className="btn h-75 btn-outline-dark">
+                <label
+                  for="profileImage"
+                  style={{ cursor: "pointer", margin: 0 }}
+                  className="d-flex align-items-center"
+                >
+                  <CameraFill className="mr-3" />
+                  Add New
+                </label>
+              </button>
+            </div>
             <Form.Group>
               <Form.File
                 type="file"
