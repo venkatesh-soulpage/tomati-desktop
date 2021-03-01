@@ -38,11 +38,11 @@ function Index(props) {
     custom_message: "",
     outlet_venue: null,
   });
+  const { outlet } = props.outlet;
 
   useEffect(() => {
     props.dispatch(getOutlet(props.location.state));
   }, []);
-  const { outlet } = props.outlet;
 
   const uploadFile = (data) => {
     const { data: csv_data } = data;
@@ -71,11 +71,11 @@ function Index(props) {
       inviteCollaborator({ ...collaboratorDetail, outlet_venue: outlet.id })
     );
     setShow(true);
-    setMessage("Invite Succesfull! ");
+    setMessage("Invite Succesfull!");
 
     setCollaborator(false);
   };
-  console.log(props.outlet);
+  console.log(outlet);
 
   const fileToBase64 = async (file) =>
     new Promise((resolve, reject) => {
@@ -99,8 +99,8 @@ function Index(props) {
         <div className="row h-100 justify-content-center">
           <div className="col-md-4 text-center align-self-center">
             <img
-              className="img-fluid rounded-circle"
-              src={outlet && outlet.logo_img}
+              className="rounded-circle"
+              src={outlet?.logo_img}
               width="150px"
               height="150px"
             />

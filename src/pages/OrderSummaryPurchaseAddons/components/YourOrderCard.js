@@ -244,6 +244,9 @@ function YourOrderCard({
             src={QR_CODE_IMAGE}
             style={{ borderRadius: "20px" }}
           />
+          <button className="btn btn-close" onClick={() => setShow(false)}>
+            X
+          </button>
         </Modal.Body>
       </Modal>
     </div>
