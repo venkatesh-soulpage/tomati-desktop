@@ -34,7 +34,6 @@ export function getOutlet(id) {
       .get(`${APIRoutes.GET_OUTLET}/${id}`)
       .then((responseData) => {
         dispatch(getSingleOutlet(responseData.data));
-
         // return responseData;
       })
       .catch((errorData) => {
