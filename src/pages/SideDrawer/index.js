@@ -69,6 +69,19 @@ const Index = (props) => {
             <img className="mr-3" src={Iconsettings} alt="icon" /> Settings
           </NavLink>
         </li>
+        {props?.auth?.user?.is_admin ? (
+          <li className=" py-4 border-bottom">
+            <NavLink
+              disabled
+              className=" drawer-link"
+              activeClassName="drawer-link-active"
+              to="/dashboard/all-users"
+            >
+              <img className="mr-3" src={Iconsettings} alt="icon" /> Users
+            </NavLink>
+          </li>
+        ) : null}
+
         <li className=" py-3 border-bottom">
           <NavLink
             disabled
