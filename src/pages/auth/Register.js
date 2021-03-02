@@ -72,15 +72,9 @@ function Register(props) {
   const { step } = values;
   console.log("props\n", props);
   return (
-    <div
-      className="bg-light container-fluid py-md-5 p-0 px-md-4"
-      style={{ height: "100vh" }}
-    >
+    <div className="bg-light container-fluid py-md-5 p-0 px-md-4 htv-100">
       <div className="container px-md-5 p-0 register-container">
-        <Card
-          className="p-3 pt-5 p-md-5 register-card mt-5 mx-auto card align-self-center"
-          style={{ borderRadius: "12px" }}
-        >
+        <Card className="p-3 pt-5 p-md-5 br-12 register-card mt-5 mx-auto card align-self-center">
           <>
             <h4 className="text-md-start text-center form-legend font-weight-medium pb-3">
               You have been invited to join Tomati.App{" "}

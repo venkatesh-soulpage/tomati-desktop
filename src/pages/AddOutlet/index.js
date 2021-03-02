@@ -113,29 +113,17 @@ const Index = (props) => {
     }
   };
 
-  const HeaderText = {
-    fontSize: "24px",
-    fontFamily: "Poppins",
-    fontWeight: "600",
-  };
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
     <div className="container-fluid">
       <div className="container">
-        {/* <Button variant="primary" onClick={() => setModalShow(true)}>
-          Launch vertically centered modal
-        </Button>
-        <CustomModal show={modalShow} onHide={() => setModalShow(false)} /> */}
         <div className="row justify-content-center">
           <div className="col-md-8">
             <Card className="p-5 rounded">
               {step === 1 ? (
                 <>
-                  <div
-                    style={HeaderText}
-                    className="text-start form-legend mb-3"
-                  >
+                  <div className="text-start form-legend mb-3 fs-24 fw-600">
                     Outlet Details
                   </div>
                   <Form
@@ -154,10 +142,7 @@ const Index = (props) => {
                 </>
               ) : step === 2 ? (
                 <>
-                  <div
-                    style={HeaderText}
-                    className="text-start form-legend pb-5"
-                  >
+                  <div className="text-start form-legend pb-5 fs-24 fw-600">
                     Create Menu
                   </div>
                   <Form

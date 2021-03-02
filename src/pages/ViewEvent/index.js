@@ -16,7 +16,7 @@ import Papa from "papaparse";
 // lodash
 import _ from "lodash";
 // bootstrap icons
-import { Camera } from "react-bootstrap-icons";
+import { Camera, CameraFill } from "react-bootstrap-icons";
 // image assets
 import IconQR from "assets/img/IconQR.svg";
 import UploadCover from "assets/img/UploadCover.svg";
@@ -103,8 +103,8 @@ function Index(props) {
             <img
               className="rounded-circle"
               src={event?.logo_img}
-              width="150px"
-              height="150px"
+              width="120px"
+              height="120px"
             />
             <label htmlFor="logoImage">
               <Camera
@@ -119,7 +119,7 @@ function Index(props) {
                 type="file"
                 className="d-none"
                 onChange={async (e) => {
-                  const name = e.target.files[0].name;
+                  const name = e.target.files[0].name.replace(/\s/g, "");
                   const url = await fileToBase64(e.target.files[0]);
                   props.dispatch(
                     updateEvent(event.id, { logo_img: { name, data: url } })
@@ -135,6 +135,29 @@ function Index(props) {
             <p className="text-white font-weight-light">
               {event && event.description}
             </p>
+          </div>
+          <Form.Group>
+            <Form.Control
+              id="coverImage"
+              type="file"
+              className="d-none"
+              onChange={async (e) => {
+                const name = e.target.files[0].name.replace(/\s/g, "");
+                const url = await fileToBase64(e.target.files[0]);
+                props.dispatch(
+                  updateEvent(event.id, { cover_image: { name, data: url } })
+                );
+              }}
+            />
+          </Form.Group>
+          <div className="col-11 d-flex justify-content-end align-items-center">
+            <button className="btn btn-outline-dark text-white d-flex align-items-center">
+              <label htmlFor="coverImage" className="m-0 p-0">
+                <CameraFill className="fs-24" />
+
+                <span className="ml-3">Edit Cover Photo</span>
+              </label>
+            </button>
           </div>
         </div>
         <div className="mt-3">
@@ -226,7 +249,7 @@ function Index(props) {
             <Form.Group>
               <Form.Control
                 type="text"
-                placeholder="Owner Email"
+                placeholder="Collaborator's Email"
                 value={collaboratorDetail.owner_email}
                 required
                 onChange={handleChange("owner_email")}
@@ -235,7 +258,7 @@ function Index(props) {
             <Form.Group>
               <Form.Control
                 type="text"
-                placeholder="Display Name"
+                placeholder="FirstName LastName"
                 value={collaboratorDetail.display_name}
                 required
                 onChange={handleChange("display_name")}
@@ -244,7 +267,7 @@ function Index(props) {
             <Form.Group>
               <Form.Control
                 type="text"
-                placeholder="Custom Message"
+                placeholder="Short Message"
                 value={collaboratorDetail.custom_message}
                 required
                 onChange={handleChange("custom_message")}

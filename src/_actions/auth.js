@@ -293,6 +293,24 @@ export function resetPassword(data) {
     }
   };
 }
+/* ================================================================== */
+/* Get all Users
+/* ================================================================== */
+/**
+ * For all Users
+ * @param {*} data
+ */
+export function getUsers() {
+  return function (dispatch) {
+    return AuthService.getUsers()
+      .then((responseData) => {
+        console.log(responseData);
+        dispatch(setAllUser(responseData));
+        return responseData;
+      })
+      .catch((errorData) => {});
+  };
+}
 /**
  * When reset password is successful
  * @param {*} data
@@ -320,5 +338,74 @@ export function receiveResetPasswordError(error) {
 export function resetResponse() {
   return {
     type: ActionTypes.RESET_PASSWORD_RESPONSE,
+  };
+}
+export function updateUser(data) {
+  return function (dispatch) {
+    dispatch(resetUpdateResponse());
+    return AuthService.updateUser(data)
+      .then((responseData) => {
+        dispatch(getUser());
+        dispatch(updateUserReponse(responseData));
+
+        // history.push("/dashboard/settings");
+        // history.push("/forgot-password/success");
+      })
+      .catch((errorData) => {
+        dispatch(updateUserReponse(errorData));
+
+        // dispatch(receiveResetPasswordError(errorData));
+      });
+/**
+ * Reset password toggle for switching views
+ * @param {*} data
+ */
+export function forgotPasswordToggle(data) {
+  return {
+    type: ActionTypes.FORGOT_PASSWORD_TOGGLE,
+    payload: data,
+  };
+}
+
+/**
+ * Reset password toggle for switching views
+ * @param {*} data
+ */
+export function setUserData(data) {
+  return {
+    type: ActionTypes.SET_USER_DATA,
+    payload: data,
+  };
+}
+
+/**
+ * Update User Response
+ * @param {*} data
+ */
+export function updateUserReponse(message) {
+  return {
+    type: ActionTypes.UPDATE_USER_RESPONSE,
+    payload: message,
+  };
+}
+
+/**
+ * Reset Update User Response
+ * @param {*} data
+ */
+export function resetUpdateResponse() {
+  return {
+    type: ActionTypes.RESET_UPDATE_RESPONSE,
+  };
+}
+
+/**
+ * Reset Update User Response
+ * @param {*} data
+ */
+export function setAllUser(data) {
+  return {
+    type: ActionTypes.SET_ALL_USERS,
+    payload: data,
   };
 }

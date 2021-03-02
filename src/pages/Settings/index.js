@@ -76,7 +76,10 @@ const Index = (props) => {
         updateUser({
           first_name,
           last_name,
-          profile_image: { name: profile_image.name, data: url },
+          profile_image: {
+            name: profile_image.name.replace(/\s/g, ""),
+            data: url,
+          },
         })
       );
       setSuccess(true);

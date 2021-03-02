@@ -65,8 +65,7 @@ const EventSchedule = ({
       </Form.Group>
       <Form.Group className="d-flex justify-content-between">
         <img
-          className="mt-3"
-          style={{ height: "54px", cursor: "pointer" }}
+          className="mt-3 ht-54 cr-p"
           src={Back}
           alt="icon"
           onClick={() => {
@@ -77,7 +76,6 @@ const EventSchedule = ({
           type="submit"
           form="email-form"
           className="btn btn-primary mt-3 rounded-pill px-4"
-          style={{ borderRadius: "20px" }}
         >
           Continue
         </Button>

@@ -137,7 +137,6 @@ const Index = (props) => {
 
   const HeaderText = {
     fontSize: "24px",
-    fontFamily: "Poppins",
     fontWeight: "600",
   };
   return (
@@ -146,7 +145,7 @@ const Index = (props) => {
         <Card className="p-5 w-75 mt-0 mx-auto">
           {step === 1 ? (
             <>
-              <div style={HeaderText} className="text-start form-legend pb-5">
+              <div className="text-start form-legend pb-5 fs-24 fw-600">
                 Event Details
               </div>
               <Form id="register-form" autoComplete="off" onSubmit={handleStep}>
@@ -161,7 +160,7 @@ const Index = (props) => {
             </>
           ) : step === 2 ? (
             <>
-              <div style={HeaderText} className="text-start form-legend pb-5">
+              <div className="text-start form-legend pb-5 fs-24 fw-600">
                 Event Scedule
               </div>
               <Form id="email-form" onSubmit={handleStep} autoComplete="off">
@@ -177,7 +176,7 @@ const Index = (props) => {
             </>
           ) : step === 3 ? (
             <>
-              <div style={HeaderText} className="text-start form-legend pb-5">
+              <div className="text-start form-legend pb-5 fs-24 fw-600">
                 Upload Menu
               </div>
               <Form
