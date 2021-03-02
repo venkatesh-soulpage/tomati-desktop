@@ -27,7 +27,7 @@ function ForgetPassword(props) {
         // <ResetPasswordForm />
         //TO DO GET A MODAl WITH A TICK
         <div>
-          <div style={{ height: "700px" }}></div>
+          <div className="ht-700"></div>
           <CustomModal
             show={show}
             onHide={() => setShow(false)}

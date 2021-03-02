@@ -40,7 +40,7 @@ const CreateMenu = ({
             {values.location_id ? values.location_id.name : "Select Location"}
           </Dropdown.Toggle>
 
-          <Dropdown.Menu style={{ width: "100%" }}>
+          <Dropdown.Menu className="w-100">
             {_.map(newLocations, function (location) {
               return (
                 <Dropdown.Item
@@ -75,25 +75,19 @@ const CreateMenu = ({
             });
           }}
         />
-        <Card
-          style={{ border: " 1px dashed", cursor: "pointer" }}
-          className="p-2 d-flex pt-4"
-        >
-          <label for="menu" style={{ cursor: "pointer" }}>
+        <Card className="p-2 d-flex pt-4 b1-dash cr-p">
+          <label for="menu" className="cr-p">
             <h6>
               <img src={UploadCover} alt="icon" className="mx-4" />
               {values.menu ? <span>{menuName}</span> : <span>Upload Menu</span>}
             </h6>
           </label>
         </Card>
-        <h6 className="mt-2" style={{ color: "#989CA4" }}>
-          Only CSV Files
-        </h6>
+        <h6 className="mt-2 grey-color">Only CSV Files</h6>
       </Form.Group>
       <Form.Group className="d-flex justify-content-between">
         <img
-          className="mt-3"
-          style={{ height: "54px", cursor: "pointer" }}
+          className="mt-3 ht-54 cr-p"
           src={Back}
           alt="icon"
           onClick={() => {
@@ -104,7 +98,6 @@ const CreateMenu = ({
           type="submit"
           form="email-form"
           className="btn btn-primary mt-3 rounded-pill px-4"
-          style={{ borderRadius: "20px" }}
           onClick={handleCreateOutlet}
         >
           Continue

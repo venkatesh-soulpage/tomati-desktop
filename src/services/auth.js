@@ -194,5 +194,15 @@ class AuthAPI {
       throw error.response.data;
     }
   }
+  static async getUsers() {
+    try {
+      // fetch data from a url endpoint
+      const response = await axios.get(APIRoutes.GET_ALL_USERS);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw error.response.data;
+    }
+  }
 }
 export default AuthAPI;

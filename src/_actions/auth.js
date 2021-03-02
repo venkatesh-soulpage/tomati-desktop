@@ -531,8 +531,10 @@ export function resetPassword(data) {
  */
 export function updateUser(data) {
   return function (dispatch) {
+    dispatch(resetUpdateResponse());
     return AuthService.updateUser(data)
       .then((responseData) => {
+        dispatch(getUser());
         dispatch(updateUserReponse(responseData));
 
         // history.push("/dashboard/settings");
@@ -583,6 +585,24 @@ export function getSubscriptionId(data) {
       .catch((errorData) => {
         // dispatch(receiveResetPasswordError(errorData));
       });
+  };
+}
+/* ================================================================== */
+/* Get all Users
+/* ================================================================== */
+/**
+ * For all Users
+ * @param {*} data
+ */
+export function getUsers() {
+  return function (dispatch) {
+    return AuthService.getUsers()
+      .then((responseData) => {
+        console.log(responseData);
+        dispatch(setAllUser(responseData));
+        return responseData;
+      })
+      .catch((errorData) => {});
   };
 }
 /**
@@ -644,5 +664,26 @@ export function updateUserReponse(message) {
   return {
     type: ActionTypes.UPDATE_USER_RESPONSE,
     payload: message,
+  };
+}
+
+/**
+ * Reset Update User Response
+ * @param {*} data
+ */
+export function resetUpdateResponse() {
+  return {
+    type: ActionTypes.RESET_UPDATE_RESPONSE,
+  };
+}
+
+/**
+ * Reset Update User Response
+ * @param {*} data
+ */
+export function setAllUser(data) {
+  return {
+    type: ActionTypes.SET_ALL_USERS,
+    payload: data,
   };
 }

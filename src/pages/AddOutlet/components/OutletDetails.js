@@ -64,11 +64,8 @@ const OutletDetails = ({
           onChange={handleFile("cover_image")}
         />
 
-        <Card
-          style={{ border: "1px dashed", cursor: "pointer" }}
-          className="p-2 pt-4"
-        >
-          <label for="coverImage" style={{ cursor: "pointer" }}>
+        <Card className="p-2 pt-4 b1-dash cr-p">
+          <label for="coverImage" className="cr-p">
             <h6>
               {" "}
               <img src={UploadCover} alt="icon" className="mx-4" />
@@ -92,11 +89,8 @@ const OutletDetails = ({
           onChange={handleFile("logo_img")}
         />
 
-        <Card
-          style={{ border: " 1px dashed", cursor: "pointer" }}
-          className="p-2 d-flex pt-4"
-        >
-          <label for="logoImage" style={{ cursor: "pointer" }}>
+        <Card className="p-2 d-flex pt-4 b1-dash cr-p">
+          <label for="logoImage" className="cr-p">
             <h6>
               <img src={UploadCover} alt="icon" className="mx-4" />
               {values.logo_img ? (
@@ -113,7 +107,6 @@ const OutletDetails = ({
           type="submit"
           form="register-form"
           className="btn btn-primary mt-3 rounded-pill px-4 py-3"
-          style={{ borderRadius: "20px" }}
         >
           Continue
         </Button>
