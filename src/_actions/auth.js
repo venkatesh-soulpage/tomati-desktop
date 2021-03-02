@@ -356,6 +356,8 @@ export function updateUser(data) {
 
         // dispatch(receiveResetPasswordError(errorData));
       });
+  };
+}
 /**
  * Reset password toggle for switching views
  * @param {*} data
