@@ -5,17 +5,13 @@ function OrderSummaryCard({
   country,
   selected_state,
   total,
-  handlePay,
-  handleFinish,
+  handleCheckout,
 }) {
   const {
     address,
     company_name,
     email,
     full_name,
-    location,
-    password,
-    state,
     city,
   } = props.location.state.values;
   return (
@@ -111,27 +107,15 @@ function OrderSummaryCard({
         <div>
           <div className="container p-3 pb-5">
             <div className=" pt-5 mt-5">
-              {total > 0 ? (
-                <button
-                  type="button"
-                  onClick={() => {
-                    handlePay();
-                  }}
-                  className="btn btn-danger btn-lg rounded-pill mt-3 px-5"
-                >
-                  Pay Now
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleFinish();
-                  }}
-                  className="btn btn-danger btn-lg rounded-pill mt-3 px-5"
-                >
-                  Finish
-                </button>
-              )}
+              <button
+                type="button"
+                onClick={() => {
+                  handleCheckout();
+                }}
+                className="btn btn-danger btn-lg rounded-pill mt-3 px-5"
+              >
+                {total > 0 ? "Pay Now" : "Finish"}
+              </button>
             </div>
           </div>
         </div>

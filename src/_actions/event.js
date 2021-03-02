@@ -6,98 +6,75 @@ import EventService from "services/event";
 import history from "utils/history";
 
 /* ================================================================== */
-/* User Outlets */
+/* User Events */
 /* ================================================================== */
 /**
- * User Outlets
- * On outlets is success - User Outlets
- * On registration Failed  - handling user outlets error
+ * User Events
+ * On events is success - User Events
+ * On registration Failed  - handling user events error
  * @param {*} getData
  */
 export function userEvents() {
-  return function (dispatch) {
-    axios
-      .get(APIRoutes.GET_EVENTS)
-      .then((responseData) => {
-        dispatch(receiveUserEvents(responseData.data));
-        return responseData;
-      })
-      .catch((errorData) => {
-        // dispatch(handleRegisterError(errorData));
-      });
+  return async (dispatch) => {
+    try {
+      const responseData = await EventService.getEvents();
+
+      dispatch(receiveUserEvents(responseData));
+      return responseData;
+    } catch (errorData) {}
   };
 }
-
 export function addEvent(data) {
-  return function (dispatch) {
-    axios
-      .post(APIRoutes.ADD_EVENT_REQUEST, data)
-      .then((responseData) => {
-        dispatch(addEventMenu(responseData.data.Event.id, data.menu));
-        history.push("/dashboard/event");
-      })
-      .catch((errorData) => {
-        return errorData;
-        // dispatch(handleRegisterError(errorData));
-      });
+  return async (dispatch) => {
+    try {
+      const responseData = await EventService.addEventRequest(data);
+
+      dispatch(addEventMenu(responseData.Event.id, data.menu));
+      history.push("/dashboard/event");
+    } catch (errorData) {}
   };
 }
 
 export function addEventMenu(id, menu) {
-  return function (dispatch) {
-    // axios
-    //   .post(`${APIRoutes.ADD_EVENT_REQUEST}/${id}/menu`, menu)
-    return EventService.addEventMenu(id, menu)
-      .then((responseData) => {
-        console.log("menu", responseData);
-
-        dispatch(addMenuResponse(responseData.Message));
-        return responseData;
-      })
-      .catch((errorData) => {});
+  return async (dispatch) => {
+    try {
+      const responseData = await EventService.addEventMenu(id, menu);
+      dispatch(addMenuResponse(responseData.Message));
+      return responseData;
+    } catch (errorData) {}
   };
 }
-
 export function getEvent(id) {
-  return function (dispatch) {
-    axios
-      .get(`${APIRoutes.GET_EVENT}/${id}`)
-      .then((responseData) => {
-        dispatch(getSingleEvent(responseData.data));
-        // return responseData;
-      })
-      .catch((errorData) => {
-        // dispatch(handleRegisterError(errorData));
-      });
+  return async (dispatch) => {
+    try {
+      const responseData = await EventService.getEvent(id);
+      dispatch(getSingleEvent(responseData));
+    } catch (errorData) {}
   };
 }
 
 export function updateEvent(id, data) {
-  return function (dispatch) {
-    return EventService.updateEvent(id, data)
-      .then((responseData) => {
-        dispatch(getEvent(id));
-        return responseData;
-        // history.push("/dashboard/event");
-      })
-      .catch((errorData) => {});
+  return async (dispatch) => {
+    try {
+      const responseData = await EventService.updateEvent(id, data);
+      dispatch({
+        type: ActionTypes.UPDATE_EVENT_RESPONSE,
+        payload: responseData,
+      });
+      dispatch(getEvent(id));
+      return responseData;
+    } catch (errorData) {}
   };
 }
-
 export function inviteCollaborator(data) {
-  return function (dispatch) {
-    axios
-      .post(APIRoutes.ADD_EVENT_COLLABORATOR, data)
-      .then((responseData) => {
-        dispatch(inviteCollaboratorResponse(responseData.data));
-        // dispatch(postUpdatedOutlet(responseData.data, true));
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(inviteCollaboratorResponse(errorData.response.data));
-
-        // dispatch(handleRegisterError(errorData));
-      });
+  return async (dispatch) => {
+    try {
+      const responseData = await EventService.addEventCollaborator(data);
+      dispatch(inviteCollaboratorResponse(responseData));
+      return responseData;
+    } catch (errorData) {
+      dispatch(inviteCollaboratorResponse(errorData));
+    }
   };
 }
 

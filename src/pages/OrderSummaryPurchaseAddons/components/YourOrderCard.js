@@ -1,46 +1,29 @@
 import React, { useState } from "react";
 import { Form, Modal } from "react-bootstrap";
 import { postDiscountValue, resetDiscountMessage } from "_actions";
+import * as Function from "../functions";
 import _, { values } from "lodash";
 import PriceComponent from "./PriceComponent";
 import { QR_CODE_IMAGE } from "constants/APIRoutes";
 
-function YourOrderCard({
-  props,
-  userValues,
-  handleOutlet,
-  outletPrice,
-  handleQr,
-  qrPrice,
-  handleUsers,
-  userPrice,
-  handleEvent,
-  eventPrice,
-  discount_value,
-  discountValue,
-  setDiscountValue,
-  subTotal,
-  tax,
-  total,
-  plan_id,
-}) {
+function YourOrderCard(props) {
   const [show, setShow] = useState(false);
   const no_of_outlets =
-    "outletaddons" in userValues
-      ? userValues?.outletaddons
-      : props?.order?.user?.no_of_outlets;
+    "outletaddons" in props.userValues
+      ? props.userValues?.outletaddons
+      : props.props?.order?.user?.no_of_outlets;
   const no_of_qrs =
-    "qraddons" in userValues
-      ? userValues?.qraddons
-      : props?.order?.user?.no_of_qrcodes;
+    "qraddons" in props.userValues
+      ? props.userValues?.qraddons
+      : props.props?.order?.user?.no_of_qrcodes;
   const no_of_users =
-    "useraddons" in userValues
-      ? userValues?.useraddons
-      : props?.order?.user?.no_of_users;
+    "useraddons" in props.userValues
+      ? props.userValues?.useraddons
+      : props.props?.order?.user?.no_of_users;
   const no_of_events =
-    "eventaddons" in userValues
-      ? userValues?.eventaddons
-      : props?.order?.user?.no_of_events;
+    "eventaddons" in props.userValues
+      ? props.userValues?.eventaddons
+      : props.props?.order?.user?.no_of_events;
 
   return (
     <div>
@@ -51,8 +34,8 @@ function YourOrderCard({
 
         <select className="form-control pl-3">
           {/* <option value="">Select Plan</option> */}
-          {props?.order?.plans?.map((plan, key) => {
-            if (plan.id === plan_id) {
+          {props.props?.order?.plans?.map((plan, key) => {
+            if (plan.id === props.plan_id) {
               if (plan.plan === "starter") {
                 return (
                   <option key={key} value={plan.id}>
@@ -97,8 +80,11 @@ function YourOrderCard({
               "An outlet is a restaurant or bar in a fixed location that requires its own unique QR code."
             }
             no_of_items={no_of_outlets}
-            handleChange={handleOutlet}
-            price={outletPrice}
+            handleChange={Function.handleOutlet}
+            price={props.outletPrice}
+            userValues={props.userValues}
+            setUserValues={props.setUserValues}
+            props={props.props}
           />
           <PriceComponent
             header={"QR Menu Tags?"}
@@ -114,8 +100,11 @@ function YourOrderCard({
               </div>
             }
             no_of_items={no_of_qrs}
-            handleChange={handleQr}
-            price={qrPrice}
+            handleChange={Function.handleQr}
+            price={props.qrPrice}
+            userValues={props.userValues}
+            setUserValues={props.setUserValues}
+            props={props.props}
           />
           <PriceComponent
             header={"Number of Users"}
@@ -123,15 +112,21 @@ function YourOrderCard({
               "buy extra seats for collaborators here including waiters, cashiers and floor managers"
             }
             no_of_items={no_of_users}
-            handleChange={handleUsers}
-            price={userPrice}
+            handleChange={Function.handleUsers}
+            price={props.userPrice}
+            userValues={props.userValues}
+            setUserValues={props.setUserValues}
+            props={props.props}
           />
           <PriceComponent
             header={"Number of Events"}
             description={"An event is a restaurant or bar with an expiry date"}
             no_of_items={no_of_events}
-            handleChange={handleEvent}
-            price={eventPrice}
+            handleChange={Function.handleEvent}
+            price={props.eventPrice}
+            userValues={props.userValues}
+            setUserValues={props.setUserValues}
+            props={props.props}
           />
         </div>
 
@@ -143,20 +138,20 @@ function YourOrderCard({
             <Form.Control
               type="text"
               placeholder="Discount code(Optional)"
-              value={discountValue}
+              value={props.discountValue}
               className="border-0"
               onChange={(e) => {
-                setDiscountValue(e.target.value);
-                props.dispatch(resetDiscountMessage());
+                props.setDiscountValue(e.target.value);
+                props.props.dispatch(resetDiscountMessage());
               }}
               onBlur={() => {
-                props.dispatch(resetDiscountMessage());
+                props.props.dispatch(resetDiscountMessage());
               }}
             />
             <button
               type="button"
               onClick={() => {
-                props.dispatch(postDiscountValue(discountValue));
+                props.props.dispatch(postDiscountValue(props.discountValue));
               }}
               className="btn border-left"
               style={{
@@ -166,7 +161,7 @@ function YourOrderCard({
               Apply
             </button>
           </Form.Group>
-          {props.order.discountVal ? (
+          {props.props.order.discountVal ? (
             <Form.Group
               className="d-flex flex-row justify-content-between align-text-center my-3 "
               style={{ background: "#F5F6F9" }}
@@ -174,15 +169,17 @@ function YourOrderCard({
               <p style={{ fontSize: "14px", fontWeight: "400", margin: 0 }}>
                 Discount value applied
               </p>
-              <p style={{ fontSize: "14px", margin: 0 }}>$ {discount_value}</p>
+              <p style={{ fontSize: "14px", margin: 0 }}>
+                $ {props.discount_value}
+              </p>
             </Form.Group>
-          ) : props?.order?.discountValError ? (
+          ) : props.props?.order?.discountValError ? (
             <Form.Group
               className="d-flex flex-row justify-content-between align-items-center my-3"
               style={{ background: "#F5F6F9" }}
             >
               <p style={{ fontSize: "14px", color: "#E0475B", margin: 0 }}>
-                {props?.order?.discountValError}
+                {props.props?.order?.discountValError}
               </p>
             </Form.Group>
           ) : null}
@@ -198,7 +195,7 @@ function YourOrderCard({
                   fontWeight: "bold",
                 }}
               >
-                $ {subTotal}
+                $ {props.subTotal}
               </small>
             </small>
           </h6>
@@ -208,7 +205,7 @@ function YourOrderCard({
             <small style={{ fontSize: "16px" }}>
               Tax:{" "}
               <small style={{ color: "#2C3A56", fontWeight: "bold" }}>
-                $ {tax}
+                $ {props.tax}
               </small>{" "}
             </small>
           </h6>
@@ -224,7 +221,7 @@ function YourOrderCard({
                   fontWeight: "bold",
                 }}
               >
-                $ {total}
+                $ {props.total}
               </small>
             </small>
           </h6>

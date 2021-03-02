@@ -46,12 +46,13 @@ const CreateMenu = ({
                 <Dropdown.Item
                   key={location.id}
                   value={location.id}
-                  disabled={location.id !== 7}
+                  // disabled={location.id !== 7}
                   onClick={() => {
                     setValues({ ...values, location_id: location });
                   }}
                 >
-                  {location.name} {location.id !== 7 && "(Coming Soon)"}
+                  {location.name}
+                  {/* {location.id !== 7 && "(Coming Soon)"} */}
                 </Dropdown.Item>
               );
             })}

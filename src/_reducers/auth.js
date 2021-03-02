@@ -9,6 +9,7 @@ var initialState = {
   userDataError: {},
   loginSuccess: {},
   loginError: null,
+  collaboratorSignupSuccess: null,
   registerError: null,
   resetPasswordError: null,
   resetPasswordSuccess: null,
@@ -80,6 +81,11 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         makePaymentError: action.payload,
+      };
+    case ActionTypes.COLLABORATOR_SIGNUP_SUCCESS:
+      return {
+        ...state,
+        collaboratorSignupSuccess: action.payload,
       };
     case ActionTypes.HANDLE_REGISTER_ERROR:
       return {

@@ -6,6 +6,7 @@ import {
   verify,
   resetMessage,
   collaboratorSignup,
+  handleEmailSuccess,
 } from "_actions";
 // Router imports
 import { withRouter, useLocation, Link } from "react-router-dom";
@@ -48,22 +49,24 @@ function Register(props) {
   };
 
   // Handling the Signup data and sending it to the service.
-  const handleSignUpData = (event) => {
+  const handleSignUpData = async (event) => {
     event.preventDefault();
     console.log(values);
-    props.dispatch(collaboratorSignup(values)).then((res) => {
-      console.log(res);
-      if (res.token) {
-        setShow(true);
-      }
-    });
+    await props.dispatch(collaboratorSignup(values));
+    if (props.auth.collaboratorSignupSuccess.token) {
+      setShow(true);
+    }
   };
 
   // Handling the location data and sending it to the service.
 
   const handleEmailCheck = (email) => {
-    props.dispatch(verify(email));
-    props.dispatch(resetMessage());
+    if (new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(email)) {
+      props.dispatch(resetMessage());
+      props.dispatch(verify(email));
+    } else {
+      props.dispatch(handleEmailSuccess("Enter valid Email"));
+    }
   };
 
   const { step } = values;

@@ -33,13 +33,13 @@ const About = (props) => {
     });
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     console.log(values);
-    props.dispatch(updateEvent(props.location.state, values)).then((res) => {
-      console.log(res, "from update event");
-      setMessage(res);
+    await props.dispatch(updateEvent(props.location.state, values));
+    if (props.event.message) {
+      setMessage(props.event.message);
       setShow(true);
-    });
+    }
   };
   let inputProps = {
     placeholder: "Start Time",

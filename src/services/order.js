@@ -61,39 +61,15 @@ class OrderAPI {
       throw error.response.data;
     }
   }
-  //   static async initPayment(postData) {
-  //     try {
-  //       // fetch data from a url endpoint
-  //       const response = await axios.post(APIRoutes.PAYMENT_URL, postData);
-  //       return response.data;
-  //     } catch (error) {
-  //       throw error.response.data;
-  //     }
-  //   }
-  //   static async retriveSubscription(postData) {
-  //     try {
-  //       // fetch data from a url endpoint
-  //       const response = await axios.post(
-  //         APIRoutes.RETRIVE_SUBSCRIPTION,
-  //         postData
-  //       );
-  //       return response.data;
-  //     } catch (error) {
-  //       throw error.response.data;
-  //     }
-  //   }
-  //   static async updateSubscription(postData) {
-  //     try {
-  //       // fetch data from a url endpoint
-  //       const response = await axios.post(
-  //         APIRoutes.UPDATE_SUBSCRIPTION,
-  //         postData
-  //       );
-  //       return response.data;
-  //     } catch (error) {
-  //       throw error.response.data;
-  //     }
-  //   }
+  static async UpdatePayment(postData) {
+    try {
+      // fetch data from a url endpoint
+      const response = await axios.post(APIRoutes.UPDATE_PAYMENT_URL, postData);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
 }
 
 export default OrderAPI;

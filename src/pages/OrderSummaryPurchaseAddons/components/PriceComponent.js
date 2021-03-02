@@ -6,6 +6,9 @@ function PriceComponent({
   no_of_items,
   handleChange,
   price,
+  userValues,
+  setUserValues,
+  props,
 }) {
   return (
     <div>
@@ -36,14 +39,24 @@ function PriceComponent({
               style={{ borderRight: "1px solid #C3CAD8" }}
             >
               <Dash
-                onClick={handleChange("minus")}
+                onClick={handleChange({
+                  action: "minus",
+                  userValues,
+                  setUserValues,
+                  props,
+                })}
                 style={{ cursor: "pointer" }}
               />
             </div>
 
             <div className="col-3 p-2 text-center">
               <Plus
-                onClick={handleChange("plus")}
+                onClick={handleChange({
+                  action: "plus",
+                  userValues,
+                  setUserValues,
+                  props,
+                })}
                 style={{ cursor: "pointer" }}
               />
             </div>

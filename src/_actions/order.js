@@ -6,15 +6,14 @@ import * as ActionTypes from "constants/ActionTypes";
  * @param {*}
  */
 export function getLocationRegister() {
-  return function (dispatch) {
-    return OrderService.getLocations()
-      .then((responseData) => {
-        dispatch(getLocationSuccess(responseData));
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(getLocationError(errorData));
-      });
+  return async (dispatch) => {
+    try {
+      const responseData = await OrderService.getLocations();
+      dispatch(getLocationSuccess(responseData));
+      return responseData;
+    } catch (errorData) {
+      dispatch(getLocationError(errorData));
+    }
   };
 }
 export function getLocationSuccess(responseData) {
@@ -34,15 +33,14 @@ export function getLocationError(error) {
  * @param {*}
  */
 export function getPlansRequest() {
-  return function (dispatch) {
-    return OrderService.getPlans()
-      .then((responseData) => {
-        dispatch(getPlansSuccess(responseData));
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(getPlansError(errorData));
-      });
+  return async (dispatch) => {
+    try {
+      const responseData = await OrderService.getPlans();
+      dispatch(getPlansSuccess(responseData));
+      return responseData;
+    } catch (errorData) {
+      dispatch(getPlansError(errorData));
+    }
   };
 }
 export function getPlansSuccess(responseData) {
@@ -63,23 +61,23 @@ export function getPlansError(error) {
  * @param {*}
  */
 export function postDiscountValue(postData) {
-  return function (dispatch) {
-    return OrderService.getDiscount(postData)
-      .then((responseData) => {
-        if (responseData.status === "active") {
-          dispatch(
-            getDiscountValueSuccess({
-              discount_value: responseData.discount_percentage,
-            })
-          );
-          return responseData;
-        } else {
-          dispatch(getDiscountValueError("Enter valid coupon"));
-        }
-      })
-      .catch((errorData) => {
+  return async (dispatch) => {
+    try {
+      const responseData = await OrderService.getDiscount(postData);
+
+      if (responseData.status === "active") {
+        dispatch(
+          getDiscountValueSuccess({
+            discount_value: responseData.discount_percentage,
+          })
+        );
+        return responseData;
+      } else {
         dispatch(getDiscountValueError("Enter valid coupon"));
-      });
+      }
+    } catch (errorData) {
+      dispatch(getDiscountValueError("Enter valid coupon"));
+    }
   };
 }
 export function getDiscountValueSuccess(responseData) {
@@ -113,14 +111,11 @@ export function resetDiscountMessage() {
  * @param {*} getData
  */
 export function getUser() {
-  return function (dispatch) {
-    return OrderService.getUser()
-      .then((responseData) => {
-        dispatch(setUserData(responseData));
-      })
-      .catch((errorData) => {
-        console.log(errorData.response);
-      });
+  return async (dispatch) => {
+    try {
+      const responseData = await OrderService.getUser();
+      dispatch(setUserData(responseData));
+    } catch (errorData) {}
   };
 }
 /**
@@ -141,14 +136,13 @@ export function setUserData(data) {
  * @param {*} data
  */
 export function updateUser(data) {
-  return function (dispatch) {
-    return OrderService.updateUser(data)
-      .then((responseData) => {
-        dispatch(updateUserReponse(responseData));
-      })
-      .catch((errorData) => {
-        dispatch(updateUserReponse(errorData));
-      });
+  return async (dispatch) => {
+    try {
+      const responseData = await OrderService.updateUser(data);
+      dispatch(updateUserReponse(responseData));
+    } catch (errorData) {
+      dispatch(updateUserReponse(errorData));
+    }
   };
 }
 /**
@@ -168,12 +162,44 @@ export function updateUserReponse(message) {
  * FOr Updating User Information
  * @param {*} data
  */
-export function getSubscriptionId(data) {
-  return function (dispatch) {
-    return OrderService.getSubscriptionId(data)
-      .then((responseData) => {
-        return responseData;
-      })
-      .catch((errorData) => {});
+export function getSubscriptionId(data, postData) {
+  return async (dispatch) => {
+    try {
+      console.log(data, postData);
+      const responseData = await OrderService.getSubscriptionId(data);
+      dispatch({
+        type: ActionTypes.SUBSCRIPTION,
+        payload: responseData,
+      });
+      let pair = {
+        subscription_id: responseData.hosted_page.content.subscription.id,
+      };
+      await dispatch(UpdatePayment({ ...postData, ...pair }));
+    } catch (error) {
+      dispatch({
+        type: ActionTypes.SUBSCRIPTION_ERROR,
+        payload: error,
+      });
+    }
+  };
+}
+/* ================================================================== */
+/* Update Payment  */
+/* ================================================================== */
+/**
+ * FOr Updating User Information
+ * @param {*} data
+ */
+export function UpdatePayment(data) {
+  return async (dispatch) => {
+    try {
+      const responseData = await OrderService.UpdatePayment(data);
+      console.log(responseData);
+      dispatch({
+        type: ActionTypes.UPDATE_SUBSCRIPTION_SUCCESS,
+        payload: responseData,
+      });
+      return responseData;
+    } catch (error) {}
   };
 }

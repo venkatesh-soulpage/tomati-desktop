@@ -25,7 +25,6 @@ const Index = (props) => {
   let filteredOutlets =
     outlet &&
     outlet.outlets.filter((outlet) => {
-      console.log(outlet);
       return outlet.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
 
@@ -50,7 +49,7 @@ const Index = (props) => {
       props.history.push("/dashboard/addoutlet");
     }
   };
-  console.log(order?.user?.plan[0]?.plan);
+
   return (
     <div className="pt-0 pr-3 pl-4 pb-3">
       {/* stats */}

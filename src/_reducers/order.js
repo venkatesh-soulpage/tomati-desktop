@@ -9,6 +9,9 @@ var initialState = {
   discountVal: null,
   discountValError: null,
   message: null,
+  subscription: null,
+  subscriptionError: null,
+  updateSubscriptionSuccess: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -58,6 +61,21 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         message: action.payload,
+      };
+    case ActionTypes.SUBSCRIPTION:
+      return {
+        ...state,
+        subscription: action.payload,
+      };
+    case ActionTypes.SUBSCRIPTION_ERROR:
+      return {
+        ...state,
+        subscriptionError: action.payload,
+      };
+    case ActionTypes.UPDATE_SUBSCRIPTION_SUCCESS:
+      return {
+        ...state,
+        updateSubscriptionSuccess: action.payload,
       };
     default:
       return state;

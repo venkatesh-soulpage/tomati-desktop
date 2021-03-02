@@ -15,89 +15,71 @@ import history from "utils/history";
  * @param {*} getData
  */
 export function userOutlets() {
-  return function (dispatch) {
-    axios
-      .get(APIRoutes.GET_OUTLETS)
-      .then((responseData) => {
-        dispatch(receiveUserOutlets(responseData.data));
-        // return responseData;
-      })
-      .catch((errorData) => {
-        // dispatch(handleRegisterError(errorData));
-      });
-  };
-}
+  return async (dispatch) => {
+    try {
+      const responseData = await OutletService.getOutlets();
 
-export function getOutlet(id) {
-  return function (dispatch) {
-    axios
-      .get(`${APIRoutes.GET_OUTLET}/${id}`)
-      .then((responseData) => {
-        dispatch(getSingleOutlet(responseData.data));
-
-        // return responseData;
-      })
-      .catch((errorData) => {
-        // dispatch(handleRegisterError(errorData));
-      });
+      dispatch(receiveUserOutlets(responseData));
+      return responseData;
+    } catch (errorData) {}
   };
 }
 
 export function addOutlet(data) {
-  return function (dispatch) {
-    axios
-      .post(`${APIRoutes.ADD_OUTLET_REQUEST}`, data)
-      .then((responseData) => {
-        dispatch(addOutletMenu(responseData.data.Venue.id, data.menu));
-        history.push("/dashboard/outlet");
-        // return responseData;
-      })
-      .catch((errorData) => {
-        // return errorData;
-        // dispatch(handleRegisterError(errorData));
-      });
+  return async (dispatch) => {
+    try {
+      const responseData = await OutletService.addOutletRequest(data);
+
+      dispatch(addOutletMenu(responseData.Venue.id, data.menu));
+      history.push("/dashboard/outlet");
+    } catch (errorData) {}
   };
 }
 
 export function addOutletMenu(id, menu) {
-  return function (dispatch) {
-    // axios
-    //   .post(`${APIRoutes.ADD_EVENT_REQUEST}/${id}/menu`, menu)
-    return OutletService.addOutletMenu(id, menu)
-      .then((responseData) => {
-        dispatch(addMenuResponse(responseData));
-        return responseData;
-      })
-      .catch((errorData) => {});
+  return async (dispatch) => {
+    try {
+      const responseData = await OutletService.addOutletMenu(id, menu);
+      dispatch(addMenuResponse(responseData));
+      return responseData;
+    } catch (errorData) {}
+  };
+}
+
+export function getOutlet(id) {
+  return async (dispatch) => {
+    try {
+      const responseData = await OutletService.getOutlet(id);
+      dispatch(getSingleOutlet(responseData));
+    } catch (errorData) {}
   };
 }
 
 export function updateOutlet(id, data) {
-  return function (dispatch) {
-    return OutletService.updateOutlet(id, data)
-      .then((responseData) => {
-        dispatch(getOutlet(id));
-        return responseData;
-      })
-      .catch((errorData) => {});
-  };
-}
-
-export function inviteCollaborator(data) {
-  return function (dispatch) {
-    axios
-      .post(APIRoutes.ADD_OUTLET_COLLABORATOR, data)
-      .then((responseData) => {
-        dispatch(inviteCollaboratorResponse(responseData.data));
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(inviteCollaboratorResponse(errorData.response.data));
-        // dispatch(handleRegisterError(errorData));
+  return async (dispatch) => {
+    try {
+      const responseData = await OutletService.updateOutlet(id, data);
+      dispatch({
+        type: ActionTypes.UPDATE_OUTLET_RESPONSE,
+        payload: responseData,
       });
+      dispatch(getOutlet(id));
+      return responseData;
+    } catch (errorData) {}
   };
 }
 
+export function inviteCollaboratorOutlet(data) {
+  return async (dispatch) => {
+    try {
+      const responseData = await OutletService.addOutletCollaborator(data);
+      dispatch(inviteCollaboratorResponse(responseData));
+      return responseData;
+    } catch (errorData) {
+      dispatch(inviteCollaboratorResponse(errorData));
+    }
+  };
+}
 export function receiveUserOutlets(data) {
   return {
     type: ActionTypes.RECEIVE_USER_OUTLETS,

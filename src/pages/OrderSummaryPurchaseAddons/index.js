@@ -1,13 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  getPlansRequest,
-  getLocationRegister,
-  updateUser,
-  getUser,
-  getSubscriptionId,
-  resetDiscountMessage,
-} from "_actions";
+import * as Action from "_actions";
 import _ from "lodash";
 
 // Router imports
@@ -41,9 +34,9 @@ function Index(props) {
 
   React.useEffect(function () {
     window.scroll(0, 0);
-    props.dispatch(getPlansRequest());
-    props.dispatch(getLocationRegister());
-    props.dispatch(getUser());
+    props.dispatch(Action.getPlansRequest());
+    props.dispatch(Action.getLocationRegister());
+    props.dispatch(Action.getUser());
   }, []);
   React.useEffect(
     function () {
@@ -51,110 +44,6 @@ function Index(props) {
     },
     [plan]
   );
-
-  const handleOutlet = (action) => (event) => {
-    if (action === "plus") {
-      if ("outletaddons" in userValues) {
-        setUserValues((values) => {
-          return { ...values, outletaddons: userValues.outletaddons + 1 };
-        });
-      } else {
-        setUserValues((values) => {
-          return {
-            ...values,
-            outletaddons: props?.order?.user?.no_of_outlets + 1,
-          };
-        });
-      }
-    } else {
-      if ("outletaddons" in userValues) {
-        if (userValues.outletaddons > props?.order?.user?.no_of_outlets) {
-          setUserValues((values) => {
-            return {
-              ...values,
-              outletaddons: userValues.outletaddons - 1,
-            };
-          });
-        }
-      }
-    }
-  };
-  const handleQr = (action) => (event) => {
-    if (action === "plus") {
-      if ("qraddons" in userValues) {
-        setUserValues((values) => {
-          return { ...values, qraddons: userValues.qraddons + 1 };
-        });
-      } else {
-        setUserValues((values) => {
-          return { ...values, qraddons: props?.order?.user?.no_of_qrcodes + 1 };
-        });
-      }
-    } else {
-      if ("qraddons" in userValues) {
-        if (userValues.qraddons > props?.order?.user?.no_of_qrcodes) {
-          setUserValues((values) => {
-            return {
-              ...values,
-              qraddons: userValues.qraddons - 1,
-            };
-          });
-        }
-      }
-    }
-  };
-
-  const handleUsers = (action) => (event) => {
-    if (action === "plus") {
-      if ("useraddons" in userValues) {
-        setUserValues((values) => {
-          return { ...values, useraddons: userValues.useraddons + 1 };
-        });
-      } else {
-        setUserValues((values) => {
-          return { ...values, useraddons: props?.order?.user?.no_of_users + 1 };
-        });
-      }
-    } else {
-      if ("useraddons" in userValues) {
-        if (userValues.useraddons > props?.order?.user?.no_of_users) {
-          setUserValues((values) => {
-            return {
-              ...values,
-              useraddons: userValues.useraddons - 1,
-            };
-          });
-        }
-      }
-    }
-  };
-  const handleEvent = (action) => (event) => {
-    if (action === "plus") {
-      if ("eventaddons" in userValues) {
-        setUserValues((values) => {
-          return { ...values, eventaddons: userValues.eventaddons + 1 };
-        });
-      } else {
-        setUserValues((values) => {
-          return {
-            ...values,
-            eventaddons: props?.order?.user?.no_of_events + 1,
-          };
-        });
-      }
-    } else {
-      if ("eventaddons" in userValues) {
-        if (userValues.eventaddons > props?.order?.user?.no_of_events) {
-          setUserValues((values) => {
-            return {
-              ...values,
-              eventaddons: userValues.eventaddons - 1,
-            };
-          });
-        }
-      }
-    }
-  };
 
   if (!props.order.locations) {
     return <>Loading...</>;
@@ -262,12 +151,12 @@ function Index(props) {
       no_of_events: no_of_events,
     };
     if (props?.order?.user !== null) {
-      props.dispatch(resetDiscountMessage());
-      props.dispatch(updateUser(inputs));
+      props.dispatch(Action.resetDiscountMessage());
+      props.dispatch(Action.updateUser(inputs));
     }
   };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     let outletQuantity = no_of_outlets - activePlan?.outlet_limit;
     let eventQuantity = no_of_events - activePlan?.event_limit;
     let userQuantity = no_of_users - activePlan?.user_limit;
@@ -311,28 +200,41 @@ function Index(props) {
       addonArray.push(qrObject);
     }
 
-    props
-      .dispatch(
-        getSubscriptionId({ hostedPageId: props?.order?.user?.transaction_id })
-      )
-      .then((res) => {
-        return AuthAPI.UpdatePayment({
-          plan_id: plan?.chargebee_plan_id,
+    await props.dispatch(
+      Action.getSubscriptionId(
+        {
+          hostedPageId: props?.order?.user?.transaction_id,
+        },
+        {
+          plan_id: activePlan?.chargebee_plan_id,
           addons: addonArray,
-          subscription_id: res.hosted_page.content.subscription.id,
           coupon,
-        }).then((response) => {
-          handlePayment(props?.order?.user?.transaction_id);
-          return response.data;
-        });
-      });
+        }
+      )
+    );
+    // if (props.order.updateSubscriptionSuccess.status) {
+    handlePayment(props?.order?.user?.transaction_id);
     setSuccess(true);
+    // }
   };
-  const handleFinish = () => {
-    handleCheckout();
-  };
-  const handlePay = () => {
-    handleCheckout(activePlan);
+
+  let orderProps = {
+    props,
+    activePlan,
+    userValues,
+    outletPrice,
+    qrPrice,
+    userPrice,
+    eventPrice,
+    discount_value,
+    discountValue,
+    setDiscountValue,
+    subTotal,
+    tax,
+    total,
+    plan_id,
+    setUserValues,
+    setActivePlan,
   };
   return (
     <div className="container mt-5 mb-5 pt-5">
@@ -343,30 +245,11 @@ function Index(props) {
             country={country}
             selected_state={selected_state}
             total={total}
-            handlePay={handlePay}
-            handleFinish={handleFinish}
+            handleCheckout={handleCheckout}
           />
         </div>
         <div className="col-md-4 order-1 order-md-2">
-          <YourOrderCard
-            props={props}
-            userValues={userValues}
-            handleOutlet={handleOutlet}
-            outletPrice={outletPrice}
-            handleQr={handleQr}
-            qrPrice={qrPrice}
-            handleUsers={handleUsers}
-            userPrice={userPrice}
-            handleEvent={handleEvent}
-            eventPrice={eventPrice}
-            discount_value={discount_value}
-            discountValue={discountValue}
-            setDiscountValue={setDiscountValue}
-            subTotal={subTotal}
-            tax={tax}
-            total={total}
-            plan_id={plan_id}
-          />
+          <YourOrderCard {...orderProps} />
         </div>
       </div>
       <CustomModal

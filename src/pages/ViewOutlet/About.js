@@ -31,10 +31,11 @@ const About = (props) => {
 
   const handleUpdate = () => {
     console.log(values);
-    props.dispatch(updateOutlet(props.location.state, values)).then((res) => {
-      setMessage(res);
+    props.dispatch(updateOutlet(props.location.state, values));
+    if (props.outlet.message) {
+      setMessage(props.outlet.message);
       setShow(true);
-    });
+    }
   };
   return (
     <div className="card bg-white border p-5 mt-2">

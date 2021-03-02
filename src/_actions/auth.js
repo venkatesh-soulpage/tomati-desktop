@@ -12,15 +12,17 @@ import history from "utils/history";
  * @param {*} postData
  */
 export function collaboratorSignup(postData) {
-  return function (dispatch) {
-    return AuthService.collaboratorSignup(postData)
-      .then((responseData) => {
-        // history.push("/");
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(handleRegisterError(errorData));
+  return async (dispatch) => {
+    try {
+      const responseData = await AuthService.collaboratorSignup(postData);
+      dispatch({
+        type: ActionTypes.COLLABORATOR_SIGNUP_SUCCESS,
+        payload: responseData,
       });
+      return responseData;
+    } catch (errorData) {
+      dispatch(handleRegisterError(errorData));
+    }
   };
 }
 /**
@@ -34,6 +36,34 @@ export function handleRegisterError(error) {
   };
 }
 /* ================================================================== */
+/* Get USer */
+/* ================================================================== */
+/**
+ * Requesting User Details
+ * @param {*} getData
+ */
+export function getUserData() {
+  return async (dispatch) => {
+    try {
+      const responseData = await AuthService.getUserData();
+      dispatch(receiveUserData(responseData));
+    } catch (errorData) {}
+  };
+}
+/* ================================================================== */
+/* User Data */
+/* ================================================================== */
+/**
+ * Storing User Details to access across the App
+ * @param {*} userData
+ */
+export function receiveUserData(userData) {
+  return {
+    type: ActionTypes.RECEIVE_USER_DATA,
+    payload: userData,
+  };
+}
+/* ================================================================== */
 /* User Login */
 /* ================================================================== */
 /**
@@ -42,29 +72,20 @@ export function handleRegisterError(error) {
  * @param {*} postData
  */
 export function userLogin(postData) {
-  return function (dispatch) {
-    dispatch(loginRequest());
-    return AuthService.postLoginDetails(postData)
-      .then((responseData) => {
-        dispatch(handleLoginSuccess(responseData));
-        dispatch(receiveUserData(responseData));
-        if (responseData.token) {
-          dispatch(setAuthTokenInSession("token", responseData.token));
-          dispatch(handleIsUserAuthenticated(true));
-          history.push("/dashboard/outlet");
-        } else {
-          var errorData = {
-            status: "ERROR",
-            message:
-              "Access Denied, User Type not permitted to use this application",
-          };
-          dispatch(handleLoginError(errorData));
-        }
-        return responseData.data.user;
-      })
-      .catch((errorData) => {
-        dispatch(handleLoginError(errorData));
-      });
+  return async (dispatch) => {
+    try {
+      dispatch(loginRequest());
+      const responseData = await AuthService.postLoginDetails(postData);
+      dispatch(handleLoginSuccess(responseData));
+      dispatch(setAuthTokenInSession("token", responseData.token));
+      dispatch(handleIsUserAuthenticated());
+      dispatch(getUserData());
+      history.push("/dashboard/outlet");
+
+      return responseData.data.user;
+    } catch (errorData) {
+      dispatch(handleLoginError(errorData));
+    }
   };
 }
 /**
@@ -110,22 +131,13 @@ export function clearLoginError() {
  * @param {*} postData
  */
 export function verify(postData) {
-  return function (dispatch) {
-    return AuthService.verifyCredentails(postData)
-      .then((responseData) => {
-        if (
-          new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(postData)
-        ) {
-          dispatch(handleEmailSuccess(responseData.Message));
-        } else {
-          dispatch(handleEmailSuccess("Enter valid Email"));
-        }
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(handleEmailError(errorData.Message));
-        return errorData;
-      });
+  return async (dispatch) => {
+    try {
+      const response = await AuthService.verifyCredentails(postData);
+      dispatch(handleEmailSuccess(response.Message));
+    } catch (error) {
+      dispatch(handleEmailError(error.Message));
+    }
   };
 }
 /**
@@ -158,19 +170,7 @@ export function handleEmailError(error) {
     payload: error,
   };
 }
-/* ================================================================== */
-/* User Data */
-/* ================================================================== */
-/**
- * Storing User Details to access across the App
- * @param {*} userData
- */
-export function receiveUserData(userData) {
-  return {
-    type: ActionTypes.RECEIVE_USER_DATA,
-    payload: userData,
-  };
-}
+
 /* ================================================================== */
 /* User Auth Token Handling */
 /* ================================================================== */
@@ -179,12 +179,15 @@ export function receiveUserData(userData) {
  * using axios request Header
  * @param {*} payload
  */
-export function handleIsUserAuthenticated(payload) {
+export function handleIsUserAuthenticated() {
   var token = sessionStorage.getItem("token");
+  let payload;
   if (token) {
     axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+    payload = true;
   } else {
     axios.defaults.headers.common["Authorization"] = "";
+    payload = false;
   }
   return {
     type: ActionTypes.HANDLE_IS_USER_AUTHENTICATED,
@@ -224,18 +227,18 @@ export function userSignOut() {
  * @param {*} postData
  */
 export function forgetPassword(postData) {
-  return function (dispatch) {
-    return AuthService.forgetPassword(postData)
-      .then((responseData) => {
-        dispatch(receiveForgotPasswordToken(responseData));
-        dispatch(forgotPasswordToggle(true));
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(receiveForgotPasswordError(errorData));
-        dispatch(forgotPasswordToggle(false));
-        return errorData;
-      });
+  return async (dispatch) => {
+    try {
+      const responseData = await AuthService.forgetPassword(postData);
+
+      dispatch(receiveForgotPasswordToken(responseData));
+      dispatch(forgotPasswordToggle(true));
+      return responseData;
+    } catch (errorData) {
+      dispatch(receiveForgotPasswordError(errorData));
+      dispatch(forgotPasswordToggle(false));
+      return errorData;
+    }
   };
 }
 /**
@@ -277,17 +280,17 @@ export function forgotPasswordToggle(data) {
  * @param {*} data
  */
 export function resetPassword(data) {
-  return function (dispatch) {
-    dispatch(resetResponse());
-    return AuthService.resetPassword(data)
-      .then((responseData) => {
-        dispatch(receiveResetPassword(responseData));
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(receiveResetPasswordError(errorData));
-        return errorData;
-      });
+  return async (dispatch) => {
+    try {
+      dispatch(resetResponse());
+      const responseData = await AuthService.resetPassword(data);
+
+      dispatch(receiveResetPassword(responseData));
+      return responseData;
+    } catch (errorData) {
+      dispatch(receiveResetPasswordError(errorData));
+      return errorData;
+    }
   };
 }
 /**
