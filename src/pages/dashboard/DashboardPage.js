@@ -13,6 +13,7 @@ import ViewEvent from "../ViewEvent";
 import AddOutlet from "../AddOutlet";
 import AddEvent from "../AddEvent";
 import Settings from "../Settings";
+import AllUsers from "../AllUsers";
 
 // Router
 import { withRouter } from "react-router-dom";
@@ -25,16 +26,13 @@ function DashboardPage(props) {
 
   return (
     <div className="container mt-4">
-      <div style={{ marginTop: "100px" }}>
+      <div className="mt-100">
         <div className="dashboard-grid-wrapper">
           <div className="dashboard-grid-header"></div>
           <div className="dashboard-left-sidebar">
             <SideDrawer />
           </div>
-          <div
-            className="dashboard-grid-main"
-            style={{ backgroung: "#F5F6F9" }}
-          >
+          <div className="dashboard-grid-main">
             <Switch>
               <Route exact path={props.match.path} component={Outlet} />
 
@@ -70,6 +68,11 @@ function DashboardPage(props) {
                 exact
                 path={`${props.match.path}/settings`}
                 component={Settings}
+              />
+              <Route
+                exact
+                path={`${props.match.path}/all-users`}
+                component={AllUsers}
               />
             </Switch>
           </div>

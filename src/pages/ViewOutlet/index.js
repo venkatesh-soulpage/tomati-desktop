@@ -15,7 +15,7 @@ import _ from "lodash";
 // react bootstrap
 import { Modal, Button, Card, Form } from "react-bootstrap";
 // bootstrap icons
-import { Camera } from "react-bootstrap-icons";
+import { Camera, CameraFill } from "react-bootstrap-icons";
 // image assets
 import IconQR from "assets/img/IconQR.svg";
 import UploadCover from "assets/img/UploadCover.svg";
@@ -101,10 +101,10 @@ function Index(props) {
             <img
               className="rounded-circle"
               src={outlet?.logo_img}
-              width="150px"
-              height="150px"
+              width="120px"
+              height="120px"
             />
-            <label for="logoImage">
+            <label htmlFor="logoImage">
               <Camera
                 style={{ color: "#fff" }}
                 style={{ marginTop: "120px", cursor: "pointer" }}
@@ -117,7 +117,7 @@ function Index(props) {
                 type="file"
                 className="d-none"
                 onChange={async (e) => {
-                  const name = e.target.files[0];
+                  const name = e.target.files[0].name.replace(/\s/g, "");
                   const url = await fileToBase64(e.target.files[0]);
                   props.dispatch(
                     updateOutlet(outlet.id, { logo_img: { name, data: url } })
@@ -133,6 +133,28 @@ function Index(props) {
             <p className="text-white font-weight-light">
               {outlet && outlet.description}
             </p>
+          </div>
+          <Form.Group>
+            <Form.Control
+              id="coverImage"
+              type="file"
+              className="d-none"
+              onChange={async (e) => {
+                const name = e.target.files[0].name.replace(/\s/g, "");
+                const url = await fileToBase64(e.target.files[0]);
+                props.dispatch(
+                  updateOutlet(outlet.id, { cover_image: { name, data: url } })
+                );
+              }}
+            />
+          </Form.Group>
+          <div className="col-11 d-flex justify-content-end align-items-center">
+            <button className="btn btn-outline-dark text-white d-flex align-items-center cr-p">
+              <label className="p-0 m-0 cr-p" htmlFor="coverImage">
+                <CameraFill className="fs-24" />
+                <span className="ml-3">Edit Cover Photo</span>
+              </label>
+            </button>
           </div>
         </div>
         <div className="mt-3">
@@ -224,7 +246,7 @@ function Index(props) {
             <Form.Group>
               <Form.Control
                 type="text"
-                placeholder="Owner Email"
+                placeholder="Collaborator's Email"
                 value={collaboratorDetail.owner_email}
                 required
                 onChange={handleChange("owner_email")}
@@ -233,7 +255,7 @@ function Index(props) {
             <Form.Group>
               <Form.Control
                 type="text"
-                placeholder="Display Name"
+                placeholder="FirstName LastName"
                 value={collaboratorDetail.display_name}
                 required
                 onChange={handleChange("display_name")}
@@ -242,7 +264,7 @@ function Index(props) {
             <Form.Group>
               <Form.Control
                 type="text"
-                placeholder="Custom Message"
+                placeholder="Short Message"
                 value={collaboratorDetail.custom_message}
                 required
                 onChange={handleChange("custom_message")}
