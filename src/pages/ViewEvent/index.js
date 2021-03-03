@@ -25,6 +25,7 @@ import Success from "assets/img/Success.svg";
 import QR from "./QR";
 import About from "./About";
 import CustomModal from "components/CustomModal";
+import Loading from "components/Loading";
 
 function Index(props) {
   const [addMenu, setAddmenu] = useState(false);
@@ -91,6 +92,10 @@ function Index(props) {
 
   let cover = event?.cover_image;
 
+  if (!event) {
+    return <Loading />;
+  }
+
   return (
     <div className="p-3">
       <div
@@ -103,16 +108,13 @@ function Index(props) {
         <div className="row h-100 justify-content-center">
           <div className="col-md-4 text-center align-self-center">
             <img
-              className="rounded-circle"
+              className="rounded-circle border1-white"
               src={event?.logo_img}
               width="120px"
               height="120px"
             />
             <label htmlFor="logoImage">
-              <Camera
-                style={{ color: "#fff" }}
-                style={{ marginTop: "120px", cursor: "pointer" }}
-              />
+              <Camera className="cr-p text-white mt-120 " />
             </label>
 
             <Form.Group>

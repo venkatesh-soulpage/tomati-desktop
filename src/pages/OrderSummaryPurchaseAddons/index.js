@@ -256,7 +256,7 @@ function Index(props) {
         show={success}
         onHide={() => setSuccess(false)}
         statusicon={Success}
-        message="You plan is updated successfully !"
+        message="Your plan has updated successfully !"
         button={
           <RouteLink to="/">
             <button

@@ -154,12 +154,14 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         message: null,
+        error: null,
       };
     case ActionTypes.SET_ALL_USERS:
       return {
         ...state,
         allUsers: action.payload,
       };
+
     default:
       return state;
   }

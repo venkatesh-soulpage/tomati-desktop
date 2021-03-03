@@ -11,6 +11,7 @@ import { withRouter, Link } from "react-router-dom";
 import CustomModal from "components/CustomModal";
 //image assets
 import Success from "assets/img/Success.svg";
+import Error from "assets/img/Error.svg";
 import User from "assets/img/User.jpg";
 
 const Index = (props) => {
@@ -147,7 +148,7 @@ const Index = (props) => {
                   name="firstName"
                   type="text"
                   onChange={handleChange("first_name")}
-                  value={values.first_name || user.first_name}
+                  value={values.first_name}
                   className="mb-3 h-100"
                 />
               </Form.Group>
@@ -156,7 +157,7 @@ const Index = (props) => {
                   type="text"
                   value={values.last_name}
                   onChange={handleChange("last_name")}
-                  value={values.last_name || user.last_name}
+                  value={values.last_name}
                   required
                   className="mb-3 h-100"
                 />
@@ -165,7 +166,7 @@ const Index = (props) => {
                 <Form.Control
                   type="text"
                   // placeholder={user && user.email}
-                  value={values.email || user.email}
+                  value={values.email}
                   onChange={handleChange("email")}
                   required
                   className="mb-3 h-100"
@@ -323,8 +324,8 @@ const Index = (props) => {
       </div>
       <CustomModal
         show={success}
-        message={props.order.message}
-        statusicon={Success}
+        message={props.order.message || props.order.error}
+        statusicon={props.order.message ? Success : Error}
         button={
           <Button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"
