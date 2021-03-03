@@ -6,7 +6,8 @@ import {
   verify,
   resetMessage,
   collaboratorSignup,
-} from "_actions/auth";
+  handleEmailSuccess,
+} from "_actions";
 // Router imports
 import { withRouter, useLocation, Link } from "react-router-dom";
 // Bootstrap Imports
@@ -48,22 +49,24 @@ function Register(props) {
   };
 
   // Handling the Signup data and sending it to the service.
-  const handleSignUpData = (event) => {
+  const handleSignUpData = async (event) => {
     event.preventDefault();
     console.log(values);
-    props.dispatch(collaboratorSignup(values)).then((res) => {
-      console.log(res);
-      if (res.token) {
-        setShow(true);
-      }
-    });
+    const res = await props.dispatch(collaboratorSignup(values));
+    if (res) {
+      setShow(true);
+    }
   };
 
   // Handling the location data and sending it to the service.
 
   const handleEmailCheck = (email) => {
-    props.dispatch(verify(email));
-    props.dispatch(resetMessage());
+    if (new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(email)) {
+      props.dispatch(resetMessage());
+      props.dispatch(verify(email));
+    } else {
+      props.dispatch(handleEmailSuccess("Enter valid Email"));
+    }
   };
 
   const { step } = values;
@@ -79,7 +82,6 @@ function Register(props) {
             <Form
               id="register-form"
               onSubmit={handleSignUpData}
-              // onLoad={() => props.handleRegisterError(null)}
               autoComplete="off"
             >
               <AlertMessage
@@ -110,7 +112,6 @@ function Register(props) {
         size="xs"
         show={show}
         onHide={() => setShow(false)}
-        // className="mt-5"
         backdrop="static"
         keyboard={false}
         style={{ marginTop: "15%" }}
@@ -136,9 +137,7 @@ function Register(props) {
                     width: "140px",
                     height: "54px",
                     border: "0.5px solid black",
-                    // backgroundColor: "transparent",
                   }}
-                  // onClick={handleLoginData}
                 >
                   Login
                 </button>

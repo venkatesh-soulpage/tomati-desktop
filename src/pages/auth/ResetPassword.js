@@ -4,11 +4,6 @@ import { connect } from "react-redux";
 //router
 import { withRouter } from "react-router-dom";
 //auth
-import {
-  forgotPasswordToggle,
-  receiveResetPassword,
-  receiveForgotPasswordToken,
-} from "_actions/auth";
 // local component
 import ForgotPasswordForm from "forms/ForgotPasswordForm";
 import ResetPasswordForm from "forms/ResetPasswordForm";

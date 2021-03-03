@@ -1,19 +1,6 @@
 import axios from "axios";
 import "utils/axios_configuration";
 import * as APIRoutes from "constants/APIRoutes";
-const urlEncode = function (data) {
-  var str = [];
-  for (var p in data) {
-    if (data.hasOwnProperty(p) && !(data[p] == undefined || data[p] == null)) {
-      str.push(
-        encodeURIComponent(p) +
-          "=" +
-          (data[p] ? encodeURIComponent(data[p]) : "")
-      );
-    }
-  }
-  return str.join("&");
-};
 // TODO: axios default configurations
 class AuthAPI {
   static async postLoginDetails(postData) {
@@ -25,7 +12,15 @@ class AuthAPI {
       throw error.response.data;
     }
   }
-
+  static async getUserData() {
+    try {
+      // fetch data from a url endpoint
+      const response = await axios.get(APIRoutes.GET_USER);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
   static async verifyCredentails(postData) {
     const data = { email: postData };
     try {
@@ -61,38 +56,6 @@ class AuthAPI {
     try {
       // fetch data from a url endpoint
       const response = await axios.post(APIRoutes.GET_EMAIL_OTP, postData);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
-
-  static async getLocations() {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.get(APIRoutes.GET_LOCATIONS);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
-
-  static async getPlans() {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.get(APIRoutes.GET_PLANS);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
-
-  static async getDiscount(postData) {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.post(APIRoutes.GET_DISCOUNT, {
-        couponId: postData,
-      });
       return response.data;
     } catch (error) {
       throw error.response.data;
@@ -139,36 +102,6 @@ class AuthAPI {
     }
   }
 
-  static async getUser() {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.get(APIRoutes.GET_USER);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
-
-  static async updateUser(data) {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.post(APIRoutes.UPDATE_USER, data);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
-
-  static async getSubscriptionId(data) {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.post(APIRoutes.GET_SUBSCRIPTION_ID, data);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
-
   static async collaboratorSignup(data) {
     try {
       let URL;
@@ -185,15 +118,6 @@ class AuthAPI {
     }
   }
 
-  static async UpdatePayment(postData) {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.post(APIRoutes.UPDATE_PAYMENT_URL, postData);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
   static async getUsers() {
     try {
       // fetch data from a url endpoint

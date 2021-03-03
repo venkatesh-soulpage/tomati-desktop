@@ -1,14 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  userRegistration,
-  getPlansRequest,
-  getLocationRegister,
-  updateUser,
-  getUser,
-  getSubscriptionId,
-  resetDiscountMessage,
-} from "_actions/auth";
+import * as Action from "_actions";
 import _ from "lodash";
 
 // Router imports
@@ -42,9 +34,9 @@ function Index(props) {
 
   React.useEffect(function () {
     window.scroll(0, 0);
-    props.dispatch(getPlansRequest());
-    props.dispatch(getLocationRegister());
-    props.dispatch(getUser());
+    props.dispatch(Action.getPlansRequest());
+    props.dispatch(Action.getLocationRegister());
+    props.dispatch(Action.getUser());
   }, []);
   React.useEffect(
     function () {
@@ -53,115 +45,11 @@ function Index(props) {
     [plan]
   );
 
-  const handleOutlet = (action) => (event) => {
-    if (action === "plus") {
-      if ("outletaddons" in userValues) {
-        setUserValues((values) => {
-          return { ...values, outletaddons: userValues.outletaddons + 1 };
-        });
-      } else {
-        setUserValues((values) => {
-          return {
-            ...values,
-            outletaddons: props?.auth?.user?.no_of_outlets + 1,
-          };
-        });
-      }
-    } else {
-      if ("outletaddons" in userValues) {
-        if (userValues.outletaddons > props?.auth?.user?.no_of_outlets) {
-          setUserValues((values) => {
-            return {
-              ...values,
-              outletaddons: userValues.outletaddons - 1,
-            };
-          });
-        }
-      }
-    }
-  };
-  const handleQr = (action) => (event) => {
-    if (action === "plus") {
-      if ("qraddons" in userValues) {
-        setUserValues((values) => {
-          return { ...values, qraddons: userValues.qraddons + 1 };
-        });
-      } else {
-        setUserValues((values) => {
-          return { ...values, qraddons: props?.auth?.user?.no_of_qrcodes + 1 };
-        });
-      }
-    } else {
-      if ("qraddons" in userValues) {
-        if (userValues.qraddons > props?.auth?.user?.no_of_qrcodes) {
-          setUserValues((values) => {
-            return {
-              ...values,
-              qraddons: userValues.qraddons - 1,
-            };
-          });
-        }
-      }
-    }
-  };
-
-  const handleUsers = (action) => (event) => {
-    if (action === "plus") {
-      if ("useraddons" in userValues) {
-        setUserValues((values) => {
-          return { ...values, useraddons: userValues.useraddons + 1 };
-        });
-      } else {
-        setUserValues((values) => {
-          return { ...values, useraddons: props?.auth?.user?.no_of_users + 1 };
-        });
-      }
-    } else {
-      if ("useraddons" in userValues) {
-        if (userValues.useraddons > props?.auth?.user?.no_of_users) {
-          setUserValues((values) => {
-            return {
-              ...values,
-              useraddons: userValues.useraddons - 1,
-            };
-          });
-        }
-      }
-    }
-  };
-  const handleEvent = (action) => (event) => {
-    if (action === "plus") {
-      if ("eventaddons" in userValues) {
-        setUserValues((values) => {
-          return { ...values, eventaddons: userValues.eventaddons + 1 };
-        });
-      } else {
-        setUserValues((values) => {
-          return {
-            ...values,
-            eventaddons: props?.auth?.user?.no_of_events + 1,
-          };
-        });
-      }
-    } else {
-      if ("eventaddons" in userValues) {
-        if (userValues.eventaddons > props?.auth?.user?.no_of_events) {
-          setUserValues((values) => {
-            return {
-              ...values,
-              eventaddons: userValues.eventaddons - 1,
-            };
-          });
-        }
-      }
-    }
-  };
-
-  if (!props.auth.locations) {
+  if (!props.order.locations) {
     return <>Loading...</>;
   }
 
-  const country = _.filter(props.auth.locations, ["id", parseInt(location)]);
+  const country = _.filter(props.order.locations, ["id", parseInt(location)]);
 
   const selected_state =
     country.length > 0 &&
@@ -173,18 +61,18 @@ function Index(props) {
     activePlan.subscription_type === "yearly"
       ? (outletPrice =
           outlet_addon_price *
-          (userValues.outletaddons - props?.auth?.user?.no_of_outlets) *
+          (userValues.outletaddons - props?.order?.user?.no_of_outlets) *
           12)
       : (outletPrice =
           outlet_addon_price *
-          (userValues.outletaddons - props?.auth?.user?.no_of_outlets));
+          (userValues.outletaddons - props?.order?.user?.no_of_outlets));
   }
   let qrPrice = 0;
   if ("qraddons" in userValues) {
     const { qr_tags_addon_price } = activePlan;
     qrPrice =
       qr_tags_addon_price *
-      (userValues.qraddons - props?.auth?.user?.no_of_qrcodes);
+      (userValues.qraddons - props?.order?.user?.no_of_qrcodes);
   }
   let userPrice = 0;
   if ("useraddons" in userValues) {
@@ -192,11 +80,11 @@ function Index(props) {
     activePlan.subscription_type === "yearly"
       ? (userPrice =
           user_addon_price *
-          (userValues.useraddons - props?.auth?.user?.no_of_users) *
+          (userValues.useraddons - props?.order?.user?.no_of_users) *
           12)
       : (userPrice =
           user_addon_price *
-          (userValues.useraddons - props?.auth?.user?.no_of_users));
+          (userValues.useraddons - props?.order?.user?.no_of_users));
   }
   let eventPrice = 0;
   if ("eventaddons" in userValues) {
@@ -204,21 +92,21 @@ function Index(props) {
     activePlan.subscription_type === "yearly"
       ? (eventPrice =
           event_addon_price *
-          (userValues.eventaddons - props?.auth?.user?.no_of_events) *
+          (userValues.eventaddons - props?.order?.user?.no_of_events) *
           12)
       : (eventPrice =
           event_addon_price *
-          (userValues.eventaddons - props?.auth?.user?.no_of_events));
+          (userValues.eventaddons - props?.order?.user?.no_of_events));
   }
   let discount_value = 0;
   let subTotal = outletPrice + qrPrice + userPrice + eventPrice;
 
-  if (props.auth.discountVal) {
+  if (props.order.discountVal) {
     discount_value =
-      parseInt(props.auth.discountVal?.discount_value) * subTotal * 0.01;
+      parseInt(props.order.discountVal?.discount_value) * subTotal * 0.01;
     discount_value = discount_value.toFixed(2);
     subTotal -=
-      parseInt(props.auth.discountVal?.discount_value) * subTotal * 0.01;
+      parseInt(props.order.discountVal?.discount_value) * subTotal * 0.01;
   }
 
   subTotal = parseFloat(subTotal.toFixed(2));
@@ -230,19 +118,19 @@ function Index(props) {
   const no_of_outlets =
     "outletaddons" in userValues
       ? userValues?.outletaddons
-      : props?.auth?.user?.no_of_outlets;
+      : props?.order?.user?.no_of_outlets;
   const no_of_qrs =
     "qraddons" in userValues
       ? userValues?.qraddons
-      : props?.auth?.user?.no_of_qrcodes;
+      : props?.order?.user?.no_of_qrcodes;
   const no_of_users =
     "useraddons" in userValues
       ? userValues?.useraddons
-      : props?.auth?.user?.no_of_users;
+      : props?.order?.user?.no_of_users;
   const no_of_events =
     "eventaddons" in userValues
       ? userValues?.eventaddons
-      : props?.auth?.user?.no_of_events;
+      : props?.order?.user?.no_of_events;
 
   const handlePayment = (transaction_id) => {
     const inputs = {
@@ -262,19 +150,19 @@ function Index(props) {
       no_of_users: no_of_users,
       no_of_events: no_of_events,
     };
-    if (props?.auth?.user !== null) {
-      props.dispatch(resetDiscountMessage());
-      props.dispatch(updateUser(inputs));
+    if (props?.order?.user !== null) {
+      props.dispatch(Action.resetDiscountMessage());
+      props.dispatch(Action.updateUser(inputs));
     }
   };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     let outletQuantity = no_of_outlets - activePlan?.outlet_limit;
     let eventQuantity = no_of_events - activePlan?.event_limit;
     let userQuantity = no_of_users - activePlan?.user_limit;
-    let qrQuantity = no_of_qrs - props?.auth?.user?.no_of_qrcodes;
+    let qrQuantity = no_of_qrs - props?.order?.user?.no_of_qrcodes;
     let coupon = null;
-    if (props.auth.discountVal) {
+    if (props.order.discountVal) {
       coupon = [discountValue];
     }
     console.log(coupon);
@@ -312,28 +200,41 @@ function Index(props) {
       addonArray.push(qrObject);
     }
 
-    props
-      .dispatch(
-        getSubscriptionId({ hostedPageId: props?.auth?.user?.transaction_id })
-      )
-      .then((res) => {
-        return AuthAPI.UpdatePayment({
-          plan_id: plan?.chargebee_plan_id,
+    await props.dispatch(
+      Action.getSubscriptionId(
+        {
+          hostedPageId: props?.order?.user?.transaction_id,
+        },
+        {
+          plan_id: activePlan?.chargebee_plan_id,
           addons: addonArray,
-          subscription_id: res.hosted_page.content.subscription.id,
           coupon,
-        }).then((response) => {
-          handlePayment(props?.auth?.user?.transaction_id);
-          return response.data;
-        });
-      });
+        }
+      )
+    );
+    // if (props.order.updateSubscriptionSuccess.status) {
+    handlePayment(props?.order?.user?.transaction_id);
     setSuccess(true);
+    // }
   };
-  const handleFinish = () => {
-    handleCheckout();
-  };
-  const handlePay = () => {
-    handleCheckout(activePlan);
+
+  let orderProps = {
+    props,
+    activePlan,
+    userValues,
+    outletPrice,
+    qrPrice,
+    userPrice,
+    eventPrice,
+    discount_value,
+    discountValue,
+    setDiscountValue,
+    subTotal,
+    tax,
+    total,
+    plan_id,
+    setUserValues,
+    setActivePlan,
   };
   return (
     <div className="container mt-5 mb-5 pt-5">
@@ -344,30 +245,11 @@ function Index(props) {
             country={country}
             selected_state={selected_state}
             total={total}
-            handlePay={handlePay}
-            handleFinish={handleFinish}
+            handleCheckout={handleCheckout}
           />
         </div>
         <div className="col-md-4 order-1 order-md-2">
-          <YourOrderCard
-            props={props}
-            userValues={userValues}
-            handleOutlet={handleOutlet}
-            outletPrice={outletPrice}
-            handleQr={handleQr}
-            qrPrice={qrPrice}
-            handleUsers={handleUsers}
-            userPrice={userPrice}
-            handleEvent={handleEvent}
-            eventPrice={eventPrice}
-            discount_value={discount_value}
-            discountValue={discountValue}
-            setDiscountValue={setDiscountValue}
-            subTotal={subTotal}
-            tax={tax}
-            total={total}
-            plan_id={plan_id}
-          />
+          <YourOrderCard {...orderProps} />
         </div>
       </div>
       <CustomModal
@@ -399,7 +281,7 @@ function Index(props) {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { auth: state.auth, order: state.order };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

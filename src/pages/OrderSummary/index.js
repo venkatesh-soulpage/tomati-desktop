@@ -1,16 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  userRegistration,
-  getPlansRequest,
-  getLocationRegister,
-  updateUser,
-  getSubscriptionId,
-  getUser,
-  resetDiscountMessage,
-} from "_actions/auth";
+import * as Action from "_actions";
 import AuthAPI from "services/auth";
-import _, { values } from "lodash";
+import _ from "lodash";
 // Router imports
 import { Redirect, withRouter, Link as RouteLink } from "react-router-dom";
 import OrderSummaryCard from "./components/OrderSummaryCard";
@@ -18,11 +10,6 @@ import YourOrderCard from "./components/YourOrderCard";
 import LoginModal from "./components/LoginModal";
 import CustomModal from "components/CustomModal";
 import Success from "assets/img/Success.svg";
-import { LOCAL_PAYMENT_URL, HERULO_PAYMENT_URL } from "constants/APIRoutes";
-import axios from "axios";
-import { Link } from "react-scroll";
-axios.defaults.headers.post["Content-Type"] =
-  "application/x-www-form-urlencoded";
 
 function Index(props) {
   const [activePlan, setActivePlan] = React.useState(null);
@@ -45,128 +32,22 @@ function Index(props) {
 
   React.useEffect(function () {
     window.scroll(0, 0);
-    props.dispatch(getPlansRequest());
-    props.dispatch(getLocationRegister());
-    props.dispatch(getUser());
+    props.dispatch(Action.getPlansRequest());
+    props.dispatch(Action.getLocationRegister());
+    props.dispatch(Action.getUser());
   }, []);
   React.useEffect(
     function () {
-      if (props.auth.plans?.length > 0) setActivePlan(props.auth.plans[0]);
+      if (props.order.plans?.length > 0) setActivePlan(props.order.plans[0]);
     },
-    [props.auth.plans]
+    [props.order.plans]
   );
 
-  const handleActivePlan = (e) => {
-    const active_plan = _.filter(props.auth.plans, [
-      "id",
-      parseInt(e.target.value),
-    ]);
-    active_plan && setActivePlan(active_plan[0]);
-    setUserValues({});
-  };
-  const handleOutlet = (action) => (event) => {
-    if (action === "plus") {
-      if ("outletaddons" in userValues) {
-        setUserValues((values) => {
-          return { ...values, outletaddons: userValues.outletaddons + 1 };
-        });
-      } else {
-        setUserValues((values) => {
-          return { ...values, outletaddons: activePlan.outlet_limit + 1 };
-        });
-      }
-    } else {
-      if ("outletaddons" in userValues) {
-        if (userValues.outletaddons > activePlan.outlet_limit) {
-          setUserValues((values) => {
-            return {
-              ...values,
-              outletaddons: userValues.outletaddons - 1,
-            };
-          });
-        }
-      }
-    }
-  };
-  const handleQr = (action) => (event) => {
-    if (action === "plus") {
-      if ("qraddons" in userValues) {
-        setUserValues((values) => {
-          return { ...values, qraddons: userValues.qraddons + 1 };
-        });
-      } else {
-        setUserValues((values) => {
-          return { ...values, qraddons: activePlan.qr_tags_limit + 1 };
-        });
-      }
-    } else {
-      if ("qraddons" in userValues) {
-        if (userValues.qraddons > activePlan.qr_tags_limit) {
-          setUserValues((values) => {
-            return {
-              ...values,
-              qraddons: userValues.qraddons - 1,
-            };
-          });
-        }
-      }
-    }
-  };
-
-  const handleUsers = (action) => (event) => {
-    if (action === "plus") {
-      if ("useraddons" in userValues) {
-        setUserValues((values) => {
-          return { ...values, useraddons: userValues.useraddons + 1 };
-        });
-      } else {
-        setUserValues((values) => {
-          return { ...values, useraddons: activePlan.user_limit + 1 };
-        });
-      }
-    } else {
-      if ("useraddons" in userValues) {
-        if (userValues.useraddons > activePlan.user_limit) {
-          setUserValues((values) => {
-            return {
-              ...values,
-              useraddons: userValues.useraddons - 1,
-            };
-          });
-        }
-      }
-    }
-  };
-  const handleEvent = (action) => (event) => {
-    if (action === "plus") {
-      if ("eventaddons" in userValues) {
-        setUserValues((values) => {
-          return { ...values, eventaddons: userValues.eventaddons + 1 };
-        });
-      } else {
-        setUserValues((values) => {
-          return { ...values, eventaddons: activePlan.event_limit + 1 };
-        });
-      }
-    } else {
-      if ("eventaddons" in userValues) {
-        if (userValues.eventaddons > activePlan.event_limit) {
-          setUserValues((values) => {
-            return {
-              ...values,
-              eventaddons: userValues.eventaddons - 1,
-            };
-          });
-        }
-      }
-    }
-  };
-
-  if (!props.auth.locations) {
+  if (!props.order.locations) {
     return <>Loading...</>;
   }
-
-  const country = _.filter(props.auth.locations, ["id", parseInt(location)]);
+  console.log(props);
+  const country = _.filter(props.order.locations, ["id", parseInt(location)]);
 
   const selected_state =
     country.length > 0 &&
@@ -211,12 +92,12 @@ function Index(props) {
     userPrice +
     eventPrice;
 
-  if (props.auth.discountVal) {
+  if (props.order.discountVal) {
     discount_value =
-      parseInt(props.auth.discountVal?.discount_value) * subTotal * 0.01;
+      parseInt(props.order.discountVal?.discount_value) * subTotal * 0.01;
     discount_value = discount_value.toFixed(2);
     subTotal -=
-      parseInt(props.auth.discountVal?.discount_value) * subTotal * 0.01;
+      parseInt(props.order.discountVal?.discount_value) * subTotal * 0.01;
   }
   let tax = subTotal * 0.075;
   tax = parseFloat(tax.toFixed(2));
@@ -238,14 +119,15 @@ function Index(props) {
       : activePlan?.event_limit;
 
   let prevOutlets =
-    props?.auth?.user?.no_of_outlets - props?.auth?.user?.plan[0]?.outlet_limit;
+    props?.order?.user?.no_of_outlets -
+    props?.order?.user?.plan[0]?.outlet_limit;
   let prevQrs =
-    props?.auth?.user?.no_of_qrcodes -
-    props?.auth?.user?.plan[0]?.qr_tags_limit;
+    props?.order?.user?.no_of_qrcodes -
+    props?.order?.user?.plan[0]?.qr_tags_limit;
   let prevUsers =
-    props?.auth?.user?.no_of_users - props?.auth?.user?.plan[0]?.user_limit;
+    props?.order?.user?.no_of_users - props?.order?.user?.plan[0]?.user_limit;
   let prevEvents =
-    props?.auth?.user?.no_of_events - props?.auth?.user?.plan[0]?.event_limit;
+    props?.order?.user?.no_of_events - props?.order?.user?.plan[0]?.event_limit;
 
   const handlePayment = (transaction_id) => {
     const inputs = {
@@ -265,19 +147,19 @@ function Index(props) {
       no_of_users: no_of_users + prevUsers,
       no_of_events: no_of_events + prevEvents,
     };
-    if (props?.auth?.user !== null) {
-      props.dispatch(resetDiscountMessage());
-      props.dispatch(updateUser(inputs));
+    if (props?.order?.user !== null) {
+      props.dispatch(Action.resetDiscountMessage());
+      props.dispatch(Action.updateUser(inputs));
     }
   };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     let addonOutlet = no_of_outlets - activePlan?.outlet_limit;
     let addonEvent = no_of_events - activePlan?.event_limit;
     let addonUser = no_of_users - activePlan?.user_limit;
     let addonQr = no_of_qrs - activePlan?.qr_tags_limit;
     let coupon = null;
-    if (props.auth.discountVal) {
+    if (props.order.discountVal) {
       coupon = [discountValue];
     }
     const addonArray = [];
@@ -314,28 +196,40 @@ function Index(props) {
       addonArray.push(qrObject);
     }
 
-    props
-      .dispatch(
-        getSubscriptionId({ hostedPageId: props?.auth?.user?.transaction_id })
-      )
-      .then((res) => {
-        return AuthAPI.UpdatePayment({
+    await props.dispatch(
+      Action.getSubscriptionId(
+        {
+          hostedPageId: props?.order?.user?.transaction_id,
+        },
+        {
           plan_id: activePlan?.chargebee_plan_id,
           addons: addonArray,
-          subscription_id: res.hosted_page.content.subscription.id,
           coupon,
-        }).then((response) => {
-          handlePayment(props?.auth?.user?.transaction_id);
-          return response.data;
-        });
-      });
+        }
+      )
+    );
+    // if (props.order.updateSubscriptionSuccess.status) {
+    handlePayment(props?.order?.user?.transaction_id);
     setSuccess(true);
+    // }
   };
-  const handleFinish = () => {
-    handleCheckout();
-  };
-  const handlePay = () => {
-    handleCheckout(activePlan);
+
+  let orderProps = {
+    props,
+    activePlan,
+    userValues,
+    outletPrice,
+    qrPrice,
+    userPrice,
+    eventPrice,
+    discount_value,
+    discountValue,
+    setDiscountValue,
+    subTotal,
+    tax,
+    total,
+    setUserValues,
+    setActivePlan,
   };
   return (
     <div className="container mt-5 mb-5 pt-5">
@@ -346,32 +240,11 @@ function Index(props) {
             country={country}
             selected_state={selected_state}
             total={total}
-            handlePay={handlePay}
-            handleFinish={handleFinish}
+            handleCheckout={handleCheckout}
           />
         </div>
         <div className="col-md-4 order-1 order-md-2">
-          <YourOrderCard
-            props={props}
-            activePlan={activePlan}
-            handleActivePlan={handleActivePlan}
-            userValues={userValues}
-            handleOutlet={handleOutlet}
-            outletPrice={outletPrice}
-            handleQr={handleQr}
-            qrPrice={qrPrice}
-            handleUsers={handleUsers}
-            userPrice={userPrice}
-            handleEvent={handleEvent}
-            eventPrice={eventPrice}
-            discount_value={discount_value}
-            discountValue={discountValue}
-            setDiscountValue={setDiscountValue}
-            subTotal={subTotal}
-            tax={tax}
-            total={total}
-            plan_id={plan_id}
-          />
+          <YourOrderCard {...orderProps} />
         </div>
       </div>
       <CustomModal
@@ -388,9 +261,7 @@ function Index(props) {
                 width: "140px",
                 height: "54px",
                 border: "0.5px solid black",
-                // backgroundColor: "transparent",
               }}
-              // onClick={handleLoginData}
             >
               Home
             </button>
@@ -404,7 +275,7 @@ function Index(props) {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { auth: state.auth, order: state.order };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

@@ -4,7 +4,7 @@ import {
   getOutlet,
   addOutletMenu,
   updateOutlet,
-  inviteCollaborator,
+  inviteCollaboratorOutlet,
 } from "_actions/outlet";
 import { connect } from "react-redux";
 import { withRouter, Link, Switch, Route } from "react-router-dom";
@@ -50,11 +50,11 @@ function Index(props) {
   };
 
   const handleMenu = () => {
-    props.dispatch(addOutletMenu(outlet.id, menu)).then((res) => {
-      setAddmenu(false);
-      setMessage("Menu Updated Succesfully! ");
-      setShow(true);
-    });
+    props.dispatch(addOutletMenu(outlet.id, menu));
+    setAddmenu(false);
+    setMessage("Menu Updated Succesfully! ");
+
+    setShow(true);
   };
 
   const handleChange = (name) => (e) => {
@@ -65,17 +65,20 @@ function Index(props) {
     }));
   };
 
-  const handleCollaborator = () => {
-    console.log({ ...collaboratorDetail, outlet_venue: outlet.id });
-    props.dispatch(
-      inviteCollaborator({ ...collaboratorDetail, outlet_venue: outlet.id })
+  const handleCollaborator = async () => {
+    const res = await props.dispatch(
+      inviteCollaboratorOutlet({
+        ...collaboratorDetail,
+        outlet_venue: outlet.id,
+      })
     );
-    setShow(true);
-    setMessage("Invite Succesfull!");
+    if (res) {
+      setCollaborator(false);
+      setMessage("Invite Successfull!");
 
-    setCollaborator(false);
+      setShow(true);
+    }
   };
-  console.log(outlet);
 
   const fileToBase64 = async (file) =>
     new Promise((resolve, reject) => {

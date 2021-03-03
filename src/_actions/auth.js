@@ -1,29 +1,7 @@
-import AuthService from "services/auth";
+import { AuthService } from "services";
 import axios from "axios";
 import * as ActionTypes from "constants/ActionTypes";
 import history from "utils/history";
-
-/* ================================================================== */
-/* User Registration */
-/* ================================================================== */
-/**
- * User Registration
- * On registration is success - User Details
- * On registration Failed  - handling user registration error
- * @param {*} postData
- */
-export function userRegistration(postData) {
-  return function (dispatch) {
-    return AuthService.postSignUpDetails(postData)
-      .then((responseData) => {
-        dispatch(receiveUserData(responseData));
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(handleRegisterError(errorData));
-      });
-  };
-}
 
 /* ================================================================== */
 /* Collaborator Signup */
@@ -34,154 +12,17 @@ export function userRegistration(postData) {
  * @param {*} postData
  */
 export function collaboratorSignup(postData) {
-  return function (dispatch) {
-    return AuthService.collaboratorSignup(postData)
-      .then((responseData) => {
-        // history.push("/");
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(handleRegisterError(errorData));
+  return async (dispatch) => {
+    try {
+      const responseData = await AuthService.collaboratorSignup(postData);
+      dispatch({
+        type: ActionTypes.COLLABORATOR_SIGNUP_SUCCESS,
+        payload: responseData,
       });
-  };
-}
-/**
- * Email Otp
- * On registration is success - User Details
- * On registration Failed  - handling user registration error
- * @param {*} postData
- */
-export function getEmailRegisterOtp(postData) {
-  return function (dispatch) {
-    return AuthService.getEmailOtp(postData)
-      .then((responseData) => {
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(handleRegisterError(errorData));
-      });
-  };
-}
-/**
- * get locations
- * @param {*}
- */
-export function getLocationRegister() {
-  return function (dispatch) {
-    return AuthService.getLocations()
-      .then((responseData) => {
-        dispatch(getLocationSuccess(responseData));
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(getLocationError(errorData));
-      });
-  };
-}
-export function getLocationSuccess(responseData) {
-  return {
-    type: ActionTypes.GET_LOCATION_SUCCESS,
-    payload: responseData,
-  };
-}
-export function getLocationError(error) {
-  return {
-    type: ActionTypes.GET_LOCATION_ERROR,
-    payload: error,
-  };
-}
-/**
- * get plans
- * @param {*}
- */
-export function getPlansRequest() {
-  return function (dispatch) {
-    return AuthService.getPlans()
-      .then((responseData) => {
-        dispatch(getPlansSuccess(responseData));
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(getPlansError(errorData));
-      });
-  };
-}
-export function getPlansSuccess(responseData) {
-  return {
-    type: ActionTypes.GET_PLANS_SUCCESS,
-    payload: responseData,
-  };
-}
-export function getPlansError(error) {
-  return {
-    type: ActionTypes.GET_PLANS_ERROR,
-    payload: error,
-  };
-}
-
-/**
- * get discount
- * @param {*}
- */
-export function postDiscountValue(postData) {
-  return function (dispatch) {
-    return AuthService.getDiscount(postData)
-      .then((responseData) => {
-        if (responseData.status === "active") {
-          dispatch(
-            getDiscountValueSuccess({
-              discount_value: responseData.discount_percentage,
-            })
-          );
-          return responseData;
-        } else {
-          dispatch(getDiscountValueError(responseData.status));
-        }
-      })
-      .catch((errorData) => {
-        dispatch(getDiscountValueError("Enter valid coupon"));
-      });
-  };
-}
-export function getDiscountValueSuccess(responseData) {
-  return {
-    type: ActionTypes.GET_DISCOUNT_VALUE_SUCCESS,
-    payload: responseData,
-  };
-}
-export function getDiscountValueError(error) {
-  return {
-    type: ActionTypes.GET_DISCOUNT_VALUE_ERROR,
-    payload: error,
-  };
-}
-
-/**
- * make payment
- * @param {*}
- */
-export function makePaymentRequest(postData) {
-  return function (dispatch) {
-    return AuthService.makePayment(postData)
-      .then((responseData) => {
-        dispatch(makePaymentSuccess(responseData));
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(makePaymentError(errorData));
-      });
-  };
-}
-export function makePaymentSuccess(responseData) {
-  return {
-    type: ActionTypes.MAKE_PAYMENT_SUCCESS,
-    payload: responseData,
-  };
-}
-export function makePaymentError(error) {
-  return {
-    type: ActionTypes.MAKE_PAYMENT_ERROR,
-    payload: error,
+      return responseData;
+    } catch (errorData) {
+      dispatch(handleRegisterError(errorData));
+    }
   };
 }
 /**
@@ -195,6 +36,34 @@ export function handleRegisterError(error) {
   };
 }
 /* ================================================================== */
+/* Get USer */
+/* ================================================================== */
+/**
+ * Requesting User Details
+ * @param {*} getData
+ */
+export function getUserData() {
+  return async (dispatch) => {
+    try {
+      const responseData = await AuthService.getUserData();
+      dispatch(receiveUserData(responseData));
+    } catch (errorData) {}
+  };
+}
+/* ================================================================== */
+/* User Data */
+/* ================================================================== */
+/**
+ * Storing User Details to access across the App
+ * @param {*} userData
+ */
+export function receiveUserData(userData) {
+  return {
+    type: ActionTypes.RECEIVE_USER_DATA,
+    payload: userData,
+  };
+}
+/* ================================================================== */
 /* User Login */
 /* ================================================================== */
 /**
@@ -203,29 +72,20 @@ export function handleRegisterError(error) {
  * @param {*} postData
  */
 export function userLogin(postData) {
-  return function (dispatch) {
-    dispatch(loginRequest());
-    return AuthService.postLoginDetails(postData)
-      .then((responseData) => {
-        dispatch(handleLoginSuccess(responseData));
-        dispatch(receiveUserData(responseData));
-        if (responseData.token) {
-          dispatch(setAuthTokenInSession("token", responseData.token));
-          dispatch(handleIsUserAuthenticated(true));
-          history.push("/dashboard/outlet");
-        } else {
-          var errorData = {
-            status: "ERROR",
-            message:
-              "Access Denied, User Type not permitted to use this application",
-          };
-          dispatch(handleLoginError(errorData));
-        }
-        return responseData.data.user;
-      })
-      .catch((errorData) => {
-        dispatch(handleLoginError(errorData));
-      });
+  return async (dispatch) => {
+    try {
+      dispatch(loginRequest());
+      const responseData = await AuthService.postLoginDetails(postData);
+      dispatch(handleLoginSuccess(responseData));
+      dispatch(setAuthTokenInSession("token", responseData.token));
+      dispatch(handleIsUserAuthenticated());
+      dispatch(getUserData());
+      history.push("/dashboard/outlet");
+
+      return responseData.data.user;
+    } catch (errorData) {
+      dispatch(handleLoginError(errorData));
+    }
   };
 }
 /**
@@ -271,22 +131,13 @@ export function clearLoginError() {
  * @param {*} postData
  */
 export function verify(postData) {
-  return function (dispatch) {
-    return AuthService.verifyCredentails(postData)
-      .then((responseData) => {
-        if (
-          new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(postData)
-        ) {
-          dispatch(handleEmailSuccess(responseData.Message));
-        } else {
-          dispatch(handleEmailSuccess("Enter valid Email"));
-        }
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(handleEmailError(errorData.Message));
-        return errorData;
-      });
+  return async (dispatch) => {
+    try {
+      const response = await AuthService.verifyCredentails(postData);
+      dispatch(handleEmailSuccess(response.Message));
+    } catch (error) {
+      dispatch(handleEmailError(error.Message));
+    }
   };
 }
 /**
@@ -296,16 +147,6 @@ export function verify(postData) {
 export function resetMessage() {
   return {
     type: ActionTypes.RESET_MESSAGE,
-    payload: null,
-  };
-}
-/**
- * Discount Reset Response
- * @param {*}
- */
-export function resetDiscountMessage() {
-  return {
-    type: ActionTypes.RESET_DISCOUNT_MESSAGE,
     payload: null,
   };
 }
@@ -329,55 +170,6 @@ export function handleEmailError(error) {
     payload: error,
   };
 }
-export function handleEmailCodeError(error) {
-  return {
-    type: ActionTypes.HANDLE_EMAIL_CODE_ERROR,
-    payload: error,
-  };
-}
-
-export function checkEmailCode(postData) {
-  return function (dispatch) {
-    return AuthService.checkCode(postData)
-      .then((responseData) => {
-        dispatch(handleEmailSuccess(responseData.Message));
-        return responseData;
-      })
-      .catch((errorData) => {
-        if (
-          typeof JSON.parse(errorData) === Object &&
-          JSON.parse(errorData).status === 400
-        ) {
-          return dispatch(handleEmailCodeError("Invalid code"));
-        }
-        dispatch(handleEmailCodeError(errorData));
-        return errorData;
-      });
-  };
-}
-/* ================================================================== */
-/* User Data */
-/* ================================================================== */
-/**
- * Storing User Details to access across the App
- * @param {*} userData
- */
-export function receiveUserData(userData) {
-  return {
-    type: ActionTypes.RECEIVE_USER_DATA,
-    payload: userData,
-  };
-}
-/**
- * Error response when getting the user details from  the user
- * @param {*} error
- */
-export function receiveUserDataError(error) {
-  return {
-    type: ActionTypes.RECEIVE_USER_DATA_ERROR,
-    payload: error,
-  };
-}
 /* ================================================================== */
 /* User Auth Token Handling */
 /* ================================================================== */
@@ -386,12 +178,15 @@ export function receiveUserDataError(error) {
  * using axios request Header
  * @param {*} payload
  */
-export function handleIsUserAuthenticated(payload) {
+export function handleIsUserAuthenticated() {
   var token = sessionStorage.getItem("token");
+  let payload;
   if (token) {
     axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+    payload = true;
   } else {
     axios.defaults.headers.common["Authorization"] = "";
+    payload = false;
   }
   return {
     type: ActionTypes.HANDLE_IS_USER_AUTHENTICATED,
@@ -406,23 +201,6 @@ export function handleIsUserAuthenticated(payload) {
 export function setAuthTokenInSession(key, value) {
   return function (dispatch) {
     sessionStorage.setItem(key, value);
-  };
-}
-/* ================================================================== */
-/* User auth token validation */
-/* ================================================================== */
-/**
- * Validating the existing user auth token is valid or not
- */
-export function validateAuthToken() {
-  return function (dispatch) {
-    return AuthService.validateAuthToken()
-      .then((responseData) => {
-        dispatch(receiveUserData(responseData.data.user));
-      })
-      .catch((errorData) => {
-        dispatch(userSignOut());
-      });
   };
 }
 /* ================================================================== */
@@ -448,37 +226,18 @@ export function userSignOut() {
  * @param {*} postData
  */
 export function forgetPassword(postData) {
-  return function (dispatch) {
-    return AuthService.forgetPassword(postData)
-      .then((responseData) => {
-        dispatch(receiveForgotPasswordToken(responseData));
-        dispatch(forgotPasswordToggle(true));
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(receiveForgotPasswordError(errorData));
-        dispatch(forgotPasswordToggle(false));
-        return errorData;
-      });
-  };
-}
+  return async (dispatch) => {
+    try {
+      const responseData = await AuthService.forgetPassword(postData);
 
-/* ================================================================== */
-/* Get USer */
-/* ================================================================== */
-/**
- * Requesting User Details
- * @param {*} getData
- */
-export function getUser() {
-  return function (dispatch) {
-    return AuthService.getUser()
-      .then((responseData) => {
-        dispatch(setUserData(responseData));
-      })
-      .catch((errorData) => {
-        console.log(errorData.response);
-      });
+      dispatch(receiveForgotPasswordToken(responseData));
+      dispatch(forgotPasswordToggle(true));
+      return responseData;
+    } catch (errorData) {
+      dispatch(receiveForgotPasswordError(errorData));
+      dispatch(forgotPasswordToggle(false));
+      return errorData;
+    }
   };
 }
 /**
@@ -501,6 +260,17 @@ export function receiveForgotPasswordError(error) {
     payload: error,
   };
 }
+/**
+ * Reset password toggle for switching views
+ * @param {*} data
+ */
+export function forgotPasswordToggle(data) {
+  return {
+    type: ActionTypes.FORGOT_PASSWORD_TOGGLE,
+    payload: data,
+  };
+}
+
 /* ================================================================== */
 /* Reset Password */
 /* ================================================================== */
@@ -509,82 +279,17 @@ export function receiveForgotPasswordError(error) {
  * @param {*} data
  */
 export function resetPassword(data) {
-  return function (dispatch) {
-    dispatch(resetResponse());
-    return AuthService.resetPassword(data)
-      .then((responseData) => {
-        dispatch(receiveResetPassword(responseData));
-        return responseData;
-      })
-      .catch((errorData) => {
-        dispatch(receiveResetPasswordError(errorData));
-        return errorData;
-      });
-  };
-}
-/* ================================================================== */
-/* Update User */
-/* ================================================================== */
-/**
- * FOr Updating User Information
- * @param {*} data
- */
-export function updateUser(data) {
-  return function (dispatch) {
-    dispatch(resetUpdateResponse());
-    return AuthService.updateUser(data)
-      .then((responseData) => {
-        dispatch(getUser());
-        dispatch(updateUserReponse(responseData));
+  return async (dispatch) => {
+    try {
+      dispatch(resetResponse());
+      const responseData = await AuthService.resetPassword(data);
 
-        // history.push("/dashboard/settings");
-        // history.push("/forgot-password/success");
-      })
-      .catch((errorData) => {
-        dispatch(updateUserError(errorData));
-
-        // dispatch(receiveResetPasswordError(errorData));
-      });
-  };
-}
-/**
- * FOr ChargeBee Information
- * @param {*} data
- */
-// export function chargeBeeRequest(data) {
-//   return function (dispatch) {
-//     return AuthService.chargeBee(data).then((responseData) => {
-//       console.log(responseData, "ChareBee Updated");
-//       return responseData;
-//       // history.push("/dashboard/settings");
-//       // dispatch(receiveResetPassword(responseData));
-//       // history.push("/forgot-password/success");
-//     });
-//     // .catch((errorData) => {
-//     //   // dispatch(receiveResetPasswordError(errorData));
-//     // });
-//   };
-// }
-
-/* ================================================================== */
-/* Get Subscription ID */
-/* ================================================================== */
-/**
- * FOr Updating User Information
- * @param {*} data
- */
-export function getSubscriptionId(data) {
-  return function (dispatch) {
-    return AuthService.getSubscriptionId(data)
-      .then((responseData) => {
-        return responseData;
-
-        // dispatch(receiveResetPassword(responseData));
-        // history.push("/forgot-password/success");
-      })
-      .catch((errorData) => {
-        // dispatch(receiveResetPasswordError(errorData));
-      });
+      dispatch(receiveResetPassword(responseData));
+      return responseData;
+    } catch (errorData) {
+      dispatch(receiveResetPasswordError(errorData));
+      return errorData;
+    }
   };
 }
 /* ================================================================== */
@@ -634,16 +339,6 @@ export function resetResponse() {
     type: ActionTypes.RESET_PASSWORD_RESPONSE,
   };
 }
-/**
- * Reset password toggle for switching views
- * @param {*} data
- */
-export function forgotPasswordToggle(data) {
-  return {
-    type: ActionTypes.FORGOT_PASSWORD_TOGGLE,
-    payload: data,
-  };
-}
 
 /**
  * Reset password toggle for switching views
@@ -663,16 +358,6 @@ export function setUserData(data) {
 export function updateUserReponse(message) {
   return {
     type: ActionTypes.UPDATE_USER_RESPONSE,
-    payload: message,
-  };
-}
-/**
- * Update User Error
- * @param {*} data
- */
-export function updateUserError(message) {
-  return {
-    type: ActionTypes.UPDATE_USER_ERROR,
     payload: message,
   };
 }

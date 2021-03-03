@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 // redux
-import { addEvent } from "_actions/event";
+import { addEvent } from "_actions";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
-import { getLocationRegister } from "_actions/auth";
+import { getLocationRegister } from "_actions";
 // local components
 import EventDetails from "./components/EventDeatails";
 import CreateMenu from "./components/CreateMenu";
@@ -209,7 +209,7 @@ const Index = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { event: state.event, auth: state.auth };
+  return { event: state.event, auth: state.auth, order: state.order };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

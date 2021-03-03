@@ -9,8 +9,8 @@ var initialState = {
   userDataError: {},
   loginSuccess: {},
   loginError: null,
+  collaboratorSignupSuccess: null,
   registerError: null,
-  resetPassword: {},
   resetPasswordError: null,
   resetPasswordSuccess: null,
   forgotPasswordToken: {},
@@ -18,19 +18,10 @@ var initialState = {
   forgotPasswordToggle: false,
   verifySuccess: null,
   verifyError: null,
-  verifyEmailCodeError: null,
-  locations: null,
-  locationsError: null,
-  user: null,
-  plans: null,
-  plansError: null,
-  discountVal: null,
-  discountValError: null,
   makePaymentSuccess: null,
   makePaymentError: null,
   message: null,
   allUsers: null,
-  error: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -82,44 +73,6 @@ export default function authReducer(state = initialState, action) {
         ...state,
         verifySuccess: action.payload,
         verifyError: action.payload,
-        discountVal: action.payload,
-        discountValError: action.payload,
-      };
-    case ActionTypes.RESET_DISCOUNT_MESSAGE:
-      return {
-        ...state,
-        discountVal: action.payload,
-        discountValError: action.payload,
-      };
-    case ActionTypes.GET_LOCATION_SUCCESS:
-      return {
-        ...state,
-        locations: action.payload,
-      };
-    case ActionTypes.GET_LOCATION_ERROR:
-      return {
-        ...state,
-        locationsError: action.payload,
-      };
-    case ActionTypes.GET_PLANS_SUCCESS:
-      return {
-        ...state,
-        plans: action.payload,
-      };
-    case ActionTypes.GET_PLANS_ERROR:
-      return {
-        ...state,
-        plansError: action.payload,
-      };
-    case ActionTypes.GET_DISCOUNT_VALUE_SUCCESS:
-      return {
-        ...state,
-        discountVal: action.payload,
-      };
-    case ActionTypes.GET_DISCOUNT_VALUE_ERROR:
-      return {
-        ...state,
-        discountValError: action.payload,
       };
     case ActionTypes.MAKE_PAYMENT_SUCCESS:
       return {
@@ -130,6 +83,11 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         makePaymentError: action.payload,
+      };
+    case ActionTypes.COLLABORATOR_SIGNUP_SUCCESS:
+      return {
+        ...state,
+        collaboratorSignupSuccess: action.payload,
       };
     case ActionTypes.HANDLE_REGISTER_ERROR:
       return {
@@ -203,11 +161,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         allUsers: action.payload,
       };
-    case ActionTypes.UPDATE_USER_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-      };
+
     default:
       return state;
   }

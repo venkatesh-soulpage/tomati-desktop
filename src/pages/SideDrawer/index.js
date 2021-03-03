@@ -10,7 +10,7 @@ import velvet2 from "assets/img/velvet2.svg";
 import { NavLink, useLocation } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
-import { userSignOut } from "_actions/auth";
+import { userSignOut } from "_actions";
 
 const Index = (props) => {
   return (
@@ -98,7 +98,7 @@ const Index = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { auth: state.auth, order: state.order };
 }
 
 export default connect(mapStateToProps)(Index);

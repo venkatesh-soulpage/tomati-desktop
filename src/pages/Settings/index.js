@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // redux
 import { connect } from "react-redux";
-import { updateUser, getUser } from "_actions/auth";
+import { updateUser, getUser } from "_actions";
 // react bootstrap
 import { Form, InputGroup, Button } from "react-bootstrap";
 // bootstrap icons
@@ -31,8 +31,6 @@ const Index = (props) => {
     hidden2: false,
   });
 
-  console.log(values);
-
   const [error, setError] = useState(false);
   const strongRegex = new RegExp(
     "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
@@ -52,22 +50,21 @@ const Index = (props) => {
   };
 
   useEffect(() => {
-    if (props.auth.user) {
-      const { first_name, last_name, email, profile_img } = props.auth.user;
+    if (props.order.user) {
+      const { first_name, last_name, email, profile_img } = props.order.user;
       setValues({ first_name, last_name, email, profile_img });
       if (profile_img) {
         setTemp(profile_img);
       }
     }
-  }, [props.auth.user]);
+  }, [props.order.user]);
 
   const handleChange = (name) => (event) => {
     const value = event.target.value;
     setValues((values) => ({ ...values, [name]: value }));
   };
 
-  const { user } = props.auth;
-  console.log(values.profile_image);
+  const { user } = props.order;
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     const { first_name, last_name, profile_image } = values;
@@ -327,8 +324,8 @@ const Index = (props) => {
       </div>
       <CustomModal
         show={success}
-        message={props.auth.message || props.auth.error}
-        statusicon={props.auth.message ? Success : Error}
+        message={props.order.message || props.order.error}
+        statusicon={props.order.message ? Success : Error}
         button={
           <Button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"
@@ -342,6 +339,6 @@ const Index = (props) => {
   );
 };
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { auth: state.auth, order: state.order };
 }
 export default withRouter(connect(mapStateToProps)(Index));

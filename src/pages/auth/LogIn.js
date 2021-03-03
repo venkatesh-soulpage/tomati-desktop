@@ -6,7 +6,7 @@ import {
   handleLoginError,
   receiveUserData,
   clearLoginError,
-} from "_actions/auth";
+} from "_actions";
 // Router
 import { withRouter, Link } from "react-router-dom";
 // Bootstrap Components
@@ -46,30 +46,21 @@ function LogIn(props) {
     setValues({ ...values, hidden: !values.hidden });
   }
   // Handling the login data and sending it to the service.
-  function handleLoginData(event) {
+  async function handleLoginData(event) {
     event.preventDefault();
     // Creating post Data
     var postData = {
       email: values.email,
       password: values.password,
     };
-    props
-      .dispatch(userLogin(postData))
-      .then((userData) => {
-        if (userData.email_verified_at === null) {
-          console.log("hittin");
-
-          props.history.push("/verify-email");
-        } else if (userData.sms_verified_at === null) {
-          console.log("hittin");
-
-          props.history.push("/verify-phone");
-        } else if (sessionStorage.getItem("token")) {
-          console.log("hittin");
-          props.history.push("/dashboard/outlet");
-        }
-      })
-      .catch((error) => {});
+    await props.dispatch(userLogin(postData));
+    if (props.auth.userData.email_verified_at === null) {
+      props.history.push("/verify-email");
+    } else if (props.auth.userData.sms_verified_at === null) {
+      props.history.push("/verify-phone");
+    } else if (sessionStorage.getItem("token")) {
+      props.history.push("/dashboard/outlet");
+    }
   }
 
   function handleAlertDismiss() {
