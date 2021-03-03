@@ -1,0 +1,11 @@
+version: "3.3"
+
+services:
+  tomati:
+    build:
+      context: .
+    env_file:
+      - .env
+    ports:
+      - 80:3000
+    command: npm start

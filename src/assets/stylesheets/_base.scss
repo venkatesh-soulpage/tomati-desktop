@@ -1,0 +1,60 @@
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  background-color: #f5f6f9;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+}
+
+// h1 {
+//   font-size: $primary-heading-size;
+//   font-weight: 500;
+// }
+// h2 {
+//   font-size: 26px;
+// }
+// h3 {
+//   font-size: $secondary-heading-size;
+//   font-weight: 400;
+// }
+p {
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  margin-top: 0px;
+}
+small {
+  font-size: 12px;
+}
+
+.progress-bar.bg-primary {
+  background-color: #e0475b !important;
+}
+
+input[type="checkbox"]:after {
+  background-color: #e0475b !important;
+}
+
+.min-height {
+  height: 100vh;
+  min-height: 600px;
+}
+
+$dark: #2c3a56;
+$danger: #e0475b;
+
+// Bootstrap Override
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
