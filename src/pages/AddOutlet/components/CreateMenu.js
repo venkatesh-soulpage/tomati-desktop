@@ -20,18 +20,6 @@ const CreateMenu = ({
     setValues({ ...values, menu: _.reject(csv_data, { name: "" }) });
   };
 
-  const arr =
-    props.order.locations &&
-    props.order.locations.filter((location) => {
-      return location.id === 7;
-    });
-  const arr2 =
-    props.order.locations &&
-    props.order.locations.filter((location) => {
-      return location.id !== 7;
-    });
-  const newLocations = arr && arr.concat(arr2);
-
   return (
     <div>
       <Form.Group>
@@ -41,18 +29,16 @@ const CreateMenu = ({
           </Dropdown.Toggle>
 
           <Dropdown.Menu className="w-100">
-            {_.map(newLocations, function (location) {
+            {_.map(props.order.locations, function (location) {
               return (
                 <Dropdown.Item
                   key={location.id}
                   value={location.id}
-                  // disabled={location.id !== 7}
                   onClick={() => {
                     setValues({ ...values, location_id: location });
                   }}
                 >
                   {location.name}
-                  {/* {location.id !== 7 && "(Coming Soon)"} */}
                 </Dropdown.Item>
               );
             })}

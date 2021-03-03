@@ -30,8 +30,6 @@ const Index = (props) => {
     hidden2: false,
   });
 
-  console.log(values);
-
   const [error, setError] = useState(false);
   const strongRegex = new RegExp(
     "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
@@ -66,7 +64,6 @@ const Index = (props) => {
   };
 
   const { user } = props.order;
-  console.log(values.profile_image);
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     const { first_name, last_name, profile_image } = values;

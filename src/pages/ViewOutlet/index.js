@@ -65,17 +65,19 @@ function Index(props) {
     }));
   };
 
-  const handleCollaborator = () => {
-    props.dispatch(
+  const handleCollaborator = async () => {
+    const res = await props.dispatch(
       inviteCollaboratorOutlet({
         ...collaboratorDetail,
         outlet_venue: outlet.id,
       })
     );
-    setShow(true);
-    setMessage("Invite Succesfull!");
+    if (res) {
+      setCollaborator(false);
+      setMessage("Invite Successfull!");
 
-    setCollaborator(false);
+      setShow(true);
+    }
   };
 
   const fileToBase64 = async (file) =>

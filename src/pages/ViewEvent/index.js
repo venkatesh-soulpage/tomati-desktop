@@ -68,15 +68,17 @@ function Index(props) {
     }));
   };
 
-  const handleCollaborator = () => {
+  const handleCollaborator = async () => {
     console.log({ ...collaboratorDetail, outlet_event: event.id });
-    props.dispatch(
+    const res = await props.dispatch(
       inviteCollaborator({ ...collaboratorDetail, outlet_event: event.id })
     );
-    setCollaborator(false);
-    setMessage("Invite Successfull!");
+    if (res) {
+      setCollaborator(false);
+      setMessage("Invite Successfull!");
 
-    setShow(true);
+      setShow(true);
+    }
   };
 
   const fileToBase64 = async (file) =>

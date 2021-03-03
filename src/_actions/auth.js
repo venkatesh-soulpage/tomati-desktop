@@ -340,34 +340,6 @@ export function resetResponse() {
     type: ActionTypes.RESET_PASSWORD_RESPONSE,
   };
 }
-export function updateUser(data) {
-  return function (dispatch) {
-    dispatch(resetUpdateResponse());
-    return AuthService.updateUser(data)
-      .then((responseData) => {
-        dispatch(getUser());
-        dispatch(updateUserReponse(responseData));
-
-        // history.push("/dashboard/settings");
-        // history.push("/forgot-password/success");
-      })
-      .catch((errorData) => {
-        dispatch(updateUserReponse(errorData));
-
-        // dispatch(receiveResetPasswordError(errorData));
-      });
-  };
-}
-/**
- * Reset password toggle for switching views
- * @param {*} data
- */
-export function forgotPasswordToggle(data) {
-  return {
-    type: ActionTypes.FORGOT_PASSWORD_TOGGLE,
-    payload: data,
-  };
-}
 
 /**
  * Reset password toggle for switching views

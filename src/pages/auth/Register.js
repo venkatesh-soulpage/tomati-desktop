@@ -52,8 +52,8 @@ function Register(props) {
   const handleSignUpData = async (event) => {
     event.preventDefault();
     console.log(values);
-    await props.dispatch(collaboratorSignup(values));
-    if (props.auth.collaboratorSignupSuccess.token) {
+    const res = await props.dispatch(collaboratorSignup(values));
+    if (res) {
       setShow(true);
     }
   };
