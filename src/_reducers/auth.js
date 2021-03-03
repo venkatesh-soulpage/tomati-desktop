@@ -30,6 +30,7 @@ var initialState = {
   makePaymentError: null,
   message: null,
   allUsers: null,
+  error: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -195,11 +196,17 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         message: null,
+        error: null,
       };
     case ActionTypes.SET_ALL_USERS:
       return {
         ...state,
         allUsers: action.payload,
+      };
+    case ActionTypes.UPDATE_USER_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

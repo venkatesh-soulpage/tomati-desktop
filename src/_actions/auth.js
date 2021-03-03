@@ -541,7 +541,7 @@ export function updateUser(data) {
         // history.push("/forgot-password/success");
       })
       .catch((errorData) => {
-        dispatch(updateUserReponse(errorData));
+        dispatch(updateUserError(errorData));
 
         // dispatch(receiveResetPasswordError(errorData));
       });
@@ -663,6 +663,16 @@ export function setUserData(data) {
 export function updateUserReponse(message) {
   return {
     type: ActionTypes.UPDATE_USER_RESPONSE,
+    payload: message,
+  };
+}
+/**
+ * Update User Error
+ * @param {*} data
+ */
+export function updateUserError(message) {
+  return {
+    type: ActionTypes.UPDATE_USER_ERROR,
     payload: message,
   };
 }

@@ -99,16 +99,13 @@ function Index(props) {
         <div className="row h-100 justify-content-center">
           <div className="col-md-4 text-center align-self-center">
             <img
-              className="rounded-circle"
+              className="rounded-circle border1-white"
               src={outlet?.logo_img}
               width="120px"
               height="120px"
             />
             <label htmlFor="logoImage">
-              <Camera
-                style={{ color: "#fff" }}
-                style={{ marginTop: "120px", cursor: "pointer" }}
-              />
+              <Camera className="cr-p text-white mt-120 " />
             </label>
 
             <Form.Group>

@@ -84,6 +84,12 @@ const CreateMenu = ({
           </label>
         </Card>
         <h6 className="mt-2 grey-color">Only CSV Files</h6>
+        <h6 className="mt-2 grey-color font-italic">
+          watch the CSV tutorial here
+        </h6>
+        <h6 className="mt-2 grey-color font-italic">
+          download CSV template here
+        </h6>
       </Form.Group>
       <Form.Group className="d-flex justify-content-between">
         <img
