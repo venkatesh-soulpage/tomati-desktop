@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // redux
 import { connect } from "react-redux";
-import { updateUser, getUser } from "_actions";
+import * as Action from "_actions";
 // react bootstrap
 import { Form, InputGroup, Button } from "react-bootstrap";
 // bootstrap icons
@@ -49,28 +49,28 @@ const Index = (props) => {
   };
 
   useEffect(() => {
-    if (props.order.user) {
-      const { first_name, last_name, email, profile_img } = props.order.user;
+    if (props.auth.userData) {
+      const { first_name, last_name, email, profile_img } = props.auth.userData;
       setValues({ first_name, last_name, email, profile_img });
       if (profile_img) {
         setTemp(profile_img);
       }
     }
-  }, [props.order.user]);
+  }, [props.auth.userData]);
 
   const handleChange = (name) => (event) => {
     const value = event.target.value;
     setValues((values) => ({ ...values, [name]: value }));
   };
 
-  const { user } = props.order;
+  const { userData } = props.auth;
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     const { first_name, last_name, profile_image } = values;
     if (profile_image) {
       const url = await fileToBase64(profile_image);
       props.dispatch(
-        updateUser({
+        Action.updateUser({
           first_name,
           last_name,
           profile_image: {
@@ -82,14 +82,14 @@ const Index = (props) => {
       setSuccess(true);
     } else {
       props.dispatch(
-        updateUser({
+        Action.updateUser({
           first_name,
           last_name,
         })
       );
       setSuccess(true);
     }
-    props.dispatch(getUser());
+    props.dispatch(Action.getUserData());
   };
 
   const handlePasswordUpate = (e) => {
@@ -97,7 +97,7 @@ const Index = (props) => {
     const { current_password, new_password } = values;
     console.log(values);
     if (!error) {
-      props.dispatch(updateUser({ current_password, new_password }));
+      props.dispatch(Action.updateUser({ current_password, new_password }));
       setShow(false);
       setSuccess(true);
     }
@@ -125,7 +125,7 @@ const Index = (props) => {
     setTemp(URL.createObjectURL(e.target.files[0]));
   };
 
-  if (!user) {
+  if (!userData) {
     return <div>loading</div>;
   }
   return (
@@ -166,7 +166,6 @@ const Index = (props) => {
               <Form.Group>
                 <Form.Control
                   type="text"
-                  // placeholder={user && user.email}
                   value={values.email}
                   onChange={handleChange("email")}
                   required
@@ -210,8 +209,6 @@ const Index = (props) => {
                 type="file"
                 id="profileImage"
                 className="d-none"
-                // placeholder={user && user.email}
-
                 onChange={handleImg}
                 required
               />
@@ -325,8 +322,8 @@ const Index = (props) => {
       </div>
       <CustomModal
         show={success}
-        message={props.order.message || props.order.error}
-        statusicon={!props.order.message ? Error : Success}
+        message={props.auth.message || props.auth.error}
+        statusicon={!props.auth.message ? Error : Success}
         button={
           <Button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"
@@ -340,6 +337,9 @@ const Index = (props) => {
   );
 };
 function mapStateToProps(state) {
-  return { auth: state.auth, order: state.order };
+  return {
+    auth: state.auth,
+    // , order: state.order
+  };
 }
 export default withRouter(connect(mapStateToProps)(Index));

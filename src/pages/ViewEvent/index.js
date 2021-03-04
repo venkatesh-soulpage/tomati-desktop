@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 // redux
-import {
-  getEvent,
-  addEventMenu,
-  inviteCollaborator,
-  updateEvent,
-} from "_actions/event";
+import * as Action from "_actions";
 import { connect } from "react-redux";
 //react router
 import { withRouter, Link, Switch, Route } from "react-router-dom";
@@ -45,7 +40,7 @@ function Index(props) {
   const { event } = props.event;
 
   useEffect(() => {
-    props.dispatch(getEvent(state));
+    props.dispatch(Action.getEvent(state));
   }, []);
 
   const uploadFile = (data) => {
@@ -54,7 +49,7 @@ function Index(props) {
   };
 
   const handleMenu = () => {
-    props.dispatch(addEventMenu(event.id, menu));
+    props.dispatch(Action.addEventMenu(event.id, menu));
     setAddmenu(false);
     setMessage("Menu Updated Succesfully! ");
 
@@ -72,7 +67,10 @@ function Index(props) {
   const handleCollaborator = async () => {
     console.log({ ...collaboratorDetail, outlet_event: event.id });
     const res = await props.dispatch(
-      inviteCollaborator({ ...collaboratorDetail, outlet_event: event.id })
+      Action.inviteCollaborator({
+        ...collaboratorDetail,
+        outlet_event: event.id,
+      })
     );
     if (res) {
       setCollaborator(false);
@@ -130,7 +128,9 @@ function Index(props) {
                     const name = e.target.files[0].name.replace(/\s/g, "");
                     const url = await fileToBase64(e.target.files[0]);
                     props.dispatch(
-                      updateEvent(event.id, { logo_img: { name, data: url } })
+                      Action.updateEvent(event.id, {
+                        logo_img: { name, data: url },
+                      })
                     );
                   }
                 }}
@@ -158,7 +158,9 @@ function Index(props) {
                   const name = e.target.files[0].name.replace(/\s/g, "");
                   const url = await fileToBase64(e.target.files[0]);
                   props.dispatch(
-                    updateEvent(event.id, { cover_image: { name, data: url } })
+                    Action.updateEvent(event.id, {
+                      cover_image: { name, data: url },
+                    })
                   );
                 }
               }}

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getEvent, updateEvent } from "_actions/event";
+import { getEvent } from "_actions/event";
+import * as Action from "_actions";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import moment from "moment";
@@ -35,7 +36,7 @@ const About = (props) => {
 
   const handleUpdate = async () => {
     console.log(values);
-    await props.dispatch(updateEvent(props.location.state, values));
+    await props.dispatch(Action.updateEvent(props.location.state, values));
     if (props.event.message) {
       setMessage(props.event.message);
       setShow(true);

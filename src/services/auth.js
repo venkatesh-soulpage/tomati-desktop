@@ -16,6 +16,16 @@ class AuthAPI {
     try {
       // fetch data from a url endpoint
       const response = await axios.get(APIRoutes.GET_USER);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+  static async updateUser(data) {
+    try {
+      // fetch data from a url endpoint
+      const response = await axios.post(APIRoutes.UPDATE_USER, data);
       return response.data;
     } catch (error) {
       throw error.response.data;
@@ -124,6 +134,15 @@ class AuthAPI {
       return response.data;
     } catch (error) {
       console.log(error);
+      throw error.response.data;
+    }
+  }
+  static async getLocations() {
+    try {
+      // fetch data from a url endpoint
+      const response = await axios.get(APIRoutes.GET_LOCATIONS);
+      return response.data;
+    } catch (error) {
       throw error.response.data;
     }
   }

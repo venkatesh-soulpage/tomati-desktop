@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 // redux
 import { connect } from "react-redux";
-import { getUser } from "_actions";
+import * as Action from "_actions";
 // react-router
 import { Route, Switch } from "react-router-dom";
 // local components
@@ -21,7 +21,7 @@ import { withRouter } from "react-router-dom";
 function DashboardPage(props) {
   useEffect(() => {
     window.scroll(0, 0);
-    props.dispatch(getUser());
+    props.dispatch(Action.getUserData());
   }, []);
 
   return (
@@ -83,7 +83,7 @@ function DashboardPage(props) {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth, order: state.order };
+  return { auth: state.auth };
 }
 
 export default withRouter(connect(mapStateToProps)(DashboardPage));

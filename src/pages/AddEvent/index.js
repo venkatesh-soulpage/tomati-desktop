@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 // redux
-import { addEvent } from "_actions";
+// import { addEvent } from "_actions";
+// import { getLocationRegister } from "_actions";
+import * as Action from "_actions";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
-import { getLocationRegister } from "_actions";
 // local components
 import EventDetails from "./components/EventDeatails";
 import CreateMenu from "./components/CreateMenu";
@@ -44,7 +45,7 @@ const Index = (props) => {
   const { step } = values;
 
   useEffect(() => {
-    props.dispatch(getLocationRegister());
+    props.dispatch(Action.getLocationRegister());
   }, []);
 
   const fileToBase64 = async (file) =>
@@ -115,7 +116,7 @@ const Index = (props) => {
       const url2 = await fileToBase64(logo_img[0]);
 
       props.dispatch(
-        addEvent({
+        Action.addEvent({
           name,
           phone_number,
           address,
@@ -209,7 +210,11 @@ const Index = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { event: state.event, auth: state.auth, order: state.order };
+  return {
+    event: state.event,
+    auth: state.auth,
+    // , order: state.order
+  };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

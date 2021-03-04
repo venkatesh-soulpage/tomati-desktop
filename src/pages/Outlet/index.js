@@ -20,7 +20,7 @@ const Index = (props) => {
     props.dispatch(userOutlets());
   }, []);
 
-  const { outlet, order } = props;
+  const { outlet, auth } = props;
 
   let filteredOutlets =
     outlet &&
@@ -29,7 +29,7 @@ const Index = (props) => {
     });
 
   const handleAddoutlet = () => {
-    if (!order?.user?.is_subscription_active) {
+    if (!auth?.userData?.is_subscription_active) {
       setMessage(
         <div>
           Your account is inactive, this might be a billing issue. Please
@@ -40,7 +40,7 @@ const Index = (props) => {
         </div>
       );
       setError(true);
-    } else if (order.user.plan[0].outlet_limit === outlet.outlets.length) {
+    } else if (auth.userData.plan[0].outlet_limit === outlet.outlets.length) {
       setMessage(
         "You have 0 outlets left on your plan. To add new outlets upgrade your plan here."
       );
@@ -62,7 +62,7 @@ const Index = (props) => {
         </div>
         <div className=" mr-3">
           <button className="btn btn-dark btn-sm">
-            {order?.user?.plan[0]?.plan}
+            {auth.userData.plan ? auth.userData.plan[0].plan : null}
           </button>
         </div>
         <a className="btn btn-outline-dark btn-sm" data-cb-type="portal">
@@ -140,29 +140,10 @@ const Index = (props) => {
         message={message}
         statusicon={Error}
         button={
-          !order?.user?.is_subscription_active ? null : (
-            <Link
-              to={{
-                pathname: "/order-summary",
-                state: {
-                  values: {
-                    company_name: order?.user?.last_name,
-                    email: order?.user?.email,
-                    full_name: order?.user?.first_name,
-                    location: order?.user?.location_id,
-                    state: order?.user?.state_id,
-                    city: order?.user?.city,
-                    address: order?.user?.street,
-                    plan: order?.user?.plan[0],
-                    plan_id: order?.user?.plan_id,
-                  },
-                },
-              }}
-            >
-              <Button className="btn btn-primary mt-3 rounded-pill px-4 py-2">
-                Upgrade
-              </Button>
-            </Link>
+          !auth?.userData?.is_subscription_active ? null : (
+            <Button className="btn btn-primary mt-3 rounded-pill px-4 py-2">
+              Upgrade
+            </Button>
           )
         }
       />
@@ -171,7 +152,7 @@ const Index = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { outlet: state.outlet, auth: state.auth, order: state.order };
+  return { outlet: state.outlet, auth: state.auth };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

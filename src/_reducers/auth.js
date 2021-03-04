@@ -21,7 +21,10 @@ var initialState = {
   makePaymentSuccess: null,
   makePaymentError: null,
   message: null,
+  error: null,
   allUsers: null,
+  locations: null,
+  locationsError: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -150,6 +153,11 @@ export default function authReducer(state = initialState, action) {
         ...state,
         message: action.payload,
       };
+    case ActionTypes.UPDATE_USER_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
     case ActionTypes.RESET_UPDATE_RESPONSE:
       return {
         ...state,
@@ -161,7 +169,16 @@ export default function authReducer(state = initialState, action) {
         ...state,
         allUsers: action.payload,
       };
-
+    case ActionTypes.GET_LOCATION_SUCCESS:
+      return {
+        ...state,
+        locations: action.payload,
+      };
+    case ActionTypes.GET_LOCATION_ERROR:
+      return {
+        ...state,
+        locationsError: action.payload,
+      };
     default:
       return state;
   }

@@ -15,11 +15,11 @@ import logoutInactive from "assets/img/logoutInactive.svg";
 import { NavLink, useLocation } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
-import { userSignOut } from "_actions";
+import * as Action from "_actions";
 
 const Index = (props) => {
   const currentLocation = useLocation();
-  console.log(currentLocation);
+
   return (
     <div className="sidebar-sticky rounded">
       <ul className="nav flex-column">
@@ -123,7 +123,7 @@ const Index = (props) => {
             disabled
             className=" drawer-link"
             to="/"
-            onClick={() => props.dispatch(userSignOut())}
+            onClick={() => props.dispatch(Action.userSignOut())}
           >
             <img className="mr-3" src={logoutInactive} alt="icon" /> Logout
           </NavLink>
@@ -134,7 +134,10 @@ const Index = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { auth: state.auth, order: state.order };
+  return {
+    auth: state.auth,
+    // , order: state.order
+  };
 }
 
 export default connect(mapStateToProps)(Index);

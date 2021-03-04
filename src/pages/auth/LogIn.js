@@ -1,12 +1,7 @@
 import React from "react";
 // Redux
 import { connect } from "react-redux";
-import {
-  userLogin,
-  handleLoginError,
-  receiveUserData,
-  clearLoginError,
-} from "_actions";
+import * as Action from "_actions";
 // Router
 import { withRouter, Link } from "react-router-dom";
 // Bootstrap Components
@@ -31,8 +26,8 @@ function LogIn(props) {
 
   React.useEffect(function () {
     window.scroll(0, 0);
-    props.dispatch(receiveUserData({}));
-    props.dispatch(handleLoginError(null));
+    props.dispatch(Action.receiveUserData({}));
+    props.dispatch(Action.handleLoginError(null));
   }, []);
 
   // For handling changes in the inputs
@@ -53,18 +48,11 @@ function LogIn(props) {
       email: values.email,
       password: values.password,
     };
-    await props.dispatch(userLogin(postData));
-    if (props.auth.userData.email_verified_at === null) {
-      props.history.push("/verify-email");
-    } else if (props.auth.userData.sms_verified_at === null) {
-      props.history.push("/verify-phone");
-    } else if (sessionStorage.getItem("token")) {
-      props.history.push("/dashboard/outlet");
-    }
+    await props.dispatch(Action.userLogin(postData));
   }
 
   function handleAlertDismiss() {
-    props.dispatch(clearLoginError());
+    props.dispatch(Action.clearLoginError());
   }
   return (
     <div className="min-height mt-5">

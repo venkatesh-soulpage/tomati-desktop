@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getOutlet, updateOutlet } from "_actions/outlet";
+import { getOutlet } from "_actions/outlet";
+import * as Action from "_actions";
 import Success from "assets/img/Success.svg";
 import CustomModal from "components/CustomModal";
 
@@ -31,7 +32,7 @@ const About = (props) => {
 
   const handleUpdate = () => {
     console.log(values);
-    props.dispatch(updateOutlet(props.location.state, values));
+    props.dispatch(Action.updateOutlet(props.location.state, values));
     if (props.outlet.message) {
       setMessage(props.outlet.message);
       setShow(true);

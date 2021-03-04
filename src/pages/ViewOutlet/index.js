@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 //redux
-import {
-  getOutlet,
-  addOutletMenu,
-  updateOutlet,
-  inviteCollaboratorOutlet,
-} from "_actions/outlet";
+import * as Action from "_actions";
 import { connect } from "react-redux";
 import { withRouter, Link, Switch, Route } from "react-router-dom";
 // papaparse
@@ -41,7 +36,7 @@ function Index(props) {
   const { outlet } = props.outlet;
 
   useEffect(() => {
-    props.dispatch(getOutlet(props.location.state));
+    props.dispatch(Action.getOutlet(props.location.state));
   }, []);
 
   const uploadFile = (data) => {
@@ -50,7 +45,7 @@ function Index(props) {
   };
 
   const handleMenu = () => {
-    props.dispatch(addOutletMenu(outlet.id, menu));
+    props.dispatch(Action.addOutletMenu(outlet.id, menu));
     setAddmenu(false);
     setMessage("Menu Updated Succesfully! ");
 
@@ -67,7 +62,7 @@ function Index(props) {
 
   const handleCollaborator = async () => {
     const res = await props.dispatch(
-      inviteCollaboratorOutlet({
+      Action.inviteCollaboratorOutlet({
         ...collaboratorDetail,
         outlet_venue: outlet.id,
       })
@@ -125,7 +120,9 @@ function Index(props) {
                     const name = e.target.files[0].name.replace(/\s/g, "");
                     const url = await fileToBase64(e.target.files[0]);
                     props.dispatch(
-                      updateOutlet(outlet.id, { logo_img: { name, data: url } })
+                      Action.updateOutlet(outlet.id, {
+                        logo_img: { name, data: url },
+                      })
                     );
                   }
                 }}
@@ -153,7 +150,7 @@ function Index(props) {
                   const name = e.target.files[0].name.replace(/\s/g, "");
                   const url = await fileToBase64(e.target.files[0]);
                   props.dispatch(
-                    updateOutlet(outlet.id, {
+                    Action.updateOutlet(outlet.id, {
                       cover_image: { name, data: url },
                     })
                   );

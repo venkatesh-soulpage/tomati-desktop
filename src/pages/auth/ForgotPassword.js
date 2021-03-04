@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 //router
 import { withRouter, Link } from "react-router-dom";
 //auth
-import { forgotPasswordToggle, receiveResetPassword } from "_actions";
+import * as Action from "_actions";
 // local component
 import ForgotPasswordForm from "forms/ForgotPasswordForm";
 import CustomModal from "components/CustomModal";
@@ -15,8 +15,8 @@ function ForgetPassword(props) {
   const [show, setShow] = useState(true);
   const [message, setMessage] = useState("");
   React.useEffect(() => {
-    props.dispatch(forgotPasswordToggle(false));
-    props.dispatch(receiveResetPassword({}));
+    props.dispatch(Action.forgotPasswordToggle(false));
+    props.dispatch(Action.receiveResetPassword({}));
     setMessage("Reset Password email has been sent to your registered  email");
     setShow(true);
   }, []);
