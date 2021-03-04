@@ -99,6 +99,8 @@
 
 .background {
   background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
 }
 
 .form-control:focus {
@@ -177,4 +179,43 @@ input::-webkit-inner-spin-button {
 
 .mt-100 {
   margin-top: 100px;
+}
+
+.mt-120 {
+  margin-top: 120px;
+}
+
+.border1-white {
+  border: 1px solid #fff;
+}
+
+.logo-img1 {
+  padding: 18px;
+  background: #fff;
+  height: 120px;
+  width: 120px;
+}
+
+.blur {
+  padding-top: 48px;
+}
+
+.fs-30 {
+  font-size: 30px;
+}
+
+.fs-12 {
+  font-size: 12px;
+}
+
+.ml-64 {
+  margin-left: 64px;
+}
+
+.b1-white {
+  border: 1px solid #fff;
+}
+
+.br-5 {
+  border-radius: 5px;
 }

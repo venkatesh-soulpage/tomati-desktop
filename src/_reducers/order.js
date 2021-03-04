@@ -12,6 +12,7 @@ var initialState = {
   subscription: null,
   subscriptionError: null,
   updateSubscriptionSuccess: null,
+  error: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -76,6 +77,11 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         updateSubscriptionSuccess: action.payload,
+      };
+    case ActionTypes.UPDATE_USER_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;

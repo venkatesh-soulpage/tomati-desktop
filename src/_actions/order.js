@@ -141,7 +141,7 @@ export function updateUser(data) {
       const responseData = await OrderService.updateUser(data);
       dispatch(updateUserReponse(responseData));
     } catch (errorData) {
-      dispatch(updateUserReponse(errorData));
+      dispatch(updateUserError(errorData));
     }
   };
 }
@@ -155,6 +155,17 @@ export function updateUserReponse(message) {
     payload: message,
   };
 }
+/**
+ * Update User Error
+ * @param {*} data
+ */
+export function updateUserError(message) {
+  return {
+    type: ActionTypes.UPDATE_USER_ERROR,
+    payload: message,
+  };
+}
+
 /* ================================================================== */
 /* Get Subscription ID */
 /* ================================================================== */

@@ -16,59 +16,77 @@ const Index = (props) => {
   return (
     <div className="sidebar-sticky rounded">
       <ul className="nav flex-column">
-        <li disabled className="py-4 border-bottom">
-          <NavLink
-            exact
-            className="drawer-link"
-            activeClassName="drawer-link-active"
-            to="/dashboard"
-            style={{ cursor: "not-allowed", pointerEvents: "none" }}
-          >
-            <img className="mr-3" src={Icondashboard} alt="icon" /> Dashboard
-            <span className="sr-only">(current)</span>
-          </NavLink>
-        </li>
-        <li className=" py-4 border-bottom">
-          <NavLink
-            exact
-            className="drawer-link"
-            activeClassName="drawer-link-active"
-            to="/dashboard/outlet"
-          >
-            <img className="mr-3" src={Iconoutlet} alt="icon" /> Outlet
-          </NavLink>
-        </li>
-        <li className=" py-4 border-bottom">
-          <NavLink
-            exact
-            className=" drawer-link"
-            activeClassName="drawer-link-active"
-            to="/dashboard/event"
-          >
-            <img className="mr-3" src={velvet2} alt="icon" /> Event
-          </NavLink>
-        </li>
-        <li className=" py-4 border-bottom">
-          <NavLink
-            disabled
-            className=" drawer-link"
-            activeClassName="drawer-link-active"
-            to="/dashboard/wallet"
-            style={{ cursor: "not-allowed", pointerEvents: "none" }}
-          >
-            <img className="mr-3" src={Iconwallet} alt="icon" /> Wallet
-          </NavLink>
-        </li>
-        <li className=" py-4 border-bottom">
-          <NavLink
-            disabled
-            className=" drawer-link"
-            activeClassName="drawer-link-active"
-            to="/dashboard/settings"
-          >
-            <img className="mr-3" src={Iconsettings} alt="icon" /> Settings
-          </NavLink>
-        </li>
+        {props?.auth?.user?.is_admin ? (
+          <div>
+            <li className=" py-4 border-bottom">
+              <NavLink
+                disabled
+                className=" drawer-link"
+                activeClassName="drawer-link-active"
+                to="/dashboard/all-users"
+              >
+                <img className="mr-3" src={Iconsettings} alt="icon" /> Users
+              </NavLink>
+            </li>
+          </div>
+        ) : (
+          <div>
+            <li disabled className="py-4 border-bottom">
+              <NavLink
+                exact
+                className="drawer-link"
+                activeClassName="drawer-link-active"
+                to="/dashboard"
+                style={{ cursor: "not-allowed", pointerEvents: "none" }}
+              >
+                <img className="mr-3" src={Icondashboard} alt="icon" />{" "}
+                Dashboard
+                <span className="sr-only">(current)</span>
+              </NavLink>
+            </li>
+            <li className=" py-4 border-bottom">
+              <NavLink
+                exact
+                className="drawer-link"
+                activeClassName="drawer-link-active"
+                to="/dashboard/outlet"
+              >
+                <img className="mr-3" src={Iconoutlet} alt="icon" /> Outlet
+              </NavLink>
+            </li>
+            <li className=" py-4 border-bottom">
+              <NavLink
+                exact
+                className=" drawer-link"
+                activeClassName="drawer-link-active"
+                to="/dashboard/event"
+              >
+                <img className="mr-3" src={velvet2} alt="icon" /> Event
+              </NavLink>
+            </li>
+            <li className=" py-4 border-bottom">
+              <NavLink
+                disabled
+                className=" drawer-link"
+                activeClassName="drawer-link-active"
+                to="/dashboard/wallet"
+                style={{ cursor: "not-allowed", pointerEvents: "none" }}
+              >
+                <img className="mr-3" src={Iconwallet} alt="icon" /> Wallet
+              </NavLink>
+            </li>
+            <li className=" py-4 border-bottom">
+              <NavLink
+                disabled
+                className=" drawer-link"
+                activeClassName="drawer-link-active"
+                to="/dashboard/settings"
+              >
+                <img className="mr-3" src={Iconsettings} alt="icon" /> Settings
+              </NavLink>
+            </li>
+          </div>
+        )}
         <li className=" py-3 border-bottom">
           <NavLink
             disabled

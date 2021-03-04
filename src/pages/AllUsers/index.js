@@ -27,10 +27,9 @@ const Index = (props) => {
                     </h6>
                   </div>
                   <div>
-                    <span>
-                      Status :{" "}
+                    <button className="btn btn-danger">
                       {user.is_subscription_active ? "Active" : "Inactive"}
-                    </span>
+                    </button>
                   </div>
                 </div>
               </div>
