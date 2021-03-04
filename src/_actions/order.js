@@ -137,6 +137,7 @@ export function setUserData(data) {
  */
 export function updateUser(data) {
   return async (dispatch) => {
+    dispatch(resetUpdateResponse());
     try {
       const responseData = await OrderService.updateUser(data);
       dispatch(updateUserReponse(responseData));
@@ -163,6 +164,15 @@ export function updateUserError(message) {
   return {
     type: ActionTypes.UPDATE_USER_ERROR,
     payload: message,
+  };
+}
+/**
+ * Reset Update User Response
+ * @param {*} data
+ */
+export function resetUpdateResponse() {
+  return {
+    type: ActionTypes.RESET_UPDATE_RESPONSE,
   };
 }
 

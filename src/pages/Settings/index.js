@@ -39,8 +39,7 @@ const Index = (props) => {
   const analyze = (e) => {
     const val = e.target.value;
     if (strongRegex.test(e.target.value)) {
-      setError(true);
-      setMessage("Strong Password");
+      setError(false);
     } else {
       setError(true);
       setMessage(
@@ -97,9 +96,11 @@ const Index = (props) => {
     e.preventDefault();
     const { current_password, new_password } = values;
     console.log(values);
-    props.dispatch(updateUser({ current_password, new_password }));
-    setShow(false);
-    setSuccess(true);
+    if (!error) {
+      props.dispatch(updateUser({ current_password, new_password }));
+      setShow(false);
+      setSuccess(true);
+    }
   };
 
   const fileToBase64 = async (file) =>
@@ -325,7 +326,7 @@ const Index = (props) => {
       <CustomModal
         show={success}
         message={props.order.message || props.order.error}
-        statusicon={props.order.message ? Success : Error}
+        statusicon={!props.order.message ? Error : Success}
         button={
           <Button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"

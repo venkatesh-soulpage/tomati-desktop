@@ -366,16 +366,6 @@ export function updateUserReponse(message) {
  * Reset Update User Response
  * @param {*} data
  */
-export function resetUpdateResponse() {
-  return {
-    type: ActionTypes.RESET_UPDATE_RESPONSE,
-  };
-}
-
-/**
- * Reset Update User Response
- * @param {*} data
- */
 export function setAllUser(data) {
   return {
     type: ActionTypes.SET_ALL_USERS,
