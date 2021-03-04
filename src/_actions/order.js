@@ -1,33 +1,33 @@
 import { OrderService } from "services";
 import * as ActionTypes from "constants/ActionTypes";
 
-/**
- * get locations
- * @param {*}
- */
-export function getLocationRegister() {
-  return async (dispatch) => {
-    try {
-      const responseData = await OrderService.getLocations();
-      dispatch(getLocationSuccess(responseData));
-      return responseData;
-    } catch (errorData) {
-      dispatch(getLocationError(errorData));
-    }
-  };
-}
-export function getLocationSuccess(responseData) {
-  return {
-    type: ActionTypes.GET_LOCATION_SUCCESS,
-    payload: responseData,
-  };
-}
-export function getLocationError(error) {
-  return {
-    type: ActionTypes.GET_LOCATION_ERROR,
-    payload: error,
-  };
-}
+// /**
+//  * get locations
+//  * @param {*}
+//  */
+// export function getLocationRegister() {
+//   return async (dispatch) => {
+//     try {
+//       const responseData = await OrderService.getLocations();
+//       dispatch(getLocationSuccess(responseData));
+//       return responseData;
+//     } catch (errorData) {
+//       dispatch(getLocationError(errorData));
+//     }
+//   };
+// }
+// export function getLocationSuccess(responseData) {
+//   return {
+//     type: ActionTypes.GET_LOCATION_SUCCESS,
+//     payload: responseData,
+//   };
+// }
+// export function getLocationError(error) {
+//   return {
+//     type: ActionTypes.GET_LOCATION_ERROR,
+//     payload: error,
+//   };
+// }
 /**
  * get plans
  * @param {*}
@@ -135,36 +135,46 @@ export function setUserData(data) {
  * FOr Updating User Information
  * @param {*} data
  */
-export function updateUser(data) {
-  return async (dispatch) => {
-    try {
-      const responseData = await OrderService.updateUser(data);
-      dispatch(updateUserReponse(responseData));
-    } catch (errorData) {
-      dispatch(updateUserError(errorData));
-    }
-  };
-}
-/**
- * Update User Response
- * @param {*} data
- */
-export function updateUserReponse(message) {
-  return {
-    type: ActionTypes.UPDATE_USER_RESPONSE,
-    payload: message,
-  };
-}
-/**
- * Update User Error
- * @param {*} data
- */
-export function updateUserError(message) {
-  return {
-    type: ActionTypes.UPDATE_USER_ERROR,
-    payload: message,
-  };
-}
+// export function updateUser(data) {
+//   return async (dispatch) => {
+//     dispatch(resetUpdateResponse());
+//     try {
+//       const responseData = await OrderService.updateUser(data);
+//       dispatch(updateUserReponse(responseData));
+//     } catch (errorData) {
+//       dispatch(updateUserError(errorData));
+//     }
+//   };
+// }
+// /**
+//  * Update User Response
+//  * @param {*} data
+//  */
+// export function updateUserReponse(message) {
+//   return {
+//     type: ActionTypes.UPDATE_USER_RESPONSE,
+//     payload: message,
+//   };
+// }
+// /**
+//  * Update User Error
+//  * @param {*} data
+//  */
+// export function updateUserError(message) {
+//   return {
+//     type: ActionTypes.UPDATE_USER_ERROR,
+//     payload: message,
+//   };
+// }
+// /**
+//  * Reset Update User Response
+//  * @param {*} data
+//  */
+// export function resetUpdateResponse() {
+//   return {
+//     type: ActionTypes.RESET_UPDATE_RESPONSE,
+//   };
+// }
 
 /* ================================================================== */
 /* Get Subscription ID */

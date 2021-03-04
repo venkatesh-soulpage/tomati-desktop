@@ -6,9 +6,7 @@ import history from "utils/history";
 import { connect } from "react-redux";
 // Importing redux actions
 import { handleIsUserAuthenticated } from "_actions/auth";
-// Local Components
-import OrderSummary from "pages/OrderSummary";
-import OrderSummaryPurchaseAddons from "pages/OrderSummaryPurchaseAddons";
+
 // import Dashboard from "pages/Dashboard";
 import Page404 from "pages/static/Page404";
 // Auth Components
@@ -65,12 +63,6 @@ function App(props) {
 
         <Route exact path="/reset" component={ResetPassword} />
         <PrivateRoute path="/dashboard" component={DashboardPage} />
-        <Route exact path="/order-summary" component={OrderSummary} />
-        <Route
-          exact
-          path="/order-summary/purchase-addones"
-          component={OrderSummaryPurchaseAddons}
-        />
 
         <Route component={Page404} />
       </Switch>

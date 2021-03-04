@@ -1,13 +1,7 @@
 import React from "react";
 // Redux
 import { connect } from "react-redux";
-import {
-  handleRegisterError,
-  verify,
-  resetMessage,
-  collaboratorSignup,
-  handleEmailSuccess,
-} from "_actions";
+import * as Action from "_actions";
 // Router imports
 import { withRouter, useLocation, Link } from "react-router-dom";
 // Bootstrap Imports
@@ -52,7 +46,7 @@ function Register(props) {
   const handleSignUpData = async (event) => {
     event.preventDefault();
     console.log(values);
-    const res = await props.dispatch(collaboratorSignup(values));
+    const res = await props.dispatch(Action.collaboratorSignup(values));
     if (res) {
       setShow(true);
     }
@@ -62,15 +56,15 @@ function Register(props) {
 
   const handleEmailCheck = (email) => {
     if (new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(email)) {
-      props.dispatch(resetMessage());
-      props.dispatch(verify(email));
+      props.dispatch(Action.resetMessage());
+      props.dispatch(Action.verify(email));
     } else {
-      props.dispatch(handleEmailSuccess("Enter valid Email"));
+      props.dispatch(Action.handleEmailSuccess("Enter valid Email"));
     }
   };
 
   const { step } = values;
-  console.log("props\n", props);
+
   return (
     <div className="bg-light container-fluid py-md-5 p-0 px-md-4 htv-100">
       <div className="container px-md-5 p-0 register-container">
@@ -153,9 +147,5 @@ function Register(props) {
 function mapStateToProps(state) {
   return { auth: state.auth };
 }
-
-const mapDispatchToProps = {
-  handleRegisterError,
-};
 
 export default withRouter(connect(mapStateToProps)(Register));

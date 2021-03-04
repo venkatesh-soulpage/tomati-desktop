@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 // redux
 import { connect } from "react-redux";
-import { addOutlet } from "_actions";
-import { getLocationRegister } from "_actions";
-
+// import { addOutlet } from "_actions";
+// import { getLocationRegister } from "_actions";
+import * as Action from "_actions";
 // react router
 import { withRouter, Link } from "react-router-dom";
 // local components
@@ -36,9 +36,9 @@ const Index = (props) => {
   });
   const { step } = values;
 
-  useEffect(() => {
-    props.dispatch(getLocationRegister());
-  }, []);
+  // useEffect(() => {
+  //   props.dispatch(Action.getLocationRegister());
+  // }, []);
 
   const fileToBase64 = async (file) =>
     new Promise((resolve, reject) => {
@@ -99,7 +99,7 @@ const Index = (props) => {
       const url2 = await fileToBase64(logo_img[0]);
 
       props.dispatch(
-        addOutlet({
+        Action.addOutlet({
           name,
           phone_number,
           address,
@@ -177,7 +177,11 @@ const Index = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { outlet: state.outlet, auth: state.auth, order: state.order };
+  return {
+    outlet: state.outlet,
+    auth: state.auth,
+    // , order: state.order
+  };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

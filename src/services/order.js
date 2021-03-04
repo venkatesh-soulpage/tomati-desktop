@@ -5,15 +5,15 @@ import * as APIRoutes from "constants/APIRoutes";
 // TODO: axios default configurations
 
 class OrderAPI {
-  static async getLocations() {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.get(APIRoutes.GET_LOCATIONS);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
+  // static async getLocations() {
+  //   try {
+  //     // fetch data from a url endpoint
+  //     const response = await axios.get(APIRoutes.GET_LOCATIONS);
+  //     return response.data;
+  //   } catch (error) {
+  //     throw error.response.data;
+  //   }
+  // }
   static async getPlans() {
     try {
       // fetch data from a url endpoint
@@ -43,15 +43,15 @@ class OrderAPI {
       throw error.response.data;
     }
   }
-  static async updateUser(data) {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.post(APIRoutes.UPDATE_USER, data);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
+  // static async updateUser(data) {
+  //   try {
+  //     // fetch data from a url endpoint
+  //     const response = await axios.post(APIRoutes.UPDATE_USER, data);
+  //     return response.data;
+  //   } catch (error) {
+  //     throw error.response.data;
+  //   }
+  // }
   static async getSubscriptionId(data) {
     try {
       // fetch data from a url endpoint

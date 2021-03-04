@@ -1,8 +1,8 @@
 import * as ActionTypes from "constants/ActionTypes";
 
 var initialState = {
-  locations: null,
-  locationsError: null,
+  // locations: null,
+  // locationsError: null,
   user: null,
   plans: null,
   plansError: null,
@@ -17,16 +17,16 @@ var initialState = {
 
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
-    case ActionTypes.GET_LOCATION_SUCCESS:
-      return {
-        ...state,
-        locations: action.payload,
-      };
-    case ActionTypes.GET_LOCATION_ERROR:
-      return {
-        ...state,
-        locationsError: action.payload,
-      };
+    // case ActionTypes.GET_LOCATION_SUCCESS:
+    //   return {
+    //     ...state,
+    //     locations: action.payload,
+    //   };
+    // case ActionTypes.GET_LOCATION_ERROR:
+    //   return {
+    //     ...state,
+    //     locationsError: action.payload,
+    //   };
     case ActionTypes.GET_PLANS_SUCCESS:
       return {
         ...state,

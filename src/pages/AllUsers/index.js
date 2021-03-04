@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 // redux
 import { connect } from "react-redux";
-import { getUsers } from "_actions/auth";
+import * as Action from "_actions";
 import { withRouter } from "react-router-dom";
 
 const Index = (props) => {
   useEffect(() => {
-    props.dispatch(getUsers());
+    props.dispatch(Action.getUsers());
   }, []);
   console.log(props);
   return (

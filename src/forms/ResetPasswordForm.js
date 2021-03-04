@@ -24,7 +24,6 @@ function ResetPasswordForm(props) {
   const [show, setShow] = React.useState(false);
   const [error, setError] = React.useState(false);
   const [error2, setError2] = React.useState(false);
-  const [message, setMessage] = React.useState(null);
   const [message1, setMessage1] = React.useState("");
 
   const [alert, setAlert] = React.useState({
@@ -46,8 +45,10 @@ function ResetPasswordForm(props) {
       password: values.password,
     };
     if (values.password === values.re_password) {
-      props.dispatch(resetPassword(data));
-      setShow(true);
+      if (!error) {
+        props.dispatch(resetPassword(data));
+        setShow(true);
+      }
     } else {
       setError2(true);
     }
@@ -61,8 +62,7 @@ function ResetPasswordForm(props) {
     const val = e.target.value;
 
     if (strongRegex.test(val)) {
-      setError(true);
-      setMessage1("Strong Password");
+      setError(false);
     } else {
       setError(true);
       setMessage1(

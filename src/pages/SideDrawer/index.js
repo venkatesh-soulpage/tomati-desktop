@@ -6,13 +6,20 @@ import Iconwallet from "assets/img/Iconwallet.svg";
 import Iconsettings from "assets/img/IconSetting.svg";
 import Iconpower from "assets/img/IconLogout.svg";
 import velvet2 from "assets/img/velvet2.svg";
+import outletInactive from "assets/img/outletInactive.svg";
+import eventInactive from "assets/img/eventInactive.svg";
+import settingsInactive from "assets/img/settingsInactive.svg";
+import walletInactive from "assets/img/walletInactive.svg";
+import logoutInactive from "assets/img/logoutInactive.svg";
 // Router
 import { NavLink, useLocation } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
-import { userSignOut } from "_actions";
+import * as Action from "_actions";
 
 const Index = (props) => {
+  const currentLocation = useLocation();
+
   return (
     <div className="sidebar-sticky rounded">
       <ul className="nav flex-column">
@@ -39,7 +46,11 @@ const Index = (props) => {
                 to="/dashboard"
                 style={{ cursor: "not-allowed", pointerEvents: "none" }}
               >
-                <img className="mr-3" src={Icondashboard} alt="icon" />{" "}
+                {currentLocation.pathname === "/dashboard" ? (
+                  <img className="mr-3" src={Icondashboard} alt="icon" />
+                ) : (
+                  <img className="mr-3" src={Icondashboard} alt="icon" />
+                )}
                 Dashboard
                 <span className="sr-only">(current)</span>
               </NavLink>
@@ -51,7 +62,12 @@ const Index = (props) => {
                 activeClassName="drawer-link-active"
                 to="/dashboard/outlet"
               >
-                <img className="mr-3" src={Iconoutlet} alt="icon" /> Outlet
+                {currentLocation.pathname === "/dashboard/outlet" ? (
+                  <img className="mr-3" src={Iconoutlet} alt="icon" />
+                ) : (
+                  <img className="mr-3" src={outletInactive} alt="icon" />
+                )}
+                Outlet
               </NavLink>
             </li>
             <li className=" py-4 border-bottom">
@@ -61,7 +77,12 @@ const Index = (props) => {
                 activeClassName="drawer-link-active"
                 to="/dashboard/event"
               >
-                <img className="mr-3" src={velvet2} alt="icon" /> Event
+                {currentLocation.pathname === "/dashboard/event" ? (
+                  <img className="mr-3" src={velvet2} alt="icon" />
+                ) : (
+                  <img className="mr-3" src={eventInactive} alt="icon" />
+                )}
+                Event
               </NavLink>
             </li>
             <li className=" py-4 border-bottom">
@@ -72,7 +93,12 @@ const Index = (props) => {
                 to="/dashboard/wallet"
                 style={{ cursor: "not-allowed", pointerEvents: "none" }}
               >
-                <img className="mr-3" src={Iconwallet} alt="icon" /> Wallet
+                {currentLocation.pathname === "/dashboard/wallet" ? (
+                  <img className="mr-3" src={Iconwallet} alt="icon" />
+                ) : (
+                  <img className="mr-3" src={walletInactive} alt="icon" />
+                )}
+                Wallet
               </NavLink>
             </li>
             <li className=" py-4 border-bottom">
@@ -82,7 +108,12 @@ const Index = (props) => {
                 activeClassName="drawer-link-active"
                 to="/dashboard/settings"
               >
-                <img className="mr-3" src={Iconsettings} alt="icon" /> Settings
+                {currentLocation.pathname === "/dashboard/settings" ? (
+                  <img className="mr-3" src={Iconsettings} alt="icon" />
+                ) : (
+                  <img className="mr-3" src={settingsInactive} alt="icon" />
+                )}
+                Settings
               </NavLink>
             </li>
           </div>
@@ -92,9 +123,9 @@ const Index = (props) => {
             disabled
             className=" drawer-link"
             to="/"
-            onClick={() => props.dispatch(userSignOut())}
+            onClick={() => props.dispatch(Action.userSignOut())}
           >
-            <img className="mr-3" src={Iconpower} alt="icon" /> Logout
+            <img className="mr-3" src={logoutInactive} alt="icon" /> Logout
           </NavLink>
         </li>
       </ul>
@@ -103,7 +134,10 @@ const Index = (props) => {
 };
 
 function mapStateToProps(state) {
-  return { auth: state.auth, order: state.order };
+  return {
+    auth: state.auth,
+    // , order: state.order
+  };
 }
 
 export default connect(mapStateToProps)(Index);
