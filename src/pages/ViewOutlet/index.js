@@ -96,20 +96,20 @@ function Index(props) {
         className="border background"
         style={{
           height: "300px",
-          background: `url('${cover}')`,
+          background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url('${cover}')`,
         }}
       >
-        <div className="row h-100 justify-content-center">
-          <div className="col-md-4 text-center align-self-center">
-            <img
-              className="rounded-circle border1-white"
-              src={outlet?.logo_img}
-              width="120px"
-              height="120px"
-            />
-            <label htmlFor="logoImage">
-              <Camera className="cr-p text-white mt-120 " />
-            </label>
+        <div className="row h-100 justify-content-center blur">
+          <div className="col-md-4 d-flex justify-content-center align-self-center">
+            <div className="rounded-circle logo-img1">
+              <img
+                className=" border1-white img-fluid h-100 "
+                src={outlet?.logo_img}
+              />
+              <label htmlFor="logoImage">
+                <CameraFill className="cr-p text-white ml-64" />
+              </label>
+            </div>
 
             <Form.Group>
               <Form.Control
@@ -117,20 +117,26 @@ function Index(props) {
                 type="file"
                 className="d-none"
                 onChange={async (e) => {
-                  const name = e.target.files[0].name.replace(/\s/g, "");
-                  const url = await fileToBase64(e.target.files[0]);
-                  props.dispatch(
-                    updateOutlet(outlet.id, { logo_img: { name, data: url } })
-                  );
+                  console.log(e.target.files[0]);
+                  if (e.target.files[0].size > 2097152) {
+                    setShow(true);
+                    setMessage("File is too big. Choose Image less than 2MB");
+                  } else {
+                    const name = e.target.files[0].name.replace(/\s/g, "");
+                    const url = await fileToBase64(e.target.files[0]);
+                    props.dispatch(
+                      updateOutlet(outlet.id, { logo_img: { name, data: url } })
+                    );
+                  }
                 }}
               />
             </Form.Group>
           </div>
           <div className="col-md-8 align-self-center">
-            <h4 className="text-white font-weight-bold">
+            <h4 className="text-white font-weight-bold fs-30">
               {outlet && outlet.name}
             </h4>
-            <p className="text-white font-weight-light">
+            <p className="text-white font-weight-light fs-12">
               {outlet && outlet.description}
             </p>
           </div>
@@ -140,16 +146,23 @@ function Index(props) {
               type="file"
               className="d-none"
               onChange={async (e) => {
-                const name = e.target.files[0].name.replace(/\s/g, "");
-                const url = await fileToBase64(e.target.files[0]);
-                props.dispatch(
-                  updateOutlet(outlet.id, { cover_image: { name, data: url } })
-                );
+                if (e.target.files[0].size > 2097152) {
+                  setShow(true);
+                  setMessage("File is too big. Choose Image less than 2MB");
+                } else {
+                  const name = e.target.files[0].name.replace(/\s/g, "");
+                  const url = await fileToBase64(e.target.files[0]);
+                  props.dispatch(
+                    updateOutlet(outlet.id, {
+                      cover_image: { name, data: url },
+                    })
+                  );
+                }
               }}
             />
           </Form.Group>
           <div className="col-11 d-flex justify-content-end align-items-center">
-            <button className="btn btn-outline-dark text-white d-flex align-items-center cr-p">
+            <button className="btn btn-outline-dark text-white d-flex align-items-center cr-p b1-white ">
               <label className="p-0 m-0 cr-p" htmlFor="coverImage">
                 <CameraFill className="fs-24" />
                 <span className="ml-3">Edit Cover Photo</span>

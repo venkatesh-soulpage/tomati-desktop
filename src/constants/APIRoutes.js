@@ -27,9 +27,13 @@ export const GET_USER = "/api/accounts/me";
 export const MAKE_PAYMENT = "/api/payment";
 export const UPDATE_USER = "/api/auth/reset-profile";
 export const GET_SUBSCRIPTION_ID = "/api/payment/retrive-subscription";
-export const INVITE_COLLABORATOR_EVENT = "/api/auth/outlet-event";
-export const INVITE_COLLABORATOR_VENUE = "/api/auth/outlet-venue";
+// export const INVITE_COLLABORATOR_EVENT = "/api/auth/outlet-event";
+// export const INVITE_COLLABORATOR_VENUE = "/api/auth/outlet-venue";
 export const GET_ALL_USERS = "/api/auth/get-all-users";
+export const INVITE_COLLABORATOR_EVENT = (id) =>
+  `/api/auth/outlet-event/${id}/waiter-signup`;
+export const INVITE_COLLABORATOR_VENUE = (id) =>
+  `/api/auth/outlet-venue/${id}/waiter-signup`;
 
 //Outlets
 export const GET_OUTLETS = "/api/outletvenues/user-venues";
