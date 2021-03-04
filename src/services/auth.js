@@ -106,11 +106,10 @@ class AuthAPI {
     try {
       let URL;
       if (data.outlet_event) {
-        URL = `${APIRoutes.INVITE_COLLABORATOR_EVENT}/${data.outlet_event}/waiter-signup`;
+        URL = APIRoutes.INVITE_COLLABORATOR_EVENT(data.outlet_event);
       } else if (data.outlet_venue) {
-        URL = `${APIRoutes.INVITE_COLLABORATOR_VENUE}/${data.outlet_venue}/waiter-signup`;
+        URL = APIRoutes.INVITE_COLLABORATOR_VENUE(data.outlet_venue);
       }
-      // fetch data from a url endpoint
       const response = await axios.post(URL, data);
       return response.data;
     } catch (error) {
