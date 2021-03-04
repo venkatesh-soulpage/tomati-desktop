@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 //router
 import { withRouter } from "react-router-dom";
 //auth
-
 // local component
 import ForgotPasswordForm from "forms/ForgotPasswordForm";
 import ResetPasswordForm from "forms/ResetPasswordForm";
