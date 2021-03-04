@@ -99,6 +99,8 @@
 
 .background {
   background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
 }
 
 .form-control:focus {
@@ -195,7 +197,6 @@ input::-webkit-inner-spin-button {
 }
 
 .blur {
-  backdrop-filter: blur(2px);
   padding-top: 48px;
 }
 
@@ -213,4 +214,8 @@ input::-webkit-inner-spin-button {
 
 .b1-white {
   border: 1px solid #fff;
+}
+
+.br-5 {
+  border-radius: 5px;
 }

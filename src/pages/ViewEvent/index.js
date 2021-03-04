@@ -99,7 +99,7 @@ function Index(props) {
   return (
     <div className="p-3">
       <div
-        className="border background"
+        className="border background br-5"
         style={{
           height: "300px",
           background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url('${cover}')`,
