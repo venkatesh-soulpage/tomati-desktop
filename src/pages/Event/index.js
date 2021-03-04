@@ -4,7 +4,6 @@ import * as Action from "_actions";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 // react bootstrap
-import { Modal, Button } from "react-bootstrap";
 import Error from "assets/img/Error.svg";
 import CustomModal from "components/CustomModal";
 // moment
@@ -22,7 +21,14 @@ const Index = (props) => {
 
   useEffect(() => {
     props.dispatch(Action.userEvents());
-  }, []);
+    if (props.auth.userData) {
+      props.dispatch(
+        Action.getUserLimits({
+          subscription_id: props?.auth?.userData?.transaction_id,
+        })
+      );
+    }
+  }, [props.auth.userData]);
 
   console.log(props);
   const { event, auth } = props;
@@ -52,7 +58,7 @@ const Index = (props) => {
         </div>
       );
       setError(true);
-    } else if (auth.userData.plan[0].event_limit === eventsPerMonth.length) {
+    } else if (auth.limit.event_limit === eventsPerMonth.length) {
       setMessage(
         "You have 0 events left on your plan. To add new events upgrade your plan here."
       );
@@ -189,7 +195,6 @@ function mapStateToProps(state) {
   return {
     event: state.event,
     auth: state.auth,
-    // , order: state.order
   };
 }
 

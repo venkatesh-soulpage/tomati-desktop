@@ -29,7 +29,7 @@ const CreateMenu = ({
           </Dropdown.Toggle>
 
           <Dropdown.Menu className="w-100">
-            {_.map(props.order.locations, function (location) {
+            {_.map(props.auth.locations, function (location) {
               return (
                 <Dropdown.Item
                   key={location.id}

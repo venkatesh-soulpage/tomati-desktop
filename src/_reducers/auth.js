@@ -25,6 +25,7 @@ var initialState = {
   allUsers: null,
   locations: null,
   locationsError: null,
+  limit: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -178,6 +179,11 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         locationsError: action.payload,
+      };
+    case ActionTypes.SET_USER_LIMIT:
+      return {
+        ...state,
+        limit: action.payload,
       };
     default:
       return state;

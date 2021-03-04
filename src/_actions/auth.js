@@ -438,3 +438,29 @@ export function setAllUser(data) {
     payload: data,
   };
 }
+/* ================================================================== */
+/* User Limits */
+/* ================================================================== */
+/**
+ * @param {*} getData
+ */
+export function getUserLimits(data) {
+  return async (dispatch) => {
+    try {
+      const responseData = await AuthService.getUserLimits(data);
+      dispatch(setUserLimits(responseData));
+    } catch (errorData) {
+      console.log(errorData);
+    }
+  };
+}
+/**
+ * Set User Limit
+ * @param {*} data
+ */
+export function setUserLimits(data) {
+  return {
+    type: ActionTypes.SET_USER_LIMIT,
+    payload: data,
+  };
+}

@@ -339,7 +339,6 @@ const Index = (props) => {
 function mapStateToProps(state) {
   return {
     auth: state.auth,
-    // , order: state.order
   };
 }
 export default withRouter(connect(mapStateToProps)(Index));
