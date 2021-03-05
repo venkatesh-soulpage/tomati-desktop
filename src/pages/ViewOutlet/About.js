@@ -42,7 +42,7 @@ const About = (props) => {
     <div className="card bg-white border p-5 mt-2">
       <div className="d-flex align-items-center">
         <div className="mr-auto">
-          <label>Outlet Name</label>
+          <label>Menu Name</label>
           <Form.Group>
             <Form.Control
               type="text"
@@ -62,7 +62,7 @@ const About = (props) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <label>Outlet Description</label>
+          <label>Description</label>
 
           <Form.Group>
             <Form.Control
@@ -75,7 +75,7 @@ const About = (props) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <label>Outlet Address</label>
+          <label>Address</label>
 
           <Form.Group>
             <Form.Control

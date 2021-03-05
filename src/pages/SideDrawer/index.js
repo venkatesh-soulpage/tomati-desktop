@@ -67,10 +67,10 @@ const Index = (props) => {
                 ) : (
                   <img className="mr-3" src={outletInactive} alt="icon" />
                 )}
-                Outlet
+                Menu
               </NavLink>
             </li>
-            <li className=" py-4 border-bottom">
+            {/* <li className=" py-4 border-bottom">
               <NavLink
                 exact
                 className=" drawer-link"
@@ -84,7 +84,7 @@ const Index = (props) => {
                 )}
                 Event
               </NavLink>
-            </li>
+            </li> */}
             <li className=" py-4 border-bottom">
               <NavLink
                 disabled
