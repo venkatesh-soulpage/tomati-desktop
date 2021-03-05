@@ -2,9 +2,9 @@ import axios from "axios";
 import "utils/axios_configuration";
 import * as APIRoutes from "constants/APIRoutes";
 class EventAPI {
-  static async getEvents() {
+  static async getEvents(data) {
     try {
-      const response = await axios.get(APIRoutes.GET_EVENTS);
+      const response = await axios.post(APIRoutes.GET_EVENTS, data);
       return response.data;
     } catch (error) {
       throw error.response.data;

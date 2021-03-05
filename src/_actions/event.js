@@ -14,10 +14,10 @@ import history from "utils/history";
  * On registration Failed  - handling user events error
  * @param {*} getData
  */
-export function userEvents() {
+export function userEvents(data) {
   return async (dispatch) => {
     try {
-      const responseData = await EventService.getEvents();
+      const responseData = await EventService.getEvents(data);
 
       dispatch(receiveUserEvents(responseData));
       return responseData;

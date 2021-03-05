@@ -2,9 +2,9 @@ import axios from "axios";
 import "utils/axios_configuration";
 import * as APIRoutes from "constants/APIRoutes";
 class OutletAPI {
-  static async getOutlets() {
+  static async getOutlets(data) {
     try {
-      const response = await axios.get(APIRoutes.GET_OUTLETS);
+      const response = await axios.post(APIRoutes.GET_OUTLETS, data);
       return response.data;
     } catch (error) {
       throw error.response.data;
