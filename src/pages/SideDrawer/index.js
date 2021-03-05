@@ -70,12 +70,13 @@ const Index = (props) => {
                 Menu
               </NavLink>
             </li>
-            {/* <li className=" py-4 border-bottom">
+            <li disabled className=" py-4 border-bottom">
               <NavLink
                 exact
                 className=" drawer-link"
                 activeClassName="drawer-link-active"
                 to="/dashboard/event"
+                style={{ cursor: "not-allowed", pointerEvents: "none" }}
               >
                 {currentLocation.pathname === "/dashboard/event" ? (
                   <img className="mr-3" src={velvet2} alt="icon" />
@@ -84,7 +85,7 @@ const Index = (props) => {
                 )}
                 Event
               </NavLink>
-            </li> */}
+            </li>
             <li className=" py-4 border-bottom">
               <NavLink
                 disabled
