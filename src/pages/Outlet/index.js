@@ -69,7 +69,7 @@ const Index = (props) => {
         </div>
         <div className=" mr-3">
           <button className="btn btn-dark btn-sm">
-            {auth.userData ? auth.userData.plan[0].plan : null}
+            {auth.limit ? auth.limit.subscription.plan_id : null}
           </button>
         </div>
         <a className="btn btn-outline-dark btn-sm" data-cb-type="portal">
