@@ -11,7 +11,8 @@ import { Bell } from "react-bootstrap-icons";
 // assets
 import Logo from "assets/img/Logo.svg";
 import toggle from "assets/img/toggle.svg";
-import User from "assets/img/User.jpg";
+import User from "assets/img/User.png";
+
 // react-scroll
 import { Link } from "react-scroll";
 
@@ -22,6 +23,7 @@ function Navigation(props) {
   }
 
   const location = useLocation();
+  console.log(props.auth);
 
   return (
     <div
@@ -60,10 +62,10 @@ function Navigation(props) {
                       className="rounded-circle"
                       height="50px"
                       width="50px"
-                      src={props?.auth?.user?.profile_img || User}
+                      src={props?.auth?.userData?.profile_img || User}
                     />
                   </Nav.Link>
-                  <p className="p-0 m-0">{props?.auth?.user?.first_name}</p>
+                  <p className="p-0 m-0">{props?.auth?.userData?.first_name}</p>
                 </Nav>
               ) : null}
             </Nav>

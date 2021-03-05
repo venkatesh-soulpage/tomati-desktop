@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // redux
-import { userOutlets } from "_actions";
+import * as Action from "_actions";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 // react bootstrap
@@ -17,8 +17,15 @@ const Index = (props) => {
   const [search, setSearch] = useState("");
   const [message, setMessage] = useState("");
   useEffect(() => {
-    props.dispatch(userOutlets());
-  }, []);
+    props.dispatch(Action.userOutlets());
+    if (props.auth.userData) {
+      props.dispatch(
+        Action.getUserLimits({
+          subscription_id: props?.auth?.userData?.transaction_id,
+        })
+      );
+    }
+  }, [props.auth.userData]);
 
   const { outlet, auth } = props;
 
@@ -40,7 +47,7 @@ const Index = (props) => {
         </div>
       );
       setError(true);
-    } else if (auth.userData.plan[0].outlet_limit === outlet.outlets.length) {
+    } else if (auth.limit.outlet_limit === outlet.outlets.length) {
       setMessage(
         "You have 0 outlets left on your plan. To add new outlets upgrade your plan here."
       );
@@ -62,7 +69,7 @@ const Index = (props) => {
         </div>
         <div className=" mr-3">
           <button className="btn btn-dark btn-sm">
-            {auth.userData.plan ? auth.userData.plan[0].plan : null}
+            {auth.userData ? auth.userData.plan[0].plan : null}
           </button>
         </div>
         <a className="btn btn-outline-dark btn-sm" data-cb-type="portal">
@@ -141,9 +148,12 @@ const Index = (props) => {
         statusicon={Error}
         button={
           !auth?.userData?.is_subscription_active ? null : (
-            <Button className="btn btn-primary mt-3 rounded-pill px-4 py-2">
+            <a
+              className="btn btn-primary mt-3 rounded-pill px-4 py-2"
+              data-cb-type="portal"
+            >
               Upgrade
-            </Button>
+            </a>
           )
         }
       />

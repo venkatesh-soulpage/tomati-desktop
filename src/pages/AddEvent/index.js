@@ -213,7 +213,6 @@ function mapStateToProps(state) {
   return {
     event: state.event,
     auth: state.auth,
-    // , order: state.order
   };
 }
 

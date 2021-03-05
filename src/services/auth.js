@@ -146,5 +146,14 @@ class AuthAPI {
       throw error.response.data;
     }
   }
+  static async getUserLimits(data) {
+    try {
+      // fetch data from a url endpoint
+      const response = await axios.post(APIRoutes.GET_USER_LIMIT, data);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
 }
 export default AuthAPI;

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 // redux
 import { connect } from "react-redux";
 import * as Action from "_actions";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 const Index = (props) => {
   useEffect(() => {
@@ -17,20 +17,26 @@ const Index = (props) => {
             return (
               <div
                 key={id}
-                className="card px-4 py-4 mt-3"
+                className="card px-4 py-4 mt-3 cr-p"
                 style={{ borderRadius: 6 }}
+                onClick={async () => {
+                  props.history.push({
+                    pathname: "/dashboard/user",
+                    state: { user: user },
+                  });
+                }}
               >
                 <div className="d-flex align-items-center justify-content-between">
                   <div>
                     <h6 className="m-0 font-weight-bold">
-                      {user.first_name + user.last_name}
+                      {user.first_name + " " + user.last_name}
                     </h6>
                   </div>
-                  <div>
+                  {/* <div>
                     <button className="btn btn-danger">
                       {user.is_subscription_active ? "Active" : "Inactive"}
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             );
@@ -41,7 +47,7 @@ const Index = (props) => {
   );
 };
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { auth: state.auth, outlet: state.outlet };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

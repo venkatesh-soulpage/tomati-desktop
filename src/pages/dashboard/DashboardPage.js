@@ -14,6 +14,7 @@ import AddOutlet from "../AddOutlet";
 import AddEvent from "../AddEvent";
 import Settings from "../Settings";
 import AllUsers from "../AllUsers";
+import User from "../User";
 
 // Router
 import { withRouter } from "react-router-dom";
@@ -34,7 +35,7 @@ function DashboardPage(props) {
           </div>
           <div className="dashboard-grid-main">
             <Switch>
-              <Route exact path={props.match.path} component={Outlet} />
+              {/* <Route exact path={props.match.path} component={Outlet} /> */}
 
               <Route
                 exact
@@ -74,6 +75,7 @@ function DashboardPage(props) {
                 path={`${props.match.path}/all-users`}
                 component={AllUsers}
               />
+              <Route exact path={`${props.match.path}/user`} component={User} />
             </Switch>
           </div>
         </div>

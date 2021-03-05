@@ -11,6 +11,7 @@ import eventInactive from "assets/img/eventInactive.svg";
 import settingsInactive from "assets/img/settingsInactive.svg";
 import walletInactive from "assets/img/walletInactive.svg";
 import logoutInactive from "assets/img/logoutInactive.svg";
+import Loading from "components/Loading";
 // Router
 import { NavLink, useLocation } from "react-router-dom";
 // Redux
@@ -19,11 +20,13 @@ import * as Action from "_actions";
 
 const Index = (props) => {
   const currentLocation = useLocation();
-
+  if (!props.auth.userData) {
+    return <Loading />;
+  }
   return (
     <div className="sidebar-sticky rounded">
       <ul className="nav flex-column">
-        {props?.auth?.user?.is_admin ? (
+        {props?.auth?.userData?.is_admin ? (
           <div>
             <li className=" py-4 border-bottom">
               <NavLink
@@ -136,7 +139,6 @@ const Index = (props) => {
 function mapStateToProps(state) {
   return {
     auth: state.auth,
-    // , order: state.order
   };
 }
 

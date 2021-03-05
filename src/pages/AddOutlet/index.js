@@ -36,9 +36,9 @@ const Index = (props) => {
   });
   const { step } = values;
 
-  // useEffect(() => {
-  //   props.dispatch(Action.getLocationRegister());
-  // }, []);
+  useEffect(() => {
+    props.dispatch(Action.getLocationRegister());
+  }, []);
 
   const fileToBase64 = async (file) =>
     new Promise((resolve, reject) => {

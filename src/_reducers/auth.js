@@ -5,16 +5,16 @@ var initialState = {
   isAuthenticated: false,
   isVerificationCodeSent: false,
   isUserVerified: false,
-  userData: {},
-  userDataError: {},
-  loginSuccess: {},
+  userData: null,
+  userDataError: null,
+  loginSuccess: null,
   loginError: null,
   collaboratorSignupSuccess: null,
   registerError: null,
   resetPasswordError: null,
   resetPasswordSuccess: null,
-  forgotPasswordToken: {},
-  forgotPasswordError: {},
+  forgotPasswordToken: null,
+  forgotPasswordError: null,
   forgotPasswordToggle: false,
   verifySuccess: null,
   verifyError: null,
@@ -25,6 +25,7 @@ var initialState = {
   allUsers: null,
   locations: null,
   locationsError: null,
+  limit: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -178,6 +179,11 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         locationsError: action.payload,
+      };
+    case ActionTypes.SET_USER_LIMIT:
+      return {
+        ...state,
+        limit: action.payload,
       };
     default:
       return state;

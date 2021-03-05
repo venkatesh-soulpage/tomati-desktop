@@ -21,7 +21,7 @@ export function collaboratorSignup(postData) {
       });
       return responseData;
     } catch (errorData) {
-      dispatch(handleRegisterError(errorData));
+      dispatch(handleRegisterError({ message: errorData }));
     }
   };
 }
@@ -111,7 +111,7 @@ export function userLogin(postData) {
       dispatch(setAuthTokenInSession("token", responseData.token));
       dispatch(handleIsUserAuthenticated());
       dispatch(getUserData());
-      history.push("/dashboard/outlet");
+      // history.push("/dashboard/outlet");
 
       return responseData.data.user;
     } catch (errorData) {
@@ -435,6 +435,32 @@ export function updateUserError(message) {
 export function setAllUser(data) {
   return {
     type: ActionTypes.SET_ALL_USERS,
+    payload: data,
+  };
+}
+/* ================================================================== */
+/* User Limits */
+/* ================================================================== */
+/**
+ * @param {*} getData
+ */
+export function getUserLimits(data) {
+  return async (dispatch) => {
+    try {
+      const responseData = await AuthService.getUserLimits(data);
+      dispatch(setUserLimits(responseData));
+    } catch (errorData) {
+      console.log(errorData);
+    }
+  };
+}
+/**
+ * Set User Limit
+ * @param {*} data
+ */
+export function setUserLimits(data) {
+  return {
+    type: ActionTypes.SET_USER_LIMIT,
     payload: data,
   };
 }

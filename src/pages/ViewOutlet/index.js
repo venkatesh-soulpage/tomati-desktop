@@ -98,7 +98,7 @@ function Index(props) {
           <div className="col-md-4 d-flex justify-content-center align-self-center">
             <div className="rounded-circle logo-img1">
               <img
-                className=" border1-white img-fluid h-100 "
+                className=" border1-white img-fluid h-100 rounded-circle"
                 src={outlet?.logo_img}
               />
               <label htmlFor="logoImage">

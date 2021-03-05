@@ -67,7 +67,7 @@ function App(props) {
         <Route component={Page404} />
       </Switch>
 
-      {!props.auth.user && <Footer />}
+      {!props.auth.userData && <Footer />}
     </Router>
   );
 }

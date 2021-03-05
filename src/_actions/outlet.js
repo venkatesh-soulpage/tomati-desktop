@@ -14,10 +14,10 @@ import history from "utils/history";
  * On registration Failed  - handling user outlets error
  * @param {*} getData
  */
-export function userOutlets() {
+export function userOutlets(data) {
   return async (dispatch) => {
     try {
-      const responseData = await OutletService.getOutlets();
+      const responseData = await OutletService.getOutlets(data);
 
       dispatch(receiveUserOutlets(responseData));
       return responseData;
