@@ -7,14 +7,14 @@ function PrivateRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
-      render={props =>
+      render={(props) =>
         sessionStorage.getItem("token") ? (
           <Component {...props} />
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
-              state: { from: props.location }
+              pathname: "/",
+              state: { from: props.location },
             }}
           />
         )

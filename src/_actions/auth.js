@@ -111,7 +111,7 @@ export function userLogin(postData) {
       dispatch(setAuthTokenInSession("token", responseData.token));
       dispatch(handleIsUserAuthenticated());
       dispatch(getUserData());
-      history.push("/dashboard/outlet");
+      // history.push("/dashboard/outlet");
 
       return responseData.data.user;
     } catch (errorData) {
