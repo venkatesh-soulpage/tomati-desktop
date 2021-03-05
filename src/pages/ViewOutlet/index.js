@@ -95,7 +95,7 @@ function Index(props) {
         }}
       >
         <div className="row h-100 justify-content-center blur">
-          <div className="col-md-4 d-flex justify-content-center align-self-center">
+          <div className="col-md-3 d-flex justify-content-center align-self-center">
             <div className="rounded-circle logo-img1">
               <img
                 className=" border1-white img-fluid h-100 rounded-circle"
@@ -129,11 +129,11 @@ function Index(props) {
               />
             </Form.Group>
           </div>
-          <div className="col-md-8 align-self-center">
+          <div className="col-md-9 align-self-center">
             <h4 className="text-white font-weight-bold fs-30">
               {outlet && outlet.name}
             </h4>
-            <p className="text-white font-weight-light fs-12">
+            <p className="text-white font-weight-light fs-12 w-50">
               {outlet && outlet.description}
             </p>
           </div>

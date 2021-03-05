@@ -72,6 +72,7 @@ const About = (props) => {
               name="description"
               value={values.description}
               required
+              maxLength="144"
               onChange={handleChange}
             />
           </Form.Group>
