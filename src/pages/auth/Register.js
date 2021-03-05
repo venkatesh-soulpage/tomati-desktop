@@ -36,6 +36,10 @@ function Register(props) {
     outlet_venue: urlParams.get("outlet_venue"),
   });
 
+  const strongRegex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+  );
+
   // For handling changes in the inputs
   const handleChange = (name) => (event) => {
     const value = event.target.value;
@@ -46,9 +50,21 @@ function Register(props) {
   const handleSignUpData = async (event) => {
     event.preventDefault();
     console.log(values);
-    const res = await props.dispatch(Action.collaboratorSignup(values));
-    if (res) {
-      setShow(true);
+    if (!strongRegex.test(values.password)) {
+      props.dispatch(
+        Action.handleRegisterError({ message: "Use valid password" })
+      );
+    } else {
+      if (values.password === values.confirm) {
+        const res = await props.dispatch(Action.collaboratorSignup(values));
+        if (res) {
+          setShow(true);
+        }
+      } else {
+        props.dispatch(
+          Action.handleRegisterError({ message: "Password does not match" })
+        );
+      }
     }
   };
 
@@ -82,7 +98,7 @@ function Register(props) {
                 variant="danger"
                 error={props.auth.registerError}
                 onDismiss={() => {
-                  props.handleRegisterError(null);
+                  Action.handleRegisterError(null);
                 }}
               ></AlertMessage>
               <PersonalDetails

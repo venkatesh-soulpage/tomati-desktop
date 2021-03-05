@@ -21,7 +21,7 @@ export function collaboratorSignup(postData) {
       });
       return responseData;
     } catch (errorData) {
-      dispatch(handleRegisterError(errorData));
+      dispatch(handleRegisterError({ message: errorData }));
     }
   };
 }

@@ -12,7 +12,7 @@ import CustomModal from "components/CustomModal";
 //image assets
 import Success from "assets/img/Success.svg";
 import Error from "assets/img/Error.svg";
-import User from "assets/img/User.jpg";
+import User from "assets/img/User.png";
 
 const Index = (props) => {
   const [show, setShow] = useState(false);
