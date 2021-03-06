@@ -124,7 +124,7 @@ const Index = (props) => {
               {step === 1 ? (
                 <>
                   <div className="text-start form-legend mb-3 fs-24 fw-600">
-                    Outlet Details
+                    Menu Details
                   </div>
                   <Form
                     id="register-form"

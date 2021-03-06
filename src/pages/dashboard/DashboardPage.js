@@ -42,29 +42,29 @@ function DashboardPage(props) {
                 path={`${props.match.path}/outlet`}
                 component={Outlet}
               />
-              <Route
+              {/* <Route
                 exact
                 path={`${props.match.path}/event`}
                 component={Event}
-              />
+              /> */}
               <Route
                 path={`${props.match.path}/viewoutlet`}
                 component={ViewOutlet}
               />
-              <Route
+              {/* <Route
                 path={`${props.match.path}/viewevent`}
                 component={ViewEvent}
-              />
+              /> */}
               <Route
                 exact
                 path={`${props.match.path}/addoutlet`}
                 component={AddOutlet}
               />
-              <Route
+              {/* <Route
                 exact
                 path={`${props.match.path}/addevent`}
                 component={AddEvent}
-              />
+              /> */}
               <Route
                 exact
                 path={`${props.match.path}/settings`}

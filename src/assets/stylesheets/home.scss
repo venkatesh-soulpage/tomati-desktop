@@ -190,7 +190,6 @@ input::-webkit-inner-spin-button {
 }
 
 .logo-img1 {
-  padding: 18px;
   background: #fff;
   height: 120px;
   width: 120px;
@@ -209,7 +208,9 @@ input::-webkit-inner-spin-button {
 }
 
 .ml-64 {
-  margin-left: 64px;
+  margin-left: 90px;
+  font-size: 24px;
+  margin-top: -58px;
 }
 
 .b1-white {
@@ -218,4 +219,8 @@ input::-webkit-inner-spin-button {
 
 .br-5 {
   border-radius: 5px;
+}
+
+.w-56 {
+  width: 56%;
 }

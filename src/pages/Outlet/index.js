@@ -49,7 +49,7 @@ const Index = (props) => {
       setError(true);
     } else if (auth.limit.outlet_limit === outlet.outlets.length) {
       setMessage(
-        "You have 0 outlets left on your plan. To add new outlets upgrade your plan here."
+        "You have 0 menus left on your plan. To add new menu upgrade your plan here."
       );
       setError(true);
     } else {
@@ -62,10 +62,10 @@ const Index = (props) => {
       {/* stats */}
       <div className="d-flex align-items-center">
         <div className="">
-          <h3 className="font-weight-bold text-dark m-0">Outlet</h3>
+          <h3 className="font-weight-bold text-dark m-0">Menu</h3>
         </div>
         <div className="ml-auto  mr-3">
-          <h4 className="lead m-0">Total Outlets: {outlet?.outlets.length}</h4>
+          <h4 className="lead m-0">Total Menus: {outlet?.outlets.length}</h4>
         </div>
         <div className=" mr-3">
           <button className="btn btn-dark btn-sm">
@@ -86,7 +86,7 @@ const Index = (props) => {
               className="btn btn-danger rounded-pill"
               onClick={handleAddoutlet}
             >
-              + Add New Outlet
+              + Add New Menu
             </button>
           </div>
           <div className="ml-auto mr-3">
