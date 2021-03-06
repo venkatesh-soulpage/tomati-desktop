@@ -16,16 +16,16 @@ const QR = ({ outlet }) => {
         </div>
         <div className="mr-auto">
           <h4 className="text-dark">{outlet && outlet.name}</h4>
-          <p className="text-dark font-weight-light">
+          <p className="text-dark font-weight-light w-56">
             {outlet && outlet.description}
           </p>
           <button
-            className="btn btn-danger mr-3 rounded-pill"
+            className="btn btn-danger mr-3 mt-1 rounded-pill"
             onClick={() => downloadQr(outlet.name)}
           >
             Download QR Code
           </button>
-          <button className="btn btn-outline-dark rounded-pill ">
+          <button className="btn btn-outline-dark mt-1 px-4 rounded-pill ">
             Order Menu tags
           </button>
         </div>

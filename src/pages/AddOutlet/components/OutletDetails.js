@@ -16,7 +16,7 @@ const OutletDetails = ({
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Outlet Name"
+          placeholder="Menu Name"
           value={values.name}
           onChange={handleChange("name")}
           required
@@ -45,7 +45,7 @@ const OutletDetails = ({
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="Outlet Bio"
+          placeholder="Menu Bio"
           value={values.description}
           onChange={handleChange("description")}
           as="textarea"
@@ -72,7 +72,7 @@ const OutletDetails = ({
               {values.cover_image ? (
                 <span>{values.cover_image[0].name}</span>
               ) : (
-                <span>Upload Outlet Cover photo</span>
+                <span>Upload Menu Cover photo</span>
               )}
             </h6>
           </label>
