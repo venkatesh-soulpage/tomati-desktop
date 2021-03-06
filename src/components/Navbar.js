@@ -23,7 +23,6 @@ function Navigation(props) {
   }
 
   const location = useLocation();
-  console.log(props.auth);
 
   return (
     <div

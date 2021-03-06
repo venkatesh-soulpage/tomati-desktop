@@ -114,3 +114,14 @@ export function addOutletResponse(message, res) {
     payload: { message, res },
   };
 }
+
+export function toggleMenu(data) {
+  return async (dispatch) => {
+    try {
+      const responseData = await OutletService.toggleMenu(data);
+
+      dispatch(userOutlets());
+      return responseData;
+    } catch (errorData) {}
+  };
+}

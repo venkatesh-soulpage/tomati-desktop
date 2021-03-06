@@ -38,6 +38,7 @@ export const GET_USER_LIMIT = "/api/payment/retrive-subscription";
 
 //Outlets
 export const GET_OUTLETS = "/api/outletvenues/user-venues";
+export const TOGGLE_MENU = "/api/outletvenues";
 export const GET_OUTLET = "/api/outletvenues";
 export const ADD_OUTLET_REQUEST = "/api/outletvenues";
 export const ADD_OUTLET_COLLABORATOR = "/api/auth/invite-collaborator";

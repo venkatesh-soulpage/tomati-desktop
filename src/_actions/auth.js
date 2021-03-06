@@ -46,7 +46,6 @@ export function getLocationRegister() {
   return async (dispatch) => {
     try {
       const responseData = await AuthService.getLocations();
-      console.log(responseData);
       dispatch(getLocationSuccess(responseData));
       return responseData;
     } catch (errorData) {
@@ -334,7 +333,6 @@ export function getUsers() {
   return function (dispatch) {
     return AuthService.getUsers()
       .then((responseData) => {
-        console.log(responseData);
         dispatch(setAllUser(responseData));
         return responseData;
       })
