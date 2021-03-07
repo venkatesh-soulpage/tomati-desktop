@@ -61,8 +61,8 @@ const Index = (props) => {
     }
   };
 
-  const toggleMenu = (data) => {
-    props.dispatch(Action.toggleMenu(data));
+  const toggleMenu = (data, status) => {
+    props.dispatch(Action.toggleMenu(data, status));
   };
   console.log(props);
 
@@ -134,16 +134,15 @@ const Index = (props) => {
 
                 <div className="ml-auto mr-3">
                   <div className="d-flex flex-row align-items-center">
-                    {!outlet.is_venue_active ? (
-                      <div
-                        className="btn btn-danger w-100 ml-auto mr-3"
-                        onClick={() => {
-                          // toggleMenu(outlet.id);
-                        }}
-                      >
-                        Inactive
-                      </div>
-                    ) : null}
+                    <div
+                      className="btn btn-danger w-100 ml-auto mr-3"
+                      onClick={() => {
+                        toggleMenu(outlet.id, !outlet.is_venue_active);
+                      }}
+                    >
+                      {outlet.is_venue_active ? "Deactivate" : "Activate"}
+                    </div>
+
                     <button
                       onClick={() => {
                         props.history.push({

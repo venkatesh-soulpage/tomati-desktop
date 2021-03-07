@@ -115,10 +115,10 @@ export function addOutletResponse(message, res) {
   };
 }
 
-export function toggleMenu(data) {
+export function toggleMenu(data, status) {
   return async (dispatch) => {
     try {
-      const responseData = await OutletService.toggleMenu(data);
+      const responseData = await OutletService.toggleMenu(data, status);
 
       dispatch(userOutlets());
       return responseData;

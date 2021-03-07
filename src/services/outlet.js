@@ -62,11 +62,12 @@ class OutletAPI {
       throw error.response.data;
     }
   }
-  static async toggleMenu(id) {
+  static async toggleMenu(id, status) {
     try {
       console.log(id, "ID");
       const response = await axios.put(
-        `${APIRoutes.TOGGLE_MENU}/${id}/inactivate_menu`
+        `${APIRoutes.TOGGLE_MENU}/${id}/inactivate_menu`,
+        { status }
       );
       console.log(response, "response");
       return response.data;
