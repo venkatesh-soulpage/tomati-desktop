@@ -26,6 +26,7 @@ const Index = (props) => {
       );
     }
   }, [props.auth.userData]);
+  useEffect(() => {}, [props.outlet.outlets]);
 
   const { outlet, auth } = props;
 
@@ -36,6 +37,9 @@ const Index = (props) => {
     });
 
   const handleAddoutlet = () => {
+    const menuAddon = auth.limit.subscription.addons.find(
+      (addon) => addon.id === "free-menu"
+    );
     if (!auth?.userData?.is_subscription_active) {
       setMessage(
         <div>
@@ -47,7 +51,7 @@ const Index = (props) => {
         </div>
       );
       setError(true);
-    } else if (auth.limit.outlet_limit === outlet.outlets.length) {
+    } else if (menuAddon.quantity <= outlet.outlets.length) {
       setMessage(
         "You have 0 menus left on your plan. To add new menu upgrade your plan here."
       );
@@ -56,6 +60,11 @@ const Index = (props) => {
       props.history.push("/dashboard/addoutlet");
     }
   };
+
+  const toggleMenu = (data, status) => {
+    props.dispatch(Action.toggleMenu(data, status));
+  };
+  console.log(props);
 
   return (
     <div className="pt-0 pr-3 pl-4 pb-3">
@@ -69,7 +78,7 @@ const Index = (props) => {
         </div>
         <div className=" mr-3">
           <button className="btn btn-dark btn-sm">
-            {auth.userData ? auth.userData.plan[0].plan : null}
+            {auth.limit ? auth.limit.subscription.plan_id : null}
           </button>
         </div>
         <a className="btn btn-outline-dark btn-sm" data-cb-type="portal">
@@ -122,20 +131,31 @@ const Index = (props) => {
                     {outlet.address}
                   </p>
                 </div>
+
                 <div className="ml-auto mr-3">
-                  {/* <Link to="/dashboard/viewoutlet"> */}
-                  <button
-                    onClick={() => {
-                      props.history.push({
-                        pathname: "/dashboard/viewoutlet",
-                        state: outlet.id,
-                      });
-                    }}
-                    className="btn btn-danger w-100"
-                  >
-                    View
-                  </button>
-                  {/* </Link> */}
+                  <div className="d-flex flex-row align-items-center">
+                    <div
+                      className="btn btn-danger w-100 ml-auto mr-3"
+                      onClick={() => {
+                        toggleMenu(outlet.id, !outlet.is_venue_active);
+                      }}
+                    >
+                      {outlet.is_venue_active ? "Deactivate" : "Activate"}
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        props.history.push({
+                          pathname: "/dashboard/viewoutlet",
+                          state: outlet.id,
+                        });
+                      }}
+                      className="btn btn-danger w-100"
+                      disabled={!outlet.is_venue_active}
+                    >
+                      View
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

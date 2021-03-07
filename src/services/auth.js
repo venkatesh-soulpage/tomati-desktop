@@ -16,7 +16,6 @@ class AuthAPI {
     try {
       // fetch data from a url endpoint
       const response = await axios.get(APIRoutes.GET_USER);
-      console.log(response);
       return response.data;
     } catch (error) {
       throw error.response.data;
@@ -133,7 +132,6 @@ class AuthAPI {
       const response = await axios.get(APIRoutes.GET_ALL_USERS);
       return response.data;
     } catch (error) {
-      console.log(error);
       throw error.response.data;
     }
   }

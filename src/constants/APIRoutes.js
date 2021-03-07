@@ -34,10 +34,11 @@ export const INVITE_COLLABORATOR_EVENT = (id) =>
   `/api/auth/outlet-event/${id}/waiter-signup`;
 export const INVITE_COLLABORATOR_VENUE = (id) =>
   `/api/auth/outlet-venue/${id}/waiter-signup`;
-export const GET_USER_LIMIT = "/api/payment/get-subscription-details";
+export const GET_USER_LIMIT = "/api/payment/retrive-subscription";
 
 //Outlets
 export const GET_OUTLETS = "/api/outletvenues/user-venues";
+export const TOGGLE_MENU = "/api/outletvenues";
 export const GET_OUTLET = "/api/outletvenues";
 export const ADD_OUTLET_REQUEST = "/api/outletvenues";
 export const ADD_OUTLET_COLLABORATOR = "/api/auth/invite-collaborator";
