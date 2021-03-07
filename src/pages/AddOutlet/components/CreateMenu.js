@@ -4,6 +4,7 @@ import Papa from "papaparse";
 import _ from "lodash";
 import Back from "assets/img/Back.svg";
 import UploadCover from "assets/img/UploadCover.svg";
+import Loading from "components/Loading";
 
 const CreateMenu = ({
   values,
@@ -93,7 +94,7 @@ const CreateMenu = ({
           className="btn btn-primary mt-3 rounded-pill px-4"
           onClick={handleCreateOutlet}
         >
-          Continue
+          {props.outlet.isFetching ? <Loading /> : "Continue"}
         </Button>
       </Form.Group>
     </div>

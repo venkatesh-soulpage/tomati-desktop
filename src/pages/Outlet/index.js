@@ -8,9 +8,9 @@ import { Modal, Button } from "react-bootstrap";
 // bootstrap icons
 import { GeoAltFill } from "react-bootstrap-icons";
 //local component
-import Success from "assets/img/Success.svg";
 import Error from "assets/img/Error.svg";
 import CustomModal from "components/CustomModal";
+import Loading from "components/Loading";
 
 const Index = (props) => {
   const [error, setError] = useState(false);
@@ -115,7 +115,14 @@ const Index = (props) => {
           </div>
         </div>
       </div>
-      {filteredOutlets &&
+      {props.outlet.isFetching ? (
+        <div className="d-flex justify-content-center align-items-center mt-5">
+          <div className="spinner-border text-secondary" role="status">
+            <span className="sr-only ">Loading...</span>
+          </div>
+        </div>
+      ) : (
+        filteredOutlets &&
         filteredOutlets.map((outlet, id) => {
           return (
             <div
@@ -160,7 +167,8 @@ const Index = (props) => {
               </div>
             </div>
           );
-        })}
+        })
+      )}
       <CustomModal
         show={error}
         onHide={() => setError(false)}

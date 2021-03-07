@@ -13,6 +13,7 @@ import CustomModal from "components/CustomModal";
 import Success from "assets/img/Success.svg";
 import Error from "assets/img/Error.svg";
 import User from "assets/img/User.png";
+import Loading from "components/Loading";
 
 const Index = (props) => {
   const [show, setShow] = useState(false);
@@ -177,7 +178,7 @@ const Index = (props) => {
                   className="btn w-25 btn-danger mt-5"
                   onClick={handleUpdateUser}
                 >
-                  Save
+                  {props.auth.isFetching ? <Loading /> : "Save"}
                 </button>
               </Form.Group>{" "}
             </Form>
@@ -307,7 +308,7 @@ const Index = (props) => {
                 className="btn btn-danger mt-4"
                 onClick={handlePasswordUpate}
               >
-                Save
+                {props.auth.isFetching ? <Loading /> : "Save"}
               </button>
             </div>
           ) : (
