@@ -63,10 +63,13 @@ const Index = (props) => {
     if (res) {
       setMessage(
         <div>
-          Please upgrade your plan or contact{" "}
-          <a target="_blank" href="mailto:support@tomati.app">
-            support@tomati.app
-          </a>
+          {/* Please upgrade your plan or contact{" "} */}
+          {res}{" "}
+          {res === "Please upgrade your plan or contact" ? (
+            <a target="_blank" href="mailto:support@tomati.app">
+              support@tomati.app
+            </a>
+          ) : null}
         </div>
       );
       setError(true);
