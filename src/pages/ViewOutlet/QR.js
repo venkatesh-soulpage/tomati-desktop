@@ -7,6 +7,7 @@ const QR = ({ outlet }) => {
       <div className="d-flex align-items-top">
         <div className="mr-5">
           <img
+            alt="menu-qr"
             className="border"
             src={outlet && outlet.menu_link}
             height="204px"

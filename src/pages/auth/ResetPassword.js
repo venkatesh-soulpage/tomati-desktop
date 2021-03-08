@@ -5,17 +5,10 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 //auth
 // local component
-import ForgotPasswordForm from "forms/ForgotPasswordForm";
 import ResetPasswordForm from "forms/ResetPasswordForm";
 import { useLocation } from "react-router-dom";
 
 function ResetPassword(props) {
-  const [values, setValues] = React.useState({
-    email: "",
-    token: "",
-    password: "",
-  });
-
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };

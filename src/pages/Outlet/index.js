@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react";
 // redux
 import * as Action from "_actions";
 import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
-// react bootstrap
-import { Modal, Button } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 // bootstrap icons
 import { GeoAltFill } from "react-bootstrap-icons";
 //local component
 import Error from "assets/img/Error.svg";
 import CustomModal from "components/CustomModal";
-import Loading from "components/Loading";
 
 const Index = (props) => {
   const [error, setError] = useState(false);
@@ -61,10 +58,20 @@ const Index = (props) => {
     }
   };
 
-  const toggleMenu = (data, status) => {
-    props.dispatch(Action.toggleMenu(data, status));
+  const toggleMenu = async (data, status) => {
+    const res = await props.dispatch(Action.toggleMenu(data, status));
+    if (res) {
+      setMessage(
+        <div>
+          Please upgrade your plan or contact{" "}
+          <a target="_blank" href="mailto:support@tomati.app">
+            support@tomati.app
+          </a>
+        </div>
+      );
+      setError(true);
+    }
   };
-  console.log(props);
 
   return (
     <div className="pt-0 pr-3 pl-4 pb-3">
@@ -174,16 +181,6 @@ const Index = (props) => {
         onHide={() => setError(false)}
         message={message}
         statusicon={Error}
-        button={
-          !auth?.userData?.is_subscription_active ? null : (
-            <a
-              className="btn btn-primary mt-3 rounded-pill px-4 py-2"
-              data-cb-type="portal"
-            >
-              Upgrade
-            </a>
-          )
-        }
       />
     </div>
   );

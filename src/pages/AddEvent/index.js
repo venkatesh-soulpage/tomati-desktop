@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 // import { getLocationRegister } from "_actions";
 import * as Action from "_actions";
 import { connect } from "react-redux";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 // local components
 import EventDetails from "./components/EventDeatails";
 import CreateMenu from "./components/CreateMenu";

@@ -1,10 +1,6 @@
 import React from "react";
 // react bootstrap
-import Success from "assets/img/Success.svg";
-// react bootstrap
-import { Modal, Button } from "react-bootstrap";
-//react router
-import { Link } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 
 function CustomModal(props) {
   return (

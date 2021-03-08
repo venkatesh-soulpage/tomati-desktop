@@ -18,10 +18,6 @@ function Register(props) {
   const [show, setShow] = React.useState(false);
   const urlParams = new URLSearchParams(window.location.search);
 
-  const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-  };
-
   const [values, setValues] = React.useState({
     email: urlParams.get("email"),
     first_name: null,

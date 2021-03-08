@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
 // redux
 import { connect } from "react-redux";
-// import { addOutlet } from "_actions";
-// import { getLocationRegister } from "_actions";
 import * as Action from "_actions";
 // react router
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 // local components
 import OutletDetails from "./components/OutletDetails";
 import CreateMenu from "./components/CreateMenu";
 import CustomModal from "components/CustomModal";
 // react bootstrap
-import { Card, Form, Button } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
 // lodash
 import _ from "lodash";
 //image assets
