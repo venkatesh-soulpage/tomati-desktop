@@ -1,7 +1,6 @@
 // import OutletService from "services/outlet";
 import axios from "axios";
 import * as ActionTypes from "constants/ActionTypes";
-import * as APIRoutes from "constants/APIRoutes";
 import OutletService from "services/outlet";
 import history from "utils/history";
 
@@ -17,47 +16,60 @@ import history from "utils/history";
 export function userOutlets(data) {
   return async (dispatch) => {
     try {
+      dispatch(fetchRequest());
       const responseData = await OutletService.getOutlets(data);
 
       dispatch(receiveUserOutlets(responseData));
       return responseData;
-    } catch (errorData) {}
+    } catch (errorData) {
+      dispatch(fetchError());
+    }
   };
 }
 
 export function addOutlet(data) {
   return async (dispatch) => {
     try {
+      dispatch(fetchRequest());
       const responseData = await OutletService.addOutletRequest(data);
 
       dispatch(addOutletMenu(responseData.Venue.id, data.menu));
       history.push("/dashboard/outlet");
-    } catch (errorData) {}
+    } catch (errorData) {
+      dispatch(fetchError());
+    }
   };
 }
 
 export function addOutletMenu(id, menu) {
   return async (dispatch) => {
     try {
+      dispatch(fetchRequest());
       const responseData = await OutletService.addOutletMenu(id, menu);
       dispatch(addMenuResponse(responseData));
       return responseData;
-    } catch (errorData) {}
+    } catch (errorData) {
+      dispatch(fetchError());
+    }
   };
 }
 
 export function getOutlet(id) {
   return async (dispatch) => {
     try {
+      dispatch(fetchRequest());
       const responseData = await OutletService.getOutlet(id);
       dispatch(getSingleOutlet(responseData));
-    } catch (errorData) {}
+    } catch (errorData) {
+      dispatch(fetchError());
+    }
   };
 }
 
 export function updateOutlet(id, data) {
   return async (dispatch) => {
     try {
+      dispatch(fetchRequest());
       const responseData = await OutletService.updateOutlet(id, data);
       dispatch({
         type: ActionTypes.UPDATE_OUTLET_RESPONSE,
@@ -65,13 +77,16 @@ export function updateOutlet(id, data) {
       });
       dispatch(getOutlet(id));
       return responseData;
-    } catch (errorData) {}
+    } catch (errorData) {
+      dispatch(fetchError());
+    }
   };
 }
 
 export function inviteCollaboratorOutlet(data) {
   return async (dispatch) => {
     try {
+      dispatch(fetchRequest());
       const responseData = await OutletService.addOutletCollaborator(data);
       dispatch(inviteCollaboratorResponse(responseData));
       return responseData;
@@ -114,14 +129,27 @@ export function addOutletResponse(message, res) {
     payload: { message, res },
   };
 }
+export function fetchRequest() {
+  return {
+    type: ActionTypes.FETCH_REQUEST,
+  };
+}
+export function fetchError() {
+  return {
+    type: ActionTypes.FETCH_ERROR,
+  };
+}
 
 export function toggleMenu(data, status) {
   return async (dispatch) => {
     try {
+      dispatch(fetchRequest());
       const responseData = await OutletService.toggleMenu(data, status);
 
       dispatch(userOutlets());
       return responseData;
-    } catch (errorData) {}
+    } catch (errorData) {
+      dispatch(fetchError());
+    }
   };
 }
