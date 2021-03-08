@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 // redux
 import { connect } from "react-redux";
 import * as Action from "_actions";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const Index = (props) => {
   useEffect(() => {

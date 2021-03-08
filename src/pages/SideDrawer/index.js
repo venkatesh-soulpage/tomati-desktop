@@ -4,7 +4,6 @@ import Icondashboard from "assets/img/Icondashboard.svg";
 import Iconoutlet from "assets/img/Iconoutlet.svg";
 import Iconwallet from "assets/img/Iconwallet.svg";
 import Iconsettings from "assets/img/IconSetting.svg";
-import Iconpower from "assets/img/IconLogout.svg";
 import velvet2 from "assets/img/velvet2.svg";
 import outletInactive from "assets/img/outletInactive.svg";
 import eventInactive from "assets/img/eventInactive.svg";

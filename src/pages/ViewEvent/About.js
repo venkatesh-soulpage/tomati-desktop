@@ -4,9 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getEvent } from "_actions/event";
 import * as Action from "_actions";
-import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
-import moment from "moment";
 import CustomModal from "components/CustomModal";
 import Success from "assets/img/Success.svg";
 

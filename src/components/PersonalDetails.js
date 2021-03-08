@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import PasswordTextField from "components/PasswordTextField";
-import { Link } from "react-router-dom";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import moment from "moment";
@@ -22,7 +21,6 @@ function PersonalDetails({
   );
 
   const analyze = (e) => {
-    const val = e.target.value;
     if (strongRegex.test(e.target.value)) {
       setError(true);
       setMessage("Strong Password");

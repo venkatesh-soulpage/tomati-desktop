@@ -10,7 +10,7 @@ import _ from "lodash";
 // react bootstrap
 import { Modal, Button, Card, Form } from "react-bootstrap";
 // bootstrap icons
-import { Camera, CameraFill } from "react-bootstrap-icons";
+import { CameraFill } from "react-bootstrap-icons";
 // image assets
 import IconQR from "assets/img/IconQR.svg";
 import UploadCover from "assets/img/UploadCover.svg";
@@ -98,6 +98,7 @@ function Index(props) {
           <div className="col-md-3 d-flex justify-content-center align-self-center">
             <div className="rounded-circle logo-img1">
               <img
+                alt="logo"
                 className=" border1-white img-fluid h-100 rounded-circle"
                 src={outlet?.logo_img}
               />
@@ -180,7 +181,7 @@ function Index(props) {
                 >
                   <h6 className="m-0">
                     {" "}
-                    <img src={IconQR} className="mr-2" />
+                    <img src={IconQR} alt="qr" className="mr-2" />
                     QR Code
                   </h6>
                 </Link>

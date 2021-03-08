@@ -1,5 +1,4 @@
 // import OutletService from "services/outlet";
-import axios from "axios";
 import * as ActionTypes from "constants/ActionTypes";
 import OutletService from "services/outlet";
 import history from "utils/history";
@@ -144,12 +143,12 @@ export function toggleMenu(data, status) {
   return async (dispatch) => {
     try {
       dispatch(fetchRequest());
-      const responseData = await OutletService.toggleMenu(data, status);
+      await OutletService.toggleMenu(data, status);
 
       dispatch(userOutlets());
-      return responseData;
     } catch (errorData) {
       dispatch(fetchError());
+      return errorData;
     }
   };
 }

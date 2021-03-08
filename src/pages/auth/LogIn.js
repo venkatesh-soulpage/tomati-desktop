@@ -7,9 +7,7 @@ import { withRouter, Link } from "react-router-dom";
 // Bootstrap Components
 import { InputGroup, Form, Button, Card } from "react-bootstrap";
 // custom components
-import PasswordTextField from "components/PasswordTextField";
 import AlertMessage from "components/AlertMessage";
-import Footer from "components/Footer";
 
 // icons
 import Lock from "assets/img/Lock.svg";
@@ -87,7 +85,12 @@ function LogIn(props) {
                     <InputGroup>
                       <InputGroup.Prepend>
                         <InputGroup.Text className="bg-white border-right-0">
-                          <img src={Mail} className="img-fluid" width="12" />
+                          <img
+                            src={Mail}
+                            alt="mail"
+                            className="img-fluid"
+                            width="12"
+                          />
                         </InputGroup.Text>
                       </InputGroup.Prepend>
                       <Form.Control
@@ -106,7 +109,12 @@ function LogIn(props) {
                     <InputGroup>
                       <InputGroup.Prepend>
                         <InputGroup.Text className="bg-white border-right-0">
-                          <img src={Lock} className="img-fluid" width="12" />
+                          <img
+                            src={Lock}
+                            alt="lock"
+                            className="img-fluid"
+                            width="12"
+                          />
                         </InputGroup.Text>
                       </InputGroup.Prepend>
                       <Form.Control

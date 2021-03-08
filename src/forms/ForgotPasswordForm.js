@@ -50,7 +50,12 @@ function ForgotPasswordForm(props) {
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text className="bg-white border-right-0">
-                    <img src={Mail} className="img-fluid" width="12" />
+                    <img
+                      alt="mail"
+                      src={Mail}
+                      className="img-fluid"
+                      width="12"
+                    />
                   </InputGroup.Text>
                 </InputGroup.Prepend>
                 <Form.Control

@@ -26,11 +26,6 @@ function ResetPasswordForm(props) {
   const [error2, setError2] = React.useState(false);
   const [message1, setMessage1] = React.useState("");
 
-  const [alert, setAlert] = React.useState({
-    variant: "warning",
-    message: "Password does not match",
-    switch: false,
-  });
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
   };
