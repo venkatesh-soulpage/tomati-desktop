@@ -7,7 +7,7 @@ import { Form, InputGroup, Button } from "react-bootstrap";
 // bootstrap icons
 import { CameraFill } from "react-bootstrap-icons";
 // Router
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import CustomModal from "components/CustomModal";
 //image assets
 import Success from "assets/img/Success.svg";
@@ -38,7 +38,6 @@ const Index = (props) => {
   );
 
   const analyze = (e) => {
-    const val = e.target.value;
     if (strongRegex.test(e.target.value)) {
       setError(false);
     } else {
@@ -159,7 +158,6 @@ const Index = (props) => {
                   type="text"
                   value={values.last_name}
                   onChange={handleChange("last_name")}
-                  value={values.last_name}
                   required
                   className="mb-3 h-100"
                 />
@@ -191,6 +189,7 @@ const Index = (props) => {
               <img
                 className="rounded-circle"
                 src={temp}
+                alt="pic"
                 height="50px"
                 width="50px"
               />

@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as Action from "_actions";
 // Router imports
-import { withRouter, useLocation, Link } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 // Bootstrap Imports
 import Form from "react-bootstrap/Form";
 import { Card, ProgressBar, Modal } from "react-bootstrap";

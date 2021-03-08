@@ -13,7 +13,7 @@ const Index = (props) => {
     props.dispatch(Action.userEvents({ account_id: user.id }));
   }, []);
   console.log(props, "USER");
-  const { outlet, event } = props;
+  const { outlet } = props;
 
   return (
     <div className="p-4">

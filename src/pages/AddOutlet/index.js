@@ -10,8 +10,7 @@ import CreateMenu from "./components/CreateMenu";
 import CustomModal from "components/CustomModal";
 // react bootstrap
 import { Card, Form } from "react-bootstrap";
-// lodash
-import _ from "lodash";
+
 //image assets
 import Error from "assets/img/Error.svg";
 
@@ -110,8 +109,6 @@ const Index = (props) => {
       );
     }
   };
-
-  const [modalShow, setModalShow] = React.useState(false);
 
   return (
     <div className="container-fluid">

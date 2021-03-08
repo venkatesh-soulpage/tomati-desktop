@@ -1,6 +1,6 @@
 import React from "react";
 // Router
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 // Redux
 import { connect } from "react-redux";
 // Bootstrap imports
@@ -27,7 +27,7 @@ function Navigation(props) {
             />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0">
-            <img src={toggle} />
+            <img src={toggle} alt="toggle" />
           </Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto" style={{ fontSize: "smaller" }}>
@@ -46,6 +46,7 @@ function Navigation(props) {
                     activeClassName="navlink-selected"
                   >
                     <img
+                      alt="profile pic"
                       className="rounded-circle"
                       height="50px"
                       width="50px"
