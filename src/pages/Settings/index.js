@@ -41,12 +41,19 @@ const Index = (props) => {
     if (strongRegex.test(e.target.value)) {
       setError(false);
     } else {
+      console.log(values.current_password);
+      console.log(e.target.value);
+      if (values.current_password === e.target.value) {
+        setMessage("Old password and New password cannot be same");
+      } else {
+        setMessage(
+          "Your password must be at-least 8 characters with uppercase, lowercase, number & special characters"
+        );
+      }
       setError(true);
-      setMessage(
-        "Your password must be at-least 8 characters with uppercase, lowercase, number & special characters"
-      );
     }
   };
+  console.log(values);
 
   useEffect(() => {
     if (props.auth.userData) {
@@ -95,6 +102,7 @@ const Index = (props) => {
   const handlePasswordUpate = (e) => {
     e.preventDefault();
     const { current_password, new_password } = values;
+
     console.log(values);
     if (!error) {
       props.dispatch(Action.updateUser({ current_password, new_password }));
@@ -323,7 +331,9 @@ const Index = (props) => {
       <CustomModal
         show={success}
         message={props.auth.message || props.auth.error}
-        statusicon={!props.auth.message ? Error : Success}
+        statusicon={
+          props.auth.message ? Success : props.auth.error ? Error : null
+        }
         button={
           <Button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"

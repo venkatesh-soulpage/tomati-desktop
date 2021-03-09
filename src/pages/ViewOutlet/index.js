@@ -15,6 +15,7 @@ import { CameraFill } from "react-bootstrap-icons";
 import IconQR from "assets/img/IconQR.svg";
 import UploadCover from "assets/img/UploadCover.svg";
 import Success from "assets/img/Success.svg";
+import CameraIcon from "assets/img/CameraIcon.svg";
 // local component
 import QR from "./QR";
 import About from "./About";
@@ -90,20 +91,20 @@ function Index(props) {
       <div
         className="border background"
         style={{
-          height: "300px",
+          height: "244px",
           background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url('${cover}')`,
         }}
       >
         <div className="row h-100 justify-content-center blur">
           <div className="col-md-3 d-flex justify-content-center align-self-center">
-            <div className="rounded-circle logo-img1">
+            <div className="rounded-circle logo-img1 ml-4">
               <img
                 alt="logo"
                 className=" border1-white img-fluid h-100 rounded-circle"
                 src={outlet?.logo_img}
               />
               <label htmlFor="logoImage">
-                <CameraFill className="cr-p text-white ml-64" />
+                <img src={CameraIcon} className="cr-p text-white ml-64" />
               </label>
             </div>
 
@@ -134,7 +135,7 @@ function Index(props) {
             <h4 className="text-white font-weight-bold fs-30">
               {outlet && outlet.name}
             </h4>
-            <p className="text-white font-weight-light fs-12 w-50">
+            <p className="text-white font-weight-light fs-12 w-58">
               {outlet && outlet.description}
             </p>
           </div>
@@ -159,11 +160,11 @@ function Index(props) {
               }}
             />
           </Form.Group>
-          <div className="col-11 d-flex justify-content-end align-items-center">
-            <button className="btn btn-outline-dark text-white d-flex align-items-center cr-p b1-white ">
+          <div className="col-11 d-flex pr-0 justify-content-end align-items-center">
+            <button className="btn p-2 btn-outline-dark text-white d-flex align-items-center cr-p b1-white mb-3 ">
               <label className="p-0 m-0 cr-p" htmlFor="coverImage">
-                <CameraFill className="fs-24" />
-                <span className="ml-3">Edit Cover Photo</span>
+                <CameraFill className="fs-20" />
+                <span className="ml-2">Edit Cover Photo</span>
               </label>
             </button>
           </div>
