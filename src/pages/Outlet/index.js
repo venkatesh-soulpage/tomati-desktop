@@ -12,6 +12,7 @@ import CustomModal from "components/CustomModal";
 const Index = (props) => {
   const [error, setError] = useState(false);
   const [search, setSearch] = useState("");
+  const [icon, setIcon] = useState(null);
   const [message, setMessage] = useState("");
   useEffect(() => {
     props.dispatch(Action.userOutlets());
@@ -61,11 +62,14 @@ const Index = (props) => {
   const toggleMenu = async (data, status) => {
     const res = await props.dispatch(Action.toggleMenu(data, status));
     if (res) {
+      if (!res.status) {
+        console.log(res.status);
+        setIcon(Error);
+      }
       setMessage(
         <div>
-          {/* Please upgrade your plan or contact{" "} */}
-          {res}{" "}
-          {res === "Please upgrade your plan or contact" ? (
+          {res.message}{" "}
+          {res.message === "Please upgrade your plan or contact" ? (
             <a target="_blank" href="mailto:support@tomati.app">
               support@tomati.app
             </a>
@@ -74,6 +78,27 @@ const Index = (props) => {
       );
       setError(true);
     }
+  };
+
+  const handleCheckout = () => {
+    const chargebeeInstance = window.Chargebee.init({
+      site: "tomati-test",
+    });
+    let cbPortal = chargebeeInstance.createChargebeePortal();
+    cbPortal.open({
+      async close() {
+        //close callbacks
+        const prevPlan = props.auth.limit.subscription.plan_id;
+        const res = await props.dispatch(
+          Action.getUserLimits({
+            subscription_id: props?.auth?.userData?.transaction_id,
+          })
+        );
+        if (res.subscription.plan_id !== prevPlan) {
+          props.history.go();
+        }
+      },
+    });
   };
 
   return (
@@ -91,9 +116,9 @@ const Index = (props) => {
             {auth.limit ? auth.limit.subscription.plan_id : null}
           </button>
         </div>
-        <a className="btn btn-outline-dark btn-sm" data-cb-type="portal">
+        <div className="btn btn-outline-dark btn-sm" onClick={handleCheckout}>
           Change
-        </a>
+        </div>
       </div>
       <div
         className="card px-4 py-3 shadow-sm mt-3"
@@ -108,10 +133,8 @@ const Index = (props) => {
               + Add New Menu
             </button>
           </div>
-          <div className="ml-auto mr-3">
-            <a className="btn btn-dark rounded-pill" data-cb-type="portal">
-              + Addons
-            </a>
+          <div className="ml-auto mr-3" onClick={handleCheckout}>
+            <a className="btn btn-dark rounded-pill">+ Addons</a>
           </div>
 
           <div>
@@ -181,9 +204,12 @@ const Index = (props) => {
       )}
       <CustomModal
         show={error}
-        onHide={() => setError(false)}
+        onHide={() => {
+          setError(false);
+          setIcon(null);
+        }}
         message={message}
-        statusicon={Error}
+        statusicon={icon}
       />
     </div>
   );

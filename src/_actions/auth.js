@@ -447,6 +447,7 @@ export function getUserLimits(data) {
     try {
       const responseData = await AuthService.getUserLimits(data);
       dispatch(setUserLimits(responseData));
+      return responseData;
     } catch (errorData) {
       console.log(errorData);
     }
