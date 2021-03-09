@@ -7,12 +7,12 @@ function AuthRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
-      render={props =>
+      render={(props) =>
         sessionStorage.getItem("token") ? (
           <Redirect
             to={{
-              pathname: "/dashboard",
-              state: { from: props.location }
+              pathname: "/dashboard/outlet",
+              state: { from: props.location },
             }}
           />
         ) : (
