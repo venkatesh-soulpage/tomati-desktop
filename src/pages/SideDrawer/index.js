@@ -104,20 +104,7 @@ const Index = (props) => {
                 Wallet
               </NavLink>
             </li>
-            {/* <li className=" py-4 border-bottom">
-              <NavLink
-                className=" drawer-link"
-                activeClassName="drawer-link-active"
-                to="/dashboard/collaborators"
-              >
-                {currentLocation.pathname === "/dashboard/collaborators" ? (
-                  <img className="mr-3" src={Iconwallet} alt="icon" />
-                ) : (
-                  <img className="mr-3" src={walletInactive} alt="icon" />
-                )}
-                Collaborators
-              </NavLink>
-            </li> */}
+
             <li className=" py-4 border-bottom">
               <NavLink
                 disabled

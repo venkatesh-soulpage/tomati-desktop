@@ -14,7 +14,6 @@ import AddOutlet from "../AddOutlet";
 import AddEvent from "../AddEvent";
 import Settings from "../Settings";
 import AllUsers from "../AllUsers";
-import Collaborators from "../Collaborators";
 import User from "../User";
 
 // Router
@@ -77,11 +76,6 @@ function DashboardPage(props) {
                 component={AllUsers}
               />
               <Route exact path={`${props.match.path}/user`} component={User} />
-              <Route
-                exact
-                path={`${props.match.path}/collaborators`}
-                component={Collaborators}
-              />
             </Switch>
           </div>
         </div>

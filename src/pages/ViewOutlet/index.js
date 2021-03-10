@@ -20,6 +20,7 @@ import CameraIcon from "assets/img/CameraIcon.svg";
 import QR from "./QR";
 import About from "./About";
 import CustomModal from "components/CustomModal";
+import Collaborators from "pages/Collaborators";
 
 function Index(props) {
   const [addMenu, setAddmenu] = useState(false);
@@ -198,6 +199,17 @@ function Index(props) {
                   <h6 className="m-0">About</h6>
                 </Link>
               </div>
+              <div className="mr-auto ml-3">
+                <Link
+                  to={{
+                    pathname: "/dashboard/viewoutlet/collaborators",
+                    state: props.location.state,
+                  }}
+                  style={{ color: "#2C3A56", textDecoration: "none" }}
+                >
+                  <h6 className="m-0">Collaborators</h6>
+                </Link>
+              </div>
               <div className="ml-auto mr-2">
                 <button
                   className="btn btn-outline-dark rounded-pill"
@@ -227,6 +239,11 @@ function Index(props) {
               exact
               path={`${props.match.path}/about`}
               component={() => <About outlet={outlet} />}
+            />
+            <Route
+              exact
+              path={`${props.match.path}/collaborators`}
+              component={() => <Collaborators />}
             />
           </Switch>
         </div>
