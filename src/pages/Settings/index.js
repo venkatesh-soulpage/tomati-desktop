@@ -345,6 +345,7 @@ const Index = (props) => {
       </div>
       <CustomModal
         show={success}
+        onHide={() => setSuccess(false)}
         message={props.auth.message || props.auth.error}
         statusicon={
           props.auth.message ? Success : props.auth.error ? Error : <Loading />

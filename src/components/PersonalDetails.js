@@ -49,6 +49,7 @@ function PersonalDetails({
             handleEmailCheck(values.email);
           }}
           required
+          disabled
         />
       </Form.Group>
       <Form.Group>

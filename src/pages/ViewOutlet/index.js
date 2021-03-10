@@ -15,6 +15,7 @@ import { CameraFill } from "react-bootstrap-icons";
 import IconQR from "assets/img/IconQR.svg";
 import UploadCover from "assets/img/UploadCover.svg";
 import Success from "assets/img/Success.svg";
+import Error from "assets/img/Error.svg";
 import CameraIcon from "assets/img/CameraIcon.svg";
 // local component
 import QR from "./QR";
@@ -69,10 +70,9 @@ function Index(props) {
         outlet_venue: outlet.id,
       })
     );
+    console.log(res);
     if (res) {
       setCollaborator(false);
-      setMessage("Invite Successfull!");
-
       setShow(true);
     }
   };
@@ -243,16 +243,18 @@ function Index(props) {
             <Route
               exact
               path={`${props.match.path}/collaborators`}
-              component={() => <Collaborators />}
+              component={() => <Collaborators outlet={outlet} />}
             />
           </Switch>
         </div>
       </div>
       <CustomModal
         show={show}
-        message={message}
+        message={props.outlet.message || props.outlet.error}
         onHide={() => setShow(false)}
-        statusicon={Success}
+        statusicon={
+          props.outlet.message ? Success : props.outlet.error ? Error : null
+        }
         button={
           <Button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"

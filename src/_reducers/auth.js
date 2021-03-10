@@ -26,7 +26,6 @@ var initialState = {
   locations: null,
   locationsError: null,
   limit: null,
-  collaborators: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -189,11 +188,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         limit: action.payload,
       };
-    case ActionTypes.SET_COLLABORATORS:
-      return {
-        ...state,
-        collaborators: action.payload,
-      };
+
     default:
       return state;
   }
