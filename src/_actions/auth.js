@@ -392,8 +392,10 @@ export function updateUser(data) {
     try {
       const responseData = await AuthService.updateUser(data);
       dispatch(updateUserReponse(responseData));
+      return responseData;
     } catch (errorData) {
       dispatch(updateUserError(errorData));
+      return errorData;
     }
   };
 }
@@ -447,6 +449,7 @@ export function getUserLimits(data) {
     try {
       const responseData = await AuthService.getUserLimits(data);
       dispatch(setUserLimits(responseData));
+      return responseData;
     } catch (errorData) {
       console.log(errorData);
     }
@@ -459,6 +462,33 @@ export function getUserLimits(data) {
 export function setUserLimits(data) {
   return {
     type: ActionTypes.SET_USER_LIMIT,
+    payload: data,
+  };
+}
+/* ================================================================== */
+/* Collaborators */
+/* ================================================================== */
+/**
+ * @param {*} getData
+ */
+export function getCollaborators(data) {
+  return async (dispatch) => {
+    try {
+      const responseData = await AuthService.getCollaborators();
+      dispatch(setCollaborators(responseData));
+      return responseData;
+    } catch (errorData) {
+      // console.log(errorData);
+    }
+  };
+}
+/**
+ * Set User Limit
+ * @param {*} data
+ */
+export function setCollaborators(data) {
+  return {
+    type: ActionTypes.SET_COLLABORATORS,
     payload: data,
   };
 }

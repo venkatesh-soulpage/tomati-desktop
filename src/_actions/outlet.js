@@ -143,9 +143,9 @@ export function toggleMenu(data, status) {
   return async (dispatch) => {
     try {
       dispatch(fetchRequest());
-      await OutletService.toggleMenu(data, status);
-
+      const res = await OutletService.toggleMenu(data, status);
       dispatch(userOutlets());
+      return res;
     } catch (errorData) {
       dispatch(fetchError());
       return errorData;

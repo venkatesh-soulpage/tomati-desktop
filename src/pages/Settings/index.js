@@ -41,10 +41,16 @@ const Index = (props) => {
     if (strongRegex.test(e.target.value)) {
       setError(false);
     } else {
+      console.log(values.current_password);
+      console.log(e.target.value);
+      if (values.current_password === e.target.value) {
+        setMessage("Old password and New password cannot be same");
+      } else {
+        setMessage(
+          "Your password must be at-least 8 characters with uppercase, lowercase, number & special characters"
+        );
+      }
       setError(true);
-      setMessage(
-        "Your password must be at-least 8 characters with uppercase, lowercase, number & special characters"
-      );
     }
   };
 
@@ -69,7 +75,7 @@ const Index = (props) => {
     const { first_name, last_name, profile_image } = values;
     if (profile_image) {
       const url = await fileToBase64(profile_image);
-      props.dispatch(
+      const res = await props.dispatch(
         Action.updateUser({
           first_name,
           last_name,
@@ -79,27 +85,43 @@ const Index = (props) => {
           },
         })
       );
-      setSuccess(true);
+      if (res) {
+        setSuccess(true);
+      }
     } else {
-      props.dispatch(
+      const res = await props.dispatch(
         Action.updateUser({
           first_name,
           last_name,
         })
       );
-      setSuccess(true);
+      if (res) {
+        setSuccess(true);
+      }
     }
     props.dispatch(Action.getUserData());
   };
 
-  const handlePasswordUpate = (e) => {
+  const handlePasswordUpate = async (e) => {
     e.preventDefault();
     const { current_password, new_password } = values;
+
     console.log(values);
     if (!error) {
-      props.dispatch(Action.updateUser({ current_password, new_password }));
-      setShow(false);
-      setSuccess(true);
+      if (current_password === new_password) {
+        props.dispatch(
+          Action.updateUserError("Old password and New password cannot be same")
+        );
+        setSuccess(true);
+      } else {
+        const res = await props.dispatch(
+          Action.updateUser({ current_password, new_password })
+        );
+        if (res) {
+          setShow(false);
+          setSuccess(true);
+        }
+      }
     }
   };
 
@@ -306,6 +328,7 @@ const Index = (props) => {
               <button
                 className="btn btn-danger mt-4"
                 onClick={handlePasswordUpate}
+                disabled={!values.current_password || !values.new_password}
               >
                 {props.auth.isFetching ? <Loading /> : "Save"}
               </button>
@@ -323,7 +346,9 @@ const Index = (props) => {
       <CustomModal
         show={success}
         message={props.auth.message || props.auth.error}
-        statusicon={!props.auth.message ? Error : Success}
+        statusicon={
+          props.auth.message ? Success : props.auth.error ? Error : <Loading />
+        }
         button={
           <Button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"

@@ -153,5 +153,14 @@ class AuthAPI {
       throw error.response.data;
     }
   }
+  static async getCollaborators() {
+    try {
+      // fetch data from a url endpoint
+      const response = await axios.get(APIRoutes.GET_COLLABORATORS);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
 }
 export default AuthAPI;
