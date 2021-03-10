@@ -392,8 +392,10 @@ export function updateUser(data) {
     try {
       const responseData = await AuthService.updateUser(data);
       dispatch(updateUserReponse(responseData));
+      return responseData;
     } catch (errorData) {
       dispatch(updateUserError(errorData));
+      return errorData;
     }
   };
 }

@@ -53,7 +53,6 @@ const Index = (props) => {
       setError(true);
     }
   };
-  console.log(values);
 
   useEffect(() => {
     if (props.auth.userData) {
@@ -76,7 +75,7 @@ const Index = (props) => {
     const { first_name, last_name, profile_image } = values;
     if (profile_image) {
       const url = await fileToBase64(profile_image);
-      props.dispatch(
+      const res = await props.dispatch(
         Action.updateUser({
           first_name,
           last_name,
@@ -86,28 +85,43 @@ const Index = (props) => {
           },
         })
       );
-      setSuccess(true);
+      if (res) {
+        setSuccess(true);
+      }
     } else {
-      props.dispatch(
+      const res = await props.dispatch(
         Action.updateUser({
           first_name,
           last_name,
         })
       );
-      setSuccess(true);
+      if (res) {
+        setSuccess(true);
+      }
     }
     props.dispatch(Action.getUserData());
   };
 
-  const handlePasswordUpate = (e) => {
+  const handlePasswordUpate = async (e) => {
     e.preventDefault();
     const { current_password, new_password } = values;
 
     console.log(values);
     if (!error) {
-      props.dispatch(Action.updateUser({ current_password, new_password }));
-      setShow(false);
-      setSuccess(true);
+      if (current_password === new_password) {
+        props.dispatch(
+          Action.updateUserError("Old password and New password cannot be same")
+        );
+        setSuccess(true);
+      } else {
+        const res = await props.dispatch(
+          Action.updateUser({ current_password, new_password })
+        );
+        if (res) {
+          setShow(false);
+          setSuccess(true);
+        }
+      }
     }
   };
 
@@ -314,6 +328,7 @@ const Index = (props) => {
               <button
                 className="btn btn-danger mt-4"
                 onClick={handlePasswordUpate}
+                disabled={!values.current_password || !values.new_password}
               >
                 {props.auth.isFetching ? <Loading /> : "Save"}
               </button>
@@ -332,7 +347,7 @@ const Index = (props) => {
         show={success}
         message={props.auth.message || props.auth.error}
         statusicon={
-          props.auth.message ? Success : props.auth.error ? Error : null
+          props.auth.message ? Success : props.auth.error ? Error : <Loading />
         }
         button={
           <Button
