@@ -8,7 +8,16 @@ function AuthRoute({ component: Component, ...rest }) {
     <Route
       {...rest}
       render={(props) =>
-        sessionStorage.getItem("token") ? (
+        sessionStorage.getItem("token") &&
+        sessionStorage.getItem("isAdmin") === "true" ? (
+          <Redirect
+            to={{
+              pathname: "/dashboard/all-users",
+              state: { from: props.location },
+            }}
+          />
+        ) : sessionStorage.getItem("token") &&
+          sessionStorage.getItem("isAdmin") === "false" ? (
           <Redirect
             to={{
               pathname: "/dashboard/outlet",

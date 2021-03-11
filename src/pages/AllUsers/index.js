@@ -3,12 +3,13 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import * as Action from "_actions";
 import { withRouter } from "react-router-dom";
+import Loading from "components/Loading";
 
 const Index = (props) => {
   useEffect(() => {
     props.dispatch(Action.getUsers());
   }, []);
-  console.log(props);
+
   return (
     <div className="p-4">
       {props.auth.allUsers ? (
@@ -42,7 +43,9 @@ const Index = (props) => {
             );
           })}
         </div>
-      ) : null}
+      ) : (
+        <Loading textSecondary={true} />
+      )}
     </div>
   );
 };

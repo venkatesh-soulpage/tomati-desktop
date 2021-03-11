@@ -8,7 +8,7 @@ import { GeoAltFill } from "react-bootstrap-icons";
 //local component
 import Error from "assets/img/Error.svg";
 import CustomModal from "components/CustomModal";
-import { CHARGEBEE_URL } from "constants/APIRoutes";
+import Loading from "components/Loading";
 
 const Index = (props) => {
   const [error, setError] = useState(false);
@@ -34,25 +34,27 @@ const Index = (props) => {
     outlet.outlets.filter((outlet) => {
       return outlet.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
+  const menuQuantity =
+    auth?.limit &&
+    auth?.limit?.subscription &&
+    auth?.limit?.subscription?.addons.find((addon) => addon.id === "free-menu")
+      .quantity;
 
   const handleAddoutlet = () => {
-    const menuAddon = auth.limit.subscription.addons.find(
-      (addon) => addon.id === "free-menu"
-    );
     if (!auth?.userData?.is_subscription_active) {
       setMessage(
         <div>
           Your account is inactive, this might be a billing issue. Please
           contact{" "}
-          <a target="_blank" href="mailto:support@tomati.app">
-            support@tomati.app
+          <a target="_blank" href="mailto:hello@tomati.app">
+            hello@tomati.app
           </a>
         </div>
       );
       setError(true);
-    } else if (menuAddon.quantity <= outlet.outlets.length) {
+    } else if (menuQuantity <= outlet.outlets.length) {
       setMessage(
-        "You have 0 menus left on your plan. To add new menu upgrade your plan here."
+        "You have exceeded your plan limit. Change plan to add new menu."
       );
       setError(true);
     } else {
@@ -64,15 +66,14 @@ const Index = (props) => {
     const res = await props.dispatch(Action.toggleMenu(data, status));
     if (res) {
       if (!res.status) {
-        console.log(res.status);
         setIcon(Error);
       }
       setMessage(
         <div>
           {res.message}{" "}
           {res.message === "Please upgrade your plan or contact" ? (
-            <a target="_blank" href="mailto:support@tomati.app">
-              support@tomati.app
+            <a target="_blank" href="mailto:hello@tomati.app">
+              hello@tomati.app
             </a>
           ) : null}
         </div>
@@ -149,10 +150,8 @@ const Index = (props) => {
         </div>
       </div>
       {props.outlet.isFetching ? (
-        <div className="d-flex justify-content-center align-items-center mt-5">
-          <div className="spinner-border text-secondary" role="status">
-            <span className="sr-only ">Loading...</span>
-          </div>
+        <div className="mt-5">
+          <Loading textSecondary={true} />
         </div>
       ) : (
         filteredOutlets &&
@@ -174,14 +173,16 @@ const Index = (props) => {
 
                 <div className="ml-auto mr-3">
                   <div className="d-flex flex-row align-items-center">
-                    <div
-                      className="btn btn-danger w-100 ml-auto mr-3"
-                      onClick={() => {
-                        toggleMenu(outlet.id, !outlet.is_venue_active);
-                      }}
-                    >
-                      {outlet.is_venue_active ? "Deactivate" : "Activate"}
-                    </div>
+                    {menuQuantity === outlet?.outlets?.length ? (
+                      <div
+                        className="btn btn-danger w-100 ml-auto mr-3"
+                        onClick={() => {
+                          toggleMenu(outlet.id, !outlet.is_venue_active);
+                        }}
+                      >
+                        {outlet.is_venue_active ? "Deactivate" : "Activate"}
+                      </div>
+                    ) : null}
 
                     <button
                       onClick={() => {
