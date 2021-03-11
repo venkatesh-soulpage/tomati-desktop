@@ -5,6 +5,7 @@ import * as Action from "_actions";
 import { Link, withRouter } from "react-router-dom";
 import { Tabs, Tab } from "react-bootstrap";
 import { GeoAltFill } from "react-bootstrap-icons";
+import Loading from "components/Loading";
 
 const Index = (props) => {
   const { user } = props.location.state;
@@ -12,7 +13,6 @@ const Index = (props) => {
     props.dispatch(Action.userOutlets({ account_id: user.id }));
     props.dispatch(Action.userEvents({ account_id: user.id }));
   }, []);
-  console.log(props, "USER");
   const { outlet } = props;
 
   return (
@@ -22,7 +22,12 @@ const Index = (props) => {
       </h6>
       <Tabs defaultActiveKey="menus">
         <Tab eventKey="menus" title="Menus">
-          {outlet &&
+          {props.outlet.isFetching ? (
+            <div className="mt-5">
+              <Loading text-secondary={true} />
+            </div>
+          ) : (
+            outlet &&
             outlet.outlets.map((outlet, id) => {
               return (
                 <div
@@ -51,7 +56,8 @@ const Index = (props) => {
                   </div>
                 </div>
               );
-            })}
+            })
+          )}
         </Tab>
 
         {/* <Tab eventKey="events" title="Events">

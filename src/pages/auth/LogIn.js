@@ -12,6 +12,7 @@ import AlertMessage from "components/AlertMessage";
 // icons
 import Lock from "assets/img/Lock.svg";
 import Mail from "assets/img/Mail.svg";
+import Loading from "components/Loading";
 
 function LogIn(props) {
   // Form states
@@ -58,11 +59,7 @@ function LogIn(props) {
       <div className="container-fluid h-100">
         <div className="row h-100 login d-flex justify-content-center">
           {props.auth.isFetching ? (
-            <div class="d-flex justify-content-center align-items-center">
-              <div class="spinner-border text-secondary" role="status">
-                <span class="sr-only">Loading...</span>
-              </div>
-            </div>
+            <Loading textSecondary={true} />
           ) : (
             <div className="col-md-4 w-100 p-0 ">
               <h2 className="text-dark d-none d-md-block mb-0 text-center mb-4">

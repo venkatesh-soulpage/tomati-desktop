@@ -6,7 +6,7 @@ import history from "utils/history";
 import { connect } from "react-redux";
 // Importing redux actions
 import { handleIsUserAuthenticated } from "_actions/auth";
-
+import * as Action from "_actions";
 // import Dashboard from "pages/Dashboard";
 import Page404 from "pages/static/Page404";
 // Auth Components
@@ -31,6 +31,7 @@ function App(props) {
    */
   React.useEffect(() => {
     if (sessionStorage.getItem("token")) {
+      props.dispatch(Action.getUserData());
       props.dispatch(handleIsUserAuthenticated(true));
     } else {
       props.dispatch(handleIsUserAuthenticated(false));
