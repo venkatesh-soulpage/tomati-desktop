@@ -34,6 +34,7 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         userData: action.payload,
+        isFetching: false,
       };
     case ActionTypes.RECEIVE_USER_DATA_ERROR:
       return {
@@ -49,7 +50,6 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         loginSuccess: action.payload,
-        isFetching: false,
       };
     case ActionTypes.HANDLE_LOGIN_ERROR:
       return {
