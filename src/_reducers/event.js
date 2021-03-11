@@ -5,6 +5,7 @@ var initialState = {
   event: null,
   success: false,
   message: null,
+  error: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -33,6 +34,11 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         message: action.payload,
+      };
+    case ActionTypes.INIVTE_COLLAB_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
 
     default:

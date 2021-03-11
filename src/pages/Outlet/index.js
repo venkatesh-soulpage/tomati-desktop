@@ -8,6 +8,7 @@ import { GeoAltFill } from "react-bootstrap-icons";
 //local component
 import Error from "assets/img/Error.svg";
 import CustomModal from "components/CustomModal";
+import { CHARGEBEE_URL } from "constants/APIRoutes";
 
 const Index = (props) => {
   const [error, setError] = useState(false);
@@ -82,7 +83,7 @@ const Index = (props) => {
 
   const handleCheckout = () => {
     const chargebeeInstance = window.Chargebee.init({
-      site: "tomati-test",
+      site: CHARGEBEE_URL,
     });
     let cbPortal = chargebeeInstance.createChargebeePortal();
     cbPortal.open({
@@ -133,13 +134,13 @@ const Index = (props) => {
               + Add New Menu
             </button>
           </div>
-          <div className="ml-auto mr-3" onClick={handleCheckout}>
+          {/* <div className="ml-auto mr-3" onClick={handleCheckout}>
             <a className="btn btn-dark rounded-pill">+ Addons</a>
-          </div>
+          </div> */}
 
-          <div>
+          <div className=" ml-auto">
             <input
-              className="form-control"
+              className="form-control "
               type="text"
               placeholder="Filter by search"
               value={search}

@@ -90,7 +90,8 @@ export function inviteCollaboratorOutlet(data) {
       dispatch(inviteCollaboratorResponse(responseData));
       return responseData;
     } catch (errorData) {
-      dispatch(inviteCollaboratorResponse(errorData));
+      dispatch(inviteCollaboratorError(errorData));
+      return errorData;
     }
   };
 }
@@ -150,5 +151,11 @@ export function toggleMenu(data, status) {
       dispatch(fetchError());
       return errorData;
     }
+  };
+}
+export function inviteCollaboratorError(message) {
+  return {
+    type: ActionTypes.INIVTE_COLLAB_ERROR,
+    payload: message,
   };
 }

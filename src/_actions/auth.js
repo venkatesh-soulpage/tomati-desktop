@@ -465,30 +465,3 @@ export function setUserLimits(data) {
     payload: data,
   };
 }
-/* ================================================================== */
-/* Collaborators */
-/* ================================================================== */
-/**
- * @param {*} getData
- */
-export function getCollaborators(data) {
-  return async (dispatch) => {
-    try {
-      const responseData = await AuthService.getCollaborators();
-      dispatch(setCollaborators(responseData));
-      return responseData;
-    } catch (errorData) {
-      // console.log(errorData);
-    }
-  };
-}
-/**
- * Set User Limit
- * @param {*} data
- */
-export function setCollaborators(data) {
-  return {
-    type: ActionTypes.SET_COLLABORATORS,
-    payload: data,
-  };
-}

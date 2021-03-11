@@ -15,11 +15,13 @@ import { CameraFill } from "react-bootstrap-icons";
 import IconQR from "assets/img/IconQR.svg";
 import UploadCover from "assets/img/UploadCover.svg";
 import Success from "assets/img/Success.svg";
+import Error from "assets/img/Error.svg";
 import CameraIcon from "assets/img/CameraIcon.svg";
 // local component
 import QR from "./QR";
 import About from "./About";
 import CustomModal from "components/CustomModal";
+import Collaborators from "pages/Collaborators";
 
 function Index(props) {
   const [addMenu, setAddmenu] = useState(false);
@@ -68,10 +70,9 @@ function Index(props) {
         outlet_venue: outlet.id,
       })
     );
+    console.log(res);
     if (res) {
       setCollaborator(false);
-      setMessage("Invite Successfull!");
-
       setShow(true);
     }
   };
@@ -198,6 +199,17 @@ function Index(props) {
                   <h6 className="m-0">About</h6>
                 </Link>
               </div>
+              <div className="mr-auto ml-3">
+                <Link
+                  to={{
+                    pathname: "/dashboard/viewoutlet/collaborators",
+                    state: props.location.state,
+                  }}
+                  style={{ color: "#2C3A56", textDecoration: "none" }}
+                >
+                  <h6 className="m-0">Collaborators</h6>
+                </Link>
+              </div>
               <div className="ml-auto mr-2">
                 <button
                   className="btn btn-outline-dark rounded-pill"
@@ -228,14 +240,21 @@ function Index(props) {
               path={`${props.match.path}/about`}
               component={() => <About outlet={outlet} />}
             />
+            <Route
+              exact
+              path={`${props.match.path}/collaborators`}
+              component={() => <Collaborators outlet={outlet} />}
+            />
           </Switch>
         </div>
       </div>
       <CustomModal
         show={show}
-        message={message}
+        message={props.outlet.message || props.outlet.error}
         onHide={() => setShow(false)}
-        statusicon={Success}
+        statusicon={
+          props.outlet.message ? Success : props.outlet.error ? Error : null
+        }
         button={
           <Button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"
