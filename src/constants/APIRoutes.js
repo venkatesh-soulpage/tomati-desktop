@@ -1,28 +1,16 @@
 //AWS
 export const AWS_DESKTOP_URL = "https://desktop.tomati.app";
 export const AWS_API_URL = "https://api.tomati.app";
-export const AWS_CHARGEBEE_URL = "https://tomati.chargebee.com";
 
 //AWS-staging
 export const AWS_STAGING_DESKTOP_URL = "https://staging-desktop.tomati.app";
 export const AWS_STAGING_API_URL = "https://staging-api.tomati.app";
-export const AWS_STAGING_CHARGEBEE_URL = "https://tomati.chargebee.com";
 
 //VERCEL
 export const VERCEL_DESKTOP_URL = "https://tomati-desktop.vercel.app";
 export const HEROKU_API_URL = "https://tomati-api.herokuapp.com";
 
 export const LOCAL_DESKTOP_URL = "http://localhost:3002";
-export const LOCAL_CHARGEBEE_URL = "tomati-test";
-
-export const CHARGEBEE_URL =
-  process.env.REACT_APP_AWS === "true"
-    ? AWS_CHARGEBEE_URL
-    : process.env.REACT_APP_VERCEL === "true"
-    ? LOCAL_CHARGEBEE_URL
-    : process.env.REACT_APP_AWS_STAGING === "true"
-    ? AWS_STAGING_CHARGEBEE_URL
-    : LOCAL_CHARGEBEE_URL;
 
 // Auth Routes
 export const CLIENT_LOGIN = "/api/auth/login";
