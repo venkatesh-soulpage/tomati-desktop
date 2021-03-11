@@ -65,6 +65,12 @@ export default function authReducer(state = initialState, action) {
         ...state,
         error: action.payload,
       };
+    case ActionTypes.UPDATE_OUTLET_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        isFetching: false,
+      };
     default:
       return state;
   }
