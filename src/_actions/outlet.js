@@ -70,13 +70,11 @@ export function updateOutlet(id, data) {
     try {
       dispatch(fetchRequest());
       const responseData = await OutletService.updateOutlet(id, data);
-      dispatch({
-        type: ActionTypes.UPDATE_OUTLET_RESPONSE,
-        payload: responseData,
-      });
+      dispatch(updateOutletResponse(responseData));
       dispatch(getOutlet(id));
       return responseData;
     } catch (errorData) {
+      dispatch(updateOutletError(errorData));
       dispatch(fetchError());
     }
   };
@@ -156,6 +154,20 @@ export function toggleMenu(data, status) {
 export function inviteCollaboratorError(message) {
   return {
     type: ActionTypes.INIVTE_COLLAB_ERROR,
+    payload: message,
+  };
+}
+
+export function updateOutletResponse(message) {
+  return {
+    type: ActionTypes.UPDATE_OUTLET_RESPONSE,
+    payload: message,
+  };
+}
+
+export function updateOutletError(message) {
+  return {
+    type: ActionTypes.UPDATE_OUTLET_ERROR,
     payload: message,
   };
 }

@@ -116,9 +116,13 @@ function Index(props) {
                 className="d-none"
                 onChange={async (e) => {
                   console.log(e.target.files[0]);
-                  if (e.target.files[0].size > 2097152) {
+                  if (e.target.files[0].size > 51200) {
                     setShow(true);
-                    setMessage("File is too big. Choose Image less than 2MB");
+                    props.dispatch(
+                      Action.updateOutletError(
+                        "Image size should not exceed 50kb"
+                      )
+                    );
                   } else {
                     const name = e.target.files[0].name.replace(/\s/g, "");
                     const url = await fileToBase64(e.target.files[0]);
@@ -146,9 +150,13 @@ function Index(props) {
               type="file"
               className="d-none"
               onChange={async (e) => {
-                if (e.target.files[0].size > 2097152) {
+                if (e.target.files[0].size > 51200) {
                   setShow(true);
-                  setMessage("File is too big. Choose Image less than 2MB");
+                  props.dispatch(
+                    Action.updateOutletError(
+                      "Image size should not exceed 50kb"
+                    )
+                  );
                 } else {
                   const name = e.target.files[0].name.replace(/\s/g, "");
                   const url = await fileToBase64(e.target.files[0]);
