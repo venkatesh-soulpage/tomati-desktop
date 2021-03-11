@@ -83,12 +83,11 @@ const Index = (props) => {
 
   const handleCheckout = () => {
     const chargebeeInstance = window.Chargebee.init({
-      site: CHARGEBEE_URL,
+      site: process.env.REACT_APP_AWS ? "tomati" : "tomati-test",
     });
     let cbPortal = chargebeeInstance.createChargebeePortal();
     cbPortal.open({
       async close() {
-        //close callbacks
         const prevPlan = props.auth.limit.subscription.plan_id;
         const res = await props.dispatch(
           Action.getUserLimits({
