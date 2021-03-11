@@ -71,6 +71,13 @@ export default function authReducer(state = initialState, action) {
         error: action.payload,
         isFetching: false,
       };
+    case ActionTypes.RESET_RESPONSE:
+      return {
+        ...state,
+        error: null,
+        isFetching: false,
+        message: null,
+      };
     default:
       return state;
   }

@@ -91,14 +91,19 @@ const Index = (props) => {
           setSuccess(true);
         }
       } else {
-        const res = await props.dispatch(
-          Action.updateUser({
-            first_name,
-            last_name,
-          })
-        );
-        if (res) {
+        if (!first_name || !last_name) {
+          props.dispatch(Action.updateUserError("Values cannot be empty"));
           setSuccess(true);
+        } else {
+          const res = await props.dispatch(
+            Action.updateUser({
+              first_name,
+              last_name,
+            })
+          );
+          if (res) {
+            setSuccess(true);
+          }
         }
       }
       props.dispatch(Action.getUserData());
@@ -214,7 +219,7 @@ const Index = (props) => {
                   className="btn w-25 btn-danger mt-5"
                   onClick={handleUpdateUser}
                 >
-                  {edit ? "Save" : "Edit"}
+                  {edit ? "Save" : props.auth.isFetching ? <Loading /> : "Edit"}
                 </button>
               </Form.Group>{" "}
             </Form>
@@ -231,11 +236,12 @@ const Index = (props) => {
                 height="50px"
                 width="50px"
               />
-              <button className="btn h-75 btn-outline-dark">
+              <button className="btn h-75 btn-outline-dark" disabled={!edit}>
                 <label
                   htmlFor="profileImage"
                   style={{ cursor: "pointer", margin: 0 }}
                   className="d-flex align-items-center"
+                  disabled={!edit}
                 >
                   <CameraFill className="mr-3" />
                   Add New
@@ -249,6 +255,7 @@ const Index = (props) => {
                 className="d-none"
                 onChange={handleImg}
                 required
+                disabled={!edit}
               />
             </Form.Group>
           </div>

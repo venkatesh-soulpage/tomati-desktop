@@ -50,8 +50,6 @@ function Index(props) {
   const handleMenu = () => {
     props.dispatch(Action.addOutletMenu(outlet.id, menu));
     setAddmenu(false);
-    setMessage("Menu Updated Succesfully! ");
-
     setShow(true);
   };
 
@@ -266,7 +264,11 @@ function Index(props) {
         button={
           <Button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"
-            onClick={() => setShow(false)}
+            onClick={() => {
+              console.log("reset");
+              props.dispatch(Action.resetOutletResponse());
+              setShow(false);
+            }}
           >
             Close
           </Button>

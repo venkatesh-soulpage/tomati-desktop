@@ -26,9 +26,13 @@ const CreateMenu = ({
       <Form.Group>
         <Dropdown>
           <Dropdown.Toggle className="custom-dropdown text-left d-flex justify-content-between align-items-center btn">
-            {values.location_id ? values.location_id.name : "Select Location"}
+            {values.location_id
+              ? _.find(props.auth.locations, [
+                  "id",
+                  parseInt(values.location_id),
+                ]).name
+              : "Select Locations (required)"}
           </Dropdown.Toggle>
-
           <Dropdown.Menu className="w-100">
             {_.map(props.auth.locations, function (location) {
               return (
@@ -36,7 +40,10 @@ const CreateMenu = ({
                   key={location.id}
                   value={location.id}
                   onClick={() => {
-                    setValues({ ...values, location_id: location });
+                    setValues((values) => ({
+                      ...values,
+                      location_id: location.id,
+                    }));
                   }}
                 >
                   {location.name}

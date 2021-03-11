@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import { GeoAltFill } from "react-bootstrap-icons";
 //local component
 import Error from "assets/img/Error.svg";
+import Success from "assets/img/Success.svg";
 import CustomModal from "components/CustomModal";
 import { CHARGEBEE_URL } from "constants/APIRoutes";
 
@@ -54,6 +55,7 @@ const Index = (props) => {
       setMessage(
         "You have 0 menus left on your plan. To add new menu upgrade your plan here."
       );
+      setIcon(Error);
       setError(true);
     } else {
       props.history.push("/dashboard/addoutlet");
@@ -63,10 +65,7 @@ const Index = (props) => {
   const toggleMenu = async (data, status) => {
     const res = await props.dispatch(Action.toggleMenu(data, status));
     if (res) {
-      if (!res.status) {
-        console.log(res.status);
-        setIcon(Error);
-      }
+      setIcon(res.status ? Success : Error);
       setMessage(
         <div>
           {res.message}{" "}

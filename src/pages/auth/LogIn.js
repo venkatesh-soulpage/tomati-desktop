@@ -31,6 +31,7 @@ function LogIn(props) {
   // For handling changes in the inputs
   const handleChange = (name) => (event) => {
     const value = event.target.value;
+    props.dispatch(Action.handleLoginError(null));
     setValues((values) => ({ ...values, [name]: value }));
   };
 
