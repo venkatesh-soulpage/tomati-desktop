@@ -91,7 +91,7 @@ function Index(props) {
         className="border background"
         style={{
           height: "244px",
-          background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url('${cover}')`,
+          background: `url('${cover}')`,
         }}
       >
         <div className="row h-100 justify-content-center blur">
@@ -135,10 +135,10 @@ function Index(props) {
             </Form.Group>
           </div>
           <div className="col-md-9 align-self-center">
-            <h4 className="text-white font-weight-bold fs-30">
+            <h4 className="text-white font-weight-bold fs-30 backdrop p-1">
               {outlet && outlet.name}
             </h4>
-            <p className="text-white font-weight-light fs-12 w-58">
+            <p className="text-white font-weight-light fs-12 w-58 backdrop p-1">
               {outlet && outlet.description}
             </p>
           </div>
@@ -168,7 +168,7 @@ function Index(props) {
             />
           </Form.Group>
           <div className="col-11 d-flex pr-0 justify-content-end align-items-center">
-            <button className="btn p-2 btn-outline-dark text-white d-flex align-items-center cr-p b1-white mb-3 ">
+            <button className="btn p-2 btn-outline-dark text-white d-flex align-items-center cr-p b1-white mb-3 btn-backdrop ">
               <label className="p-0 m-0 cr-p" htmlFor="coverImage">
                 <CameraFill className="fs-20" />
                 <span className="ml-2">Edit Cover Photo</span>

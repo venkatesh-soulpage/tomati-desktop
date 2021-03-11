@@ -226,5 +226,14 @@ input::-webkit-inner-spin-button {
 }
 
 .w-58 {
-  width: 58%;
+  max-width: 58%;
+}
+
+.backdrop {
+  backdrop-filter: brightness(20%);
+  width: fit-content;
+}
+
+.btn-backdrop {
+  backdrop-filter: brightness(0.5) !important;
 }
