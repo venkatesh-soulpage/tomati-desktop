@@ -18,6 +18,7 @@ import Loading from "components/Loading";
 const Index = (props) => {
   const [show, setShow] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [edit, setEdit] = useState(false);
   const [message, setMessage] = useState("");
   const [temp, setTemp] = useState(User);
 
@@ -72,34 +73,39 @@ const Index = (props) => {
   const { userData } = props.auth;
   const handleUpdateUser = async (e) => {
     e.preventDefault();
-    const { first_name, last_name, profile_image } = values;
-    if (profile_image) {
-      const url = await fileToBase64(profile_image);
-      const res = await props.dispatch(
-        Action.updateUser({
-          first_name,
-          last_name,
-          profile_image: {
-            name: profile_image.name.replace(/\s/g, ""),
-            data: url,
-          },
-        })
-      );
-      if (res) {
-        setSuccess(true);
+    if (edit) {
+      const { first_name, last_name, profile_image } = values;
+      if (profile_image) {
+        const url = await fileToBase64(profile_image);
+        const res = await props.dispatch(
+          Action.updateUser({
+            first_name,
+            last_name,
+            profile_image: {
+              name: profile_image.name.replace(/\s/g, ""),
+              data: url,
+            },
+          })
+        );
+        if (res) {
+          setSuccess(true);
+        }
+      } else {
+        const res = await props.dispatch(
+          Action.updateUser({
+            first_name,
+            last_name,
+          })
+        );
+        if (res) {
+          setSuccess(true);
+        }
       }
+      props.dispatch(Action.getUserData());
+      setEdit(false);
     } else {
-      const res = await props.dispatch(
-        Action.updateUser({
-          first_name,
-          last_name,
-        })
-      );
-      if (res) {
-        setSuccess(true);
-      }
+      setEdit(true);
     }
-    props.dispatch(Action.getUserData());
   };
 
   const handlePasswordUpate = async (e) => {
@@ -173,6 +179,7 @@ const Index = (props) => {
                   onChange={handleChange("first_name")}
                   value={values.first_name}
                   className="mb-3 h-100"
+                  disabled={!edit}
                 />
               </Form.Group>
               <Form.Group>
@@ -182,15 +189,24 @@ const Index = (props) => {
                   onChange={handleChange("last_name")}
                   required
                   className="mb-3 h-100"
+                  disabled={!edit}
                 />
               </Form.Group>
               <Form.Group>
                 <Form.Control
                   type="text"
                   value={values.email}
-                  onChange={handleChange("email")}
+                  onChange={(e) => {
+                    setSuccess(true);
+                    props.dispatch(
+                      Action.updateUserError(
+                        "To change email contact support on hello@tomati.app"
+                      )
+                    );
+                  }}
                   required
                   className="mb-3 h-100"
+                  disabled={!edit}
                 />
               </Form.Group>
               <Form.Group>
@@ -198,7 +214,7 @@ const Index = (props) => {
                   className="btn w-25 btn-danger mt-5"
                   onClick={handleUpdateUser}
                 >
-                  {props.auth.isFetching ? <Loading /> : "Save"}
+                  {edit ? "Save" : "Edit"}
                 </button>
               </Form.Group>{" "}
             </Form>
@@ -353,7 +369,11 @@ const Index = (props) => {
         button={
           <Button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"
-            onClick={() => setSuccess(false)}
+            onClick={() => {
+              setSuccess(false);
+              props.dispatch(Action.updateUserReponse(null));
+              props.dispatch(Action.updateUserError(null));
+            }}
           >
             Close
           </Button>
