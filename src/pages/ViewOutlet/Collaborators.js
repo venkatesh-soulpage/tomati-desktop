@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
-import * as Action from "_actions";
+import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import Loading from "components/Loading";
 
-const Index = (props) => {
+const Collaborators = (props) => {
   if (!props.outlet.outlet) {
-    return <div>Loading ..... </div>;
+    return (
+      <div>
+        <Loading textSecondary={true} />{" "}
+      </div>
+    );
   }
 
   return (
@@ -43,4 +47,4 @@ function mapStateToProps(state) {
   return { outlet: state.outlet };
 }
 
-export default withRouter(connect(mapStateToProps)(Index));
+export default withRouter(connect(mapStateToProps)(Collaborators));

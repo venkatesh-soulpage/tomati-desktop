@@ -13,6 +13,7 @@ import Loading from "components/Loading";
 
 const Index = (props) => {
   const [error, setError] = useState(false);
+  const [activate, setActivate] = useState(false);
   const [search, setSearch] = useState("");
   const [icon, setIcon] = useState(null);
   const [message, setMessage] = useState("");
@@ -26,7 +27,15 @@ const Index = (props) => {
       );
     }
   }, [props.auth.userData]);
-  useEffect(() => {}, [props.outlet.outlets]);
+  useEffect(() => {
+    const menuQuantity = auth?.limit?.subscription?.addons.find(
+      (addon) => addon.id === "free-menu"
+    ).quantity;
+    const outletsLength = props.outlet?.outlets?.length;
+    if (outletsLength > menuQuantity) {
+      setActivate(true);
+    }
+  }, [props.auth.limit, props.outlet.outlets]);
 
   const { outlet, auth } = props;
 
@@ -35,11 +44,9 @@ const Index = (props) => {
     outlet.outlets.filter((outlet) => {
       return outlet.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
-  const menuQuantity =
-    auth?.limit &&
-    auth?.limit?.subscription &&
-    auth?.limit?.subscription?.addons.find((addon) => addon.id === "free-menu")
-      .quantity;
+  const menuQuantity = auth?.limit?.subscription?.addons.find(
+    (addon) => addon.id === "free-menu"
+  ).quantity;
 
   const handleAddoutlet = () => {
     if (!auth?.userData?.is_subscription_active) {
@@ -101,7 +108,12 @@ const Index = (props) => {
       },
     });
   };
-
+  console.log(
+    outlet?.outlets?.length,
+    ">",
+    menuQuantity,
+    "outletLength > menuQuantity "
+  );
   return (
     <div className="pt-0 pr-3 pl-4 pb-3">
       {/* stats */}
@@ -173,7 +185,7 @@ const Index = (props) => {
 
                 <div className="ml-auto mr-3">
                   <div className="d-flex flex-row align-items-center">
-                    {menuQuantity === outlet?.outlets?.length ? (
+                    {activate ? (
                       <div
                         className="btn btn-danger w-100 ml-auto mr-3"
                         onClick={() => {

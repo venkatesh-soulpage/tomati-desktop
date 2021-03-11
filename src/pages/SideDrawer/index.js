@@ -20,7 +20,7 @@ import * as Action from "_actions";
 const Index = (props) => {
   const currentLocation = useLocation();
   if (!props.auth.userData) {
-    return <Loading />;
+    return <Loading textSecondary={true} />;
   }
   return (
     <div className="sidebar-sticky rounded">

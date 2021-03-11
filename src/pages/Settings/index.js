@@ -159,7 +159,11 @@ const Index = (props) => {
   };
 
   if (!userData) {
-    return <div>loading</div>;
+    return (
+      <div>
+        <Loading textSecondary={true} />
+      </div>
+    );
   }
   return (
     <div className="pt-0 pr-3 pl-4 pb-3">
