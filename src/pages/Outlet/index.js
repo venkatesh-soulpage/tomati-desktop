@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import { GeoAltFill } from "react-bootstrap-icons";
 //local component
 import Error from "assets/img/Error.svg";
+import Success from "assets/img/Success.svg";
 import CustomModal from "components/CustomModal";
 import Loading from "components/Loading";
 
@@ -56,6 +57,7 @@ const Index = (props) => {
       setMessage(
         "You have exceeded your plan limit. Change plan to add new menu."
       );
+      setIcon(Error);
       setError(true);
     } else {
       props.history.push("/dashboard/addoutlet");
@@ -65,9 +67,7 @@ const Index = (props) => {
   const toggleMenu = async (data, status) => {
     const res = await props.dispatch(Action.toggleMenu(data, status));
     if (res) {
-      if (!res.status) {
-        setIcon(Error);
-      }
+      setIcon(res.status ? Success : Error);
       setMessage(
         <div>
           {res.message}{" "}

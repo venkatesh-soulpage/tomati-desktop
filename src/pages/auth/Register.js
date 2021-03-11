@@ -12,6 +12,7 @@ import AlertMessage from "components/AlertMessage";
 import PersonalDetails from "components/PersonalDetails";
 // image assets
 import Success from "assets/img/Success.svg";
+import { handleRegisterError } from "_actions";
 
 function Register(props) {
   const [message, setMessage] = React.useState("");
@@ -39,6 +40,7 @@ function Register(props) {
   // For handling changes in the inputs
   const handleChange = (name) => (event) => {
     const value = event.target.value;
+    props.dispatch(handleRegisterError(null));
     setValues((values) => ({ ...values, [name]: value }));
   };
 

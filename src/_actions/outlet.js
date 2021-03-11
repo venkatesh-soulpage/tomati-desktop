@@ -85,9 +85,11 @@ export function inviteCollaboratorOutlet(data) {
     try {
       dispatch(fetchRequest());
       const responseData = await OutletService.addOutletCollaborator(data);
+      dispatch(getOutlet(data.outlet_venue));
       dispatch(inviteCollaboratorResponse(responseData));
       return responseData;
     } catch (errorData) {
+      dispatch(getOutlet(data.outlet_venue));
       dispatch(inviteCollaboratorError(errorData));
       return errorData;
     }
@@ -107,10 +109,10 @@ export function getSingleOutlet(data) {
   };
 }
 
-export function addMenuResponse(message) {
+export function addMenuResponse() {
   return {
     type: ActionTypes.ADD_MENU_RESPONSE,
-    payload: message,
+    payload: "Menu Updated Succesfully",
   };
 }
 
@@ -169,5 +171,11 @@ export function updateOutletError(message) {
   return {
     type: ActionTypes.UPDATE_OUTLET_ERROR,
     payload: message,
+  };
+}
+
+export function resetOutletResponse() {
+  return {
+    type: ActionTypes.RESET_RESPONSE,
   };
 }

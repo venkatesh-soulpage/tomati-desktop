@@ -100,7 +100,7 @@ const Index = (props) => {
           name,
           phone_number,
           address,
-          location_id: location_id.id,
+          location_id: location_id,
           description,
           cover_image: { name: cover_image[0].name, data: url },
           logo_img: { name: logo_img[0].name, data: url2 },

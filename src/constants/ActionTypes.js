@@ -68,5 +68,6 @@ export const RECEIVE_USER_EVENTS = "RECEIVE_USER_EVENTS";
 export const ADD_EVENT = "ADD_EVENT";
 export const GET_SINGLE_EVENT = "GET_SINGLE_EVENT";
 export const UPDATE_EVENT_RESPONSE = "UPDATE_EVENT_RESPONSE";
+export const RESET_RESPONSE = "RESET_RESPONSE";
 
 export const TOMATI_DESKTOP_URL = "https://tomati-desktop.vercel.app/";
