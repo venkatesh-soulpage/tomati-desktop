@@ -103,6 +103,7 @@ const Index = (props) => {
           })
         );
         if (res.subscription.plan_id !== prevPlan) {
+          const res = await props.dispatch(Action.updateMenuStatus());
           props.history.go();
         }
       },

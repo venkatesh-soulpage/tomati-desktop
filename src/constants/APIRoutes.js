@@ -41,6 +41,7 @@ export const GET_COLLABORATORS = "/api/auth";
 //Outlets
 export const GET_OUTLETS = "/api/outletvenues/user-venues";
 export const TOGGLE_MENU = "/api/outletvenues";
+export const UPDATE_MENU_STATUS = "/api/outletvenues/update_menu_status";
 export const GET_OUTLET = "/api/outletvenues";
 export const ADD_OUTLET_REQUEST = "/api/outletvenues";
 export const ADD_OUTLET_COLLABORATOR = "/api/auth/invite-collaborator";

@@ -153,6 +153,20 @@ export function toggleMenu(data, status) {
     }
   };
 }
+export function updateMenuStatus() {
+  return async (dispatch) => {
+    try {
+      dispatch(fetchRequest());
+      const res = await OutletService.updateMenuStatus();
+      console.log(res);
+      dispatch(fetchError());
+      return res;
+    } catch (errorData) {
+      dispatch(fetchError());
+      return errorData;
+    }
+  };
+}
 export function inviteCollaboratorError(message) {
   return {
     type: ActionTypes.INIVTE_COLLAB_ERROR,

@@ -73,5 +73,13 @@ class OutletAPI {
       throw error.response.data;
     }
   }
+  static async updateMenuStatus() {
+    try {
+      const response = await axios.post(APIRoutes.UPDATE_MENU_STATUS);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
 }
 export default OutletAPI;
