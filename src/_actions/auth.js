@@ -46,23 +46,17 @@ export function getLocationRegister() {
   return async (dispatch) => {
     try {
       const responseData = await AuthService.getLocations();
-      dispatch(getLocationSuccess(responseData));
+      dispatch({
+        type: ActionTypes.GET_LOCATION_SUCCESS,
+        payload: responseData,
+      });
       return responseData;
     } catch (errorData) {
-      dispatch(getLocationError(errorData));
+      dispatch({
+        type: ActionTypes.GET_LOCATION_ERROR,
+        payload: errorData,
+      });
     }
-  };
-}
-export function getLocationSuccess(responseData) {
-  return {
-    type: ActionTypes.GET_LOCATION_SUCCESS,
-    payload: responseData,
-  };
-}
-export function getLocationError(error) {
-  return {
-    type: ActionTypes.GET_LOCATION_ERROR,
-    payload: error,
   };
 }
 /* ================================================================== */
@@ -81,9 +75,6 @@ export function getUserData() {
     } catch (errorData) {}
   };
 }
-/* ================================================================== */
-/* User Data */
-/* ================================================================== */
 /**
  * Storing User Details to access across the App
  * @param {*} userData
@@ -105,37 +96,21 @@ export function receiveUserData(userData) {
 export function userLogin(postData) {
   return async (dispatch) => {
     try {
-      dispatch(loginRequest());
+      dispatch({
+        type: ActionTypes.HANDLE_LOGIN_REQUEST,
+      });
       const responseData = await AuthService.postLoginDetails(postData);
-      dispatch(handleLoginSuccess(responseData));
+      dispatch({
+        type: ActionTypes.HANDLE_LOGIN_SUCCESS,
+        payload: responseData,
+      });
       dispatch(setAuthTokenInSession("token", responseData.token));
       dispatch(handleIsUserAuthenticated());
       dispatch(getUserData());
-      // history.push("/dashboard/outlet");
-
       return responseData;
     } catch (errorData) {
       dispatch(handleLoginError(errorData));
     }
-  };
-}
-/**
- * Login Request
- * @param {*}
- */
-export function loginRequest() {
-  return {
-    type: ActionTypes.HANDLE_LOGIN_REQUEST,
-  };
-}
-/**
- * Login Success Response
- * @param {*} loginResponse
- */
-export function handleLoginSuccess(loginResponse) {
-  return {
-    type: ActionTypes.HANDLE_LOGIN_SUCCESS,
-    payload: loginResponse,
   };
 }
 /**
@@ -149,15 +124,6 @@ export function handleLoginError(error) {
   };
 }
 /**
- * Clearing Login Failed Response
- */
-export function clearLoginError() {
-  return {
-    type: ActionTypes.HANDLE_LOGIN_ERROR,
-    payload: null,
-  };
-}
-/**
  * Verify with email
  * @param {*} postData
  */
@@ -167,18 +133,11 @@ export function verify(postData) {
       const response = await AuthService.verifyCredentails(postData);
       dispatch(handleEmailSuccess(response.Message));
     } catch (error) {
-      dispatch(handleEmailError(error.Message));
+      dispatch({
+        type: ActionTypes.HANDLE_EMAIL_ERROR,
+        payload: error.Message,
+      });
     }
-  };
-}
-/**
- * Verify Reset Response
- * @param {*}
- */
-export function resetMessage() {
-  return {
-    type: ActionTypes.RESET_MESSAGE,
-    payload: null,
   };
 }
 /**
@@ -192,13 +151,13 @@ export function handleEmailSuccess(Message) {
   };
 }
 /**
- * Verify Error Response
- * @param {*} error
+ * Verify Reset Response
+ * @param {*}
  */
-export function handleEmailError(error) {
+export function resetMessage() {
   return {
-    type: ActionTypes.HANDLE_EMAIL_ERROR,
-    payload: error,
+    type: ActionTypes.RESET_MESSAGE,
+    payload: null,
   };
 }
 /* ================================================================== */
@@ -261,7 +220,10 @@ export function forgetPassword(postData) {
     try {
       const responseData = await AuthService.forgetPassword(postData);
 
-      dispatch(receiveForgotPasswordToken(responseData));
+      dispatch({
+        type: ActionTypes.RECEIVE_PASSWORD_RESET_TOKEN,
+        payload: responseData,
+      });
       dispatch(forgotPasswordToggle(true));
       return responseData;
     } catch (errorData) {
@@ -269,16 +231,6 @@ export function forgetPassword(postData) {
       dispatch(forgotPasswordToggle(false));
       return errorData;
     }
-  };
-}
-/**
- * On Success Receives Reset Token
- * @param {*} data
- */
-export function receiveForgotPasswordToken(data) {
-  return {
-    type: ActionTypes.RECEIVE_PASSWORD_RESET_TOKEN,
-    payload: data,
   };
 }
 /**
@@ -301,7 +253,6 @@ export function forgotPasswordToggle(data) {
     payload: data,
   };
 }
-
 /* ================================================================== */
 /* Reset Password */
 /* ================================================================== */
@@ -312,32 +263,29 @@ export function forgotPasswordToggle(data) {
 export function resetPassword(data) {
   return async (dispatch) => {
     try {
-      dispatch(resetResponse());
+      dispatch({
+        type: ActionTypes.RESET_PASSWORD_RESPONSE,
+      });
       const responseData = await AuthService.resetPassword(data);
 
       dispatch(receiveResetPassword(responseData));
       return responseData;
     } catch (errorData) {
-      dispatch(receiveResetPasswordError(errorData));
+      dispatch({
+        type: ActionTypes.RESET_PASSWORD_ERROR,
+        payload: errorData,
+      });
       return errorData;
     }
   };
 }
-/* ================================================================== */
-/* Get all Users
-/* ================================================================== */
 /**
- * For all Users
- * @param {*} data
+ * When reset password receives and failed response.
+ * @param {*} error
  */
-export function getUsers() {
-  return function (dispatch) {
-    return AuthService.getUsers()
-      .then((responseData) => {
-        dispatch(setAllUser(responseData));
-        return responseData;
-      })
-      .catch((errorData) => {});
+export function resetResponse() {
+  return {
+    type: ActionTypes.RESET_PASSWORD_RESPONSE,
   };
 }
 /**
@@ -350,34 +298,24 @@ export function receiveResetPassword(data) {
     payload: data,
   };
 }
+/* ================================================================== */
+/* Get all Users
+/* ================================================================== */
 /**
- * When reset password receives and failed response.
- * @param {*} error
- */
-export function receiveResetPasswordError(error) {
-  return {
-    type: ActionTypes.RESET_PASSWORD_ERROR,
-    payload: error,
-  };
-}
-/**
- * When reset password receives and failed response.
- * @param {*} error
- */
-export function resetResponse() {
-  return {
-    type: ActionTypes.RESET_PASSWORD_RESPONSE,
-  };
-}
-
-/**
- * Reset password toggle for switching views
+ * For all Users
  * @param {*} data
  */
-export function setUserData(data) {
-  return {
-    type: ActionTypes.SET_USER_DATA,
-    payload: data,
+export function getUsers() {
+  return async (dispatch) => {
+    try {
+      const responseData = await AuthService.getUsers();
+
+      dispatch({
+        type: ActionTypes.SET_ALL_USERS,
+        payload: responseData,
+      });
+      return responseData;
+    } catch (errorData) {}
   };
 }
 /* ================================================================== */
@@ -389,7 +327,9 @@ export function setUserData(data) {
  */
 export function updateUser(data) {
   return async (dispatch) => {
-    dispatch(resetUpdateResponse());
+    dispatch({
+      type: ActionTypes.RESET_UPDATE_RESPONSE,
+    });
     try {
       const responseData = await AuthService.updateUser(data);
       dispatch(updateUserReponse(responseData));
@@ -398,15 +338,6 @@ export function updateUser(data) {
       dispatch(updateUserError(errorData));
       return errorData;
     }
-  };
-}
-/**
- * Reset Update User Response
- * @param {*} data
- */
-export function resetUpdateResponse() {
-  return {
-    type: ActionTypes.RESET_UPDATE_RESPONSE,
   };
 }
 /**
@@ -429,16 +360,6 @@ export function updateUserError(message) {
     payload: message,
   };
 }
-/**
- * Reset Update User Response
- * @param {*} data
- */
-export function setAllUser(data) {
-  return {
-    type: ActionTypes.SET_ALL_USERS,
-    payload: data,
-  };
-}
 /* ================================================================== */
 /* User Limits */
 /* ================================================================== */
@@ -449,20 +370,11 @@ export function getUserLimits(data) {
   return async (dispatch) => {
     try {
       const responseData = await AuthService.getUserLimits(data);
-      dispatch(setUserLimits(responseData));
+      dispatch({
+        type: ActionTypes.SET_USER_LIMIT,
+        payload: responseData,
+      });
       return responseData;
-    } catch (errorData) {
-      console.log(errorData);
-    }
-  };
-}
-/**
- * Set User Limit
- * @param {*} data
- */
-export function setUserLimits(data) {
-  return {
-    type: ActionTypes.SET_USER_LIMIT,
-    payload: data,
+    } catch (errorData) {}
   };
 }

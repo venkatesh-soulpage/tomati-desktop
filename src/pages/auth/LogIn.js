@@ -52,7 +52,7 @@ function LogIn(props) {
   }
 
   function handleAlertDismiss() {
-    props.dispatch(Action.clearLoginError());
+    props.dispatch(Action.handleLoginError(null));
   }
   return (
     <div className="min-height mt-5">

@@ -21,7 +21,7 @@ import CameraIcon from "assets/img/CameraIcon.svg";
 import QR from "./QR";
 import About from "./About";
 import CustomModal from "components/CustomModal";
-import Collaborators from "pages/Collaborators";
+import Collaborators from "./Collaborators";
 
 function Index(props) {
   const [addMenu, setAddmenu] = useState(false);
