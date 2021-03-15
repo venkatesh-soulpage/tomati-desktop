@@ -1,12 +1,14 @@
 import axios from "axios";
 import "utils/axios_configuration";
 import * as APIRoutes from "constants/APIRoutes";
+import { apiCatch } from "utils/sentry_init";
 class OutletAPI {
   static async getOutlets(data) {
     try {
       const response = await axios.post(APIRoutes.GET_OUTLETS, data);
       return response.data;
     } catch (error) {
+      apiCatch(error);
       throw error.response.data;
     }
   }
@@ -18,6 +20,7 @@ class OutletAPI {
       );
       return response.data;
     } catch (error) {
+      apiCatch(error);
       throw error.response.data;
     }
   }
@@ -30,6 +33,7 @@ class OutletAPI {
       );
       return response.data;
     } catch (error) {
+      apiCatch(error);
       throw error.response.data;
     }
   }
@@ -38,6 +42,7 @@ class OutletAPI {
       const response = await axios.get(`${APIRoutes.GET_OUTLET}/${id}`);
       return response.data;
     } catch (error) {
+      apiCatch(error);
       throw error.response.data;
     }
   }
@@ -48,6 +53,7 @@ class OutletAPI {
       const response = await axios.put(`${APIRoutes.GET_OUTLET}/${id}`, data);
       return response.data;
     } catch (error) {
+      apiCatch(error);
       throw error.response.data;
     }
   }
@@ -59,6 +65,7 @@ class OutletAPI {
       );
       return response.data;
     } catch (error) {
+      apiCatch(error);
       throw error.response.data;
     }
   }
@@ -70,6 +77,16 @@ class OutletAPI {
       );
       return response.data;
     } catch (error) {
+      apiCatch(error);
+      throw error.response.data;
+    }
+  }
+  static async updateMenuStatus() {
+    try {
+      const response = await axios.post(APIRoutes.UPDATE_MENU_STATUS);
+      return response.data;
+    } catch (error) {
+      apiCatch(error);
       throw error.response.data;
     }
   }
