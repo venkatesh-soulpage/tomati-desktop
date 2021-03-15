@@ -55,102 +55,89 @@ function LogIn(props) {
     props.dispatch(Action.handleLoginError(null));
   }
   return (
-    <div className="min-height mt-5">
-      <div className="container-fluid h-100">
-        <div className="row h-100 login d-flex justify-content-center">
-          {props.auth.isFetching ? (
-            <Loading textSecondary={true} />
-          ) : (
-            <div className="col-md-4 w-100 p-0 ">
-              <h2 className="text-dark d-none d-md-block mb-0 text-center mb-4">
-                Login
-              </h2>
-              <Card className="p-md-5 pb-md-3 p-2 login-card card-border">
-                <h2 className="text-dark d-blocl d-md-none mb-0 text-center mb-4">
-                  Login
-                </h2>
-                <Form onSubmit={handleLoginData} autoComplete="off">
-                  <AlertMessage
-                    variant="danger"
-                    error={
-                      props.auth.loginError && {
-                        message: props.auth.loginError,
-                      }
-                    }
-                    onDismiss={handleAlertDismiss}
+    <div className="container-fluid min-height d-flex align-items-center justify-content-center">
+      {props.auth.isFetching ? (
+        <Loading textSecondary={true} />
+      ) : (
+        <div className="col-md-4 w-100 p-0 ">
+          <h2 className="text-dark text-center mb-4">Login</h2>
+          <Card className="p-md-5 pb-md-3 p-2 login-card card-border">
+            <Form onSubmit={handleLoginData} autoComplete="off">
+              <AlertMessage
+                variant="danger"
+                error={
+                  props.auth.loginError && {
+                    message: props.auth.loginError,
+                  }
+                }
+                onDismiss={handleAlertDismiss}
+              />
+              <Form.Group>
+                <InputGroup>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text className="bg-white border-right-0">
+                      <img
+                        src={Mail}
+                        alt="mail"
+                        className="img-fluid"
+                        width="20"
+                        height="20"
+                      />
+                    </InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <Form.Control
+                    className="border-left-0"
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={values.email}
+                    onChange={handleChange("email")}
+                    placeholder="Enter email"
+                    required
                   />
-                  <Form.Group>
-                    <InputGroup>
-                      <InputGroup.Prepend>
-                        <InputGroup.Text className="bg-white border-right-0">
-                          <img
-                            src={Mail}
-                            alt="mail"
-                            className="img-fluid"
-                            width="12"
-                          />
-                        </InputGroup.Text>
-                      </InputGroup.Prepend>
-                      <Form.Control
-                        className="border-left-0"
-                        type="email"
-                        name="email"
-                        id="email"
-                        value={values.email}
-                        onChange={handleChange("email")}
-                        placeholder="Enter email"
-                        required
+                </InputGroup>
+              </Form.Group>
+              <Form.Group>
+                <InputGroup>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text className="bg-white border-right-0">
+                      <img
+                        src={Lock}
+                        alt="lock"
+                        className="img-fluid"
+                        width="20"
+                        height="20"
                       />
-                    </InputGroup>
-                  </Form.Group>
-                  <Form.Group>
-                    <InputGroup>
-                      <InputGroup.Prepend>
-                        <InputGroup.Text className="bg-white border-right-0">
-                          <img
-                            src={Lock}
-                            alt="lock"
-                            className="img-fluid"
-                            width="12"
-                          />
-                        </InputGroup.Text>
-                      </InputGroup.Prepend>
-                      <Form.Control
-                        className="border-left-0 border-right-none"
-                        name="password"
-                        value={values.password}
-                        onChange={handleChange("password")}
-                        placeholder="Password"
-                        type={values.hidden ? "password" : "text"}
-                        required
-                      />
-                      <div className="input-group-append">
-                        <div
-                          className="show-button"
-                          onClick={handlePasswordToggle}
-                        >
-                          <small>{values.hidden ? "Show" : "Hide"}</small>
-                        </div>
-                      </div>
-                    </InputGroup>
-                  </Form.Group>
-                  <Form.Group className="d-flex justify-content-between align-items-center mt-4">
-                    <Link className=" red-link" to="/forgot-password">
-                      Forgot Password?
-                    </Link>
-                    <Button
-                      className="rounded-pill btn-danger px-4"
-                      type="submit"
-                    >
-                      Login
-                    </Button>
-                  </Form.Group>
-                </Form>
-              </Card>
-            </div>
-          )}
+                    </InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <Form.Control
+                    className="border-left-0 border-right-none"
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange("password")}
+                    placeholder="Password"
+                    type={values.hidden ? "password" : "text"}
+                    required
+                  />
+                  <div className="input-group-append">
+                    <div className="show-button" onClick={handlePasswordToggle}>
+                      <small>{values.hidden ? "Show" : "Hide"}</small>
+                    </div>
+                  </div>
+                </InputGroup>
+              </Form.Group>
+              <Form.Group className="d-flex justify-content-between align-items-center mt-4">
+                <Link className=" red-link" to="/forgot-password">
+                  Forgot Password?
+                </Link>
+                <Button className="rounded-pill btn-danger px-4" type="submit">
+                  Login
+                </Button>
+              </Form.Group>
+            </Form>
+          </Card>
         </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -1,7 +1,4 @@
-// import OutletService from "services/outlet";
-import axios from "axios";
 import * as ActionTypes from "constants/ActionTypes";
-import * as APIRoutes from "constants/APIRoutes";
 import EventService from "services/event";
 import history from "utils/history";
 

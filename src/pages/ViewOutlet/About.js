@@ -31,7 +31,6 @@ const About = (props) => {
   };
 
   const handleUpdate = () => {
-    console.log(values);
     props.dispatch(Action.updateOutlet(props.location.state, values));
     if (props.outlet.message) {
       setMessage(props.outlet.message);

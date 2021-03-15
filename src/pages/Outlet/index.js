@@ -103,18 +103,13 @@ const Index = (props) => {
           })
         );
         if (res.subscription.plan_id !== prevPlan) {
-          const res = await props.dispatch(Action.updateMenuStatus());
+          await props.dispatch(Action.updateMenuStatus());
           props.history.go();
         }
       },
     });
   };
-  console.log(
-    outlet?.outlets?.length,
-    ">",
-    menuQuantity,
-    "outletLength > menuQuantity "
-  );
+
   return (
     <div className="pt-0 pr-3 pl-4 pb-3">
       {/* stats */}

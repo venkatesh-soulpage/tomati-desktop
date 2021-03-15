@@ -8,7 +8,6 @@ import Loading from "components/Loading";
 
 const CreateMenu = ({
   values,
-  handleChange,
   handleCreateOutlet,
   setValues,
   handleStepPrev,
@@ -27,14 +26,14 @@ const CreateMenu = ({
         <Dropdown>
           <Dropdown.Toggle className="custom-dropdown text-left d-flex justify-content-between align-items-center btn">
             {values.location_id
-              ? _.find(props.auth.locations, [
+              ? _.find(props.outlet.locations, [
                   "id",
                   parseInt(values.location_id),
                 ]).name
               : "Select Locations (required)"}
           </Dropdown.Toggle>
           <Dropdown.Menu className="w-100">
-            {_.map(props.auth.locations, function (location) {
+            {_.map(props.outlet.locations, function (location) {
               return (
                 <Dropdown.Item
                   key={location.id}

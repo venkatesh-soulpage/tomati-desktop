@@ -3,6 +3,16 @@ import "utils/axios_configuration";
 import * as APIRoutes from "constants/APIRoutes";
 import { apiCatch } from "utils/sentry_init";
 class OutletAPI {
+  static async getLocations() {
+    try {
+      // fetch data from a url endpoint
+      const response = await axios.get(APIRoutes.GET_LOCATIONS);
+      return response.data;
+    } catch (error) {
+      apiCatch(error);
+      throw error.response.data;
+    }
+  }
   static async getOutlets(data) {
     try {
       const response = await axios.post(APIRoutes.GET_OUTLETS, data);

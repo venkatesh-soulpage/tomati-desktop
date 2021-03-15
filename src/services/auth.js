@@ -101,28 +101,6 @@ class AuthAPI {
     }
   }
 
-  static async forgetPassword(data) {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.post(APIRoutes.FORGOT_PASSWORD, data);
-      return response.data;
-    } catch (error) {
-      apiCatch(error);
-      throw error.response.data;
-    }
-  }
-
-  static async resetPassword(data) {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.post(APIRoutes.RESET_PASSWORD, data);
-      return response.data;
-    } catch (error) {
-      apiCatch(error);
-      throw error.response.data;
-    }
-  }
-
   static async collaboratorSignup(data) {
     try {
       let URL;
@@ -149,16 +127,7 @@ class AuthAPI {
       throw error.response.data;
     }
   }
-  static async getLocations() {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.get(APIRoutes.GET_LOCATIONS);
-      return response.data;
-    } catch (error) {
-      apiCatch(error);
-      throw error.response.data;
-    }
-  }
+
   static async getUserLimits(data) {
     try {
       // fetch data from a url endpoint

@@ -1,8 +1,31 @@
-// import OutletService from "services/outlet";
 import * as ActionTypes from "constants/ActionTypes";
 import OutletService from "services/outlet";
 import history from "utils/history";
 
+/* ================================================================== */
+/* Get Location */
+/* ================================================================== */
+/**
+ * get locations
+ * @param {*}
+ */
+export function getLocationRegister() {
+  return async (dispatch) => {
+    try {
+      const responseData = await OutletService.getLocations();
+      dispatch({
+        type: ActionTypes.GET_LOCATION_SUCCESS,
+        payload: responseData,
+      });
+      return responseData;
+    } catch (errorData) {
+      dispatch({
+        type: ActionTypes.GET_LOCATION_ERROR,
+        payload: errorData,
+      });
+    }
+  };
+}
 /* ================================================================== */
 /* User Outlets */
 /* ================================================================== */
@@ -17,7 +40,6 @@ export function userOutlets(data) {
     try {
       dispatch(fetchRequest());
       const responseData = await OutletService.getOutlets(data);
-
       dispatch({
         type: ActionTypes.RECEIVE_USER_OUTLETS,
         payload: responseData,
@@ -87,7 +109,6 @@ export function updateOutlet(id, data) {
       return responseData;
     } catch (errorData) {
       dispatch(updateOutletError(errorData));
-      dispatch(fetchError());
     }
   };
 }
@@ -143,7 +164,6 @@ export function updateMenuStatus() {
     try {
       dispatch(fetchRequest());
       const res = await OutletService.updateMenuStatus();
-      console.log(res);
       dispatch(fetchError());
       return res;
     } catch (errorData) {

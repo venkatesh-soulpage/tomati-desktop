@@ -1,7 +1,7 @@
 import React from "react";
 //redux
 import { connect } from "react-redux";
-import { forgetPassword, receiveForgotPasswordError } from "_actions/auth";
+import * as Action from "_actions";
 // React router
 import { Link } from "react-router-dom";
 //react bootstrap
@@ -19,7 +19,7 @@ function ForgotPasswordForm(props) {
     var postData = {
       email: values.email,
     };
-    props.dispatch(forgetPassword(postData));
+    props.dispatch(Action.forgetPassword(postData));
   }
 
   return (
@@ -31,11 +31,11 @@ function ForgotPasswordForm(props) {
           style={{ borderRadius: "15px", width: "fit-content", margin: "auto" }}
         >
           <Form onSubmit={onFormSubmit} className="p-5">
-            {props.auth.forgotPasswordError === "No account found" && (
+            {props.reset.forgotPasswordError === "No account found" && (
               <Alert
                 variant="danger"
                 onClose={() => {
-                  receiveForgotPasswordError({});
+                  Action.receiveForgotPasswordError({});
                 }}
                 dismissible
               >
@@ -92,6 +92,6 @@ function ForgotPasswordForm(props) {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { reset: state.reset };
 }
 export default connect(mapStateToProps)(ForgotPasswordForm);

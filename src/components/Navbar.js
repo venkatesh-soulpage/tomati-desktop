@@ -22,12 +22,14 @@ function Navigation(props) {
           <Navbar.Brand href={props.auth.isAuthenticated ? "/dashboard" : "/"}>
             <img
               src={Logo}
-              className="img-fluid d-inline-block align-top logo-img "
+              className="img-fluid d-inline-block align-top"
+              width="150"
+              height="50"
               alt="Tomati.app"
             />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0">
-            <img src={toggle} alt="toggle" />
+            <img src={toggle} width="50" height="50" alt="toggle" />
           </Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto" style={{ fontSize: "smaller" }}>
@@ -48,8 +50,8 @@ function Navigation(props) {
                     <img
                       alt="profile pic"
                       className="rounded-circle"
-                      height="50px"
-                      width="50px"
+                      height="50"
+                      width="50"
                       src={props?.auth?.userData?.profile_img || User}
                     />
                   </Nav.Link>
