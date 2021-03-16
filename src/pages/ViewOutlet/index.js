@@ -84,6 +84,7 @@ function Index(props) {
     });
 
   let cover = outlet?.cover_image;
+  console.log(props);
 
   return (
     <div className="p-3">

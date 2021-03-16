@@ -69,8 +69,6 @@ const Index = (props) => {
     setValues((values) => ({ ...values, step: values.step - 1 }));
   };
 
-  console.log(values);
-
   const handleCreateOutlet = async (e) => {
     e.preventDefault();
     const {
