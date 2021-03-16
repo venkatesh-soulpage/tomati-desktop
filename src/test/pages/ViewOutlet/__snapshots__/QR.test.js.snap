@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QR page matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="card bg-white border p-5 mt-2"
+  >
+    <div
+      class="d-flex align-items-top"
+    >
+      <div
+        class="mr-5"
+      >
+        <img
+          alt="menu-qr"
+          class="border"
+          height="204px"
+          id="menu-qr"
+          width="204px"
+        />
+      </div>
+      <div
+        class="mr-auto"
+      >
+        <h4
+          class="text-dark"
+        />
+        <p
+          class="text-dark font-weight-light w-56"
+        />
+        <button
+          class="btn btn-danger mr-3 mt-1 rounded-pill"
+        >
+          Download QR Code
+        </button>
+        <button
+          class="btn btn-outline-dark mt-1 px-4 rounded-pill "
+        >
+          Order Menu tags
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
