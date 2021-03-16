@@ -21,9 +21,9 @@ const Index = (props) => {
                 className="card px-4 py-4 mt-3 cr-p"
                 style={{ borderRadius: 6 }}
                 onClick={async () => {
+                  props.dispatch(Action.selectedUser(user));
                   props.history.push({
                     pathname: "/dashboard/user",
-                    state: { user: user },
                   });
                 }}
               >

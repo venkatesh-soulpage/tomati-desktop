@@ -11,7 +11,7 @@ import ForgotPasswordForm from "forms/ForgotPasswordForm";
 import CustomModal from "components/CustomModal";
 import Success from "assets/img/Success.svg";
 
-function ForgetPassword(props) {
+function ForgotPassword(props) {
   const [show, setShow] = useState(true);
   const [message, setMessage] = useState("");
   React.useEffect(() => {
@@ -57,4 +57,4 @@ function mapStateToProps(state) {
   return { reset: state.reset };
 }
 
-export default withRouter(connect(mapStateToProps)(ForgetPassword));
+export default withRouter(connect(mapStateToProps)(ForgotPassword));

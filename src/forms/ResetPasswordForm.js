@@ -14,6 +14,7 @@ import Success from "assets/img/Success.svg";
 import Error from "assets/img/Error.svg";
 
 import { Card, Button, Form } from "react-bootstrap";
+import Loading from "components/Loading";
 
 function ResetPasswordForm(props) {
   const [values, setValues] = React.useState({
@@ -89,7 +90,6 @@ function ResetPasswordForm(props) {
                   onDismiss={() => setError2(false)}
                 />
                 <Form.Group>
-                  <Form.Label>New Password</Form.Label>
                   <PasswordTextField
                     name="password"
                     value={values.password}
@@ -137,7 +137,7 @@ function ResetPasswordForm(props) {
                       className="rounded-pill"
                       onClick={onFormSubmit}
                     >
-                      Update
+                      {props.reset.isFetching ? <Loading /> : "Update"}
                     </Button>{" "}
                     <Link to="/">
                       <Button variant="light" className="rounded-pill">

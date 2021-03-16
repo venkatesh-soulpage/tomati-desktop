@@ -1,6 +1,7 @@
 import * as ActionTypes from "constants/ActionTypes";
 
 var initialState = {
+  isFetching: null,
   resetPasswordError: null,
   resetPasswordSuccess: null,
   forgotPasswordToken: null,
@@ -10,6 +11,11 @@ var initialState = {
 
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
+    case ActionTypes.RESET_PASSWORD_RESPONSE:
+      return {
+        ...state,
+        isFetching: true,
+      };
     case ActionTypes.RECEIVE_PASSWORD_RESET_TOKEN:
       return {
         ...state,
@@ -25,11 +31,13 @@ export default function authReducer(state = initialState, action) {
         ...state,
         resetPasswordSuccess: action.payload,
         resetPasswordError: null,
+        isFetching: false,
       };
     case ActionTypes.RESET_PASSWORD_ERROR:
       return {
         ...state,
         resetPasswordError: action.payload,
+        isFetching: false,
       };
     case ActionTypes.FORGOT_PASSWORD_TOGGLE:
       return {

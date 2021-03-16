@@ -41,7 +41,7 @@ function PersonalDetails({
         <Form.Control
           type="email"
           placeholder="Email Address"
-          value={values.email}
+          value={values?.email}
           onChange={handleChange("email")}
           onBlur={() => {
             handleEmailCheck(values.email);
@@ -54,7 +54,7 @@ function PersonalDetails({
         <Form.Control
           type="text"
           placeholder="FullName"
-          value={values.first_name}
+          value={values?.first_name}
           onChange={handleChange("first_name")}
           required
         />
@@ -63,7 +63,7 @@ function PersonalDetails({
         <Form.Control
           type="text"
           placeholder="Last Name"
-          value={values.last_name}
+          value={values?.last_name}
           onChange={handleChange("last_name")}
           required
         />
@@ -72,7 +72,7 @@ function PersonalDetails({
         <Form.Control
           type="number"
           placeholder="Phone Number"
-          value={values.phone_number}
+          value={values?.phone_number}
           onChange={handleChange("phone_number")}
           required
         />
@@ -80,7 +80,7 @@ function PersonalDetails({
       <Form.Group>
         <Datetime
           inputProps={inputProps}
-          value={values.date_of_birth}
+          value={values?.date_of_birth}
           onChange={(e) =>
             setValues({ ...values, date_of_birth: moment(e).format() })
           }
@@ -89,7 +89,7 @@ function PersonalDetails({
       <Form.Group></Form.Group>
       <Form.Group>
         <PasswordTextField
-          value={values.password}
+          value={values?.password}
           onChange={handleChange("password")}
           placeholder="Password"
           required
@@ -109,7 +109,7 @@ function PersonalDetails({
         ) : null}
       </Form.Group>
       <PasswordTextField
-        value={values.confirm}
+        value={values?.confirm}
         onChange={handleChange("confirm")}
         placeholder="Confirm Password"
         required
