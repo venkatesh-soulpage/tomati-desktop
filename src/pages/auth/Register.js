@@ -95,7 +95,7 @@ function Register(props) {
                 variant="danger"
                 error={props.auth.registerError}
                 onDismiss={() => {
-                  Action.handleRegisterError(null);
+                  props.dispatch(handleRegisterError(null));
                 }}
               ></AlertMessage>
               <PersonalDetails
