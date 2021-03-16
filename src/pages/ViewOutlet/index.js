@@ -133,6 +133,7 @@ function Index(props) {
                         logo_img: { name, data: url },
                       })
                     );
+                    setShow(true);
                   }
                 }}
               />
@@ -167,6 +168,7 @@ function Index(props) {
                       cover_image: { name, data: url },
                     })
                   );
+                  setShow(true);
                 }
               }}
             />

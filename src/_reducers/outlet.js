@@ -77,6 +77,7 @@ export default function authReducer(state = initialState, action) {
         isFetching: false,
       };
     case ActionTypes.RESET_RESPONSE:
+      console.log("RESET");
       return {
         ...state,
         error: null,
