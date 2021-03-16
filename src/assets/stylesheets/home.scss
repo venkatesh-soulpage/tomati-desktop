@@ -5,51 +5,51 @@
   position: relative;
 }
 
-@media only screen and (max-width: 768px) {
-  .primary-text-color {
-    color: #2c3a56;
-    font-size: 24px;
-  }
-  .hero-text-secondary {
-    font-size: 12px;
-  }
-  .faq-text {
-    font-size: 12px;
-  }
-  .faq-header {
-    font-size: 18px;
-    font-weight: 500;
-  }
-  .section-header {
-    font-size: 16px;
-  }
-  .section-card-header {
-    font-size: 18px;
-  }
-  .table-text-secondary {
-    font-size: 14px;
-    font-weight: 500;
-  }
-}
+// @media only screen and (max-width: 768px) {
+//   .primary-text-color {
+//     color: #2c3a56;
+//     font-size: 24px;
+//   }
+//   .hero-text-secondary {
+//     font-size: 12px;
+//   }
+//   .faq-text {
+//     font-size: 12px;
+//   }
+//   .faq-header {
+//     font-size: 18px;
+//     font-weight: 500;
+//   }
+//   .section-header {
+//     font-size: 16px;
+//   }
+//   .section-card-header {
+//     font-size: 18px;
+//   }
+//   .table-text-secondary {
+//     font-size: 14px;
+//     font-weight: 500;
+//   }
+// }
 
-@media only screen and (min-width: 768px) {
-  .hero-text-secondary {
-    font-size: 20px;
-  }
-  .faq-text {
-    font-size: 20px;
-  }
-  .faq-header {
-    font-size: 36px;
-    font-weight: 500;
-  }
-  .section-header {
-    font-size: 32px;
-  }
-  .section-card-header {
-    font-size: 24px;
-  }
-}
+// @media only screen and (min-width: 768px) {
+//   .hero-text-secondary {
+//     font-size: 20px;
+//   }
+//   .faq-text {
+//     font-size: 20px;
+//   }
+//   .faq-header {
+//     font-size: 36px;
+//     font-weight: 500;
+//   }
+//   .section-header {
+//     font-size: 32px;
+//   }
+//   .section-card-header {
+//     font-size: 24px;
+//   }
+// }
 
 .how-it-works-section {
   margin-top: -475px;

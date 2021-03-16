@@ -14,7 +14,7 @@ const Index = (props) => {
     <div className="p-4">
       {props.auth.allUsers ? (
         <div>
-          {props?.auth?.allUsers.map((user, id) => {
+          {props.auth?.allUsers.map((user, id) => {
             return (
               <div
                 key={id}
@@ -50,7 +50,7 @@ const Index = (props) => {
   );
 };
 function mapStateToProps(state) {
-  return { auth: state.auth, outlet: state.outlet };
+  return { auth: state.auth };
 }
 
 export default withRouter(connect(mapStateToProps)(Index));

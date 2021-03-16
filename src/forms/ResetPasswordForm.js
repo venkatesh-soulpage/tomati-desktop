@@ -1,7 +1,7 @@
 import React from "react";
 //redux
 import { connect } from "react-redux";
-import { resetPassword } from "_actions/auth";
+import * as Action from "_actions";
 // React router
 import { Link, useLocation } from "react-router-dom";
 //react bootstrap
@@ -41,7 +41,7 @@ function ResetPasswordForm(props) {
     };
     if (values.password === values.re_password) {
       if (!error) {
-        props.dispatch(resetPassword(data));
+        props.dispatch(Action.resetPassword(data));
         setShow(true);
       }
     } else {
@@ -160,11 +160,11 @@ function ResetPasswordForm(props) {
         show={show}
         onHide={() => setShow(false)}
         message={
-          props.auth.resetPasswordSuccess || props.auth.resetPasswordError
+          props.reset.resetPasswordSuccess || props.reset.resetPasswordError
         }
-        statusicon={props.auth.resetPasswordError ? Error : Success}
+        statusicon={props.reset.resetPasswordError ? Error : Success}
         button={
-          props.auth.resetPasswordError ? (
+          props.reset.resetPasswordError ? (
             <button
               className="btn btn-primary mt-3 rounded-pill px-4 py-2"
               onClick={() => setShow(false)}
@@ -185,6 +185,6 @@ function ResetPasswordForm(props) {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { reset: state.reset };
 }
 export default connect(mapStateToProps)(ResetPasswordForm);

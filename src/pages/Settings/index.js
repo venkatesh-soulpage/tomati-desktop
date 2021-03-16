@@ -42,8 +42,6 @@ const Index = (props) => {
     if (strongRegex.test(e.target.value)) {
       setError(false);
     } else {
-      console.log(values.current_password);
-      console.log(e.target.value);
       if (values.current_password === e.target.value) {
         setMessage("Old password and New password cannot be same");
       } else {
@@ -116,8 +114,6 @@ const Index = (props) => {
   const handlePasswordUpate = async (e) => {
     e.preventDefault();
     const { current_password, new_password } = values;
-
-    console.log(values);
     if (!error) {
       if (current_password === new_password) {
         props.dispatch(

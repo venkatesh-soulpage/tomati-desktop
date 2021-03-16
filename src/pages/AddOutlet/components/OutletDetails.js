@@ -4,13 +4,7 @@ import UploadCover from "assets/img/UploadCover.svg";
 
 // modal
 
-const OutletDetails = ({
-  handleStep,
-  values,
-  handleChange,
-  setValues,
-  handleFile,
-}) => {
+const OutletDetails = ({ values, handleChange, handleFile }) => {
   return (
     <div>
       <Form.Group>
