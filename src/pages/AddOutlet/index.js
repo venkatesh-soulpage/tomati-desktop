@@ -131,10 +131,8 @@ const Index = (props) => {
                   >
                     <OutletDetails
                       values={values}
-                      setValues={setValues}
                       handleChange={handleChange}
                       handleFile={handleFile}
-                      handleStep={handleStep}
                     />
                   </Form>
                 </>
@@ -150,9 +148,7 @@ const Index = (props) => {
                   >
                     <CreateMenu
                       values={values}
-                      handleChange={handleChange}
                       setValues={setValues}
-                      handleStep={handleStep}
                       handleCreateOutlet={handleCreateOutlet}
                       handleStepPrev={handleStepPrev}
                       setError={setError}
@@ -189,8 +185,6 @@ const Index = (props) => {
 function mapStateToProps(state) {
   return {
     outlet: state.outlet,
-    auth: state.auth,
-    // , order: state.order
   };
 }
 

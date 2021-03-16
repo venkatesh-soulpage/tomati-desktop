@@ -29,7 +29,6 @@ function Index(props) {
   const [addCollaborator, setCollaborator] = useState(false);
   const [menu, setMenu] = useState(null);
   const [show, setShow] = useState(false);
-  const [message, setMessage] = useState("");
   const [collaboratorDetail, setCollaboratorDetail] = useState({
     owner_email: "",
     display_name: "",
@@ -68,7 +67,6 @@ function Index(props) {
         outlet_venue: outlet.id,
       })
     );
-    console.log(res);
     if (res) {
       setCollaborator(false);
       setShow(true);
@@ -106,7 +104,11 @@ function Index(props) {
                 width="120px"
               />
               <label htmlFor="logoImage">
-                <img src={CameraIcon} className="cr-p text-white ml-64" />
+                <img
+                  src={CameraIcon}
+                  alt="camera"
+                  className="cr-p text-white ml-64"
+                />
               </label>
             </div>
 
@@ -267,7 +269,6 @@ function Index(props) {
           <Button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"
             onClick={() => {
-              console.log("reset");
               props.dispatch(Action.resetOutletResponse());
               setShow(false);
             }}

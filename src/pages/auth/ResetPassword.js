@@ -3,7 +3,6 @@ import React from "react";
 import { connect } from "react-redux";
 //router
 import { withRouter } from "react-router-dom";
-//auth
 // local component
 import ResetPasswordForm from "forms/ResetPasswordForm";
 import { useLocation } from "react-router-dom";
@@ -21,7 +20,7 @@ function ResetPassword(props) {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { reset: state.reset };
 }
 
 export default withRouter(connect(mapStateToProps)(ResetPassword));
