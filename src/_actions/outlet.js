@@ -98,6 +98,7 @@ export function getOutlet(id) {
 
 export function updateOutlet(id, data) {
   return async (dispatch) => {
+    dispatch(resetOutletResponse());
     try {
       dispatch(fetchRequest());
       const responseData = await OutletService.updateOutlet(id, data);
