@@ -10,6 +10,7 @@ const OutletDetails = ({
   handleChange,
   setValues,
   handleFile,
+  fileErr,
 }) => {
   return (
     <div>
@@ -50,6 +51,7 @@ const OutletDetails = ({
           onChange={handleChange("description")}
           as="textarea"
           rows={3}
+          maxLength="144"
           required
         />
       </Form.Group>

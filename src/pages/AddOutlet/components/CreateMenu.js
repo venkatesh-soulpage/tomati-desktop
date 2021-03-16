@@ -13,6 +13,8 @@ const CreateMenu = ({
   setValues,
   handleStepPrev,
   props,
+  setError,
+  setMessage,
 }) => {
   const [menuName, setMenuName] = useState(null);
 
@@ -61,13 +63,18 @@ const CreateMenu = ({
           custom
           className="d-none"
           onChange={(e) => {
-            setMenuName(e.target.files[0].name);
-            Papa.parse(e.target.files[0], {
-              complete: uploadFile,
-              header: true,
-              transformHeader: (header) =>
-                header.toLowerCase().replace(/\W/g, "_"),
-            });
+            if (e.target.files[0].size > 235520) {
+              setError(true);
+              setMessage("Maximum file size is 230Kb");
+            } else {
+              setMenuName(e.target.files[0].name);
+              Papa.parse(e.target.files[0], {
+                complete: uploadFile,
+                header: true,
+                transformHeader: (header) =>
+                  header.toLowerCase().replace(/\W/g, "_"),
+              });
+            }
           }}
         />
         <Card className="p-2 d-flex pt-4 b1-dash cr-p">
