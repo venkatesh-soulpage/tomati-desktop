@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 // Redux imports and configuring store
 import { Provider } from "react-redux";
 import configureStore from "./store";
-import { persistStore, autoRehydrate } from "redux-persist";
 // Component and Service Worker
 import App from "./containers/App";
 import * as serviceWorker from "./serviceWorker";
@@ -17,8 +16,7 @@ import { Integrations } from "@sentry/tracing";
 require("dotenv").config();
 
 Sentry.init({
-  dsn:
-    "https://541e3e5cbd324e2198c46ab74ad287a4@o548624.ingest.sentry.io/5672802",
+  dsn: process.env.REACT_APP_SENTRY_DSN,
   integrations: [new Integrations.BrowserTracing()],
   // Set tracesSampleRate to 1.0 to capture 100%
   // of transactions for performance monitoring.
@@ -31,17 +29,10 @@ const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Sentry.ErrorBoundary fallback={"An error has occurred"}>
+      <App />
+    </Sentry.ErrorBoundary>
   </Provider>,
   document.getElementById("root")
 );
 serviceWorker.unregister();
-// persistStore(store, {}, () => {
-//   ReactDOM.render(
-//     <Provider store={store}>
-//       <App />
-//     </Provider>,
-//     document.getElementById("root")
-//   );
-//   serviceWorker.unregister();
-// });
