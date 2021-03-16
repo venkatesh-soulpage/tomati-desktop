@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 // redux
-// import { addEvent } from "_actions";
-// import { getLocationRegister } from "_actions";
 import * as Action from "_actions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -74,8 +72,6 @@ const Index = (props) => {
   const handleStepPrev = (values) => {
     setValues((values) => ({ ...values, step: values.step - 1 }));
   };
-
-  console.log(values);
 
   const handleCreateOutlet = async (e) => {
     e.preventDefault();

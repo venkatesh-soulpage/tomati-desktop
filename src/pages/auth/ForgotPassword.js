@@ -23,7 +23,7 @@ function ForgetPassword(props) {
 
   return (
     <>
-      {props.auth.forgotPasswordToggle ? (
+      {props.reset.forgotPasswordToggle ? (
         // <ResetPasswordForm />
         //TO DO GET A MODAl WITH A TICK
         <div>
@@ -54,7 +54,7 @@ function ForgetPassword(props) {
 }
 
 function mapStateToProps(state) {
-  return { auth: state.auth };
+  return { reset: state.reset };
 }
 
 export default withRouter(connect(mapStateToProps)(ForgetPassword));

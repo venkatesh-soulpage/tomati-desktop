@@ -47,7 +47,6 @@ function Register(props) {
   // Handling the Signup data and sending it to the service.
   const handleSignUpData = async (event) => {
     event.preventDefault();
-    console.log(values);
     if (!strongRegex.test(values.password)) {
       props.dispatch(
         Action.handleRegisterError({ message: "Use valid password" })

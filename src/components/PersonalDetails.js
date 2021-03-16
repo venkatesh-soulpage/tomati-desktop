@@ -10,7 +10,6 @@ function PersonalDetails({
   values,
   handleChange,
   handleEmailCheck,
-  props,
   setValues,
   message,
   setMessage,
@@ -45,7 +44,6 @@ function PersonalDetails({
           value={values.email}
           onChange={handleChange("email")}
           onBlur={() => {
-            console.log("blur");
             handleEmailCheck(values.email);
           }}
           required
