@@ -9,7 +9,7 @@ import OutletDetails from "./components/OutletDetails";
 import CreateMenu from "./components/CreateMenu";
 import CustomModal from "components/CustomModal";
 // react bootstrap
-import { Card, Form } from "react-bootstrap";
+import { Card, Form, Button } from "react-bootstrap";
 
 //image assets
 import Error from "assets/img/Error.svg";
@@ -52,7 +52,12 @@ const Index = (props) => {
 
   const handleFile = (name) => (event) => {
     const value = event.target.files;
-    setValues((values) => ({ ...values, [name]: value }));
+    if (event.target.files[0].size > 235520) {
+      setError(true);
+      setMessage("Maximum file size is 230Kb");
+    } else {
+      setValues((values) => ({ ...values, [name]: value }));
+    }
   };
 
   const handleStep = (e) => {
@@ -146,6 +151,8 @@ const Index = (props) => {
                       setValues={setValues}
                       handleCreateOutlet={handleCreateOutlet}
                       handleStepPrev={handleStepPrev}
+                      setError={setError}
+                      setMessage={setMessage}
                       props={props}
                     />
                   </Form>
@@ -160,6 +167,16 @@ const Index = (props) => {
         onHide={() => setError(false)}
         message={message}
         statusicon={Error}
+        button={
+          <Button
+            className="btn btn-primary mt-3 rounded-pill px-4 py-2"
+            onClick={() => {
+              setError(false);
+            }}
+          >
+            Close
+          </Button>
+        }
       />
     </div>
   );

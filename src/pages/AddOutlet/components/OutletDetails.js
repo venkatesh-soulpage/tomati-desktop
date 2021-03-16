@@ -4,7 +4,14 @@ import UploadCover from "assets/img/UploadCover.svg";
 
 // modal
 
-const OutletDetails = ({ values, handleChange, handleFile }) => {
+const OutletDetails = ({
+  handleStep,
+  values,
+  handleChange,
+  setValues,
+  handleFile,
+  fileErr,
+}) => {
   return (
     <div>
       <Form.Group>
@@ -44,6 +51,7 @@ const OutletDetails = ({ values, handleChange, handleFile }) => {
           onChange={handleChange("description")}
           as="textarea"
           rows={3}
+          maxLength="144"
           required
         />
       </Form.Group>

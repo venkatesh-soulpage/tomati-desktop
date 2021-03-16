@@ -82,6 +82,7 @@ function Index(props) {
     });
 
   let cover = outlet?.cover_image;
+  console.log(props);
 
   return (
     <div className="p-3">
@@ -99,6 +100,8 @@ function Index(props) {
                 alt="logo"
                 className=" border1-white img-fluid h-100 rounded-circle"
                 src={outlet?.logo_img}
+                height="120px"
+                width="120px"
               />
               <label htmlFor="logoImage">
                 <img
@@ -115,11 +118,11 @@ function Index(props) {
                 type="file"
                 className="d-none"
                 onChange={async (e) => {
-                  if (e.target.files[0].size > 51200) {
+                  if (e.target.files[0].size > 235520) {
                     setShow(true);
                     props.dispatch(
                       Action.updateOutletError(
-                        "Image size should not exceed 50kb"
+                        "Image size should not exceed 230kb"
                       )
                     );
                   } else {
@@ -149,11 +152,11 @@ function Index(props) {
               type="file"
               className="d-none"
               onChange={async (e) => {
-                if (e.target.files[0].size > 51200) {
+                if (e.target.files[0].size > 235520) {
                   setShow(true);
                   props.dispatch(
                     Action.updateOutletError(
-                      "Image size should not exceed 50kb"
+                      "Image size should not exceed 230kb"
                     )
                   );
                 } else {
