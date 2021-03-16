@@ -24,7 +24,6 @@ function LogIn(props) {
   });
 
   React.useEffect(function () {
-    window.scroll(0, 0);
     props.dispatch(Action.receiveUserData({}));
     props.dispatch(Action.handleLoginError(null));
   }, []);

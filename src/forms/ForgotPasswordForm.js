@@ -5,8 +5,8 @@ import * as Action from "_actions";
 // React router
 import { Link } from "react-router-dom";
 //react bootstrap
-
-import { Alert, Card, Button, Form, InputGroup } from "react-bootstrap";
+import AlertMessage from "components/AlertMessage";
+import { Card, Button, Form, InputGroup } from "react-bootstrap";
 import Mail from "assets/img/Mail.svg";
 
 function ForgotPasswordForm(props) {
@@ -31,17 +31,17 @@ function ForgotPasswordForm(props) {
           style={{ borderRadius: "15px", width: "fit-content", margin: "auto" }}
         >
           <Form onSubmit={onFormSubmit} className="p-5">
-            {props.reset.forgotPasswordError === "No account found" && (
-              <Alert
-                variant="danger"
-                onClose={() => {
-                  Action.receiveForgotPasswordError({});
-                }}
-                dismissible
-              >
-                Email Doesn't exist please try again.
-              </Alert>
-            )}
+            <AlertMessage
+              variant="danger"
+              error={
+                props.reset.forgotPasswordError && {
+                  message: "Email Doesn't exist please try again.",
+                }
+              }
+              onDismiss={() => {
+                props.dispatch(Action.receiveForgotPasswordError(null));
+              }}
+            ></AlertMessage>
             <small className="text-secondary d-flex justify-content-center p-3">
               Please enter the email address associated with this account
             </small>
@@ -54,7 +54,8 @@ function ForgotPasswordForm(props) {
                       alt="mail"
                       src={Mail}
                       className="img-fluid"
-                      width="12"
+                      width="20"
+                      height="20"
                     />
                   </InputGroup.Text>
                 </InputGroup.Prepend>

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 // Redux imports and configuring store
 import { Provider } from "react-redux";
 import configureStore from "./store";
+import { persistStore, autoRehydrate } from "redux-persist";
 // Component and Service Worker
 import App from "./containers/App";
 import * as serviceWorker from "./serviceWorker";
@@ -35,3 +36,12 @@ ReactDOM.render(
   document.getElementById("root")
 );
 serviceWorker.unregister();
+// persistStore(store, {}, () => {
+//   ReactDOM.render(
+//     <Provider store={store}>
+//       <App />
+//     </Provider>,
+//     document.getElementById("root")
+//   );
+//   serviceWorker.unregister();
+// });

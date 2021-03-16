@@ -25,7 +25,7 @@ const CreateMenu = ({
       <Form.Group>
         <Dropdown>
           <Dropdown.Toggle className="custom-dropdown text-left d-flex justify-content-between align-items-center btn">
-            {values.location_id
+            {values?.location_id
               ? _.find(props.outlet.locations, [
                   "id",
                   parseInt(values.location_id),
@@ -33,7 +33,7 @@ const CreateMenu = ({
               : "Select Locations (required)"}
           </Dropdown.Toggle>
           <Dropdown.Menu className="w-100">
-            {_.map(props.outlet.locations, function (location) {
+            {_.map(props?.outlet?.locations, function (location) {
               return (
                 <Dropdown.Item
                   key={location.id}
@@ -70,10 +70,14 @@ const CreateMenu = ({
           }}
         />
         <Card className="p-2 d-flex pt-4 b1-dash cr-p">
-          <label for="menu" className="cr-p">
+          <label htmlFor="menu" className="cr-p">
             <h6>
               <img src={UploadCover} alt="icon" className="mx-4" />
-              {values.menu ? <span>{menuName}</span> : <span>Upload Menu</span>}
+              {values?.menu ? (
+                <span>{menuName}</span>
+              ) : (
+                <span>Upload Menu</span>
+              )}
             </h6>
           </label>
         </Card>
@@ -100,7 +104,7 @@ const CreateMenu = ({
           className="btn btn-primary mt-3 rounded-pill px-4"
           onClick={handleCreateOutlet}
         >
-          {props.outlet.isFetching ? <Loading /> : "Continue"}
+          {props?.outlet?.isFetching ? <Loading /> : "Continue"}
         </Button>
       </Form.Group>
     </div>

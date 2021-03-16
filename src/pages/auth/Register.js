@@ -20,14 +20,14 @@ function Register(props) {
   const urlParams = new URLSearchParams(window.location.search);
 
   const [values, setValues] = React.useState({
-    email: urlParams.get("email"),
-    first_name: null,
-    last_name: null,
-    phone_number: null,
-    date_of_birth: null,
+    email: urlParams.get("email") ? urlParams.get("email") : "",
+    first_name: "",
+    last_name: "",
+    phone_number: "",
+    date_of_birth: "",
     password: "",
-    gender: null,
-    confirm: null,
+    gender: "",
+    confirm: "",
     token: urlParams.get("token"),
     outlet_event: urlParams.get("outlet_event"),
     outlet_venue: urlParams.get("outlet_venue"),

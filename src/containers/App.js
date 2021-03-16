@@ -38,7 +38,7 @@ function App(props) {
   }, [sessionStorage.getItem("token")]);
 
   // Rending Routes
-
+  console.log(props);
   return (
     <Router history={history}>
       <Navbar />
