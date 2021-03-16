@@ -16,7 +16,7 @@ const Collaborators = (props) => {
     <>
       {props?.outlet?.outlet?.collaborators?.length === 0 ? (
         <div className="text-center mt-5">
-          you currently have no collaborators, add some
+          You currently have no collaborators, add some
         </div>
       ) : (
         <div>
