@@ -20,6 +20,12 @@ function DashboardPage(props) {
   useEffect(() => {
     window.scroll(0, 0);
     props.dispatch(Action.getUserData());
+    if (props.auth.userData) {
+      var userId = props.auth.userData.id || null;
+      window.hj("identify", userId, {
+        emai: props.auth.userData.email,
+      });
+    }
   }, []);
 
   return (

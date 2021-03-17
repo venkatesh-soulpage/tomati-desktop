@@ -84,6 +84,7 @@ function PersonalDetails({
           onChange={(e) =>
             setValues({ ...values, date_of_birth: moment(e).format() })
           }
+          timeFormat={false}
         />
       </Form.Group>
       <Form.Group></Form.Group>
