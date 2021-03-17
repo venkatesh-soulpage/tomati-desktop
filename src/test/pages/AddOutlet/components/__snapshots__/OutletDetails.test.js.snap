@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OutletDetails page matches snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="form-group"
+    >
+      <input
+        class="form-control"
+        placeholder="Menu Name"
+        required=""
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      class="form-group"
+    >
+      <input
+        class="form-control"
+        placeholder="Phone Number"
+        required=""
+        type="number"
+        value=""
+      />
+    </div>
+    <div
+      class="form-group"
+    >
+      <textarea
+        class="form-control"
+        placeholder="Address"
+        required=""
+        rows="3"
+        type="text"
+      />
+    </div>
+    <div
+      class="form-group"
+    >
+      <textarea
+        class="form-control"
+        maxlength="144"
+        placeholder="Menu Bio"
+        required=""
+        rows="3"
+        type="text"
+      />
+    </div>
+    <div
+      class="form-group"
+    >
+      <input
+        accept=".png, .jpg,.jpeg"
+        class="d-none custom-file"
+        id="coverImage"
+        label="Custom file input"
+        type="file"
+      />
+      <div
+        class="p-2 pt-4 b1-dash cr-p card"
+      >
+        <label
+          class="cr-p"
+          for="coverImage"
+        >
+          <h6>
+             
+            <img
+              alt="icon"
+              class="mx-4"
+              src="UploadCover.svg"
+            />
+            <span>
+              Upload Menu Cover photo
+            </span>
+          </h6>
+        </label>
+      </div>
+    </div>
+    <div
+      class="form-group"
+    >
+      <div
+        class="d-none custom custom-file"
+      >
+        <input
+          accept=".png, .jpg,.jpeg"
+          class="custom-file-input"
+          id="logoImage"
+          type="file"
+        />
+        <label
+          class="custom-file-label"
+          for="logoImage"
+        >
+          Custom file input
+        </label>
+      </div>
+      <div
+        class="p-2 d-flex pt-4 b1-dash cr-p card"
+      >
+        <label
+          class="cr-p"
+          for="logoImage"
+        >
+          <h6>
+            <img
+              alt="icon"
+              class="mx-4"
+              src="UploadCover.svg"
+            />
+            <span>
+              Upload Logo
+            </span>
+          </h6>
+        </label>
+      </div>
+    </div>
+    <div
+      class="d-flex justify-content-end form-group"
+    >
+      <button
+        class="btn btn-primary mt-3 rounded-pill px-4 py-3 btn btn-primary"
+        form="register-form"
+        type="submit"
+      >
+        Continue
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
