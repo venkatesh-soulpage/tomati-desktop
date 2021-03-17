@@ -256,7 +256,6 @@ export function selectedUser(user) {
 }
 export function getSelectedUser() {
   let user = cookie.get("selectedUser");
-  console.log(user, "USER FROM ACTION");
   user = eval("(" + user + ")");
 
   return {

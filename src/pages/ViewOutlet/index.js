@@ -22,6 +22,7 @@ import QR from "./QR";
 import About from "./About";
 import CustomModal from "components/CustomModal";
 import Collaborators from "./Collaborators";
+import Loading from "components/Loading";
 
 function Index(props) {
   const [addMenu, setAddmenu] = useState(false);
@@ -82,8 +83,15 @@ function Index(props) {
     });
 
   let cover = outlet?.cover_image;
-  console.log(props);
-
+  if (
+    !outlet ||
+    !outlet?.logo_img ||
+    !outlet?.name ||
+    !outlet?.description ||
+    !outlet?.cover_image
+  ) {
+    return <Loading textSecondary={true} />;
+  }
   return (
     <div className="p-3">
       <div
@@ -141,10 +149,10 @@ function Index(props) {
           </div>
           <div className="col-md-9 align-self-center">
             <h4 className="text-white font-weight-bold fs-30 backdrop p-1">
-              {outlet && outlet.name}
+              {outlet?.name}
             </h4>
             <p className="text-white font-weight-light fs-12 w-58 backdrop p-1">
-              {outlet && outlet.description}
+              {outlet?.description}
             </p>
           </div>
           <Form.Group>
@@ -182,84 +190,86 @@ function Index(props) {
             </button>
           </div>
         </div>
-        <div className="mt-3">
-          <div className="card bg-white border p-3">
-            <div className="d-flex align-items-center">
-              <div className="">
-                <Link
-                  to={{
-                    pathname: "/dashboard/viewoutlet",
-                    state: props.location.state,
-                  }}
-                  style={{ color: "#2C3A56", textDecoration: "none" }}
-                >
-                  <h6 className="m-0">
-                    {" "}
-                    <img src={IconQR} alt="qr" className="mr-2" />
-                    QR Code
-                  </h6>
-                </Link>
-              </div>
-              <div className="mr-auto ml-5">
-                <Link
-                  to={{
-                    pathname: "/dashboard/viewoutlet/about",
-                    state: props.location.state,
-                  }}
-                  style={{ color: "#2C3A56", textDecoration: "none" }}
-                >
-                  <h6 className="m-0">About</h6>
-                </Link>
-              </div>
-              <div className="mr-auto ml-3">
-                <Link
-                  to={{
-                    pathname: "/dashboard/viewoutlet/collaborators",
-                    state: props.location.state,
-                  }}
-                  style={{ color: "#2C3A56", textDecoration: "none" }}
-                >
-                  <h6 className="m-0">Collaborators</h6>
-                </Link>
-              </div>
-              <div className="ml-auto mr-2">
-                <button
-                  className="btn btn-outline-dark rounded-pill"
-                  onClick={() => setCollaborator(true)}
-                >
-                  Add Collaborators
-                </button>
-              </div>
-              <div>
-                <button
-                  className="btn btn-danger rounded-pill"
-                  onClick={() => setAddmenu(true)}
-                >
-                  Update Menu
-                </button>
-              </div>
+      </div>
+
+      <div className="mt-3">
+        <div className="card bg-white border p-3">
+          <div className="d-flex align-items-center">
+            <div className="">
+              <Link
+                to={{
+                  pathname: "/dashboard/viewoutlet",
+                  state: props.location.state,
+                }}
+                style={{ color: "#2C3A56", textDecoration: "none" }}
+              >
+                <h6 className="m-0">
+                  {" "}
+                  <img src={IconQR} alt="qr" className="mr-2" />
+                  QR Code
+                </h6>
+              </Link>
+            </div>
+            <div className="mr-auto ml-5">
+              <Link
+                to={{
+                  pathname: "/dashboard/viewoutlet/about",
+                  state: props.location.state,
+                }}
+                style={{ color: "#2C3A56", textDecoration: "none" }}
+              >
+                <h6 className="m-0">About</h6>
+              </Link>
+            </div>
+            <div className="mr-auto ml-3">
+              <Link
+                to={{
+                  pathname: "/dashboard/viewoutlet/collaborators",
+                  state: props.location.state,
+                }}
+                style={{ color: "#2C3A56", textDecoration: "none" }}
+              >
+                <h6 className="m-0">Collaborators</h6>
+              </Link>
+            </div>
+            <div className="ml-auto mr-2">
+              <button
+                className="btn btn-outline-dark rounded-pill"
+                onClick={() => setCollaborator(true)}
+              >
+                Add Collaborators
+              </button>
+            </div>
+            <div>
+              <button
+                className="btn btn-danger rounded-pill"
+                onClick={() => setAddmenu(true)}
+              >
+                Update Menu
+              </button>
             </div>
           </div>
-          {/* card 2 */}
-          <Switch>
-            <Route
-              exact
-              path={props.match.path}
-              component={() => <QR outlet={outlet} />}
-            />
-            <Route
-              exact
-              path={`${props.match.path}/about`}
-              component={() => <About outlet={outlet} />}
-            />
-            <Route
-              exact
-              path={`${props.match.path}/collaborators`}
-              component={() => <Collaborators outlet={outlet} />}
-            />
-          </Switch>
         </div>
+        {/* card 2 */}
+        <Switch>
+          <Route
+            exact
+            path={props.match.path}
+            component={() => <QR outlet={outlet} />}
+          />
+          <Route
+            exact
+            path={`${props.match.path}/about`}
+            component={() => <About outlet={outlet} />}
+          />
+          <Route
+            exact
+            path={`${props.match.path}/collaborators`}
+            component={() => <Collaborators outlet={outlet} />}
+          />
+        </Switch>
       </div>
+
       <CustomModal
         show={show}
         message={props.outlet.message || props.outlet.error}
