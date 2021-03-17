@@ -263,7 +263,7 @@ exports[`PersonalDetails page matches snapshot 1`] = `
                   15
                 </td>
                 <td
-                  class="rdtDay rdtToday"
+                  class="rdtDay"
                   data-month="2"
                   data-value="16"
                   data-year="2021"
@@ -271,7 +271,7 @@ exports[`PersonalDetails page matches snapshot 1`] = `
                   16
                 </td>
                 <td
-                  class="rdtDay"
+                  class="rdtDay rdtToday"
                   data-month="2"
                   data-value="17"
                   data-year="2021"
