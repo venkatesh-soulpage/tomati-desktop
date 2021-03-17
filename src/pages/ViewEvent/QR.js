@@ -12,7 +12,7 @@ const QR = ({ event }) => {
             src={event?.menu_link}
             height="204px"
             width="204px"
-            // id="menu-qr"
+            id="menu-qr"
           />
         </div>
         <div className="mr-auto">
