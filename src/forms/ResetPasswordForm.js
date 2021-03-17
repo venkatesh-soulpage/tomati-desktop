@@ -162,7 +162,13 @@ function ResetPasswordForm(props) {
         message={
           props.reset.resetPasswordSuccess || props.reset.resetPasswordError
         }
-        statusicon={props.reset.resetPasswordError ? Error : Success}
+        statusicon={
+          props.reset.resetPasswordError
+            ? Error
+            : props.reset.resetPasswordSuccess
+            ? Success
+            : null
+        }
         button={
           props.reset.resetPasswordError ? (
             <button

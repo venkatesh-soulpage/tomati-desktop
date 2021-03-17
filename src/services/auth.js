@@ -71,26 +71,6 @@ class AuthAPI {
     }
   }
 
-  static async makePayment(postData) {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.post(APIRoutes.MAKE_PAYMENT, postData);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
-
-  static async validateAuthToken() {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.get(APIRoutes.AUTH_TOKEN_VALIDATION);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
-
   static async collaboratorSignup(data) {
     try {
       let URL;
