@@ -8,13 +8,23 @@ import { GeoAltFill } from "react-bootstrap-icons";
 import Loading from "components/Loading";
 
 const Index = (props) => {
-  const { user } = props.location.state;
   useEffect(() => {
-    props.dispatch(Action.userOutlets({ account_id: user.id }));
-    props.dispatch(Action.userEvents({ account_id: user.id }));
+    props.dispatch(Action.getSelectedUser());
   }, []);
+  useEffect(() => {
+    props.dispatch(
+      Action.userOutlets({ account_id: props.auth.selectedUser?.id })
+    );
+    props.dispatch(
+      Action.userEvents({ account_id: props.auth.selectedUser?.id })
+    );
+  }, [props.auth.selectedUser]);
   const { outlet } = props;
-
+  const { selectedUser: user } = props.auth;
+  console.log(props);
+  if (!user) {
+    return <Loading />;
+  }
   return (
     <div className="p-4">
       <h6 className="m-0 my-4 font-weight-bold">

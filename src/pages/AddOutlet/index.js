@@ -19,16 +19,16 @@ const Index = (props) => {
   const [message, setMessage] = useState("");
   const [values, setValues] = useState({
     name: "",
-    cover_image: null,
-    logo_img: null,
-    menu: null,
+    cover_image: undefined,
+    logo_img: undefined,
+    menu: undefined,
     plan: 1,
-    location_id: null,
-    phone_number: null,
-    latitude: null,
-    longitude: null,
-    description: null,
-    address: null,
+    location_id: undefined,
+    phone_number: undefined,
+    latitude: undefined,
+    longitude: undefined,
+    description: undefined,
+    address: undefined,
     step: 1,
   });
   const { step } = values;

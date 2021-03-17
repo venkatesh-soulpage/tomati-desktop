@@ -14,6 +14,7 @@ var initialState = {
   error: null,
   allUsers: null,
   limit: null,
+  selectedUser: null,
 };
 
 export default function authReducer(state = initialState, action) {
@@ -82,6 +83,11 @@ export default function authReducer(state = initialState, action) {
         ...state,
         error: action.payload,
         isFetching: false,
+      };
+    case ActionTypes.SELECTED_USER:
+      return {
+        ...state,
+        selectedUser: action.payload,
       };
     case ActionTypes.RESET_UPDATE_RESPONSE:
       return {

@@ -18,7 +18,7 @@ const OutletDetails = ({
         <Form.Control
           type="text"
           placeholder="Menu Name"
-          value={values.name}
+          value={values?.name}
           onChange={handleChange("name")}
           required
         />
@@ -27,7 +27,7 @@ const OutletDetails = ({
         <Form.Control
           type="number"
           placeholder="Phone Number"
-          value={values.phone_number}
+          value={values?.phone_number}
           onChange={handleChange("phone_number")}
           required
         />
@@ -36,7 +36,7 @@ const OutletDetails = ({
         <Form.Control
           type="text"
           placeholder="Address"
-          value={values.address}
+          value={values?.address}
           onChange={handleChange("address")}
           as="textarea"
           rows={3}
@@ -47,7 +47,7 @@ const OutletDetails = ({
         <Form.Control
           type="text"
           placeholder="Menu Bio"
-          value={values.description}
+          value={values?.description}
           onChange={handleChange("description")}
           as="textarea"
           rows={3}
@@ -67,12 +67,12 @@ const OutletDetails = ({
         />
 
         <Card className="p-2 pt-4 b1-dash cr-p">
-          <label for="coverImage" className="cr-p">
+          <label htmlFor="coverImage" className="cr-p">
             <h6>
               {" "}
               <img src={UploadCover} alt="icon" className="mx-4" />
-              {values.cover_image ? (
-                <span>{values.cover_image[0].name}</span>
+              {values?.cover_image ? (
+                <span>{values?.cover_image[0].name}</span>
               ) : (
                 <span>Upload Menu Cover photo</span>
               )}
@@ -92,11 +92,11 @@ const OutletDetails = ({
         />
 
         <Card className="p-2 d-flex pt-4 b1-dash cr-p">
-          <label for="logoImage" className="cr-p">
+          <label htmlFor="logoImage" className="cr-p">
             <h6>
               <img src={UploadCover} alt="icon" className="mx-4" />
-              {values.logo_img ? (
-                <span>{values.logo_img[0].name}</span>
+              {values?.logo_img ? (
+                <span>{values?.logo_img[0].name}</span>
               ) : (
                 <span>Upload Logo</span>
               )}

@@ -2,6 +2,7 @@ import { AuthService } from "services";
 import axios from "axios";
 import * as ActionTypes from "constants/ActionTypes";
 import history from "utils/history";
+import cookie from "js-cookie";
 
 /* ================================================================== */
 /* Collaborator Signup */
@@ -244,6 +245,23 @@ export function updateUserError(message) {
   return {
     type: ActionTypes.UPDATE_USER_ERROR,
     payload: message,
+  };
+}
+export function selectedUser(user) {
+  cookie.set("selectedUser", JSON.stringify(user));
+  return {
+    type: ActionTypes.SELECTED_USER,
+    payload: user,
+  };
+}
+export function getSelectedUser() {
+  let user = cookie.get("selectedUser");
+  console.log(user, "USER FROM ACTION");
+  user = eval("(" + user + ")");
+
+  return {
+    type: ActionTypes.SELECTED_USER,
+    payload: user,
   };
 }
 /* ================================================================== */
