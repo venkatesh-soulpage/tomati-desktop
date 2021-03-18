@@ -41,7 +41,9 @@ const OutletDetails = ({
           as="textarea"
           rows={3}
           required
+          maxLength="144"
         />
+        <h6 className="mt-2 grey-color">Max length 144</h6>
       </Form.Group>
       <Form.Group>
         <Form.Control
@@ -54,6 +56,7 @@ const OutletDetails = ({
           maxLength="144"
           required
         />
+        <h6 className="mt-2 grey-color">Max length 144</h6>
       </Form.Group>
       <Form.Group>
         <Form.Control
@@ -79,6 +82,7 @@ const OutletDetails = ({
             </h6>
           </label>
         </Card>
+        <h6 className="mt-2 grey-color">230Kb Max</h6>
       </Form.Group>
       <Form.Group>
         <Form.File
@@ -103,6 +107,7 @@ const OutletDetails = ({
             </h6>
           </label>
         </Card>
+        <h6 className="mt-2 grey-color">230Kb Max</h6>
       </Form.Group>
       <Form.Group className="d-flex justify-content-end">
         <Button
