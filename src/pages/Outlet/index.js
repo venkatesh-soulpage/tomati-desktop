@@ -49,7 +49,17 @@ const Index = (props) => {
   ).quantity;
 
   const handleAddoutlet = () => {
-    if (!auth?.userData?.is_subscription_active) {
+    if (
+      props.auth?.limit?.subscription?.status !== "active" &&
+      props.auth?.limit?.subscription?.status !== "in_trial"
+    ) {
+      setIcon(Error);
+      setMessage(
+        "Your account is inactive. Reactivate Subscription to add new menu."
+      );
+      setError(true);
+    } else if (!auth?.userData?.is_subscription_active) {
+      setIcon(Error);
       setMessage(
         <div>
           Your account is inactive, this might be a billing issue. Please
@@ -96,13 +106,16 @@ const Index = (props) => {
     let cbPortal = chargebeeInstance.createChargebeePortal();
     cbPortal.open({
       async close() {
-        const prevPlan = props.auth.limit.subscription.plan_id;
+        const prevPlan = props.auth.limit.subscription;
         const res = await props.dispatch(
           Action.getUserLimits({
             subscription_id: props?.auth?.userData?.transaction_id,
           })
         );
-        if (res.subscription.plan_id !== prevPlan) {
+        if (
+          res.subscription.plan_id !== prevPlan.plan_id ||
+          res.subscription.status !== prevPlan.status
+        ) {
           await props.dispatch(Action.updateMenuStatus());
           props.history.go();
         }
@@ -138,6 +151,10 @@ const Index = (props) => {
             <button
               className="btn btn-danger rounded-pill"
               onClick={handleAddoutlet}
+              // disabled={
+              //   props.auth?.limit?.subscription?.status !== "active" &&
+              //   props.auth?.limit?.subscription?.status !== "in_trial"
+              // }
             >
               + Add New Menu
             </button>
@@ -182,14 +199,19 @@ const Index = (props) => {
                 <div className="ml-auto mr-3">
                   <div className="d-flex flex-row align-items-center">
                     {activate ? (
-                      <div
+                      <button
                         className="btn btn-danger w-100 ml-auto mr-3"
                         onClick={() => {
                           toggleMenu(outlet.id, !outlet.is_venue_active);
                         }}
+                        disabled={
+                          props.auth?.limit?.subscription?.status !==
+                            "active" &&
+                          props.auth?.limit?.subscription?.status !== "in_trial"
+                        }
                       >
                         {outlet.is_venue_active ? "Deactivate" : "Activate"}
-                      </div>
+                      </button>
                     ) : null}
 
                     <button

@@ -219,7 +219,7 @@ const Index = (props) => {
                   className="btn w-25 btn-danger mt-5"
                   onClick={handleUpdateUser}
                 >
-                  {edit ? "Save" : props.auth.isFetching ? <Loading /> : "Edit"}
+                  {edit ? props.auth.isFetching ? <Loading /> : "Save" : "Edit"}
                 </button>
               </Form.Group>{" "}
             </Form>
@@ -329,20 +329,11 @@ const Index = (props) => {
                 </InputGroup>
                 {error ? (
                   <span
-                    style={
-                      message ===
-                      "Your password must be at-least 8 characters with uppercase, lowercase, number & special characters"
-                        ? {
-                            color: "#cc3300",
-                            marginTop: "2px",
-                            fontSize: "11px",
-                          }
-                        : {
-                            color: "#4BB543",
-                            marginTop: "2px",
-                            fontSize: "11px",
-                          }
-                    }
+                    style={{
+                      color: "#cc3300",
+                      marginTop: "2px",
+                      fontSize: "11px",
+                    }}
                   >
                     {message}
                   </span>
@@ -353,7 +344,13 @@ const Index = (props) => {
                 onClick={handlePasswordUpate}
                 disabled={!values.current_password || !values.new_password}
               >
-                {props.auth.isFetching ? <Loading /> : "Save"}
+                {props.auth.isFetching &&
+                values.current_password &&
+                values.new_password ? (
+                  <Loading />
+                ) : (
+                  "Save"
+                )}
               </button>
             </div>
           ) : (
