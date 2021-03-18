@@ -43,6 +43,7 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         forgotPasswordToggle: action.payload,
+        isFetching: false,
       };
 
     default:

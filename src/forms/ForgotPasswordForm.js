@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import AlertMessage from "components/AlertMessage";
 import { Card, Button, Form, InputGroup } from "react-bootstrap";
 import Mail from "assets/img/Mail.svg";
+import Loading from "components/Loading";
 
 function ForgotPasswordForm(props) {
   const [values, setValues] = React.useState({
@@ -82,7 +83,7 @@ function ForgotPasswordForm(props) {
                 className="ml-auto "
                 style={{ borderRadius: "20px" }}
               >
-                Retrieve
+                {props.reset.isFetching ? <Loading /> : "Retrieve"}
               </Button>
             </div>
           </Form>
