@@ -43,6 +43,10 @@ const Index = (props) => {
       if (status !== "active" && status !== "in_trail") {
         setShow(true);
       }
+    } else if (outletsLength <= menuQuantity) {
+      if (status !== "active" && status !== "in_trail") {
+        setShow(true);
+      }
     }
   }, [props.auth.limit, props.outlet.outlets]);
 
