@@ -19,7 +19,7 @@ exports[`PersonalDetails page matches snapshot 1`] = `
   >
     <input
       class="form-control"
-      placeholder="FullName"
+      placeholder="First Name"
       required=""
       type="text"
       value=""

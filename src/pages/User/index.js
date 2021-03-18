@@ -15,15 +15,12 @@ const Index = (props) => {
     props.dispatch(
       Action.userOutlets({ account_id: props.auth.selectedUser?.id })
     );
-    props.dispatch(
-      Action.userEvents({ account_id: props.auth.selectedUser?.id })
-    );
   }, [props.auth.selectedUser]);
   const { outlet } = props;
   const { selectedUser: user } = props.auth;
-  console.log(props);
+
   if (!user) {
-    return <Loading />;
+    return <Loading textSecondary={true} />;
   }
   return (
     <div className="p-4">

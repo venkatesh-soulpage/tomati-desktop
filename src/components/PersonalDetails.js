@@ -53,7 +53,7 @@ function PersonalDetails({
       <Form.Group>
         <Form.Control
           type="text"
-          placeholder="FullName"
+          placeholder="First Name"
           value={values?.first_name}
           onChange={handleChange("first_name")}
           required

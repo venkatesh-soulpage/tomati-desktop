@@ -9,16 +9,16 @@ const QR = ({ outlet }) => {
           <img
             alt="menu-qr"
             className="border"
-            src={outlet && outlet.menu_link}
+            src={outlet?.menu_link}
             height="204px"
             width="204px"
             id="menu-qr"
           />
         </div>
         <div className="mr-auto">
-          <h4 className="text-dark">{outlet && outlet.name}</h4>
+          <h4 className="text-dark">{outlet?.name}</h4>
           <p className="text-dark font-weight-light w-56">
-            {outlet && outlet.description}
+            {outlet?.description}
           </p>
           <button
             className="btn btn-danger mr-3 mt-1 rounded-pill"
