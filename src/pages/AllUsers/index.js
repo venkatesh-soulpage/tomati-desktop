@@ -18,7 +18,7 @@ const Index = (props) => {
             return (
               <div
                 key={id}
-                className="card px-4 py-4 mt-3 cr-p"
+                className="card px-4 py-3 mt-3 cr-p"
                 style={{ borderRadius: 6 }}
                 onClick={async () => {
                   props.dispatch(Action.selectedUser(user));
@@ -29,8 +29,11 @@ const Index = (props) => {
               >
                 <div className="d-flex align-items-center justify-content-between">
                   <div>
-                    <h6 className="m-0 font-weight-bold">
+                    <h5 className="m-0 font-weight-bold">
                       {user.first_name + " " + user.last_name}
+                    </h5>
+                    <h6 className="mt-2 font-weight-bold">
+                      {user.company_name}
                     </h6>
                   </div>
                   {/* <div>
