@@ -11,6 +11,9 @@ import * as ActionTypes from "constants/ActionTypes";
 export function forgetPassword(postData) {
   return async (dispatch) => {
     try {
+      dispatch({
+        type: ActionTypes.RESET_PASSWORD_RESPONSE,
+      });
       const responseData = await ResetService.forgetPassword(postData);
 
       dispatch({
