@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import * as Action from "_actions";
 // Router imports
 import { withRouter, Link } from "react-router-dom";
+import { MOBILE_APP_URL } from "constants/APIRoutes";
+
 // Bootstrap Imports
 import Form from "react-bootstrap/Form";
 import { Card, ProgressBar, Modal } from "react-bootstrap";
@@ -136,7 +138,7 @@ function Register(props) {
               <h5 className="text-center">Successfull! </h5>
             </div>
             <div className="col-12 mt-3 text-center">
-              <Link to="/">
+              <a href={MOBILE_APP_URL}>
                 <button
                   className="btn btn-light mt-3"
                   style={{
@@ -148,7 +150,7 @@ function Register(props) {
                 >
                   Login
                 </button>
-              </Link>
+              </a>
             </div>
           </div>
         </Modal.Body>

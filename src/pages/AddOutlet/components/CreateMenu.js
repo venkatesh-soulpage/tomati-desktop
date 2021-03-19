@@ -88,7 +88,7 @@ const CreateMenu = ({
             </h6>
           </label>
         </Card>
-        <h6 className="mt-2 grey-color">Only CSV Files</h6>
+        <h6 className="mt-2 grey-color">Only CSV Files 230Kb max.</h6>
         <h6 className="mt-2 grey-color font-italic">
           watch the CSV tutorial here
         </h6>
