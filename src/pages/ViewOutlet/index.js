@@ -147,14 +147,18 @@ function Index(props) {
               />
             </Form.Group>
           </div>
-          <div className="col-md-9 align-self-center">
-            <h4 className="text-white font-weight-bold fs-30 backdrop p-1">
-              {outlet?.name}
-            </h4>
+          <div className="col-md-9 align-self-center ">
+            <div className="menu-header">
+              <h4 className="text-white font-weight-bold fs-30 backdrop p-1 ellipse">
+                {outlet?.name}
+              </h4>
+            </div>
+
             <p className="text-white font-weight-light fs-12 w-58 backdrop p-1">
               {outlet?.description}
             </p>
           </div>
+
           <Form.Group>
             <Form.Control
               id="coverImage"
