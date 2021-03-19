@@ -10,9 +10,11 @@ import Error from "assets/img/Error.svg";
 import Success from "assets/img/Success.svg";
 import CustomModal from "components/CustomModal";
 import Loading from "components/Loading";
+import Alert from "react-bootstrap/Alert";
 
 const Index = (props) => {
   const [error, setError] = useState(false);
+  const [show, setShow] = useState(false);
   const [activate, setActivate] = useState(false);
   const [search, setSearch] = useState("");
   const [icon, setIcon] = useState(null);
@@ -27,17 +29,26 @@ const Index = (props) => {
       );
     }
   }, [props.auth.userData]);
+
+  const { outlet, auth } = props;
+
   useEffect(() => {
     const menuQuantity = auth?.limit?.subscription?.addons.find(
       (addon) => addon.id === "free-menu"
     ).quantity;
     const outletsLength = props.outlet?.outlets?.length;
+    const status = auth?.limit?.subscription?.status;
     if (outletsLength > menuQuantity) {
       setActivate(true);
+      if (status !== "active" && status !== "in_trail") {
+        setShow(true);
+      }
+    } else if (outletsLength <= menuQuantity) {
+      if (status !== "active" && status !== "in_trail") {
+        setShow(true);
+      }
     }
   }, [props.auth.limit, props.outlet.outlets]);
-
-  const { outlet, auth } = props;
 
   let filteredOutlets =
     outlet &&
@@ -126,6 +137,19 @@ const Index = (props) => {
   return (
     <div className="pt-0 pr-3 pl-4 pb-3">
       {/* stats */}
+
+      <Alert
+        show={show}
+        variant="danger"
+        onClose={() => {
+          setShow(false);
+        }}
+        style={{ position: "absolute", top: 15, zIndex: "99999999" }}
+        dismissible
+      >
+        Your account is inactive. Reactivate Subscription to add new menu.
+      </Alert>
+
       <div className="d-flex align-items-center">
         <div className="">
           <h3 className="font-weight-bold text-dark m-0">Menu</h3>

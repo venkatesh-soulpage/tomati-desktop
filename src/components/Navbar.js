@@ -15,7 +15,7 @@ function Navigation(props) {
   return (
     <div
       className="fixed-top bg-white border-bottom"
-      style={{ zIndex: "999999999" }}
+      style={{ zIndex: "9999999" }}
     >
       <Container>
         <Navbar expand="md">
