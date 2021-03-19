@@ -163,16 +163,9 @@ const Index = (props) => {
   }
   return (
     <div className="pt-0 pr-3 pl-4 pb-3">
-      <h4 className="text-start form-legend pb-2" style={{ fontSize: "26px" }}>
-        Settings
-      </h4>
+      <h4 className="text-start form-legend pb-2 fs-26">Settings</h4>
       <div className="card bg-white border p-5 mt-2">
-        <h6
-          className="text-start form-legend pb-4"
-          style={{ fontSize: "16px" }}
-        >
-          Profile Details
-        </h6>
+        <h6 className="text-start form-legend pb-4 fs-16">Profile Details</h6>
         <div className="d-flex align-items-top">
           <div className="w-75 mr-4 mb-2">
             <Form>
@@ -225,9 +218,7 @@ const Index = (props) => {
             </Form>
           </div>
           <div className="ml-auto w-50 h-75 border p-4">
-            <h4 className="text-dark" style={{ fontSize: "16px" }}>
-              Profile Picture
-            </h4>
+            <h4 className="text-dark fs-16">Profile Picture</h4>
             <div className="d-flex justify-content-between align-items-center">
               <img
                 className="rounded-circle"
@@ -239,8 +230,7 @@ const Index = (props) => {
               <button className="btn h-75 btn-outline-dark" disabled={!edit}>
                 <label
                   htmlFor="profileImage"
-                  style={{ cursor: "pointer", margin: 0 }}
-                  className="d-flex align-items-center"
+                  className="d-flex align-items-center cr-p m-0"
                   disabled={!edit}
                 >
                   <CameraFill className="mr-3" />
@@ -262,65 +252,40 @@ const Index = (props) => {
         </div>
         <div className="d-flex align-items-center border-top mt-4" />
         <div className="">
-          <h4 className="text-dark mt-5" style={{ fontSize: "16px" }}>
-            Password
-          </h4>
+          <h4 className="text-dark mt-5 fs-16">Password</h4>
           {show ? (
             <div>
               <Form.Group>
-                <InputGroup style={{ width: "50%" }}>
+                <InputGroup className="w-50">
                   <Form.Control
                     type={values.hidden ? "text" : "password"}
                     placeholder="Current Password"
                     value={values.current_password}
                     onChange={handleChange("current_password")}
                     required
-                    style={{ width: "50%", borderRight: "none" }}
+                    className="w-50 border-right-none"
                   />
                   <div className="input-group-append">
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "60px",
-                        border: "1px solid #ced4da",
-                        borderTopRightRadius: "5px",
-                        borderBottomRightRadius: "5px",
-                        backgroundColor: "transparent",
-                        cursor: "pointer",
-                      }}
-                      onClick={handlePasswordToggle}
-                    >
+                    <div className="show-button" onClick={handlePasswordToggle}>
                       <small>{values.hidden ? "Hide" : "Show"}</small>
                     </div>
                   </div>
                 </InputGroup>
               </Form.Group>
               <Form.Group>
-                <InputGroup style={{ width: "50%" }}>
+                <InputGroup className="w-50">
                   <Form.Control
                     type={values.hidden2 ? "text" : "password"}
                     placeholder="New Password"
                     value={values.new_password}
                     onChange={handleChange("new_password")}
                     required
-                    style={{ width: "50%", borderRight: "none" }}
+                    className="w-50 border-right-none"
                     onBlur={analyze}
                   />
                   <div className="input-group-append">
                     <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "60px",
-                        border: "1px solid #ced4da",
-                        borderTopRightRadius: "5px",
-                        borderBottomRightRadius: "5px",
-                        backgroundColor: "transparent",
-                        cursor: "pointer",
-                      }}
+                      className="show-button"
                       onClick={handlePasswordToggle2}
                     >
                       <small>{values.hidden2 ? "Hide" : "Show"}</small>
@@ -328,15 +293,7 @@ const Index = (props) => {
                   </div>
                 </InputGroup>
                 {error ? (
-                  <span
-                    style={{
-                      color: "#cc3300",
-                      marginTop: "2px",
-                      fontSize: "11px",
-                    }}
-                  >
-                    {message}
-                  </span>
+                  <span className="message-style">{message}</span>
                 ) : null}
               </Form.Group>
               <button

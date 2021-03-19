@@ -123,13 +123,13 @@ function Register(props) {
         onHide={() => setShow(false)}
         backdrop="static"
         keyboard={false}
-        style={{ marginTop: "15%" }}
+        className="mt-15"
       >
         {" "}
         <Modal.Header className="border-0">
           <Modal.Title />
         </Modal.Header>
-        <Modal.Body style={{ overflow: "hidden" }}>
+        <Modal.Body className="overflow-hidden">
           <div className="row pt-0 p-3 ">
             <div className="col-12 text-center mt-4">
               <img className="img-fluid mt-3" src={Success} alt="icon" />
@@ -139,15 +139,7 @@ function Register(props) {
             </div>
             <div className="col-12 mt-3 text-center">
               <a href={MOBILE_APP_URL}>
-                <button
-                  className="btn btn-light mt-3"
-                  style={{
-                    borderRadius: "30px",
-                    width: "140px",
-                    height: "54px",
-                    border: "0.5px solid black",
-                  }}
-                >
+                <button className="btn btn-light mt-3 login-button">
                   Login
                 </button>
               </a>

@@ -43,10 +43,9 @@ const Index = (props) => {
             <li disabled className="py-4 border-bottom">
               <NavLink
                 exact
-                className="drawer-link"
+                className="drawer-link blocked"
                 activeClassName="drawer-link-active"
                 to="/dashboard"
-                style={{ cursor: "not-allowed", pointerEvents: "none" }}
               >
                 {currentLocation.pathname === "/dashboard" ? (
                   <img className="mr-3" src={Icondashboard} alt="icon" />
@@ -75,10 +74,9 @@ const Index = (props) => {
             <li disabled className=" py-4 border-bottom">
               <NavLink
                 exact
-                className=" drawer-link"
+                className=" drawer-link blocked"
                 activeClassName="drawer-link-active"
                 to="/dashboard/event"
-                style={{ cursor: "not-allowed", pointerEvents: "none" }}
               >
                 {currentLocation.pathname === "/dashboard/event" ? (
                   <img className="mr-3" src={velvet2} alt="icon" />
@@ -91,10 +89,9 @@ const Index = (props) => {
             <li className=" py-4 border-bottom">
               <NavLink
                 disabled
-                className=" drawer-link"
+                className=" drawer-link blocked"
                 activeClassName="drawer-link-active"
                 to="/dashboard/wallet"
-                style={{ cursor: "not-allowed", pointerEvents: "none" }}
               >
                 {currentLocation.pathname === "/dashboard/wallet" ? (
                   <img className="mr-3" src={Iconwallet} alt="icon" />

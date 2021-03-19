@@ -18,8 +18,7 @@ const Index = (props) => {
             return (
               <div
                 key={id}
-                className="card px-4 py-3 mt-3 cr-p"
-                style={{ borderRadius: 6 }}
+                className="card px-4 py-3 mt-3 cr-p br-5"
                 onClick={async () => {
                   props.dispatch(Action.selectedUser(user));
                   props.history.push({

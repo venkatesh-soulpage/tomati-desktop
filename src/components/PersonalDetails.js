@@ -121,8 +121,7 @@ function PersonalDetails({
         <Button
           type="submit"
           form="register-form"
-          className="btn btn-danger mt-md-3 mt-5 rounded-pill px-4"
-          style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+          className="btn btn-danger mt-md-3 mt-5 rounded-pill px-4 br-30 button-size"
         >
           Continue
         </Button>
