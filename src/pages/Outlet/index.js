@@ -40,15 +40,15 @@ const Index = (props) => {
     const status = auth?.limit?.subscription?.status;
     if (outletsLength > menuQuantity) {
       setActivate(true);
-      if (status !== "active" && status !== "in_trail") {
-        setShow(true);
-      }
-    } else if (outletsLength <= menuQuantity) {
-      if (status !== "active" && status !== "in_trail") {
-        setShow(true);
-      }
     }
-  }, [props.auth.limit, props.outlet.outlets]);
+    if (status && status !== "active" && status !== "in_trail") {
+      setShow(true);
+    }
+  }, [props.auth.limit, props.outlet.outlets, props.auth?.limit?.subscription]);
+
+  if (!auth?.limit?.subscription) {
+    return <Loading textSecondary={true} />;
+  }
 
   let filteredOutlets =
     outlet &&
