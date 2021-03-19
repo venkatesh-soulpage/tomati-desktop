@@ -4,7 +4,7 @@ exports[`Navigation page matches snapshot 1`] = `
 <DocumentFragment>
   <div
     class="fixed-top bg-white border-bottom"
-    style="z-index: 999999999;"
+    style="z-index: 9999999;"
   >
     <div
       class="container"
