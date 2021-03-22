@@ -13,10 +13,7 @@ import User from "assets/img/User.png";
 
 function Navigation(props) {
   return (
-    <div
-      className="fixed-top bg-white border-bottom"
-      style={{ zIndex: "9999999" }}
-    >
+    <div className="fixed-top bg-white border-bottom nav-style">
       <Container>
         <Navbar expand="md">
           <Navbar.Brand href={props.auth.isAuthenticated ? "/dashboard" : "/"}>
@@ -32,7 +29,7 @@ function Navigation(props) {
             <img src={toggle} width="50" height="50" alt="toggle" />
           </Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto" style={{ fontSize: "smaller" }}>
+            <Nav className="ml-auto fs-smaller">
               {props.auth.isAuthenticated ? (
                 <Nav className="d-flex align-items-center">
                   <Nav.Link
@@ -40,7 +37,7 @@ function Navigation(props) {
                     to="/dashboard"
                     activeClassName="navlink-selected"
                   >
-                    <Bell style={{ fontSize: "32px" }} />
+                    <Bell className="fs-32" />
                   </Nav.Link>
                   <Nav.Link
                     as={NavLink}

@@ -37,11 +37,7 @@ const Index = (props) => {
             outlet &&
             outlet.outlets.map((outlet, id) => {
               return (
-                <div
-                  key={id}
-                  className="card px-4 py-4 mt-3"
-                  style={{ borderRadius: 6 }}
-                >
+                <div key={id} className="card px-4 py-4 mt-3 br-5">
                   <div className="d-flex align-items-center">
                     <div>
                       <h6 className="m-0 font-weight-bold">{outlet.name}</h6>

@@ -45,13 +45,39 @@ input::-webkit-inner-spin-button {
   right: 0;
   color: #fff;
 }
+.button-size {
+  width: 140px;
+  height: 54px;
+}
+.fs-12 {
+  font-size: 12px;
+}
+
+.fs-16 {
+  font-size: 16px;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
 
 .fs-24 {
   font-size: 24px;
 }
 
-.fs-20 {
-  font-size: 20px;
+.fs-26 {
+  font-size: 26px;
+}
+
+.fs-30 {
+  font-size: 30px;
+}
+
+.fs-32 {
+  font-size: 32px;
+}
+.fs-smaller {
+  font-size: smaller;
 }
 
 .fw-600 {
@@ -69,9 +95,16 @@ input::-webkit-inner-spin-button {
 .grey-color {
   color: #989ca4;
 }
-
+.color-link {
+  color: #2c3a56;
+  text-decoration: none;
+}
 .ht-54 {
   height: 54px;
+}
+
+.ht-320 {
+  height: 320px;
 }
 
 .ht-700 {
@@ -82,10 +115,9 @@ input::-webkit-inner-spin-button {
   height: 100vh;
 }
 
-.br-12 {
-  border-radius: 12px;
+.mt-15 {
+  margin-top: 15%;
 }
-
 .mt-100 {
   margin-top: 100px;
 }
@@ -103,17 +135,14 @@ input::-webkit-inner-spin-button {
   height: 120px;
   width: 120px;
 }
-
+.login-button {
+  border-radius: 30px;
+  width: 140px;
+  height: 54px;
+  border: 0.5px solid black;
+}
 .blur {
   padding-top: 48px;
-}
-
-.fs-30 {
-  font-size: 30px;
-}
-
-.fs-12 {
-  font-size: 12px;
 }
 
 .ml-64 {
@@ -130,6 +159,26 @@ input::-webkit-inner-spin-button {
   border-radius: 5px;
 }
 
+.br-12 {
+  border-radius: 12px;
+}
+
+.br-15 {
+  border-radius: 15px;
+}
+
+.br-20 {
+  border-radius: 20px;
+}
+
+.br-30 {
+  border-radius: 30px;
+}
+.card-style {
+  border-radius: 15px;
+  width: fit-content;
+  margin: auto;
+}
 .w-58 {
   max-width: 58%;
 }
@@ -153,4 +202,16 @@ input::-webkit-inner-spin-button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.nav-style {
+  z-index: 9999999;
+}
+.message-style {
+  color: #cc3300;
+  margin-top: 2px;
+  font-size: 11px;
+}
+.blocked {
+  cursor: not-allowed;
+  pointer-events: none;
 }

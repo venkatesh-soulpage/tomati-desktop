@@ -27,10 +27,7 @@ function ForgotPasswordForm(props) {
     <div className="bg-light container-fluid d-flex justify-content-center align-items-center h-75">
       <div className="container ">
         <h3 className="text-center">Forgot Password</h3>
-        <Card
-          className="mt-5"
-          style={{ borderRadius: "15px", width: "fit-content", margin: "auto" }}
-        >
+        <Card className="mt-5 card-style">
           <Form onSubmit={onFormSubmit} className="p-5">
             <AlertMessage
               variant="danger"
@@ -77,12 +74,7 @@ function ForgotPasswordForm(props) {
               <Link className="red-link" to="/">
                 Back to Login
               </Link>
-              <Button
-                type="submit"
-                variant="primary"
-                className="ml-auto "
-                style={{ borderRadius: "20px" }}
-              >
+              <Button type="submit" variant="primary" className="ml-auto br-20">
                 {props.reset.isFetching ? <Loading /> : "Retrieve"}
               </Button>
             </div>

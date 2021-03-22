@@ -18,21 +18,7 @@ function PasswordTextFeild({ ...props }) {
         {...props}
       />
       <div className="input-group-append">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "60px",
-            border: "1px solid #ced4da",
-            borderTopRightRadius: "5px",
-            borderBottomRightRadius: "5px",
-            backgroundColor: "transparent",
-            cursor: "pointer",
-            borderLeft: "none",
-          }}
-          onClick={handlePasswordToggle}
-        >
+        <div className="show-button" onClick={handlePasswordToggle}>
           <small>{values.hidden ? "Show" : "Hide"}</small>
         </div>
       </div>

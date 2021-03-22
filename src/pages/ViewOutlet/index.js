@@ -199,7 +199,7 @@ function Index(props) {
                   pathname: "/dashboard/viewoutlet",
                   state: props.location.state,
                 }}
-                style={{ color: "#2C3A56", textDecoration: "none" }}
+                className="color-link"
               >
                 <h6 className="m-0">
                   {" "}
@@ -214,7 +214,7 @@ function Index(props) {
                   pathname: "/dashboard/viewoutlet/about",
                   state: props.location.state,
                 }}
-                style={{ color: "#2C3A56", textDecoration: "none" }}
+                className="color-link"
               >
                 <h6 className="m-0">About</h6>
               </Link>
@@ -225,7 +225,7 @@ function Index(props) {
                   pathname: "/dashboard/viewoutlet/collaborators",
                   state: props.location.state,
                 }}
-                style={{ color: "#2C3A56", textDecoration: "none" }}
+                className="color-link"
               >
                 <h6 className="m-0">Collaborators</h6>
               </Link>
