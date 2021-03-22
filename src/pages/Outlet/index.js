@@ -40,15 +40,15 @@ const Index = (props) => {
     const status = auth?.limit?.subscription?.status;
     if (outletsLength > menuQuantity) {
       setActivate(true);
-      if (status !== "active" && status !== "in_trail") {
-        setShow(true);
-      }
-    } else if (outletsLength <= menuQuantity) {
-      if (status !== "active" && status !== "in_trail") {
-        setShow(true);
-      }
     }
-  }, [props.auth.limit, props.outlet.outlets]);
+    if (status && status !== "active" && status !== "in_trail") {
+      setShow(true);
+    }
+  }, [props.auth.limit, props.outlet.outlets, props.auth?.limit?.subscription]);
+
+  if (!auth?.limit?.subscription) {
+    return <Loading textSecondary={true} />;
+  }
 
   let filteredOutlets =
     outlet &&
@@ -166,10 +166,7 @@ const Index = (props) => {
           Change
         </div>
       </div>
-      <div
-        className="card px-4 py-3 shadow-sm mt-3"
-        style={{ borderRadius: 6 }}
-      >
+      <div className="card px-4 py-3 shadow-sm mt-3 br-5">
         <div className="d-flex align-items-center">
           <div>
             <button
@@ -206,11 +203,7 @@ const Index = (props) => {
         filteredOutlets &&
         filteredOutlets.map((outlet, id) => {
           return (
-            <div
-              key={id}
-              className="card px-4 py-4 mt-3"
-              style={{ borderRadius: 6 }}
-            >
+            <div key={id} className="card px-4 py-4 mt-3 br-5">
               <div className="d-flex align-items-center">
                 <div>
                   <h6 className="m-0 font-weight-bold">{outlet.name}</h6>

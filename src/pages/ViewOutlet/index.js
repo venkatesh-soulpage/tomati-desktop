@@ -205,7 +205,7 @@ function Index(props) {
                   pathname: "/dashboard/viewoutlet",
                   state: props.location.state,
                 }}
-                style={{ color: "#2C3A56", textDecoration: "none" }}
+                className="color-link"
               >
                 <h6 className="m-0">
                   {" "}
@@ -220,7 +220,7 @@ function Index(props) {
                   pathname: "/dashboard/viewoutlet/about",
                   state: props.location.state,
                 }}
-                style={{ color: "#2C3A56", textDecoration: "none" }}
+                className="color-link"
               >
                 <h6 className="m-0">About</h6>
               </Link>
@@ -231,7 +231,7 @@ function Index(props) {
                   pathname: "/dashboard/viewoutlet/collaborators",
                   state: props.location.state,
                 }}
-                style={{ color: "#2C3A56", textDecoration: "none" }}
+                className="color-link"
               >
                 <h6 className="m-0">Collaborators</h6>
               </Link>
@@ -296,9 +296,7 @@ function Index(props) {
       <Modal
         show={addCollaborator}
         onHide={() => setCollaborator(false)}
-        style={{
-          marginTop: "15%",
-        }}
+        className="mt-15"
       >
         <Modal.Header className="border-0" closeButton></Modal.Header>
         <Modal.Body>
@@ -332,8 +330,7 @@ function Index(props) {
             </Form.Group>
 
             <Button
-              className="btn btn-primary mt-3 rounded-pill"
-              style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+              className="btn btn-primary mt-3 rounded-pill br-30 button-size"
               onClick={handleCollaborator}
             >
               Send
@@ -341,19 +338,11 @@ function Index(props) {
           </div>
         </Modal.Body>
       </Modal>
-      <Modal
-        show={addMenu}
-        onHide={() => setAddmenu(false)}
-        style={{
-          marginTop: "15%",
-        }}
-      >
+      <Modal show={addMenu} onHide={() => setAddmenu(false)} className="mt-15">
         <Modal.Header className="border-0 pb-0" closeButton></Modal.Header>
-        <Modal.Body className="pt-0" style={{ height: "320px" }}>
+        <Modal.Body className="pt-0 ht-320">
           <div className="text-left">
-            <h5 className="mb-5" style={{ fontSize: "24px" }}>
-              Menu Upload
-            </h5>
+            <h5 className="mb-5 fs-24">Menu Upload</h5>
             <Form.Group>
               <Form.File
                 id="menu"
@@ -371,26 +360,20 @@ function Index(props) {
                   });
                 }}
               />
-              <Card
-                style={{ border: " 1px dashed", cursor: "pointer" }}
-                className="p-2 d-flex pt-4"
-              >
-                <label for="menu" style={{ cursor: "pointer" }}>
+              <Card className="p-2 d-flex pt-4 cr-p b1-dash">
+                <label for="menu" className="cr-p">
                   <h6>
                     <img src={UploadCover} alt="icon" className="mx-4" />
                     {menu ? <span>{menuName}</span> : <span>Upload Menu</span>}
                   </h6>
                 </label>
               </Card>
-              <h6 className="mt-2" style={{ color: "#989CA4" }}>
-                Only CSV Files
-              </h6>
+              <h6 className="mt-2 grey-color">Only CSV Files</h6>
             </Form.Group>
           </div>
           <div className="text-right">
             <Button
-              className="btn btn-primary mt-3 rounded-pill"
-              style={{ borderRadius: "30px", width: "140px", height: "54px" }}
+              className="btn btn-primary mt-3 rounded-pill br-30 button-size"
               onClick={handleMenu}
             >
               Upload

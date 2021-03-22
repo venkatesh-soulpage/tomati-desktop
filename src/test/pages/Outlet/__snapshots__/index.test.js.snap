@@ -3,85 +3,17 @@
 exports[`Outlet page matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="pt-0 pr-3 pl-4 pb-3"
+    class="d-flex justify-content-center align-items-center"
   >
     <div
-      class="d-flex align-items-center"
+      class="spinner-border text-secondary"
+      role="status"
     >
-      <div
-        class=""
+      <span
+        class="sr-only "
       >
-        <h3
-          class="font-weight-bold text-dark m-0"
-        >
-          Menu
-        </h3>
-      </div>
-      <div
-        class="ml-auto  mr-3"
-      >
-        <h4
-          class="lead m-0"
-        >
-          Total Menus: 0
-        </h4>
-      </div>
-      <div
-        class=" mr-3"
-      >
-        <button
-          class="btn btn-dark btn-sm"
-        />
-      </div>
-      <div
-        class="btn btn-outline-dark btn-sm"
-      >
-        Change
-      </div>
-    </div>
-    <div
-      class="card px-4 py-3 shadow-sm mt-3"
-      style="border-radius: 6px;"
-    >
-      <div
-        class="d-flex align-items-center"
-      >
-        <div>
-          <button
-            class="btn btn-danger rounded-pill"
-          >
-            + Add New Menu
-          </button>
-        </div>
-        <div
-          class=" ml-auto"
-        >
-          <input
-            class="form-control "
-            placeholder="Filter by search"
-            type="text"
-            value=""
-          />
-        </div>
-      </div>
-    </div>
-    <div
-      class="mt-5"
-    >
-      <div
-        class="d-flex justify-content-center align-items-center"
-      >
-        <div
-          class="spinner-border text-secondary"
-          role="status"
-        >
-          <span
-            class="sr-only "
-          >
-            Loading...
-          </span>
-        </div>
-      </div>
+        Loading...
+      </span>
     </div>
   </div>
 </DocumentFragment>

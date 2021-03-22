@@ -60,7 +60,7 @@ exports[`CreateMenu page matches snapshot 1`] = `
       <h6
         class="mt-2 grey-color"
       >
-        Only CSV Files
+        Only CSV Files 230Kb max.
       </h6>
       <h6
         class="mt-2 grey-color font-italic"

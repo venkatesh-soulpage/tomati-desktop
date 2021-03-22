@@ -24,10 +24,7 @@ const Collaborators = (props) => {
             return (
               <div key={id} className="p-2 px-0 m-0">
                 <div>
-                  <div
-                    className="card px-4 py-4 mt-1 cr-p"
-                    style={{ borderRadius: 6 }}
-                  >
+                  <div className="card px-4 py-4 mt-1 cr-p br-5">
                     <div className="d-flex align-items-center justify-content-between">
                       <div>
                         <h6 className="m-0 font-weight-bold">

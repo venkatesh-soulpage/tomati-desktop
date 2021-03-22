@@ -78,7 +78,7 @@ function ResetPasswordForm(props) {
         <div className="row h-100 justify-content-center mt-5">
           <div className="col-md-6 w-100 align-self-center">
             <h2 className="text-dark mb-0 text-center mb-4">Update Password</h2>
-            <Card className="p-5 pb-3" style={{ borderRadius: "15px" }}>
+            <Card className="p-5 pb-3 br-15">
               <Form>
                 <AlertMessage
                   variant="danger"
