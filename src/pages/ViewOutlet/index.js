@@ -4,16 +4,14 @@ import * as Action from "_actions";
 import { connect } from "react-redux";
 import { withRouter, Link, Switch, Route } from "react-router-dom";
 // papaparse
-import Papa from "papaparse";
 //lodash
 import _ from "lodash";
 // react bootstrap
-import { Modal, Button, Card, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 // bootstrap icons
 import { CameraFill } from "react-bootstrap-icons";
 // image assets
 import IconQR from "assets/img/IconQR.svg";
-import UploadCover from "assets/img/UploadCover.svg";
 import Success from "assets/img/Success.svg";
 import Error from "assets/img/Error.svg";
 import CameraIcon from "assets/img/CameraIcon.svg";
@@ -23,13 +21,14 @@ import About from "./About";
 import CustomModal from "components/CustomModal";
 import Collaborators from "./Collaborators";
 import Loading from "components/Loading";
+import AddCollaboratorModal from "./AddCollaboratorModal";
+import UpdateMenuModal from "./UpdateMenuModal";
 
 function Index(props) {
   const [addMenu, setAddmenu] = useState(false);
-  const [menuName, setMenuName] = useState(null);
   const [addCollaborator, setCollaborator] = useState(false);
-  const [menu, setMenu] = useState(null);
   const [show, setShow] = useState(false);
+  const [menu, setMenu] = useState(null);
   const [collaboratorDetail, setCollaboratorDetail] = useState({
     owner_email: "",
     display_name: "",
@@ -41,11 +40,6 @@ function Index(props) {
   useEffect(() => {
     props.dispatch(Action.getOutlet(props.location.state));
   }, []);
-
-  const uploadFile = (data) => {
-    const { data: csv_data } = data;
-    setMenu(_.reject(csv_data, { name: "" }));
-  };
 
   const handleMenu = () => {
     props.dispatch(Action.addOutletMenu(outlet.id, menu));
@@ -293,111 +287,20 @@ function Index(props) {
           </Button>
         }
       />
-      <Modal
-        show={addCollaborator}
-        onHide={() => setCollaborator(false)}
-        style={{
-          marginTop: "15%",
-        }}
-      >
-        <Modal.Header className="border-0" closeButton></Modal.Header>
-        <Modal.Body>
-          <div className="text-center">
-            <Form.Group>
-              <Form.Control
-                type="text"
-                placeholder="Collaborator's Email"
-                value={collaboratorDetail.owner_email}
-                required
-                onChange={handleChange("owner_email")}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Control
-                type="text"
-                placeholder="FirstName LastName"
-                value={collaboratorDetail.display_name}
-                required
-                onChange={handleChange("display_name")}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Control
-                type="text"
-                placeholder="Short Message"
-                value={collaboratorDetail.custom_message}
-                required
-                onChange={handleChange("custom_message")}
-              />
-            </Form.Group>
-
-            <Button
-              className="btn btn-primary mt-3 rounded-pill"
-              style={{ borderRadius: "30px", width: "140px", height: "54px" }}
-              onClick={handleCollaborator}
-            >
-              Send
-            </Button>
-          </div>
-        </Modal.Body>
-      </Modal>
-      <Modal
-        show={addMenu}
-        onHide={() => setAddmenu(false)}
-        style={{
-          marginTop: "15%",
-        }}
-      >
-        <Modal.Header className="border-0 pb-0" closeButton></Modal.Header>
-        <Modal.Body className="pt-0" style={{ height: "320px" }}>
-          <div className="text-left">
-            <h5 className="mb-5" style={{ fontSize: "24px" }}>
-              Menu Upload
-            </h5>
-            <Form.Group>
-              <Form.File
-                id="menu"
-                accept=".csv"
-                label="Custom file input"
-                custom
-                className="d-none"
-                onChange={(e) => {
-                  setMenuName(e.target.files[0].name);
-                  Papa.parse(e.target.files[0], {
-                    complete: uploadFile,
-                    header: true,
-                    transformHeader: (header) =>
-                      header.toLowerCase().replace(/\W/g, "_"),
-                  });
-                }}
-              />
-              <Card
-                style={{ border: " 1px dashed", cursor: "pointer" }}
-                className="p-2 d-flex pt-4"
-              >
-                <label for="menu" style={{ cursor: "pointer" }}>
-                  <h6>
-                    <img src={UploadCover} alt="icon" className="mx-4" />
-                    {menu ? <span>{menuName}</span> : <span>Upload Menu</span>}
-                  </h6>
-                </label>
-              </Card>
-              <h6 className="mt-2" style={{ color: "#989CA4" }}>
-                Only CSV Files
-              </h6>
-            </Form.Group>
-          </div>
-          <div className="text-right">
-            <Button
-              className="btn btn-primary mt-3 rounded-pill"
-              style={{ borderRadius: "30px", width: "140px", height: "54px" }}
-              onClick={handleMenu}
-            >
-              Upload
-            </Button>
-          </div>
-        </Modal.Body>
-      </Modal>
+      <AddCollaboratorModal
+        addCollaborator={addCollaborator}
+        setCollaborator={setCollaborator}
+        collaboratorDetail={collaboratorDetail}
+        handleChange={handleChange}
+        handleCollaborator={handleCollaborator}
+      />
+      <UpdateMenuModal
+        addMenu={addMenu}
+        setAddmenu={setAddmenu}
+        handleMenu={handleMenu}
+        menu={menu}
+        setMenu={setMenu}
+      />
     </div>
   );
 }
