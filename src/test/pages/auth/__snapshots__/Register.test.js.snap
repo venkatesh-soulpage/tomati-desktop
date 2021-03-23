@@ -306,7 +306,7 @@ exports[`Register page after entering values 1`] = `
                           18
                         </td>
                         <td
-                          class="rdtDay rdtToday"
+                          class="rdtDay"
                           data-month="2"
                           data-value="19"
                           data-year="2021"
@@ -340,7 +340,7 @@ exports[`Register page after entering values 1`] = `
                           22
                         </td>
                         <td
-                          class="rdtDay"
+                          class="rdtDay rdtToday"
                           data-month="2"
                           data-value="23"
                           data-year="2021"
@@ -522,7 +522,7 @@ exports[`Register page after entering values 1`] = `
                 class="input-group-append"
               >
                 <div
-                  style="display: flex; justify-content: center; align-items: center; width: 60px; border: 1px solid #ced4da; border-top-right-radius: 5px; border-bottom-right-radius: 5px; background-color: transparent; cursor: pointer;"
+                  class="show-button"
                 >
                   <small>
                     Show
@@ -545,7 +545,7 @@ exports[`Register page after entering values 1`] = `
               class="input-group-append"
             >
               <div
-                style="display: flex; justify-content: center; align-items: center; width: 60px; border: 1px solid #ced4da; border-top-right-radius: 5px; border-bottom-right-radius: 5px; background-color: transparent; cursor: pointer;"
+                class="show-button"
               >
                 <small>
                   Show
@@ -557,9 +557,8 @@ exports[`Register page after entering values 1`] = `
             class="d-flex justify-content-end mt-5 form-group"
           >
             <button
-              class="btn btn-danger mt-md-3 mt-5 rounded-pill px-4 btn btn-primary"
+              class="btn btn-danger mt-md-3 mt-5 rounded-pill px-4 br-30 button-size btn btn-primary"
               form="register-form"
-              style="border-radius: 30px; width: 140px; height: 54px;"
               type="submit"
             >
               Continue
@@ -896,7 +895,7 @@ exports[`Register page before entering values 1`] = `
                           18
                         </td>
                         <td
-                          class="rdtDay rdtToday"
+                          class="rdtDay"
                           data-month="2"
                           data-value="19"
                           data-year="2021"
@@ -930,7 +929,7 @@ exports[`Register page before entering values 1`] = `
                           22
                         </td>
                         <td
-                          class="rdtDay"
+                          class="rdtDay rdtToday"
                           data-month="2"
                           data-value="23"
                           data-year="2021"
@@ -1112,7 +1111,7 @@ exports[`Register page before entering values 1`] = `
                 class="input-group-append"
               >
                 <div
-                  style="display: flex; justify-content: center; align-items: center; width: 60px; border: 1px solid #ced4da; border-top-right-radius: 5px; border-bottom-right-radius: 5px; background-color: transparent; cursor: pointer;"
+                  class="show-button"
                 >
                   <small>
                     Show
@@ -1135,7 +1134,7 @@ exports[`Register page before entering values 1`] = `
               class="input-group-append"
             >
               <div
-                style="display: flex; justify-content: center; align-items: center; width: 60px; border: 1px solid #ced4da; border-top-right-radius: 5px; border-bottom-right-radius: 5px; background-color: transparent; cursor: pointer;"
+                class="show-button"
               >
                 <small>
                   Show
@@ -1147,9 +1146,8 @@ exports[`Register page before entering values 1`] = `
             class="d-flex justify-content-end mt-5 form-group"
           >
             <button
-              class="btn btn-danger mt-md-3 mt-5 rounded-pill px-4 btn btn-primary"
+              class="btn btn-danger mt-md-3 mt-5 rounded-pill px-4 br-30 button-size btn btn-primary"
               form="register-form"
-              style="border-radius: 30px; width: 140px; height: 54px;"
               type="submit"
             >
               Continue

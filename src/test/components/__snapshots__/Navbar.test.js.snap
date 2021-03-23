@@ -3,8 +3,7 @@
 exports[`Navigation page matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="fixed-top bg-white border-bottom"
-    style="z-index: 9999999;"
+    class="fixed-top bg-white border-bottom nav-style"
   >
     <div
       class="container"
@@ -42,8 +41,7 @@ exports[`Navigation page matches snapshot 1`] = `
           id="basic-navbar-nav"
         >
           <div
-            class="ml-auto navbar-nav"
-            style="font-size: smaller;"
+            class="ml-auto fs-smaller navbar-nav"
           />
         </div>
       </nav>
