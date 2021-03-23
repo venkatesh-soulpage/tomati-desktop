@@ -62,39 +62,6 @@ const Index = (props) => {
             })
           )}
         </Tab>
-
-        {/* <Tab eventKey="events" title="Events">
-          {event &&
-            event.events.map((event, id) => {
-              return (
-                <div
-                  key={id}
-                  className="card px-4 py-4  mt-3"
-                  style={{ borderRadius: 6 }}
-                >
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <h6 className="m-0 font-weight-bold">{event.name}</h6>
-                      <p className="m-0 mt-2  text-dark">
-                        <GeoAltFill className="mr-2" />
-                        {event.address}
-                      </p>
-                    </div>
-                    <div className="ml-auto mr-3">
-                      <Link
-                        to={{
-                          pathname: "/dashboard/viewevent",
-                          state: event.id,
-                        }}
-                      >
-                        <button className="btn btn-danger">View</button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-        </Tab> */}
       </Tabs>
     </div>
   );
