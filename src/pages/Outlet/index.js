@@ -144,7 +144,6 @@ const Index = (props) => {
         onClose={() => {
           setShow(false);
         }}
-        style={{ position: "absolute", top: 15, zIndex: "99999999" }}
         dismissible
       >
         Your account is inactive. Reactivate Subscription to add new menu.
