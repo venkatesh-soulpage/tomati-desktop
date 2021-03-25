@@ -41,7 +41,7 @@ const Index = (props) => {
     if (outletsLength > menuQuantity) {
       setActivate(true);
     }
-    if (status && status !== "active" && status !== "in_trail") {
+    if (status && status !== "active" && status !== "in_trial") {
       setShow(true);
     }
   }, [props.auth.limit, props.outlet.outlets, props.auth?.limit?.subscription]);
