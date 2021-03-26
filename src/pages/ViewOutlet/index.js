@@ -3,9 +3,6 @@ import React, { useEffect, useState } from "react";
 import * as Action from "_actions";
 import { connect } from "react-redux";
 import { withRouter, Link, Switch, Route } from "react-router-dom";
-// papaparse
-//lodash
-import _ from "lodash";
 // react bootstrap
 import { Button, Form } from "react-bootstrap";
 // bootstrap icons

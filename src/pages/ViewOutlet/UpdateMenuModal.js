@@ -71,6 +71,7 @@ const UpdateMenuModal = ({
               className="btn btn-primary mt-3 rounded-pill"
               style={{ borderRadius: "30px", width: "140px", height: "54px" }}
               onClick={handleMenu}
+              disabled={menuName ? false : true}
             >
               Upload
             </Button>
