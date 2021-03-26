@@ -17,7 +17,6 @@ export const MOBILE_APP_URL =
 
 // Auth Routes
 export const CLIENT_LOGIN = "/api/auth/login";
-export const CLIENT_REGISTER = "/api/auth/user-signup";
 export const GET_EMAIL_OTP = "/api/verifications/email/get-code";
 export const GET_LOCATIONS = "/api/outletlocations";
 export const CHECK_EMAIL_CODE = "/api/verifications/email/check-code";

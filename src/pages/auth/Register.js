@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as Action from "_actions";
 // Router imports
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { MOBILE_APP_URL } from "constants/APIRoutes";
 
 // Bootstrap Imports

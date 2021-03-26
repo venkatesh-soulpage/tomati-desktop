@@ -52,6 +52,7 @@ const AddCollaboratorModal = ({
               className="btn btn-primary mt-3 rounded-pill"
               style={{ borderRadius: "30px", width: "140px", height: "54px" }}
               onClick={handleCollaborator}
+              disabled={collaboratorDetail.owner_email.trim() ? false : true}
             >
               Send
             </Button>

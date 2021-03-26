@@ -51,16 +51,6 @@ class AuthAPI {
     }
   }
 
-  static async postSignUpDetails(postData) {
-    try {
-      // fetch data from a url endpoint
-      const response = await axios.post(APIRoutes.CLIENT_REGISTER, postData);
-      return response.data;
-    } catch (error) {
-      throw error.response.data;
-    }
-  }
-
   static async getEmailOtp(postData) {
     try {
       // fetch data from a url endpoint
