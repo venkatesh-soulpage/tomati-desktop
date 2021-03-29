@@ -95,9 +95,10 @@ input::-webkit-inner-spin-button {
 .grey-color {
   color: #989ca4;
 }
-.color-link {
+.color-link,
+:hover {
   color: #2c3a56;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 .ht-54 {
   height: 54px;
