@@ -5,7 +5,6 @@ import * as Action from "_actions";
 // react bootstrap
 import { Form, InputGroup, Button } from "react-bootstrap";
 // bootstrap icons
-import { CameraFill } from "react-bootstrap-icons";
 // Router
 import { withRouter } from "react-router-dom";
 import CustomModal from "components/CustomModal";
@@ -14,6 +13,8 @@ import Success from "assets/img/Success.svg";
 import Error from "assets/img/Error.svg";
 import User from "assets/img/User.png";
 import Loading from "components/Loading";
+import ProfileDetails from "./ProfileDetails";
+import ChangePassword from "./ChangePassword";
 
 const Index = (props) => {
   const [show, setShow] = useState(false);
@@ -34,24 +35,6 @@ const Index = (props) => {
   });
 
   const [error, setError] = useState(false);
-  const strongRegex = new RegExp(
-    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
-  );
-
-  const analyze = (e) => {
-    if (strongRegex.test(e.target.value)) {
-      setError(false);
-    } else {
-      if (values.current_password === e.target.value) {
-        setMessage("Old password and New password cannot be same");
-      } else {
-        setMessage(
-          "Your password must be at-least 8 characters with uppercase, lowercase, number & special characters"
-        );
-      }
-      setError(true);
-    }
-  };
 
   useEffect(() => {
     if (props.auth.userData) {
@@ -166,150 +149,32 @@ const Index = (props) => {
       <h4 className="text-start form-legend pb-2 fs-26">Settings</h4>
       <div className="card bg-white border p-5 mt-2">
         <h6 className="text-start form-legend pb-4 fs-16">Profile Details</h6>
-        <div className="d-flex align-items-top">
-          <div className="w-75 mr-4 mb-2">
-            <Form>
-              <Form.Group>
-                <Form.Control
-                  id="firstName"
-                  name="firstName"
-                  type="text"
-                  onChange={handleChange("first_name")}
-                  value={values.first_name}
-                  className="mb-3 h-100"
-                  disabled={!edit}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  type="text"
-                  value={values.last_name}
-                  onChange={handleChange("last_name")}
-                  required
-                  className="mb-3 h-100"
-                  disabled={!edit}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  type="text"
-                  value={values.email}
-                  onChange={(e) => {
-                    setSuccess(true);
-                    props.dispatch(
-                      Action.updateUserError(
-                        "To change email contact support on hello@tomati.app"
-                      )
-                    );
-                  }}
-                  required
-                  className="mb-3 h-100"
-                  disabled={!edit}
-                />
-              </Form.Group>
-              <Form.Group>
-                <button
-                  className="btn w-25 btn-danger mt-5"
-                  onClick={handleUpdateUser}
-                >
-                  {edit ? props.auth.isFetching ? <Loading /> : "Save" : "Edit"}
-                </button>
-              </Form.Group>{" "}
-            </Form>
-          </div>
-          <div className="ml-auto w-50 h-75 border p-4">
-            <h4 className="text-dark fs-16">Profile Picture</h4>
-            <div className="d-flex justify-content-between align-items-center">
-              <img
-                className="rounded-circle"
-                src={temp}
-                alt="pic"
-                height="50px"
-                width="50px"
-              />
-              <button className="btn h-75 btn-outline-dark" disabled={!edit}>
-                <label
-                  htmlFor="profileImage"
-                  className="d-flex align-items-center cr-p m-0"
-                  disabled={!edit}
-                >
-                  <CameraFill className="mr-3" />
-                  Add New
-                </label>
-              </button>
-            </div>
-            <Form.Group>
-              <Form.File
-                type="file"
-                id="profileImage"
-                className="d-none"
-                onChange={handleImg}
-                required
-                disabled={!edit}
-              />
-            </Form.Group>
-          </div>
-        </div>
+        <ProfileDetails
+          values={values}
+          edit={edit}
+          handleChange={handleChange}
+          setSuccess={setSuccess}
+          props={props}
+          handleUpdateUser={handleUpdateUser}
+          handleImg={handleImg}
+          temp={temp}
+        />
         <div className="d-flex align-items-center border-top mt-4" />
         <div className="">
           <h4 className="text-dark mt-5 fs-16">Password</h4>
           {show ? (
-            <div>
-              <Form.Group>
-                <InputGroup className="w-50">
-                  <Form.Control
-                    type={values.hidden ? "text" : "password"}
-                    placeholder="Current Password"
-                    value={values.current_password}
-                    onChange={handleChange("current_password")}
-                    required
-                    className="w-50 border-right-none"
-                  />
-                  <div className="input-group-append">
-                    <div className="show-button" onClick={handlePasswordToggle}>
-                      <small>{values.hidden ? "Hide" : "Show"}</small>
-                    </div>
-                  </div>
-                </InputGroup>
-              </Form.Group>
-              <Form.Group>
-                <InputGroup className="w-50">
-                  <Form.Control
-                    type={values.hidden2 ? "text" : "password"}
-                    placeholder="New Password"
-                    value={values.new_password}
-                    onChange={handleChange("new_password")}
-                    required
-                    className="w-50 border-right-none"
-                    onBlur={analyze}
-                  />
-                  <div className="input-group-append">
-                    <div
-                      className="show-button"
-                      onClick={handlePasswordToggle2}
-                    >
-                      <small>{values.hidden2 ? "Hide" : "Show"}</small>
-                    </div>
-                  </div>
-                </InputGroup>
-                {error ? (
-                  <span className="message-style">{message}</span>
-                ) : null}
-              </Form.Group>
-              <button
-                className="btn btn-danger mt-4"
-                onClick={handlePasswordUpate}
-                disabled={!values.current_password || !values.new_password}
-              >
-                {props.auth.isFetching &&
-                values.current_password &&
-                values.new_password ? (
-                  <Loading />
-                ) : (
-                  "Save"
-                )}
-              </button>
-            </div>
+            <ChangePassword
+              values={values}
+              handleChange={handleChange}
+              handlePasswordToggle={handlePasswordToggle}
+              error={error}
+              message={message}
+              handlePasswordUpate={handlePasswordUpate}
+              handlePasswordToggle2={handlePasswordToggle2}
+              props={props}
+              setError={setError}
+              setMessage={setMessage}
+            />
           ) : (
             <button
               className="btn btn-danger mt-4"

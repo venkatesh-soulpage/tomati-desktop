@@ -364,7 +364,7 @@ exports[`Register page after entering values 1`] = `
                           25
                         </td>
                         <td
-                          class="rdtDay rdtToday"
+                          class="rdtDay"
                           data-month="2"
                           data-value="26"
                           data-year="2021"
@@ -390,7 +390,7 @@ exports[`Register page after entering values 1`] = `
                           28
                         </td>
                         <td
-                          class="rdtDay"
+                          class="rdtDay rdtToday"
                           data-month="2"
                           data-value="29"
                           data-year="2021"
@@ -953,7 +953,7 @@ exports[`Register page before entering values 1`] = `
                           25
                         </td>
                         <td
-                          class="rdtDay rdtToday"
+                          class="rdtDay"
                           data-month="2"
                           data-value="26"
                           data-year="2021"
@@ -979,7 +979,7 @@ exports[`Register page before entering values 1`] = `
                           28
                         </td>
                         <td
-                          class="rdtDay"
+                          class="rdtDay rdtToday"
                           data-month="2"
                           data-value="29"
                           data-year="2021"
