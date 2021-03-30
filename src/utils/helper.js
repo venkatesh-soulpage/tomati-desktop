@@ -57,7 +57,14 @@ export function generatePDF(img, name, formattedName) {
   });
 
   try {
-    doc.addImage(img, "PNG", pdfWidth / 2 - 50, 29, 100, 100);
+    doc.addImage(
+      `${img.src}?origin=${window.location.origin}`,
+      "PNG",
+      pdfWidth / 2 - 50,
+      29,
+      100,
+      100
+    );
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(20);
