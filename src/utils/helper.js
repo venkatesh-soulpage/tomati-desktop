@@ -49,12 +49,12 @@ export function generatePDF(img, name, formattedName) {
 
   doc.setTextColor(224, 71, 91);
 
-  doc.text(menu_link, pdfWidth / 2 - doc.getTextWidth(menu_link) / 2, 30, {
+  doc.text(menu_link, pdfWidth / 2 - doc.getTextWidth(menu_link) / 2, 28, {
     align: "justify",
   });
 
   try {
-    doc.addImage(img, "PNG", pdfWidth / 2 - 50, 35, 100, 100);
+    doc.addImage(img, "PNG", pdfWidth / 2 - 50, 29, 100, 100);
 
     doc.setFont("helvetica", "bold");
     doc.setFontSize(20);
