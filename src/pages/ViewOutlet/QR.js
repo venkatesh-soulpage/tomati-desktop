@@ -23,8 +23,8 @@ const QR = ({ outlet }) => {
           <button
             className="btn btn-danger mr-3 mt-1 rounded-pill"
             onClick={() =>
-              getImgFromUrl(outlet, function (img, name) {
-                generatePDF(img, name);
+              getImgFromUrl(outlet, function (img, name, formattedName) {
+                generatePDF(img, name, formattedName);
               })
             }
           >
