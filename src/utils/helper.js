@@ -37,15 +37,18 @@ export function generatePDF(img, name, formattedName) {
 
   const pdfWidth = doc.internal.pageSize.getWidth();
 
-  const main_header = "SCAN OR VISIT LINK BELOW";
+  const main_header = "SCAN CODE OR VISIT LINK BELOW";
 
   const menu_link = `menu.tomati.app/${formattedName}`;
 
   doc.setFont("helvetica", "bold");
 
+  doc.setFontSize(14);
+
   doc.text(main_header, pdfWidth / 2 - doc.getTextWidth(main_header) / 2, 20, {
     align: "justify",
   });
+  doc.setFontSize(14);
 
   doc.setTextColor(224, 71, 91);
 
