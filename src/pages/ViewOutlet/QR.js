@@ -1,5 +1,5 @@
 import React from "react";
-import { downloadQr } from "utils/helper";
+import { getImgFromUrl, generatePDF } from "utils/helper";
 
 const QR = ({ outlet }) => {
   return (
@@ -22,7 +22,11 @@ const QR = ({ outlet }) => {
           </p>
           <button
             className="btn btn-danger mr-3 mt-1 rounded-pill"
-            onClick={() => downloadQr(outlet.name)}
+            onClick={() =>
+              getImgFromUrl(outlet, function (img, name) {
+                generatePDF(img, name);
+              })
+            }
           >
             Download QR Code
           </button>

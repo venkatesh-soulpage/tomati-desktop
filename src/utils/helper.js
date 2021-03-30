@@ -1,5 +1,7 @@
 import jsPDF from "jspdf";
 
+import latinize from "latinize";
+
 export function replaceNulls(data) {
   return JSON.parse(JSON.stringify(data).replace(/\:null/gi, ':""'));
 }
@@ -19,67 +21,55 @@ export function getVariantColorByStatus(value) {
   }
 }
 
-export function downloadURI(uri, name) {
-  var link = document.createElement("a");
-  link.download = name;
-  link.href = uri;
-  link.target = "_blank";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+export function getImgFromUrl(outlet, callback) {
+  var img = new Image();
+  img.src = outlet.menu_link;
+  img.onload = function () {
+    let name = latinize(outlet.name);
+    name = name.toLowerCase().trim().replace(/\s+/g, "");
+    callback(img, name);
+  };
 }
 
-const downloadQr2 = (qrcode, name, doc, pdfWidth) => {
-  const downloadedImg = new Image();
-  downloadedImg.crossOrigin = "Anonymous";
-  downloadedImg.addEventListener(
-    "load",
-    function () {
-      const canvas = document.createElement("canvas");
-      const context = canvas.getContext("2d");
-      canvas.width = downloadedImg.width;
-      canvas.height = downloadedImg.height;
-      context.drawImage(downloadedImg, 0, 0);
-      doc.addImage(
-        canvas.toDataURL("image/png"),
-        "PNG",
-        pdfWidth / 2 - 50,
-        0,
-        100,
-        100
-      );
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(20);
-      doc.text(name, pdfWidth / 2 - doc.getTextWidth(name) / 2, 101, {
-        align: "justify",
-      });
-      doc.save(`${name}.pdf`);
-    },
-    false
-  );
-  downloadedImg.src = qrcode.src;
-};
+export function generatePDF(img, name) {
+  var options = { orientation: "p", unit: "mm" };
+  var doc = new jsPDF(options);
 
-export async function downloadQr(name) {
-  const qrcode = document.querySelector("#menu-qr");
-  const options = {
-    orientation: "p",
-    unit: "mm",
-  };
-  const doc = new jsPDF(options);
   const pdfWidth = doc.internal.pageSize.getWidth();
-  try {
-    doc.addImage(qrcode.src, "PNG", pdfWidth / 2 - 50, 0, 100, 100);
-  } catch (err) {
-    downloadQr2(qrcode, name, doc, pdfWidth);
-  }
+
+  const main_header = "SCAN QR OR VISIT LINK BELOW";
+
+  const menu_link = `menu.tomati.app/${name}`;
 
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(20);
 
-  doc.text(name, pdfWidth / 2 - doc.getTextWidth(name) / 2, 101, {
+  doc.text(main_header, pdfWidth / 2 - doc.getTextWidth(main_header) / 2, 20, {
     align: "justify",
   });
 
-  doc.save(`${name}.pdf`);
+  doc.setTextColor(224, 71, 91);
+
+  doc.text(menu_link, pdfWidth / 2 - doc.getTextWidth(menu_link) / 2, 30, {
+    align: "justify",
+  });
+
+  try {
+    doc.addImage(img, "PNG", pdfWidth / 2 - 50, 35, 100, 100);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(20);
+    doc.setTextColor(0, 0, 0);
+    doc.text(name, pdfWidth / 2 - doc.getTextWidth(name) / 2, 135, {
+      align: "justify",
+    });
+
+    doc.setLineWidth(2);
+    doc.rect(25, 10, 160, 150);
+
+    doc.save(`${name}.pdf`);
+  } catch (err) {
+    // var xhr = new XMLHttpRequest(); // use sync to avoid popup blocker
+    // xhr.open("HEAD", img.src, true);
+    // xhr.send();
+  }
 }
