@@ -41,6 +41,7 @@ function Index(props) {
   const handleMenu = () => {
     props.dispatch(Action.addOutletMenu(outlet.id, menu));
     setAddmenu(false);
+    setMenu(null);
     setShow(true);
   };
 
@@ -63,6 +64,12 @@ function Index(props) {
       setCollaborator(false);
       setShow(true);
     }
+    setCollaboratorDetail({
+      owner_email: "",
+      display_name: "",
+      custom_message: "",
+      outlet_venue: null,
+    });
   };
 
   const fileToBase64 = async (file) =>

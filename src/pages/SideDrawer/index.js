@@ -71,7 +71,7 @@ const Index = (props) => {
                 Menu
               </NavLink>
             </li>
-            <li disabled className=" py-4 border-bottom">
+            {/* <li disabled className=" py-4 border-bottom">
               <NavLink
                 exact
                 className=" drawer-link blocked"
@@ -85,7 +85,7 @@ const Index = (props) => {
                 )}
                 Event
               </NavLink>
-            </li>
+            </li> */}
             <li className=" py-4 border-bottom">
               <NavLink
                 disabled
