@@ -11,8 +11,6 @@ const About = (props) => {
   useEffect(() => {
     getOutlet(props.location.state);
   }, []);
-  const [show, setShow] = useState(false);
-  const [message, setMessage] = useState("");
 
   const { outlet } = props.outlet;
   const [values, setValues] = useState({
@@ -32,10 +30,6 @@ const About = (props) => {
 
   const handleUpdate = () => {
     props.dispatch(Action.updateOutlet(props.location.state, values));
-    if (props.outlet.message) {
-      setMessage(props.outlet.message);
-      setShow(true);
-    }
   };
   return (
     <div className="card bg-white border p-5 mt-2">
@@ -91,17 +85,17 @@ const About = (props) => {
           <button
             className="btn btn-danger rounded-pill"
             onClick={handleUpdate}
+            disabled={
+              !values.name ||
+              !values.phone_number ||
+              !values.address ||
+              !values.description
+            }
           >
             Save
           </button>
         </div>
       </div>
-      <CustomModal
-        show={show}
-        message={message}
-        onHide={() => setShow(false)}
-        statusicon={Success}
-      />
     </div>
   );
 };

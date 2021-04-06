@@ -125,7 +125,7 @@ function Index(props) {
                 className="d-none"
                 onChange={async (e) => {
                   if (e.target.files[0].size > 235520) {
-                    setShow(true);
+                    // setShow(true);
                     props.dispatch(
                       Action.updateOutletError(
                         "Image size should not exceed 230kb"
@@ -139,7 +139,7 @@ function Index(props) {
                         logo_img: { name, data: url },
                       })
                     );
-                    setShow(true);
+                    // setShow(true);
                   }
                 }}
               />
@@ -164,7 +164,7 @@ function Index(props) {
               className="d-none"
               onChange={async (e) => {
                 if (e.target.files[0].size > 235520) {
-                  setShow(true);
+                  // setShow(true);
                   props.dispatch(
                     Action.updateOutletError(
                       "Image size should not exceed 230kb"
@@ -178,7 +178,7 @@ function Index(props) {
                       cover_image: { name, data: url },
                     })
                   );
-                  setShow(true);
+                  // setShow(true);
                 }
               }}
             />
@@ -271,8 +271,26 @@ function Index(props) {
           />
         </Switch>
       </div>
-
       <CustomModal
+        show={props.outlet.message || props.outlet.error ? true : false}
+        message={props.outlet.message || props.outlet.error}
+        onHide={() => props.dispatch(Action.resetOutletResponse())}
+        statusicon={
+          props.outlet.message ? Success : props.outlet.error ? Error : null
+        }
+        button={
+          <Button
+            className="btn btn-primary mt-3 rounded-pill px-4 py-2"
+            onClick={() => {
+              props.dispatch(Action.resetOutletResponse());
+            }}
+          >
+            Close
+          </Button>
+        }
+      />
+
+      {/* <CustomModal
         show={show}
         message={props.outlet.message || props.outlet.error}
         onHide={() => setShow(false)}
@@ -290,7 +308,7 @@ function Index(props) {
             Close
           </Button>
         }
-      />
+      /> */}
       <AddCollaboratorModal
         addCollaborator={addCollaborator}
         setCollaborator={setCollaborator}
