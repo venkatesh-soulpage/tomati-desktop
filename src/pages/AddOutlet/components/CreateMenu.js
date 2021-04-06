@@ -5,6 +5,7 @@ import _ from "lodash";
 import Back from "assets/img/Back.svg";
 import UploadCover from "assets/img/UploadCover.svg";
 import Loading from "components/Loading";
+import { CSV_TEMPLATE_URL } from "constants/APIRoutes";
 
 const CreateMenu = ({
   values,
@@ -78,7 +79,7 @@ const CreateMenu = ({
         />
         <Card className="p-2 d-flex pt-4 b1-dash cr-p">
           <label htmlFor="menu" className="cr-p">
-            <h6>
+            <h6 className="d-flex">
               <img src={UploadCover} alt="icon" className="mx-4" />
               {values?.menu ? (
                 <span>{menuName}</span>
@@ -92,9 +93,9 @@ const CreateMenu = ({
         <h6 className="mt-2 grey-color font-italic">
           watch the CSV tutorial here
         </h6>
-        <h6 className="mt-2 grey-color font-italic">
+        <a className="mt-2 grey-link font-italic" href={CSV_TEMPLATE_URL}>
           download CSV template here
-        </h6>
+        </a>
       </Form.Group>
       <Form.Group className="d-flex justify-content-between">
         <img
