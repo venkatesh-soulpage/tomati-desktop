@@ -1,5 +1,6 @@
 import React from "react";
 import { getImgFromUrl, generatePDF } from "utils/helper";
+import { CSV_TEMPLATE_URL } from "constants/APIRoutes";
 
 const QR = ({ outlet }) => {
   return (
@@ -30,9 +31,12 @@ const QR = ({ outlet }) => {
           >
             Download QR Code
           </button>
-          <button className="btn btn-outline-dark mt-1 px-4 rounded-pill ">
-            Order Menu tags
-          </button>
+          <a
+            className="a-link btn btn-outline-dark mt-1 px-4 rounded-pill"
+            href={CSV_TEMPLATE_URL}
+          >
+            Menu Template
+          </a>
         </div>
       </div>
     </div>
