@@ -35,7 +35,7 @@ const QR = ({ outlet }) => {
             className=" btn btn-danger mr-3 mt-1 rounded-pill"
             href={CSV_TEMPLATE_URL}
           >
-            Menu Template
+            Download Menu Template
           </a>
           <button className="btn btn-outline-dark mt-1 px-4 rounded-pill ">
             Order Menu tags
