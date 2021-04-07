@@ -95,6 +95,39 @@ input::-webkit-inner-spin-button {
 .grey-color {
   color: #989ca4;
 }
+.grey-link {
+  color: #989ca4;
+}
+.grey-link:hover {
+  color: #2c3a56;
+}
+.a-link {
+  color: #2c3a56;
+}
+.a-link:hover {
+  color: white;
+}
+.image-div {
+  position: relative;
+}
+.image-div:hover .overlay {
+  opacity: 0.9;
+}
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: rgb(0, 0, 0);
+  background: #e0475b !important;
+  // color: #e0475b;
+  width: 100%;
+  transition: 0.5s ease;
+  opacity: 0;
+  color: white !important;
+  font-size: 14px;
+  padding: 20px;
+  text-align: center;
+}
 .color-link,
 :hover {
   color: #2c3a56;

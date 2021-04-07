@@ -9,6 +9,8 @@ export const AWS_STAGING_API_URL = "https://staging-api.tomati.app";
 export const HEROKU_API_URL = "https://tomati-api.herokuapp.com";
 
 export const LOCAL_DESKTOP_URL = "http://localhost:3002";
+export const CSV_TEMPLATE_URL =
+  "https://tomati.s3.af-south-1.amazonaws.com/sample-menu.csv";
 
 export const MOBILE_APP_URL =
   process.env.REACT_APP_AWS === "true"
