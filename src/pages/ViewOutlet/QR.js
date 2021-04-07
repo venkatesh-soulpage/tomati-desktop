@@ -1,6 +1,6 @@
 import React from "react";
 import { getImgFromUrl, generatePDF } from "utils/helper";
-import { CSV_TEMPLATE_URL } from "constants/APIRoutes";
+import CsvDownload from "react-json-to-csv";
 
 const QR = ({ outlet }) => {
   return (
@@ -31,12 +31,13 @@ const QR = ({ outlet }) => {
           <p className="text-dark font-weight-light w-56">
             {outlet?.description}
           </p>
-          <a
+          <CsvDownload
             className=" btn btn-danger mr-3 mt-1 rounded-pill"
-            href={CSV_TEMPLATE_URL}
+            data={outlet.menu}
+            filename={`${outlet.name}.csv`}
           >
-            Download Menu Template
-          </a>
+            Download Menu
+          </CsvDownload>
           <button className="btn btn-outline-dark mt-1 px-4 rounded-pill ">
             Order Menu tags
           </button>
