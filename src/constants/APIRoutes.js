@@ -4,6 +4,7 @@ export const AWS_MOBILE_URL = "https://mobile.tomati.app/login";
 
 //AWS-staging
 export const AWS_STAGING_API_URL = "https://staging-api.tomati.app";
+export const AWS_STAGING_MOBILE_URL = "https://staging-mobile.tomati.app";
 
 //VERCEL
 export const HEROKU_API_URL = "https://tomati-api.herokuapp.com";
@@ -15,6 +16,8 @@ export const CSV_TEMPLATE_URL =
 export const MOBILE_APP_URL =
   process.env.REACT_APP_AWS === "true"
     ? AWS_MOBILE_URL
+    : process.env.REACT_APP_AWS_STAGING
+    ? AWS_STAGING_MOBILE_URL
     : "http://localhost:3002";
 
 // Auth Routes
