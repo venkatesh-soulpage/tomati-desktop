@@ -43,6 +43,7 @@ const About = (props) => {
               name="name"
               required
               onChange={handleChange}
+              disabled={true}
             />
           </Form.Group>
           <label>Phone Number</label>
