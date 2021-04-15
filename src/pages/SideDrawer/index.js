@@ -58,12 +58,11 @@ const Index = (props) => {
             </li>
             <li className=" py-4 border-bottom">
               <NavLink
-                exact
                 className="drawer-link"
                 activeClassName="drawer-link-active"
                 to="/dashboard/outlet"
               >
-                {currentLocation.pathname === "/dashboard/outlet" ? (
+                {currentLocation.pathname.includes("/dashboard/outlet") ? (
                   <img className="mr-3" src={Iconoutlet} alt="icon" />
                 ) : (
                   <img className="mr-3" src={outletInactive} alt="icon" />

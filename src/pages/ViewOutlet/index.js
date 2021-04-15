@@ -186,8 +186,8 @@ function Index(props) {
           <div className="col-11 d-flex pr-0 justify-content-end align-items-center">
             <button className="btn p-2 btn-outline-dark text-white d-flex align-items-center cr-p b1-white mb-3 btn-backdrop ">
               <label className="p-0 m-0 cr-p" htmlFor="coverImage">
-                <CameraFill className="fs-20" />
-                <span className="ml-2">Edit Cover Photo</span>
+                <CameraFill className="fs-20 text-white" />
+                <span className="ml-2 text-white">Edit Cover Photo</span>
               </label>
             </button>
           </div>
@@ -200,7 +200,7 @@ function Index(props) {
             <div className="">
               <Link
                 to={{
-                  pathname: "/dashboard/viewoutlet",
+                  pathname: "/dashboard/outlet/viewoutlet",
                   state: props.location.state,
                 }}
                 className="color-link"
@@ -215,7 +215,7 @@ function Index(props) {
             <div className="mr-auto ml-5">
               <Link
                 to={{
-                  pathname: "/dashboard/viewoutlet/about",
+                  pathname: "/dashboard/outlet/viewoutlet/about",
                   state: props.location.state,
                 }}
                 className="color-link"
@@ -226,7 +226,7 @@ function Index(props) {
             <div className="mr-auto ml-3">
               <Link
                 to={{
-                  pathname: "/dashboard/viewoutlet/collaborators",
+                  pathname: "/dashboard/outlet/viewoutlet/collaborators",
                   state: props.location.state,
                 }}
                 className="color-link"
