@@ -41,6 +41,7 @@ function Index(props) {
   const handleMenu = () => {
     props.dispatch(Action.addOutletMenu(outlet.id, menu));
     setAddmenu(false);
+    setMenu(null);
     setShow(true);
   };
 
@@ -63,6 +64,12 @@ function Index(props) {
       setCollaborator(false);
       setShow(true);
     }
+    setCollaboratorDetail({
+      owner_email: "",
+      display_name: "",
+      custom_message: "",
+      outlet_venue: null,
+    });
   };
 
   const fileToBase64 = async (file) =>
@@ -118,7 +125,7 @@ function Index(props) {
                 className="d-none"
                 onChange={async (e) => {
                   if (e.target.files[0].size > 235520) {
-                    setShow(true);
+                    // setShow(true);
                     props.dispatch(
                       Action.updateOutletError(
                         "Image size should not exceed 230kb"
@@ -132,7 +139,7 @@ function Index(props) {
                         logo_img: { name, data: url },
                       })
                     );
-                    setShow(true);
+                    // setShow(true);
                   }
                 }}
               />
@@ -157,7 +164,7 @@ function Index(props) {
               className="d-none"
               onChange={async (e) => {
                 if (e.target.files[0].size > 235520) {
-                  setShow(true);
+                  // setShow(true);
                   props.dispatch(
                     Action.updateOutletError(
                       "Image size should not exceed 230kb"
@@ -171,7 +178,7 @@ function Index(props) {
                       cover_image: { name, data: url },
                     })
                   );
-                  setShow(true);
+                  // setShow(true);
                 }
               }}
             />
@@ -179,8 +186,8 @@ function Index(props) {
           <div className="col-11 d-flex pr-0 justify-content-end align-items-center">
             <button className="btn p-2 btn-outline-dark text-white d-flex align-items-center cr-p b1-white mb-3 btn-backdrop ">
               <label className="p-0 m-0 cr-p" htmlFor="coverImage">
-                <CameraFill className="fs-20" />
-                <span className="ml-2">Edit Cover Photo</span>
+                <CameraFill className="fs-20 text-white" />
+                <span className="ml-2 text-white">Edit Cover Photo</span>
               </label>
             </button>
           </div>
@@ -193,7 +200,7 @@ function Index(props) {
             <div className="">
               <Link
                 to={{
-                  pathname: "/dashboard/viewoutlet",
+                  pathname: "/dashboard/outlet/viewoutlet",
                   state: props.location.state,
                 }}
                 className="color-link"
@@ -208,7 +215,7 @@ function Index(props) {
             <div className="mr-auto ml-5">
               <Link
                 to={{
-                  pathname: "/dashboard/viewoutlet/about",
+                  pathname: "/dashboard/outlet/viewoutlet/about",
                   state: props.location.state,
                 }}
                 className="color-link"
@@ -219,7 +226,7 @@ function Index(props) {
             <div className="mr-auto ml-3">
               <Link
                 to={{
-                  pathname: "/dashboard/viewoutlet/collaborators",
+                  pathname: "/dashboard/outlet/viewoutlet/collaborators",
                   state: props.location.state,
                 }}
                 className="color-link"
@@ -264,8 +271,26 @@ function Index(props) {
           />
         </Switch>
       </div>
-
       <CustomModal
+        show={props.outlet.message || props.outlet.error ? true : false}
+        message={props.outlet.message || props.outlet.error}
+        onHide={() => props.dispatch(Action.resetOutletResponse())}
+        statusicon={
+          props.outlet.message ? Success : props.outlet.error ? Error : null
+        }
+        button={
+          <Button
+            className="btn btn-primary mt-3 rounded-pill px-4 py-2"
+            onClick={() => {
+              props.dispatch(Action.resetOutletResponse());
+            }}
+          >
+            Close
+          </Button>
+        }
+      />
+
+      {/* <CustomModal
         show={show}
         message={props.outlet.message || props.outlet.error}
         onHide={() => setShow(false)}
@@ -283,7 +308,7 @@ function Index(props) {
             Close
           </Button>
         }
-      />
+      /> */}
       <AddCollaboratorModal
         addCollaborator={addCollaborator}
         setCollaborator={setCollaborator}

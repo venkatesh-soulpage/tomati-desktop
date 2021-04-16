@@ -88,7 +88,7 @@ const Index = (props) => {
       setIcon(Error);
       setError(true);
     } else {
-      props.history.push("/dashboard/addoutlet");
+      props.history.push("/dashboard/outlet/addoutlet");
     }
   };
 
@@ -233,7 +233,7 @@ const Index = (props) => {
                     <button
                       onClick={() => {
                         props.history.push({
-                          pathname: "/dashboard/viewoutlet",
+                          pathname: "/dashboard/outlet/viewoutlet",
                           state: outlet.id,
                         });
                       }}

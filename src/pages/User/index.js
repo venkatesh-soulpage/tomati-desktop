@@ -49,7 +49,7 @@ const Index = (props) => {
                     <div className="ml-auto mr-3">
                       <Link
                         to={{
-                          pathname: "/dashboard/viewoutlet",
+                          pathname: "/dashboard/outlet/viewoutlet",
                           state: outlet.id,
                         }}
                       >

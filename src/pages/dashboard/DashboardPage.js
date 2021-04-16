@@ -47,12 +47,12 @@ function DashboardPage(props) {
                 component={Outlet}
               />
               <Route
-                path={`${props.match.path}/viewoutlet`}
+                path={`${props.match.path}/outlet/viewoutlet`}
                 component={ViewOutlet}
               />
               <Route
                 exact
-                path={`${props.match.path}/addoutlet`}
+                path={`${props.match.path}/outlet/addoutlet`}
                 component={AddOutlet}
               />
               <Route
