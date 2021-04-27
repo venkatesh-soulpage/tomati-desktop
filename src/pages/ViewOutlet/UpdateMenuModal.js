@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Form, Button, Card } from "react-bootstrap";
+import { Modal, Form, Card } from "react-bootstrap";
 import _ from "lodash";
 import UploadCover from "assets/img/UploadCover.svg";
 import Papa from "papaparse";
@@ -67,14 +67,14 @@ const UpdateMenuModal = ({
             </Form.Group>
           </div>
           <div className="text-right">
-            <Button
+            <button
               className="btn btn-primary mt-3 rounded-pill"
               style={{ borderRadius: "30px", width: "140px", height: "54px" }}
               onClick={handleMenu}
               disabled={menuName ? false : true}
             >
               Upload
-            </Button>
+            </button>
           </div>
         </Modal.Body>
       </Modal>

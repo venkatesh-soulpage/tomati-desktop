@@ -147,12 +147,12 @@ export function fetchError() {
   };
 }
 
-export function toggleMenu(data, status) {
+export function toggleMenu(data, status,userId) {
   return async (dispatch) => {
     try {
       dispatch(fetchRequest());
       const res = await OutletService.toggleMenu(data, status);
-      dispatch(userOutlets());
+      dispatch(userOutlets({account_id:userId}));
       return res;
     } catch (errorData) {
       dispatch(fetchError());

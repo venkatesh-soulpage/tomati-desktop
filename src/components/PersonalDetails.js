@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import PasswordTextField from "components/PasswordTextField";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
@@ -118,13 +117,13 @@ function PersonalDetails({
       />
 
       <Form.Group className="d-flex justify-content-end mt-5">
-        <Button
+        <button
           type="submit"
           form="register-form"
           className="btn btn-danger mt-md-3 mt-5 rounded-pill px-4 br-30 button-size"
         >
           Continue
-        </Button>
+        </button>
       </Form.Group>
     </>
   );

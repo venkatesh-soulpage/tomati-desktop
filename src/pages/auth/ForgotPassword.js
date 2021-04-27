@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 //redux
 import { connect } from "react-redux";
-import { Button } from "react-bootstrap";
 //router
 import { withRouter, Link } from "react-router-dom";
 //auth
@@ -36,12 +35,12 @@ function ForgotPassword(props) {
             button={
               <Link to="/">
                 {" "}
-                <Button
+                <button
                   className="btn btn-primary mt-3 rounded-pill px-4 py-2"
                   onClick={() => setShow(false)}
                 >
                   Login
-                </Button>
+                </button>
               </Link>
             }
           />

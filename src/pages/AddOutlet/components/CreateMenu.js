@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Card, Dropdown } from "react-bootstrap";
+import { Form, Card, Dropdown } from "react-bootstrap";
 import Papa from "papaparse";
 import _ from "lodash";
 import Back from "assets/img/Back.svg";
@@ -106,14 +106,14 @@ const CreateMenu = ({
             handleStepPrev("step", 1);
           }}
         />
-        <Button
+        <button
           type="submit"
           form="email-form"
           className="btn btn-primary mt-3 rounded-pill px-4"
           onClick={handleCreateOutlet}
         >
           {props?.outlet?.isFetching ? <Loading /> : "Continue"}
-        </Button>
+        </button>
       </Form.Group>
     </div>
   );

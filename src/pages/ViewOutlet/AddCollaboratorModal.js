@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Form, Button } from "react-bootstrap";
+import { Modal, Form } from "react-bootstrap";
 
 const AddCollaboratorModal = ({
   addCollaborator,
@@ -48,14 +48,14 @@ const AddCollaboratorModal = ({
               />
             </Form.Group>
 
-            <Button
+            <button
               className="btn btn-primary mt-3 rounded-pill"
               style={{ borderRadius: "30px", width: "140px", height: "54px" }}
               onClick={handleCollaborator}
               disabled={collaboratorDetail.owner_email.trim() ? false : true}
             >
               Send
-            </Button>
+            </button>
           </div>
         </Modal.Body>
       </Modal>

@@ -9,7 +9,7 @@ import OutletDetails from "./components/OutletDetails";
 import CreateMenu from "./components/CreateMenu";
 import CustomModal from "components/CustomModal";
 // react bootstrap
-import { Card, Form, Button } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
 
 //image assets
 import Error from "assets/img/Error.svg";
@@ -168,14 +168,14 @@ const Index = (props) => {
         message={message}
         statusicon={Error}
         button={
-          <Button
+          <button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"
             onClick={() => {
               setError(false);
             }}
           >
             Close
-          </Button>
+          </button>
         }
       />
     </div>

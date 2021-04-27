@@ -5,7 +5,7 @@ import * as Action from "_actions";
 // Router
 import { withRouter, Link } from "react-router-dom";
 // Bootstrap Components
-import { InputGroup, Form, Button, Card } from "react-bootstrap";
+import { InputGroup, Form, Card } from "react-bootstrap";
 // custom components
 import AlertMessage from "components/AlertMessage";
 
@@ -129,9 +129,9 @@ function LogIn(props) {
                 <Link className=" red-link" to="/forgot-password">
                   Forgot Password?
                 </Link>
-                <Button className="rounded-pill btn-danger px-4" type="submit">
+                <button className="btn rounded-pill btn-danger px-4" type="submit">
                   Login
-                </Button>
+                </button>
               </Form.Group>
             </Form>
           </Card>

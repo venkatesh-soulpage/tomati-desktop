@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getOutlet } from "_actions/outlet";
 import * as Action from "_actions";
-import Success from "assets/img/Success.svg";
-import CustomModal from "components/CustomModal";
 
 const About = (props) => {
   useEffect(() => {

@@ -6,7 +6,7 @@ import * as Action from "_actions";
 import { Link } from "react-router-dom";
 //react bootstrap
 import AlertMessage from "components/AlertMessage";
-import { Card, Button, Form, InputGroup } from "react-bootstrap";
+import { Card, Form, InputGroup } from "react-bootstrap";
 import Mail from "assets/img/Mail.svg";
 import Loading from "components/Loading";
 
@@ -74,9 +74,9 @@ function ForgotPasswordForm(props) {
               <Link className="red-link" to="/">
                 Back to Login
               </Link>
-              <Button type="submit" variant="primary" className="ml-auto br-20">
+              <button type="submit"  className="btn btn-primary ml-auto br-20">
                 {props.reset.isFetching ? <Loading /> : "Retrieve"}
-              </Button>
+              </button>
             </div>
           </Form>
         </Card>

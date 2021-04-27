@@ -13,7 +13,7 @@ import AlertMessage from "components/AlertMessage";
 import Success from "assets/img/Success.svg";
 import Error from "assets/img/Error.svg";
 
-import { Card, Button, Form } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
 import Loading from "components/Loading";
 
 function ResetPasswordForm(props) {
@@ -132,17 +132,16 @@ function ResetPasswordForm(props) {
                 </Form.Group>
                 <div className="text-right">
                   <Form.Group className="mt-3">
-                    <Button
-                      variant="danger"
-                      className="rounded-pill"
+                    <button
+                      className="btn btn-danger rounded-pill"
                       onClick={onFormSubmit}
                     >
                       {props.reset.isFetching ? <Loading /> : "Update"}
-                    </Button>{" "}
+                    </button>{" "}
                     <Link to="/">
-                      <Button variant="light" className="rounded-pill">
+                      <button  className="btn btn-light rounded-pill">
                         Cancel
-                      </Button>
+                      </button>
                     </Link>
                   </Form.Group>
                 </div>

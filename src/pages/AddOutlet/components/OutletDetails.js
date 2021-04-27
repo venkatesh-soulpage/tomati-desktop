@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Card } from "react-bootstrap";
 import UploadCover from "assets/img/UploadCover.svg";
 
 // modal
@@ -110,13 +110,13 @@ const OutletDetails = ({
         <h6 className="mt-2 grey-color">230Kb Max</h6>
       </Form.Group>
       <Form.Group className="d-flex justify-content-end">
-        <Button
+        <button
           type="submit"
           form="register-form"
           className="btn btn-primary mt-3 rounded-pill px-4 py-3"
         >
           Continue
-        </Button>
+        </button>
       </Form.Group>
     </div>
   );

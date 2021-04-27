@@ -4,7 +4,7 @@ import * as Action from "_actions";
 import { connect } from "react-redux";
 import { withRouter, Link, Switch, Route } from "react-router-dom";
 // react bootstrap
-import { Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 // bootstrap icons
 import { CameraFill } from "react-bootstrap-icons";
 // image assets
@@ -24,7 +24,6 @@ import UpdateMenuModal from "./UpdateMenuModal";
 function Index(props) {
   const [addMenu, setAddmenu] = useState(false);
   const [addCollaborator, setCollaborator] = useState(false);
-  const [show, setShow] = useState(false);
   const [menu, setMenu] = useState(null);
   const [collaboratorDetail, setCollaboratorDetail] = useState({
     owner_email: "",
@@ -42,7 +41,6 @@ function Index(props) {
     props.dispatch(Action.addOutletMenu(outlet.id, menu));
     setAddmenu(false);
     setMenu(null);
-    setShow(true);
   };
 
   const handleChange = (name) => (e) => {
@@ -62,7 +60,6 @@ function Index(props) {
     );
     if (res) {
       setCollaborator(false);
-      setShow(true);
     }
     setCollaboratorDetail({
       owner_email: "",
@@ -125,7 +122,6 @@ function Index(props) {
                 className="d-none"
                 onChange={async (e) => {
                   if (e.target.files[0].size > 235520) {
-                    // setShow(true);
                     props.dispatch(
                       Action.updateOutletError(
                         "Image size should not exceed 230kb"
@@ -139,7 +135,6 @@ function Index(props) {
                         logo_img: { name, data: url },
                       })
                     );
-                    // setShow(true);
                   }
                 }}
               />
@@ -164,7 +159,6 @@ function Index(props) {
               className="d-none"
               onChange={async (e) => {
                 if (e.target.files[0].size > 235520) {
-                  // setShow(true);
                   props.dispatch(
                     Action.updateOutletError(
                       "Image size should not exceed 230kb"
@@ -178,7 +172,6 @@ function Index(props) {
                       cover_image: { name, data: url },
                     })
                   );
-                  // setShow(true);
                 }
               }}
             />
@@ -279,36 +272,17 @@ function Index(props) {
           props.outlet.message ? Success : props.outlet.error ? Error : null
         }
         button={
-          <Button
+          <button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"
             onClick={() => {
               props.dispatch(Action.resetOutletResponse());
             }}
           >
             Close
-          </Button>
+          </button>
         }
       />
 
-      {/* <CustomModal
-        show={show}
-        message={props.outlet.message || props.outlet.error}
-        onHide={() => setShow(false)}
-        statusicon={
-          props.outlet.message ? Success : props.outlet.error ? Error : null
-        }
-        button={
-          <Button
-            className="btn btn-primary mt-3 rounded-pill px-4 py-2"
-            onClick={() => {
-              props.dispatch(Action.resetOutletResponse());
-              setShow(false);
-            }}
-          >
-            Close
-          </Button>
-        }
-      /> */}
       <AddCollaboratorModal
         addCollaborator={addCollaborator}
         setCollaborator={setCollaborator}

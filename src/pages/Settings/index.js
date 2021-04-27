@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 // redux
 import { connect } from "react-redux";
 import * as Action from "_actions";
-// react bootstrap
-import { Button } from "react-bootstrap";
-// bootstrap icons
 // Router
 import { withRouter } from "react-router-dom";
 import CustomModal from "components/CustomModal";
@@ -193,7 +190,7 @@ const Index = (props) => {
           props.auth.message ? Success : props.auth.error ? Error : <Loading />
         }
         button={
-          <Button
+          <button
             className="btn btn-primary mt-3 rounded-pill px-4 py-2"
             onClick={() => {
               setSuccess(false);
@@ -202,7 +199,7 @@ const Index = (props) => {
             }}
           >
             Close
-          </Button>
+          </button>
         }
       />
     </div>
