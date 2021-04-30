@@ -20,14 +20,18 @@ const Index = (props) => {
   const [icon, setIcon] = useState(null);
   const [message, setMessage] = useState("");
   useEffect(() => {
-    props.dispatch(Action.userOutlets());
-    if (props.auth.userData) {
-      props.dispatch(
-        Action.getUserLimits({
-          subscription_id: props?.auth?.userData?.transaction_id,
-        })
-      );
+    async function func() {
+      await props.dispatch(Action.updateMenuStatus());
+      props.dispatch(Action.userOutlets());
+      if (props.auth.userData) {
+        props.dispatch(
+          Action.getUserLimits({
+            subscription_id: props?.auth?.userData?.transaction_id,
+          })
+        );
+      }
     }
+    func();
   }, [props.auth.userData]);
 
   const { outlet, auth } = props;
@@ -39,7 +43,7 @@ const Index = (props) => {
     const outletsLength = props.outlet?.outlets?.length;
     const status = auth?.limit?.subscription?.status;
     if (outletsLength > menuQuantity) {
-      setActivate(true);
+      // setActivate(true);
     }
     if (status && status !== "active" && status !== "in_trial") {
       setShow(true);
